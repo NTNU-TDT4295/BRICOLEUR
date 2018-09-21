@@ -1,6 +1,8 @@
 // Explanation and derivation of formulas used:
 // https://docs.google.com/document/d/1bng-I3OrYp1IoY3vhtT-xtBhCldARYmhWZ4Pq9hrSdY/edit
 
+#include "em_device.h"
+#include "em_chip.h"
 #include <stdio.h>
 #include <math.h>
 
@@ -92,7 +94,7 @@ int main() {
 
     Line line;
     Line *linePtr = &line;
-    
+
     Position2D positions[2];
     positions[0].x = 1;
     positions[0].y = 5;

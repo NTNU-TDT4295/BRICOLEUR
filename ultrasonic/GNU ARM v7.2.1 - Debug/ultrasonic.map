@@ -1,0 +1,1036 @@
+Archive member included to satisfy reference by file (symbol)
+
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_sqrt.o)
+                              ./src/main.o (sqrtf)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-ef_sqrt.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_sqrt.o) (__ieee754_sqrtf)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_lib_ver.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_sqrt.o) (__fdlib_version)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_matherr.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_sqrt.o) (matherr)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_addsubdf3.o)
+                              ./src/main.o (__aeabi_f2d)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_muldivdf3.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_sqrt.o) (__aeabi_ddiv)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_truncdfsf2.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_sqrt.o) (__aeabi_d2f)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_addsubsf3.o)
+                              ./src/main.o (__aeabi_fsub)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_muldivsf3.o)
+                              ./src/main.o (__aeabi_fmul)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_cmpsf2.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_sqrt.o) (__aeabi_fcmplt)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_unordsf2.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_sqrt.o) (__aeabi_fcmpun)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-errno.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_sqrt.o) (__errno)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-exit.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/crt0.o (exit)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-impure.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-exit.o) (_global_impure_ptr)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-init.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/crt0.o (__libc_init_array)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memset.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/crt0.o (memset)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-printf.o)
+                              ./src/main.o (printf)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-printf.o) (__sinit)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fwalk.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o) (_fwalk)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-mallocr.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o) (_malloc_r)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-printf.o) (_vfprintf_r)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf.o) (_printf_i)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-sbrkr.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-mallocr.o) (_sbrk_r)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-stdio.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o) (__sread)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-wbuf.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf.o) (__swbuf_r)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-writer.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-stdio.o) (_write_r)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-wsetup.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf.o) (__swsetup_r)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-closer.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-stdio.o) (_close_r)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fflush.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o) (_fflush_r)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fvwrite.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf.o) (__sfvwrite_r)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-lseekr.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-stdio.o) (_lseek_r)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-makebuf.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-wsetup.o) (__smakebuf_r)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memchr-stub.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf.o) (memchr)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memcpy-stub.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fvwrite.o) (memcpy)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memmove.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fvwrite.o) (memmove)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-mlock.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-mallocr.o) (__malloc_lock)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-freer.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-wsetup.o) (_free_r)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-reallocr.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fvwrite.o) (_realloc_r)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-readr.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-stdio.o) (_read_r)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-reent.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-sbrkr.o) (errno)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fstatr.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-makebuf.o) (_fstat_r)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-isattyr.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-makebuf.o) (_isatty_r)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-msizer.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-reallocr.o) (_malloc_usable_size_r)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(close.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-closer.o) (_close)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(fstat.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fstatr.o) (_fstat)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(isatty.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-isattyr.o) (_isatty)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(lseek.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-lseekr.o) (_lseek)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(read.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-readr.o) (_read)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(sbrk.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-sbrkr.o) (_sbrk)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(write.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-writer.o) (_write)
+/home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(_exit.o)
+                              /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-exit.o) (_exit)
+
+Allocating common symbols
+Common symbol       size              file
+
+errno               0x4               /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-reent.o)
+
+Discarded input sections
+
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crti.o
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crti.o
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crti.o
+ .data          0x0000000000000000        0x4 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtbegin.o
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/crt0.o
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/crt0.o
+ .ARM.extab     0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/crt0.o
+ .data          0x0000000000000000        0x0 ./CMSIS/EFM32G/startup_efm32g.o
+ .bss           0x0000000000000000        0x0 ./CMSIS/EFM32G/startup_efm32g.o
+ .text          0x0000000000000000        0x0 ./CMSIS/EFM32G/system_efm32g.o
+ .data          0x0000000000000000        0x0 ./CMSIS/EFM32G/system_efm32g.o
+ .bss           0x0000000000000000        0x0 ./CMSIS/EFM32G/system_efm32g.o
+ .data.SystemHFXOClock
+                0x0000000000000000        0x4 ./CMSIS/EFM32G/system_efm32g.o
+ .data.SystemLFXOClock
+                0x0000000000000000        0x4 ./CMSIS/EFM32G/system_efm32g.o
+ .text.GetProdRev
+                0x0000000000000000       0x18 ./CMSIS/EFM32G/system_efm32g.o
+ .data.SystemCoreClock
+                0x0000000000000000        0x4 ./CMSIS/EFM32G/system_efm32g.o
+ .text.SystemCoreClockGet
+                0x0000000000000000       0x34 ./CMSIS/EFM32G/system_efm32g.o
+ .text.SystemMaxCoreClockGet
+                0x0000000000000000       0x14 ./CMSIS/EFM32G/system_efm32g.o
+ .text.SystemHFClockGet
+                0x0000000000000000       0xf0 ./CMSIS/EFM32G/system_efm32g.o
+ .text.SystemHFXOClockGet
+                0x0000000000000000       0x14 ./CMSIS/EFM32G/system_efm32g.o
+ .text.SystemHFXOClockSet
+                0x0000000000000000       0x30 ./CMSIS/EFM32G/system_efm32g.o
+ .text.SystemLFRCOClockGet
+                0x0000000000000000       0x10 ./CMSIS/EFM32G/system_efm32g.o
+ .text.SystemULFRCOClockGet
+                0x0000000000000000       0x10 ./CMSIS/EFM32G/system_efm32g.o
+ .text.SystemLFXOClockGet
+                0x0000000000000000       0x14 ./CMSIS/EFM32G/system_efm32g.o
+ .text.SystemLFXOClockSet
+                0x0000000000000000       0x30 ./CMSIS/EFM32G/system_efm32g.o
+ .text          0x0000000000000000        0x0 ./emlib/em_system.o
+ .data          0x0000000000000000        0x0 ./emlib/em_system.o
+ .bss           0x0000000000000000        0x0 ./emlib/em_system.o
+ .text.SYSTEM_ChipRevisionGet
+                0x0000000000000000       0x78 ./emlib/em_system.o
+ .text.SYSTEM_GetCalibrationValue
+                0x0000000000000000       0x58 ./emlib/em_system.o
+ .debug_info    0x0000000000000000      0x27c ./emlib/em_system.o
+ .debug_abbrev  0x0000000000000000      0x11a ./emlib/em_system.o
+ .debug_loc     0x0000000000000000       0xb8 ./emlib/em_system.o
+ .debug_aranges
+                0x0000000000000000       0x28 ./emlib/em_system.o
+ .debug_ranges  0x0000000000000000       0x18 ./emlib/em_system.o
+ .debug_line    0x0000000000000000      0x358 ./emlib/em_system.o
+ .debug_str     0x0000000000000000      0x337 ./emlib/em_system.o
+ .comment       0x0000000000000000       0x7f ./emlib/em_system.o
+ .debug_frame   0x0000000000000000       0x60 ./emlib/em_system.o
+ .ARM.attributes
+                0x0000000000000000       0x33 ./emlib/em_system.o
+ .text          0x0000000000000000        0x0 ./src/main.o
+ .data          0x0000000000000000        0x0 ./src/main.o
+ .bss           0x0000000000000000        0x0 ./src/main.o
+ .text.getPosition3D
+                0x0000000000000000       0xe4 ./src/main.o
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_sqrt.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_sqrt.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_sqrt.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-ef_sqrt.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-ef_sqrt.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-ef_sqrt.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_lib_ver.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_lib_ver.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_lib_ver.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_matherr.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_matherr.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_matherr.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_addsubdf3.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_addsubdf3.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_muldivdf3.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_muldivdf3.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_truncdfsf2.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_truncdfsf2.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_addsubsf3.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_addsubsf3.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_muldivsf3.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_muldivsf3.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_cmpsf2.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_cmpsf2.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_unordsf2.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_unordsf2.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-errno.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-errno.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-errno.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-exit.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-exit.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-exit.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-impure.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-impure.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-impure.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-init.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-init.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-init.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memset.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memset.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memset.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-printf.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-printf.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-printf.o)
+ .text._printf_r
+                0x0000000000000000       0x28 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-printf.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+ .text.__fp_lock
+                0x0000000000000000        0x4 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+ .text.__fp_unlock
+                0x0000000000000000        0x4 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+ .text._cleanup
+                0x0000000000000000        0xc /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+ .text.__sfp_lock_acquire
+                0x0000000000000000        0x2 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+ .text.__sfp_lock_release
+                0x0000000000000000        0x2 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+ .text.__sinit_lock_acquire
+                0x0000000000000000        0x2 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+ .text.__sinit_lock_release
+                0x0000000000000000        0x2 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+ .text.__fp_lock_all
+                0x0000000000000000       0x14 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+ .text.__fp_unlock_all
+                0x0000000000000000       0x14 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fwalk.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fwalk.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fwalk.o)
+ .text._fwalk   0x0000000000000000       0x38 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fwalk.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-mallocr.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-mallocr.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-mallocr.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf.o)
+ .text.__sprint_r
+                0x0000000000000000       0x1a /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf.o)
+ .text.vfprintf
+                0x0000000000000000       0x14 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-sbrkr.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-sbrkr.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-sbrkr.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-stdio.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-stdio.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-stdio.o)
+ .text.__seofread
+                0x0000000000000000        0x4 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-stdio.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-wbuf.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-wbuf.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-wbuf.o)
+ .text.__swbuf  0x0000000000000000       0x10 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-wbuf.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-writer.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-writer.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-writer.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-wsetup.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-wsetup.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-wsetup.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-closer.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-closer.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-closer.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fflush.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fflush.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fflush.o)
+ .text.fflush   0x0000000000000000       0x24 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fflush.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fvwrite.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fvwrite.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fvwrite.o)
+ .text.__sfvwrite_r
+                0x0000000000000000      0x29c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fvwrite.o)
+ .debug_frame   0x0000000000000000       0x3c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fvwrite.o)
+ .ARM.attributes
+                0x0000000000000000       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fvwrite.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-lseekr.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-lseekr.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-lseekr.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-makebuf.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-makebuf.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-makebuf.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memchr-stub.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memchr-stub.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memchr-stub.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .text.memcpy   0x0000000000000000       0x16 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x0000000000000000       0x28 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .ARM.attributes
+                0x0000000000000000       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memmove.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memmove.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memmove.o)
+ .text.memmove  0x0000000000000000       0x32 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memmove.o)
+ .debug_frame   0x0000000000000000       0x28 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memmove.o)
+ .ARM.attributes
+                0x0000000000000000       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memmove.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-mlock.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-mlock.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-mlock.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-freer.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-freer.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-freer.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-reallocr.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-reallocr.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-reallocr.o)
+ .text._realloc_r
+                0x0000000000000000       0x4c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-reallocr.o)
+ .debug_frame   0x0000000000000000       0x3c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-reallocr.o)
+ .ARM.attributes
+                0x0000000000000000       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-reallocr.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-readr.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-readr.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-readr.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-reent.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-reent.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-reent.o)
+ .text.cleanup_glue
+                0x0000000000000000       0x1a /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-reent.o)
+ .text._reclaim_reent
+                0x0000000000000000       0xb8 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-reent.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fstatr.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fstatr.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fstatr.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-isattyr.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-isattyr.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-isattyr.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-msizer.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-msizer.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-msizer.o)
+ .text._malloc_usable_size_r
+                0x0000000000000000       0x10 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-msizer.o)
+ .debug_frame   0x0000000000000000       0x20 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-msizer.o)
+ .ARM.attributes
+                0x0000000000000000       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-msizer.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(close.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(close.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(close.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(fstat.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(fstat.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(fstat.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(isatty.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(isatty.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(isatty.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(lseek.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(lseek.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(lseek.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(read.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(read.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(read.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(sbrk.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(sbrk.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(sbrk.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(write.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(write.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(write.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(_exit.o)
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(_exit.o)
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(_exit.o)
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtend.o
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtend.o
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtend.o
+ .text          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtn.o
+ .data          0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtn.o
+ .bss           0x0000000000000000        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtn.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x0000000000000000 0x0000000000020000 xr
+RAM              0x0000000020000000 0x0000000000004000 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crti.o
+LOAD /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtbegin.o
+LOAD /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/crt0.o
+LOAD ./CMSIS/EFM32G/startup_efm32g.o
+LOAD ./CMSIS/EFM32G/system_efm32g.o
+LOAD ./emlib/em_system.o
+LOAD ./src/main.o
+LOAD /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a
+START GROUP
+LOAD /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a
+LOAD /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a
+LOAD /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a
+END GROUP
+START GROUP
+LOAD /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a
+LOAD /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg_nano.a
+LOAD /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a
+END GROUP
+START GROUP
+LOAD /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a
+LOAD /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a
+END GROUP
+LOAD /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtend.o
+LOAD /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtn.o
+
+.text           0x0000000000000000     0x2420
+ *(.vectors)
+ .vectors       0x0000000000000000       0xbc ./CMSIS/EFM32G/startup_efm32g.o
+                0x0000000000000000                __Vectors
+                0x00000000000000bc                __Vectors_End = .
+                0x00000000000000bc                __Vectors_Size = (__Vectors_End - __Vectors)
+                0x00000000000000bc                __end__ = .
+ *(.text*)
+ .text          0x00000000000000bc       0x40 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtbegin.o
+ .text          0x00000000000000fc       0x74 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/crt0.o
+                0x00000000000000fc                _mainCRTStartup
+                0x00000000000000fc                _start
+ .text          0x0000000000000170       0x30 ./CMSIS/EFM32G/startup_efm32g.o
+                0x0000000000000170                Reset_Handler
+                0x000000000000019c                TIMER2_IRQHandler
+                0x000000000000019c                DebugMon_Handler
+                0x000000000000019c                USART0_TX_IRQHandler
+                0x000000000000019c                I2C0_IRQHandler
+                0x000000000000019c                HardFault_Handler
+                0x000000000000019c                LEUART1_IRQHandler
+                0x000000000000019c                SysTick_Handler
+                0x000000000000019c                USART1_RX_IRQHandler
+                0x000000000000019c                PendSV_Handler
+                0x000000000000019c                NMI_Handler
+                0x000000000000019c                USART1_TX_IRQHandler
+                0x000000000000019c                MSC_IRQHandler
+                0x000000000000019c                ADC0_IRQHandler
+                0x000000000000019c                UsageFault_Handler
+                0x000000000000019c                LEUART0_IRQHandler
+                0x000000000000019c                GPIO_EVEN_IRQHandler
+                0x000000000000019c                UART0_TX_IRQHandler
+                0x000000000000019c                RTC_IRQHandler
+                0x000000000000019c                TIMER0_IRQHandler
+                0x000000000000019c                LCD_IRQHandler
+                0x000000000000019c                PCNT2_IRQHandler
+                0x000000000000019c                UART0_RX_IRQHandler
+                0x000000000000019c                LETIMER0_IRQHandler
+                0x000000000000019c                TIMER1_IRQHandler
+                0x000000000000019c                USART2_RX_IRQHandler
+                0x000000000000019c                Default_Handler
+                0x000000000000019c                PCNT0_IRQHandler
+                0x000000000000019c                PCNT1_IRQHandler
+                0x000000000000019c                ACMP0_IRQHandler
+                0x000000000000019c                USART0_RX_IRQHandler
+                0x000000000000019c                MemManage_Handler
+                0x000000000000019c                SVC_Handler
+                0x000000000000019c                DAC0_IRQHandler
+                0x000000000000019c                CMU_IRQHandler
+                0x000000000000019c                GPIO_ODD_IRQHandler
+                0x000000000000019c                AES_IRQHandler
+                0x000000000000019c                VCMP_IRQHandler
+                0x000000000000019c                DMA_IRQHandler
+                0x000000000000019c                BusFault_Handler
+                0x000000000000019c                USART2_TX_IRQHandler
+ .text.SystemInit
+                0x00000000000001a0       0x1c ./CMSIS/EFM32G/system_efm32g.o
+                0x00000000000001a0                SystemInit
+ .text.getPosition2D
+                0x00000000000001bc       0x86 ./src/main.o
+                0x00000000000001bc                getPosition2D
+ .text.getLine  0x0000000000000242      0x214 ./src/main.o
+                0x0000000000000242                getLine
+ *fill*         0x0000000000000456        0x2 
+ .text.main     0x0000000000000458       0xb8 ./src/main.o
+                0x0000000000000458                main
+ .text.sqrtf    0x0000000000000510       0xa0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_sqrt.o)
+                0x0000000000000510                sqrtf
+ .text.__ieee754_sqrtf
+                0x00000000000005b0       0xa8 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-ef_sqrt.o)
+                0x00000000000005b0                __ieee754_sqrtf
+ .text.matherr  0x0000000000000658        0x4 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_matherr.o)
+                0x0000000000000658                matherr
+ .text          0x000000000000065c      0x378 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_addsubdf3.o)
+                0x000000000000065c                __aeabi_drsub
+                0x0000000000000664                __aeabi_dsub
+                0x0000000000000664                __subdf3
+                0x0000000000000668                __adddf3
+                0x0000000000000668                __aeabi_dadd
+                0x00000000000008e0                __aeabi_ui2d
+                0x00000000000008e0                __floatunsidf
+                0x0000000000000900                __floatsidf
+                0x0000000000000900                __aeabi_i2d
+                0x0000000000000924                __extendsfdf2
+                0x0000000000000924                __aeabi_f2d
+                0x0000000000000968                __aeabi_ul2d
+                0x0000000000000968                __floatundidf
+                0x0000000000000978                __floatdidf
+                0x0000000000000978                __aeabi_l2d
+ .text          0x00000000000009d4      0x424 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_muldivdf3.o)
+                0x00000000000009d4                __aeabi_dmul
+                0x00000000000009d4                __muldf3
+                0x0000000000000c28                __aeabi_ddiv
+                0x0000000000000c28                __divdf3
+ .text          0x0000000000000df8       0xa0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_truncdfsf2.o)
+                0x0000000000000df8                __aeabi_d2f
+                0x0000000000000df8                __truncdfsf2
+ .text          0x0000000000000e98      0x21c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_addsubsf3.o)
+                0x0000000000000e98                __aeabi_frsub
+                0x0000000000000ea0                __subsf3
+                0x0000000000000ea0                __aeabi_fsub
+                0x0000000000000ea4                __aeabi_fadd
+                0x0000000000000ea4                __addsf3
+                0x0000000000001004                __aeabi_ui2f
+                0x0000000000001004                __floatunsisf
+                0x000000000000100c                __aeabi_i2f
+                0x000000000000100c                __floatsisf
+                0x0000000000001028                __floatundisf
+                0x0000000000001028                __aeabi_ul2f
+                0x0000000000001038                __floatdisf
+                0x0000000000001038                __aeabi_l2f
+ .text          0x00000000000010b4      0x2a0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_muldivsf3.o)
+                0x00000000000010b4                __mulsf3
+                0x00000000000010b4                __aeabi_fmul
+                0x000000000000121c                __divsf3
+                0x000000000000121c                __aeabi_fdiv
+ .text          0x0000000000001354       0xec /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_cmpsf2.o)
+                0x0000000000001354                __gtsf2
+                0x0000000000001354                __gesf2
+                0x000000000000135c                __lesf2
+                0x000000000000135c                __ltsf2
+                0x0000000000001364                __nesf2
+                0x0000000000001364                __eqsf2
+                0x0000000000001364                __cmpsf2
+                0x00000000000013c4                __aeabi_cfrcmple
+                0x00000000000013cc                __aeabi_cfcmple
+                0x00000000000013cc                __aeabi_cfcmpeq
+                0x00000000000013dc                __aeabi_fcmpeq
+                0x00000000000013f0                __aeabi_fcmplt
+                0x0000000000001404                __aeabi_fcmple
+                0x0000000000001418                __aeabi_fcmpge
+                0x000000000000142c                __aeabi_fcmpgt
+ .text          0x0000000000001440       0x2c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_unordsf2.o)
+                0x0000000000001440                __aeabi_fcmpun
+                0x0000000000001440                __unordsf2
+ .text.__errno  0x000000000000146c        0xc /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-errno.o)
+                0x000000000000146c                __errno
+ .text.exit     0x0000000000001478       0x28 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-exit.o)
+                0x0000000000001478                exit
+ .text.__libc_init_array
+                0x00000000000014a0       0x48 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-init.o)
+                0x00000000000014a0                __libc_init_array
+ .text.memset   0x00000000000014e8       0x10 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memset.o)
+                0x00000000000014e8                memset
+ .text.printf   0x00000000000014f8       0x30 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-printf.o)
+                0x00000000000014f8                printf
+                0x00000000000014f8                iprintf
+ .text.std      0x0000000000001528       0x48 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+ .text._cleanup_r
+                0x0000000000001570        0xc /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+                0x0000000000001570                _cleanup_r
+ .text.__sfmoreglue
+                0x000000000000157c       0x2c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+                0x000000000000157c                __sfmoreglue
+ .text.__sinit  0x00000000000015a8       0x60 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+                0x00000000000015a8                __sinit
+ .text.__sfp    0x0000000000001608       0x78 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+                0x0000000000001608                __sfp
+ .text._fwalk_reent
+                0x0000000000001680       0x3c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fwalk.o)
+                0x0000000000001680                _fwalk_reent
+ .text._malloc_r
+                0x00000000000016bc       0xb4 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-mallocr.o)
+                0x00000000000016bc                _malloc_r
+ .text.__sfputc_r
+                0x0000000000001770       0x2a /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf.o)
+ .text.__sfputs_r
+                0x000000000000179a       0x24 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf.o)
+                0x000000000000179a                __sfputs_r
+ *fill*         0x00000000000017be        0x2 
+ .text._vfprintf_r
+                0x00000000000017c0      0x228 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf.o)
+                0x00000000000017c0                _vfiprintf_r
+                0x00000000000017c0                _vfprintf_r
+ .text._printf_common
+                0x00000000000019e8       0xec /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+                0x00000000000019e8                _printf_common
+ .text._printf_i
+                0x0000000000001ad4      0x224 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+                0x0000000000001ad4                _printf_i
+ .text._sbrk_r  0x0000000000001cf8       0x20 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-sbrkr.o)
+                0x0000000000001cf8                _sbrk_r
+ .text.__sread  0x0000000000001d18       0x22 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-stdio.o)
+                0x0000000000001d18                __sread
+ .text.__swrite
+                0x0000000000001d3a       0x38 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-stdio.o)
+                0x0000000000001d3a                __swrite
+ .text.__sseek  0x0000000000001d72       0x24 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-stdio.o)
+                0x0000000000001d72                __sseek
+ .text.__sclose
+                0x0000000000001d96        0x8 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-stdio.o)
+                0x0000000000001d96                __sclose
+ *fill*         0x0000000000001d9e        0x2 
+ .text.__swbuf_r
+                0x0000000000001da0       0xa4 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-wbuf.o)
+                0x0000000000001da0                __swbuf_r
+ .text._write_r
+                0x0000000000001e44       0x24 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-writer.o)
+                0x0000000000001e44                _write_r
+ .text.__swsetup_r
+                0x0000000000001e68       0xdc /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-wsetup.o)
+                0x0000000000001e68                __swsetup_r
+ .text._close_r
+                0x0000000000001f44       0x20 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-closer.o)
+                0x0000000000001f44                _close_r
+ .text.__sflush_r
+                0x0000000000001f64      0x10c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fflush.o)
+                0x0000000000001f64                __sflush_r
+ .text._fflush_r
+                0x0000000000002070       0x54 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fflush.o)
+                0x0000000000002070                _fflush_r
+ .text._lseek_r
+                0x00000000000020c4       0x24 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-lseekr.o)
+                0x00000000000020c4                _lseek_r
+ .text.__swhatbuf_r
+                0x00000000000020e8       0x48 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-makebuf.o)
+                0x00000000000020e8                __swhatbuf_r
+ .text.__smakebuf_r
+                0x0000000000002130       0x80 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-makebuf.o)
+                0x0000000000002130                __smakebuf_r
+ .text.memchr   0x00000000000021b0       0x1c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memchr-stub.o)
+                0x00000000000021b0                memchr
+ .text.__malloc_lock
+                0x00000000000021cc        0x2 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-mlock.o)
+                0x00000000000021cc                __malloc_lock
+ .text.__malloc_unlock
+                0x00000000000021ce        0x2 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-mlock.o)
+                0x00000000000021ce                __malloc_unlock
+ .text._free_r  0x00000000000021d0       0x98 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-freer.o)
+                0x00000000000021d0                _free_r
+ .text._read_r  0x0000000000002268       0x24 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-readr.o)
+                0x0000000000002268                _read_r
+ .text._fstat_r
+                0x000000000000228c       0x24 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fstatr.o)
+                0x000000000000228c                _fstat_r
+ .text._isatty_r
+                0x00000000000022b0       0x20 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-isattyr.o)
+                0x00000000000022b0                _isatty_r
+ .text._close   0x00000000000022d0       0x10 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(close.o)
+                0x00000000000022d0                _close
+ .text._fstat   0x00000000000022e0       0x10 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(fstat.o)
+                0x00000000000022e0                _fstat
+ .text._isatty  0x00000000000022f0       0x10 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(isatty.o)
+                0x00000000000022f0                _isatty
+ .text._lseek   0x0000000000002300       0x10 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(lseek.o)
+                0x0000000000002300                _lseek
+ .text._read    0x0000000000002310       0x10 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(read.o)
+                0x0000000000002310                _read
+ .text._sbrk    0x0000000000002320       0x1c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(sbrk.o)
+                0x0000000000002320                _sbrk
+ .text._write   0x000000000000233c       0x10 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(write.o)
+                0x000000000000233c                _write
+ .text._exit    0x000000000000234c        0x4 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(_exit.o)
+                0x000000000000234c                _exit
+ *(.init)
+ .init          0x0000000000002350        0x4 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crti.o
+                0x0000000000002350                _init
+ .init          0x0000000000002354        0x8 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtn.o
+ *(.fini)
+ .fini          0x000000000000235c        0x4 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crti.o
+                0x000000000000235c                _fini
+ .fini          0x0000000000002360        0x8 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtn.o
+ *crtbegin.o(.ctors)
+ *crtbegin?.o(.ctors)
+ *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
+ *(SORT_BY_NAME(.ctors.*))
+ *(.ctors)
+ *crtbegin.o(.dtors)
+ *crtbegin?.o(.dtors)
+ *(EXCLUDE_FILE(*crtend.o *crtend?.o) .dtors)
+ *(SORT_BY_NAME(.dtors.*))
+ *(.dtors)
+ *(.rodata*)
+ .rodata        0x0000000000002368       0x12 ./src/main.o
+ *fill*         0x000000000000237a        0x2 
+ .rodata.sqrtf.str1.4
+                0x000000000000237c        0x8 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_sqrt.o)
+                                          0x6 (size before relaxing)
+ .rodata._global_impure_ptr
+                0x0000000000002384        0x4 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-impure.o)
+                0x0000000000002384                _global_impure_ptr
+ .rodata.__sf_fake_stderr
+                0x0000000000002388       0x20 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+                0x0000000000002388                __sf_fake_stderr
+ .rodata.__sf_fake_stdin
+                0x00000000000023a8       0x20 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+                0x00000000000023a8                __sf_fake_stdin
+ .rodata.__sf_fake_stdout
+                0x00000000000023c8       0x20 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+                0x00000000000023c8                __sf_fake_stdout
+ .rodata._vfprintf_r.str1.1
+                0x00000000000023e8       0x11 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf.o)
+ .rodata._printf_i.str1.1
+                0x00000000000023f9       0x22 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+ *(.eh_frame*)
+ *fill*         0x000000000000241b        0x1 
+ .eh_frame      0x000000000000241c        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtbegin.o
+ .eh_frame      0x000000000000241c        0x4 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtend.o
+
+.glue_7         0x0000000000002420        0x0
+ .glue_7        0x0000000000002420        0x0 linker stubs
+
+.glue_7t        0x0000000000002420        0x0
+ .glue_7t       0x0000000000002420        0x0 linker stubs
+
+.vfp11_veneer   0x0000000000002420        0x0
+ .vfp11_veneer  0x0000000000002420        0x0 linker stubs
+
+.v4_bx          0x0000000000002420        0x0
+ .v4_bx         0x0000000000002420        0x0 linker stubs
+
+.iplt           0x0000000000002420        0x0
+ .iplt          0x0000000000002420        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtbegin.o
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+                0x0000000000002420                __exidx_start = .
+
+.ARM.exidx      0x0000000000002420        0x8
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+ .ARM.exidx     0x0000000000002420        0x8 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/crt0.o
+                0x0000000000002428                __exidx_end = .
+                0x0000000000002428                __etext = .
+
+.rel.dyn        0x0000000000002428        0x0
+ .rel.iplt      0x0000000000002428        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtbegin.o
+
+.data           0x0000000020000000       0x70 load address 0x0000000000002428
+                0x0000000020000000                __data_start__ = .
+ *(vtable)
+ *(.data*)
+ .data.__fdlib_version
+                0x0000000020000000        0x1 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_lib_ver.o)
+                0x0000000020000000                __fdlib_version
+ *fill*         0x0000000020000001        0x3 
+ .data._impure_ptr
+                0x0000000020000004        0x4 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-impure.o)
+                0x0000000020000004                _impure_ptr
+ .data.impure_data
+                0x0000000020000008       0x60 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-impure.o)
+                0x0000000020000068                . = ALIGN (0x4)
+ *(.ram)
+                0x0000000020000068                . = ALIGN (0x4)
+                0x0000000020000068                PROVIDE (__preinit_array_start, .)
+ *(.preinit_array)
+                0x0000000020000068                PROVIDE (__preinit_array_end, .)
+                0x0000000020000068                . = ALIGN (0x4)
+                0x0000000020000068                PROVIDE (__init_array_start, .)
+ *(SORT_BY_NAME(.init_array.*))
+ *(.init_array)
+ .init_array    0x0000000020000068        0x4 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtbegin.o
+                0x000000002000006c                PROVIDE (__init_array_end, .)
+                0x000000002000006c                . = ALIGN (0x4)
+                [!provide]                        PROVIDE (__fini_array_start, .)
+ *(SORT_BY_NAME(.fini_array.*))
+ *(.fini_array)
+ .fini_array    0x000000002000006c        0x4 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtbegin.o
+                [!provide]                        PROVIDE (__fini_array_end, .)
+ *(.jcr*)
+                0x0000000020000070                . = ALIGN (0x4)
+                0x0000000020000070                __data_end__ = .
+
+.igot.plt       0x0000000020000070        0x0 load address 0x0000000000002498
+ .igot.plt      0x0000000020000070        0x0 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtbegin.o
+
+.bss            0x0000000020000070       0x2c load address 0x0000000000002498
+                0x0000000020000070                . = ALIGN (0x4)
+                0x0000000020000070                __bss_start__ = .
+ *(.bss*)
+ .bss           0x0000000020000070       0x1c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtbegin.o
+ .bss.__malloc_free_list
+                0x000000002000008c        0x4 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-mallocr.o)
+                0x000000002000008c                __malloc_free_list
+ .bss.__malloc_sbrk_start
+                0x0000000020000090        0x4 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-mallocr.o)
+                0x0000000020000090                __malloc_sbrk_start
+ .bss.heap_end.4102
+                0x0000000020000094        0x4 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(sbrk.o)
+ *(COMMON)
+ COMMON         0x0000000020000098        0x4 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-reent.o)
+                0x0000000020000098                errno
+                0x000000002000009c                . = ALIGN (0x4)
+                0x000000002000009c                __bss_end__ = .
+
+.heap           0x00000000200000a0      0xc00
+                0x00000000200000a0                __HeapBase = .
+                0x00000000200000a0                __end__ = .
+                0x00000000200000a0                end = __end__
+                0x00000000200000a0                _end = __end__
+ *(.heap*)
+ .heap          0x00000000200000a0      0xc00 ./CMSIS/EFM32G/startup_efm32g.o
+                0x0000000020000ca0                __HeapLimit = .
+
+.stack_dummy    0x00000000200000a0      0x400
+ *(.stack*)
+ .stack         0x00000000200000a0      0x400 ./CMSIS/EFM32G/startup_efm32g.o
+                0x0000000020004000                __StackTop = (ORIGIN (RAM) + LENGTH (RAM))
+                0x0000000020003c00                __StackLimit = (__StackTop - SIZEOF (.stack_dummy))
+                0x0000000020004000                PROVIDE (__stack, __StackTop)
+                0x0000000000000001                ASSERT ((__StackLimit >= __HeapLimit), region RAM overflowed with stack)
+                0x0000000000000001                ASSERT ((LENGTH (FLASH) >= (__etext + SIZEOF (.data))), FLASH memory overflowed !)
+OUTPUT(ultrasonic.axf elf32-littlearm)
+
+.ARM.attributes
+                0x0000000000000000       0x29
+ .ARM.attributes
+                0x0000000000000000       0x1d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crti.o
+ .ARM.attributes
+                0x000000000000001d       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtbegin.o
+ .ARM.attributes
+                0x000000000000004a       0x1b /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/crt0.o
+ .ARM.attributes
+                0x0000000000000065       0x1b ./CMSIS/EFM32G/startup_efm32g.o
+ .ARM.attributes
+                0x0000000000000080       0x33 ./CMSIS/EFM32G/system_efm32g.o
+ .ARM.attributes
+                0x00000000000000b3       0x33 ./src/main.o
+ .ARM.attributes
+                0x00000000000000e6       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_sqrt.o)
+ .ARM.attributes
+                0x0000000000000113       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-ef_sqrt.o)
+ .ARM.attributes
+                0x0000000000000140       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_lib_ver.o)
+ .ARM.attributes
+                0x000000000000016d       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_matherr.o)
+ .ARM.attributes
+                0x000000000000019a       0x1d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_addsubdf3.o)
+ .ARM.attributes
+                0x00000000000001b7       0x1d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_muldivdf3.o)
+ .ARM.attributes
+                0x00000000000001d4       0x1d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_truncdfsf2.o)
+ .ARM.attributes
+                0x00000000000001f1       0x1d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_addsubsf3.o)
+ .ARM.attributes
+                0x000000000000020e       0x1d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_muldivsf3.o)
+ .ARM.attributes
+                0x000000000000022b       0x1d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_cmpsf2.o)
+ .ARM.attributes
+                0x0000000000000248       0x1d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_unordsf2.o)
+ .ARM.attributes
+                0x0000000000000265       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-errno.o)
+ .ARM.attributes
+                0x0000000000000292       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-exit.o)
+ .ARM.attributes
+                0x00000000000002bf       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-impure.o)
+ .ARM.attributes
+                0x00000000000002ec       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-init.o)
+ .ARM.attributes
+                0x0000000000000319       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memset.o)
+ .ARM.attributes
+                0x0000000000000346       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-printf.o)
+ .ARM.attributes
+                0x0000000000000373       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+ .ARM.attributes
+                0x00000000000003a0       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fwalk.o)
+ .ARM.attributes
+                0x00000000000003cd       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-mallocr.o)
+ .ARM.attributes
+                0x00000000000003fa       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf.o)
+ .ARM.attributes
+                0x0000000000000427       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+ .ARM.attributes
+                0x0000000000000454       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-sbrkr.o)
+ .ARM.attributes
+                0x0000000000000481       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-stdio.o)
+ .ARM.attributes
+                0x00000000000004ae       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-wbuf.o)
+ .ARM.attributes
+                0x00000000000004db       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-writer.o)
+ .ARM.attributes
+                0x0000000000000508       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-wsetup.o)
+ .ARM.attributes
+                0x0000000000000535       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-closer.o)
+ .ARM.attributes
+                0x0000000000000562       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fflush.o)
+ .ARM.attributes
+                0x000000000000058f       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-lseekr.o)
+ .ARM.attributes
+                0x00000000000005bc       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-makebuf.o)
+ .ARM.attributes
+                0x00000000000005e9       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memchr-stub.o)
+ .ARM.attributes
+                0x0000000000000616       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-mlock.o)
+ .ARM.attributes
+                0x0000000000000643       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-freer.o)
+ .ARM.attributes
+                0x0000000000000670       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-readr.o)
+ .ARM.attributes
+                0x000000000000069d       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-reent.o)
+ .ARM.attributes
+                0x00000000000006ca       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fstatr.o)
+ .ARM.attributes
+                0x00000000000006f7       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-isattyr.o)
+ .ARM.attributes
+                0x0000000000000724       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(close.o)
+ .ARM.attributes
+                0x0000000000000751       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(fstat.o)
+ .ARM.attributes
+                0x000000000000077e       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(isatty.o)
+ .ARM.attributes
+                0x00000000000007ab       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(lseek.o)
+ .ARM.attributes
+                0x00000000000007d8       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(read.o)
+ .ARM.attributes
+                0x0000000000000805       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(sbrk.o)
+ .ARM.attributes
+                0x0000000000000832       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(write.o)
+ .ARM.attributes
+                0x000000000000085f       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(_exit.o)
+ .ARM.attributes
+                0x000000000000088c       0x2d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtend.o
+ .ARM.attributes
+                0x00000000000008b9       0x1d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/crtn.o
+
+.comment        0x0000000000000000       0x7e
+ .comment       0x0000000000000000       0x7e ./CMSIS/EFM32G/system_efm32g.o
+                                         0x7f (size before relaxing)
+ .comment       0x000000000000007e       0x7f ./src/main.o
+
+.debug_line     0x0000000000000000      0x80e
+ .debug_line    0x0000000000000000       0xd8 ./CMSIS/EFM32G/startup_efm32g.o
+ .debug_line    0x00000000000000d8      0x3b9 ./CMSIS/EFM32G/system_efm32g.o
+ .debug_line    0x0000000000000491      0x37d ./src/main.o
+
+.debug_info     0x0000000000000000     0x13fe
+ .debug_info    0x0000000000000000       0x26 ./CMSIS/EFM32G/startup_efm32g.o
+ .debug_info    0x0000000000000026      0x74d ./CMSIS/EFM32G/system_efm32g.o
+ .debug_info    0x0000000000000773      0xc8b ./src/main.o
+
+.debug_abbrev   0x0000000000000000      0x3e5
+ .debug_abbrev  0x0000000000000000       0x14 ./CMSIS/EFM32G/startup_efm32g.o
+ .debug_abbrev  0x0000000000000014      0x1b2 ./CMSIS/EFM32G/system_efm32g.o
+ .debug_abbrev  0x00000000000001c6      0x21f ./src/main.o
+
+.debug_aranges  0x0000000000000000       0xc8
+ .debug_aranges
+                0x0000000000000000       0x20 ./CMSIS/EFM32G/startup_efm32g.o
+ .debug_aranges
+                0x0000000000000020       0x70 ./CMSIS/EFM32G/system_efm32g.o
+ .debug_aranges
+                0x0000000000000090       0x38 ./src/main.o
+
+.debug_str      0x0000000000000000      0x9f0
+ .debug_str     0x0000000000000000       0xe1 ./CMSIS/EFM32G/startup_efm32g.o
+ .debug_str     0x00000000000000e1      0x4ad ./CMSIS/EFM32G/system_efm32g.o
+                                        0x54e (size before relaxing)
+ .debug_str     0x000000000000058e      0x462 ./src/main.o
+                                        0x67e (size before relaxing)
+
+.debug_loc      0x0000000000000000      0x460
+ .debug_loc     0x0000000000000000      0x31c ./CMSIS/EFM32G/system_efm32g.o
+ .debug_loc     0x000000000000031c      0x144 ./src/main.o
+
+.debug_ranges   0x0000000000000000       0x88
+ .debug_ranges  0x0000000000000000       0x60 ./CMSIS/EFM32G/system_efm32g.o
+ .debug_ranges  0x0000000000000060       0x28 ./src/main.o
+
+.debug_frame    0x0000000000000000      0xdd8
+ .debug_frame   0x0000000000000000      0x180 ./CMSIS/EFM32G/system_efm32g.o
+ .debug_frame   0x0000000000000180       0xb8 ./src/main.o
+ .debug_frame   0x0000000000000238       0x3c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_sqrt.o)
+ .debug_frame   0x0000000000000274       0x30 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-ef_sqrt.o)
+ .debug_frame   0x00000000000002a4       0x20 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_matherr.o)
+ .debug_frame   0x00000000000002c4       0xac /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_addsubdf3.o)
+ .debug_frame   0x0000000000000370       0x50 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_muldivdf3.o)
+ .debug_frame   0x00000000000003c0       0x24 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_truncdfsf2.o)
+ .debug_frame   0x00000000000003e4       0x4c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_addsubsf3.o)
+ .debug_frame   0x0000000000000430       0x38 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_muldivsf3.o)
+ .debug_frame   0x0000000000000468       0xc8 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_cmpsf2.o)
+ .debug_frame   0x0000000000000530       0x24 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7-m/libgcc.a(_arm_unordsf2.o)
+ .debug_frame   0x0000000000000554       0x20 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-errno.o)
+ .debug_frame   0x0000000000000574       0x28 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-exit.o)
+ .debug_frame   0x000000000000059c       0x2c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-init.o)
+ .debug_frame   0x00000000000005c8       0x20 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memset.o)
+ .debug_frame   0x00000000000005e8       0x74 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-printf.o)
+ .debug_frame   0x000000000000065c      0x11c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-findfp.o)
+ .debug_frame   0x0000000000000778       0x54 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fwalk.o)
+ .debug_frame   0x00000000000007cc       0x2c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-mallocr.o)
+ .debug_frame   0x00000000000007f8       0xac /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf.o)
+ .debug_frame   0x00000000000008a4       0x60 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+ .debug_frame   0x0000000000000904       0x2c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-sbrkr.o)
+ .debug_frame   0x0000000000000930       0x88 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-stdio.o)
+ .debug_frame   0x00000000000009b8       0x40 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-wbuf.o)
+ .debug_frame   0x00000000000009f8       0x2c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-writer.o)
+ .debug_frame   0x0000000000000a24       0x2c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-wsetup.o)
+ .debug_frame   0x0000000000000a50       0x2c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-closer.o)
+ .debug_frame   0x0000000000000a7c       0x68 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fflush.o)
+ .debug_frame   0x0000000000000ae4       0x2c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-lseekr.o)
+ .debug_frame   0x0000000000000b10       0x58 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-makebuf.o)
+ .debug_frame   0x0000000000000b68       0x28 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-memchr-stub.o)
+ .debug_frame   0x0000000000000b90       0x30 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-mlock.o)
+ .debug_frame   0x0000000000000bc0       0x38 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-nano-freer.o)
+ .debug_frame   0x0000000000000bf8       0x2c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-readr.o)
+ .debug_frame   0x0000000000000c24       0x5c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-reent.o)
+ .debug_frame   0x0000000000000c80       0x2c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-fstatr.o)
+ .debug_frame   0x0000000000000cac       0x2c /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc_nano.a(lib_a-isattyr.o)
+ .debug_frame   0x0000000000000cd8       0x20 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(close.o)
+ .debug_frame   0x0000000000000cf8       0x20 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(fstat.o)
+ .debug_frame   0x0000000000000d18       0x20 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(isatty.o)
+ .debug_frame   0x0000000000000d38       0x20 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(lseek.o)
+ .debug_frame   0x0000000000000d58       0x20 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(read.o)
+ .debug_frame   0x0000000000000d78       0x20 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(sbrk.o)
+ .debug_frame   0x0000000000000d98       0x20 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(write.o)
+ .debug_frame   0x0000000000000db8       0x20 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(_exit.o)
+
+.stab           0x0000000000000000       0x9c
+ .stab          0x0000000000000000       0x24 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(close.o)
+ .stab          0x0000000000000024       0x18 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(fstat.o)
+                                         0x24 (size before relaxing)
+ .stab          0x000000000000003c       0x18 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(isatty.o)
+                                         0x24 (size before relaxing)
+ .stab          0x0000000000000054       0x18 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(lseek.o)
+                                         0x24 (size before relaxing)
+ .stab          0x000000000000006c       0x18 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(read.o)
+                                         0x24 (size before relaxing)
+ .stab          0x0000000000000084       0x18 /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(write.o)
+                                         0x24 (size before relaxing)
+
+.stabstr        0x0000000000000000      0x14d
+ .stabstr       0x0000000000000000      0x14d /home/olatoft/program/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libnosys.a(close.o)
