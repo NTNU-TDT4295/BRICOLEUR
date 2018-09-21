@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -g
+CFLAGS = -g -Wall
 OBJ = ultrasonic.o
 LIBS = -lm
 
