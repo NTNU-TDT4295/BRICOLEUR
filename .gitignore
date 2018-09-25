@@ -1,3 +1,8 @@
 *.o
+*.d
+*.hex
+*.map
+*.s37
+
 .vscode
 ultrasonic/ultrasonic
