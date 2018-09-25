@@ -47,7 +47,20 @@ src/main.o: ../src/main.c \
  /home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_system.h \
  /home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_gpio.h \
  /home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_bus.h \
- /home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_assert.h
+ /home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_assert.h \
+ /home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/src/em_lcd.c \
+ /home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_lcd.h \
+ /home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_assert.h \
+ /home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_bus.h \
+ /home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/src/em_cmu.c \
+ /home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_cmu.h \
+ /home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_common.h \
+ /home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_emu.h \
+ /home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_gpio.h \
+ /home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_system.h \
+ /home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//hardware/kit/common/drivers/segmentlcd.c \
+ /home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//hardware/kit/common/drivers/segmentlcd.h \
+ /home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//hardware/kit/EFM32_Gxxx_STK/config/segmentlcdconfig.h
 
 /home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/Device/SiliconLabs/EFM32G/Include/em_device.h:
 
@@ -146,3 +159,29 @@ src/main.o: ../src/main.c \
 /home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_bus.h:
 
 /home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_assert.h:
+
+/home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/src/em_lcd.c:
+
+/home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_lcd.h:
+
+/home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_assert.h:
+
+/home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_bus.h:
+
+/home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/src/em_cmu.c:
+
+/home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_cmu.h:
+
+/home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_common.h:
+
+/home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_emu.h:
+
+/home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_gpio.h:
+
+/home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//platform/emlib/inc/em_system.h:
+
+/home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//hardware/kit/common/drivers/segmentlcd.c:
+
+/home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//hardware/kit/common/drivers/segmentlcd.h:
+
+/home/olatoft/program/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.4//hardware/kit/EFM32_Gxxx_STK/config/segmentlcdconfig.h:

@@ -3,6 +3,9 @@
 
 #include "em_device.h"
 #include "em_chip.h"
+#include "em_lcd.c"
+#include "em_cmu.c"
+#include "segmentlcd.c"
 #include <stdio.h>
 #include <math.h>
 
@@ -33,6 +36,7 @@ typedef struct line Line;
 void getPosition2D(Position2D *position, float r1, float r2);
 void getPosition3D(Position3D *position, float r1, float r2, float r3);
 void getLine(Line *line, Position2D positions[], int length);
+void getInput(float distances[], int length);
 
 void getPosition2D(Position2D *position, float r1, float r2) {
     position->x = (x2*x2 + r1*r1 - r2*r2) / (2 * x2);
@@ -82,27 +86,57 @@ void getLine(Line *line, Position2D positions[], int length) {
     line->b = y_avg - (line->a * x_avg);
 }
 
+void getInput(float distances[], int length) {
+	for (int i = 0; i < length; i++) {
+		// Get input somehow, i.e. go to sleep and wait for interrupt, then
+		// read input. Right now we use a dummy value.
+		distances[i] = 1;
+	}
+}
+
 int main() {
-    Position2D pos;
-    Position2D *position = &pos;
+	SegmentLCD_Init(false);
+	char buf[20];
 
-    getPosition2D(position, 5, sqrtf(65));
-    // getPosition2D(position, 8.6, 9);
+	Position2D positions[1000];
+	int positionsLength = 0;
 
-    printf("%f\n", position->x);
-    printf("%f\n", position->y);
+	int distancesLength = 2;  // 1 distance for each sensor
+	float distances[distancesLength];
 
-    Line line;
-    Line *linePtr = &line;
+	Position2D position;
+	Line line;
 
-    Position2D positions[2];
+	while (true) {
+		getInput(distances, distancesLength);
+
+		getPosition2D(&position, distances[0], distances[1]);
+		positions[positionsLength] = position;
+		positionsLength++;
+
+		// This avoids working outside the positions array. However, it means
+		// we sometimes get a really short buffer, and sometimes a very long
+		// one. Some sort of circular buffer could be better.
+		if (positionsLength > 1000) {
+			positionsLength = 0;
+		}
+
+		getLine(&line, positions, positionsLength);
+
+		snprintf(buf, 20, "%d", (int)line.a);
+		SegmentLCD_Write(buf);
+	}
+
+    // Dummy data for y = 2x + 3
+	/*
+	Position2D positions[3];
     positions[0].x = 1;
     positions[0].y = 5;
     positions[1].x = 2;
     positions[1].y = 7;
-
-    getLine(linePtr, positions, 2);
-    printf("y = %fx + %f\n", line.a, line.b);
+    positions[2].x = 3;
+    positions[2].y = 9;
+    */
 
     return 0;
 }
