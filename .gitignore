@@ -1,6 +1,7 @@
 *.o
 *.d
 *.axf
+*.bin
 *.hex
 *.map
 *.s37
