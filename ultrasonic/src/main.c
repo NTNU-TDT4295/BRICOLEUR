@@ -39,6 +39,7 @@ void getLine(Line *line, Position2D positions[], int length);
 void getInput(float distances[], int length);
 bool willCollide2D(Line *line);
 void panic();
+bool isMoving(Position2D positions[], int positionsLength);
 
 void getPosition2D(Position2D *position, float r1, float r2) {
     position->x = (x2*x2 + r1*r1 - r2*r2) / (2 * x2);
@@ -102,15 +103,20 @@ bool willCollide2D(Line *line) {
 	float x = -(line->b / line->a);
 	// This only checks if the object will hit the front of the system.
 	// TODO: Check if the object hits the side of the object
-	return (x > 0) && (x < x2); // Check if object hits between sensor1 and sensor2
+	return (x >= 0) && (x <= x2); // Check if object hits between sensor1 and sensor2
 }
 
 void panic() {
 	// Do some fancy output
-	SegmentLCD_Init(false);
-	char buf[20];
-	snprintf(buf, 20, "Panic");
-	SegmentLCD_Write(buf);
+	// SegmentLCD_Init(false);
+	// char buf[20];
+	// snprintf(buf, 20, "Panic");
+	SegmentLCD_Write("Panic");
+}
+
+bool isMoving(Position2D positions[], int positionsLength) {
+	return ((positions[positionsLength - 1].x == positions[positionsLength - 2].x) &&
+		    (positions[positionsLength - 1].y == positions[positionsLength - 2].y));
 }
 
 int main() {
@@ -140,14 +146,20 @@ int main() {
 			positionsLength = 0;
 		}
 
-		getLine(&line, positions, positionsLength);
+		// It doesn't make sense to make a line from one point (and we would
+		// get a division by zero)
 
-		if (willCollide2D(&line)) {
-			panic();
+		if ((positionsLength > 1) && (isMoving(positions, positionsLength))) {
+			getLine(&line, positions, positionsLength);
+
+			if (willCollide2D(&line)) {
+				panic();
+			}
+
+			// snprintf(buf, 20, "%d", (int)line.a);
+			// SegmentLCD_Write(buf);
 		}
 
-		snprintf(buf, 20, "%d", (int)line.a);
-		SegmentLCD_Write(buf);
 	}
 
     // Dummy data for y = 2x + 3
