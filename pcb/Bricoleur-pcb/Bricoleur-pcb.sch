@@ -15,7 +15,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L Bricoleur-pcb-cache:Arducam-OV5642 U5
+L Bricoleur-pcb-rescue:Arducam-OV5642-Bricoleur-pcb-cache U5
 U 1 1 5B998412
 P 4200 5200
 F 0 "U5" H 4000 5500 50  0000 L CNN
@@ -26,7 +26,7 @@ F 3 "" H 4200 5050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Bricoleur-pcb-cache:Arducam-OV5642 U6
+L Bricoleur-pcb-rescue:Arducam-OV5642-Bricoleur-pcb-cache U6
 U 1 1 5B99848C
 P 4200 7450
 F 0 "U6" H 4149 7778 50  0000 L CNN
@@ -49,7 +49,7 @@ PYNQ_3V3
 Text Label 5050 6950 1    50   ~ 0
 GND
 $Comp
-L symbols:EFM32GG980 U7
+L Bricoleur-pcb-rescue:EFM32GG980-symbols U7
 U 1 1 5B9A6C8F
 P 6150 1200
 F 0 "U7" H 7250 1587 60  0000 C CNN
@@ -60,7 +60,7 @@ F 3 "" H 6150 1200 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Bricoleur-pcb-cache:Bricoleur-pcb-cache_Ultrasonic-LV-EZ0 U1
+L Bricoleur-pcb-rescue:Bricoleur-pcb-cache_Ultrasonic-LV-EZ0-Bricoleur-pcb-cache U1
 U 1 1 5B9AE131
 P 4150 1450
 F 0 "U1" V 4665 1419 50  0000 C CNN
@@ -71,7 +71,7 @@ F 3 "" H 4150 1500 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Bricoleur-pcb-cache:Bricoleur-pcb-cache_Ultrasonic-LV-EZ0 U3
+L Bricoleur-pcb-rescue:Bricoleur-pcb-cache_Ultrasonic-LV-EZ0-Bricoleur-pcb-cache U3
 U 1 1 5B9AE194
 P 5450 2300
 F 0 "U3" V 5950 2250 50  0000 L CNN
@@ -82,7 +82,7 @@ F 3 "" H 5450 2350 50  0001 C CNN
 	0    1    -1   0   
 $EndComp
 $Comp
-L Bricoleur-pcb-cache:Bricoleur-pcb-cache_Ultrasonic-LV-EZ0 U4
+L Bricoleur-pcb-rescue:Bricoleur-pcb-cache_Ultrasonic-LV-EZ0-Bricoleur-pcb-cache U4
 U 1 1 5B9AE2C4
 P 4100 2600
 F 0 "U4" V 4600 2550 50  0000 L CNN
@@ -203,7 +203,7 @@ $EndComp
 Wire Wire Line
 	9400 3050 9400 3700
 $Comp
-L IP4220CZ6:IP4220CZ6 U9
+L Bricoleur-pcb-rescue:IP4220CZ6-IP4220CZ6 U9
 U 1 1 5BA09E46
 P 10450 2300
 F 0 "U9" H 10450 1630 50  0000 C CNN
@@ -240,7 +240,7 @@ Wire Wire Line
 Text Label 10000 750  1    50   ~ 0
 GND
 $Comp
-L Bricoleur-pcb-cache:UART_BOOT U8
+L Bricoleur-pcb-rescue:UART_BOOT-Bricoleur-pcb-cache U8
 U 1 1 5BA26E40
 P 8800 1100
 F 0 "U8" H 8750 1200 50  0000 L CNN
@@ -356,24 +356,6 @@ Entry Wire Line
 	2800 5600 2900 5700
 Entry Wire Line
 	2800 5500 2900 5600
-Wire Wire Line
-	2700 7350 2250 7350
-Wire Wire Line
-	2700 7450 2250 7450
-Wire Wire Line
-	2700 7550 2250 7550
-Wire Wire Line
-	2700 7650 2250 7650
-Wire Wire Line
-	2700 7750 2250 7750
-Wire Wire Line
-	2700 7850 2250 7850
-Wire Wire Line
-	2700 7950 2250 7950
-Wire Wire Line
-	2700 8050 2250 8050
-Wire Wire Line
-	2700 8150 2250 8150
 Text Label 3650 6950 1    50   ~ 0
 CAM0_DOUT2
 Text Label 3750 6950 1    50   ~ 0
@@ -420,18 +402,10 @@ Text Label 2350 6000 0    50   ~ 0
 CAM0_PCLK
 Text Label 2350 5100 0    50   ~ 0
 CAM0_HREF
-Wire Wire Line
-	2700 8250 2250 8250
 Entry Wire Line
 	2800 5400 2900 5500
 Entry Wire Line
 	2800 5300 2900 5400
-Wire Wire Line
-	2700 7250 2250 7250
-Wire Wire Line
-	2700 7150 2250 7150
-Wire Wire Line
-	2700 7050 2250 7050
 Text Label 2350 5900 0    50   ~ 0
 CAM0_VSYNC
 Text Label 2350 5000 0    50   ~ 0
@@ -931,7 +905,7 @@ F0 "Imponator" 50
 F1 "file5BACB072.sch" 50
 $EndSheet
 $Comp
-L Bricoleur-pcb-cache:SW_DP3T U11
+L Bricoleur-pcb-rescue:SW_DP3T-Bricoleur-pcb-cache U11
 U 1 1 5BAC4FA8
 P 10450 5200
 F 0 "U11" H 10525 5325 50  0000 C CNN
@@ -1127,7 +1101,7 @@ Wire Wire Line
 NoConn ~ 6150 1300
 NoConn ~ 6150 1400
 $Comp
-L Bricoleur-pcb-cache:PYNQ-Shield-Bricoleur-pcb-cache U2
+L Bricoleur-pcb-rescue:PYNQ-Shield-Bricoleur-pcb-cache-Bricoleur-pcb-cache U2
 U 1 1 5BADF788
 P 1650 2600
 F 0 "U2" H 1650 2365 50  0000 C CNN
@@ -1248,4 +1222,6 @@ Wire Bus Line
 	3000 6250 4850 6250
 Wire Bus Line
 	2900 3600 2900 4850
+Text GLabel 5900 1200 1    50   Input ~ 0
+PULSE
 $EndSCHEMATC

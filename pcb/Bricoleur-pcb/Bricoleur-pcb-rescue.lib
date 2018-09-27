@@ -1,11 +1,11 @@
 EESchema-LIBRARY Version 2.4
 #encoding utf-8
 #
-# Bricoleur-pcb-rescue_Arducam-OV5642-Bricoleur-pcb-cache
+# Arducam-OV5642-Bricoleur-pcb-cache
 #
-DEF Bricoleur-pcb-rescue_Arducam-OV5642-Bricoleur-pcb-cache U 0 40 Y Y 1 F N
+DEF Arducam-OV5642-Bricoleur-pcb-cache U 0 40 Y Y 1 F N
 F0 "U" 0 50 50 H V C CNN
-F1 "Bricoleur-pcb-rescue_Arducam-OV5642-Bricoleur-pcb-cache" 0 150 50 H V C CNN
+F1 "Arducam-OV5642-Bricoleur-pcb-cache" 0 150 50 H V C CNN
 F2 "" 0 50 50 H I C CNN
 F3 "" 0 50 50 H I C CNN
 DRAW
@@ -33,11 +33,11 @@ X DOUT0 ~ 950 -500 100 U 50 50 1 1 N
 ENDDRAW
 ENDDEF
 #
-# Bricoleur-pcb-rescue_Bricoleur-pcb-cache_Ultrasonic-LV-EZ0-Bricoleur-pcb-cache
+# Bricoleur-pcb-cache_Ultrasonic-LV-EZ0-Bricoleur-pcb-cache
 #
-DEF Bricoleur-pcb-rescue_Bricoleur-pcb-cache_Ultrasonic-LV-EZ0-Bricoleur-pcb-cache U 0 40 Y Y 1 F N
+DEF Bricoleur-pcb-cache_Ultrasonic-LV-EZ0-Bricoleur-pcb-cache U 0 40 Y Y 1 F N
 F0 "U" 0 50 50 H V C CNN
-F1 "Bricoleur-pcb-rescue_Bricoleur-pcb-cache_Ultrasonic-LV-EZ0-Bricoleur-pcb-cache" -50 150 50 H V C CNN
+F1 "Bricoleur-pcb-cache_Ultrasonic-LV-EZ0-Bricoleur-pcb-cache" -50 150 50 H V C CNN
 F2 "" 0 50 50 H I C CNN
 F3 "" 0 50 50 H I C CNN
 DRAW
@@ -52,11 +52,11 @@ X GND 7 250 -250 100 U 50 50 1 1 W
 ENDDRAW
 ENDDEF
 #
-# Bricoleur-pcb-rescue_EFM32GG980-symbols
+# EFM32GG980-symbols
 #
-DEF Bricoleur-pcb-rescue_EFM32GG980-symbols U 0 10 Y Y 1 F N
+DEF EFM32GG980-symbols U 0 10 Y Y 1 F N
 F0 "U" 1100 400 60 H V C CNN
-F1 "Bricoleur-pcb-rescue_EFM32GG980-symbols" 1100 300 60 H V C CNN
+F1 "EFM32GG980-symbols" 1100 300 60 H V C CNN
 F2 "QFP100_14X14" 1100 240 60 H I C CNN
 F3 "" 0 0 60 H V C CNN
 $FPLIST
@@ -172,11 +172,11 @@ X PE15 99 2200 -100 300 L 59 59 1 0 U
 ENDDRAW
 ENDDEF
 #
-# Bricoleur-pcb-rescue_IP4220CZ6-IP4220CZ6
+# IP4220CZ6-IP4220CZ6
 #
-DEF Bricoleur-pcb-rescue_IP4220CZ6-IP4220CZ6 U 0 40 Y Y 1 L N
+DEF IP4220CZ6-IP4220CZ6 U 0 40 Y Y 1 L N
 F0 "U" -211 298 50 H V L BNN
-F1 "Bricoleur-pcb-rescue_IP4220CZ6-IP4220CZ6" -176 -676 50 H V L BNN
+F1 "IP4220CZ6-IP4220CZ6" -176 -676 50 H V L BNN
 F2 "SOT95P275X110-6N" 0 0 50 H I L BNN
 F3 "Unavailable" 0 0 50 H I L BNN
 F4 "Integrated circuit: ESD protection; SOT457" 0 0 50 H I L BNN
@@ -198,11 +198,11 @@ X I/O_2 6 700 0 200 L 40 40 0 0 B
 ENDDRAW
 ENDDEF
 #
-# Bricoleur-pcb-rescue_PYNQ-Shield-Bricoleur-pcb-cache-Bricoleur-pcb-cache
+# PYNQ-Shield-Bricoleur-pcb-cache-Bricoleur-pcb-cache
 #
-DEF Bricoleur-pcb-rescue_PYNQ-Shield-Bricoleur-pcb-cache-Bricoleur-pcb-cache U 0 40 Y Y 1 F N
+DEF PYNQ-Shield-Bricoleur-pcb-cache-Bricoleur-pcb-cache U 0 40 Y Y 1 F N
 F0 "U" -50 -1150 50 H V C CNN
-F1 "Bricoleur-pcb-rescue_PYNQ-Shield-Bricoleur-pcb-cache-Bricoleur-pcb-cache" -50 -1050 50 H V C CNN
+F1 "PYNQ-Shield-Bricoleur-pcb-cache-Bricoleur-pcb-cache" -50 -1050 50 H V C CNN
 F2 "" -50 -1150 50 H I C CNN
 F3 "" -50 -1150 50 H I C CNN
 DRAW
@@ -268,11 +268,11 @@ X V_P 9 -700 -1300 100 R 50 50 1 1 I
 ENDDRAW
 ENDDEF
 #
-# Bricoleur-pcb-rescue_SW_DP3T-Bricoleur-pcb-cache
+# SW_DP3T-Bricoleur-pcb-cache
 #
-DEF Bricoleur-pcb-rescue_SW_DP3T-Bricoleur-pcb-cache U 0 40 Y Y 1 F N
+DEF SW_DP3T-Bricoleur-pcb-cache U 0 40 Y Y 1 F N
 F0 "U" 0 0 50 H V C CNN
-F1 "Bricoleur-pcb-rescue_SW_DP3T-Bricoleur-pcb-cache" 0 100 50 H V C CNN
+F1 "SW_DP3T-Bricoleur-pcb-cache" 0 100 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -284,11 +284,11 @@ X ~ 4 250 -500 100 R 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
-# Bricoleur-pcb-rescue_UART_BOOT-Bricoleur-pcb-cache
+# UART_BOOT-Bricoleur-pcb-cache
 #
-DEF Bricoleur-pcb-rescue_UART_BOOT-Bricoleur-pcb-cache U 0 40 Y Y 1 F N
+DEF UART_BOOT-Bricoleur-pcb-cache U 0 40 Y Y 1 F N
 F0 "U" -50 100 50 H V C CNN
-F1 "Bricoleur-pcb-rescue_UART_BOOT-Bricoleur-pcb-cache" -50 200 50 H V C CNN
+F1 "UART_BOOT-Bricoleur-pcb-cache" -50 200 50 H V C CNN
 F2 "" -50 100 50 H I C CNN
 F3 "" -50 100 50 H I C CNN
 DRAW
@@ -299,11 +299,11 @@ X DBG_SWCLK 3 50 -550 100 U 50 50 1 1 I
 ENDDRAW
 ENDDEF
 #
-# Bricoleur-pcb-rescue_VESD05A8A-HNH-Bricoleur-pcb-cache
+# VESD05A8A-HNH-Bricoleur-pcb-cache
 #
-DEF Bricoleur-pcb-rescue_VESD05A8A-HNH-Bricoleur-pcb-cache U 0 40 Y Y 1 F N
+DEF VESD05A8A-HNH-Bricoleur-pcb-cache U 0 40 Y Y 1 F N
 F0 "U" 0 0 50 H V C CNN
-F1 "Bricoleur-pcb-rescue_VESD05A8A-HNH-Bricoleur-pcb-cache" -50 100 50 H V C CNN
+F1 "VESD05A8A-HNH-Bricoleur-pcb-cache" -50 100 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -317,238 +317,6 @@ X L6 6 50 -250 100 D 50 50 1 1 I
 X L7 7 150 -250 100 D 50 50 1 1 I
 X L8 8 250 -250 100 D 50 50 1 1 I
 X GND 9 250 -800 100 U 50 50 1 1 w
-ENDDRAW
-ENDDEF
-#
-# Connector_Conn_01x04_Male
-#
-DEF Connector_Conn_01x04_Male J 0 40 Y N 1 F N
-F0 "J" 0 200 50 H V C CNN
-F1 "Connector_Conn_01x04_Male" 0 -300 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-$FPLIST
- Connector*:*_1x??_*
-$ENDFPLIST
-DRAW
-S 34 -195 0 -205 1 1 6 F
-S 34 -95 0 -105 1 1 6 F
-S 34 5 0 -5 1 1 6 F
-S 34 105 0 95 1 1 6 F
-P 2 1 1 6 50 -200 34 -200 N
-P 2 1 1 6 50 -100 34 -100 N
-P 2 1 1 6 50 0 34 0 N
-P 2 1 1 6 50 100 34 100 N
-X Pin_1 1 200 100 150 L 50 50 1 1 P
-X Pin_2 2 200 0 150 L 50 50 1 1 P
-X Pin_3 3 200 -100 150 L 50 50 1 1 P
-X Pin_4 4 200 -200 150 L 50 50 1 1 P
-ENDDRAW
-ENDDEF
-#
-# Connector_Generic_Conn_02x10_Odd_Even
-#
-DEF Connector_Generic_Conn_02x10_Odd_Even J 0 40 Y N 1 F N
-F0 "J" 50 500 50 H V C CNN
-F1 "Connector_Generic_Conn_02x10_Odd_Even" 50 -600 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-$FPLIST
- Connector*:*_2x??_*
-$ENDFPLIST
-DRAW
-S -50 -495 0 -505 1 1 6 N
-S -50 -395 0 -405 1 1 6 N
-S -50 -295 0 -305 1 1 6 N
-S -50 -195 0 -205 1 1 6 N
-S -50 -95 0 -105 1 1 6 N
-S -50 5 0 -5 1 1 6 N
-S -50 105 0 95 1 1 6 N
-S -50 205 0 195 1 1 6 N
-S -50 305 0 295 1 1 6 N
-S -50 405 0 395 1 1 6 N
-S -50 450 150 -550 1 1 10 f
-S 150 -495 100 -505 1 1 6 N
-S 150 -395 100 -405 1 1 6 N
-S 150 -295 100 -305 1 1 6 N
-S 150 -195 100 -205 1 1 6 N
-S 150 -95 100 -105 1 1 6 N
-S 150 5 100 -5 1 1 6 N
-S 150 105 100 95 1 1 6 N
-S 150 205 100 195 1 1 6 N
-S 150 305 100 295 1 1 6 N
-S 150 405 100 395 1 1 6 N
-X Pin_1 1 -200 400 150 R 50 50 1 1 P
-X Pin_10 10 300 0 150 L 50 50 1 1 P
-X Pin_11 11 -200 -100 150 R 50 50 1 1 P
-X Pin_12 12 300 -100 150 L 50 50 1 1 P
-X Pin_13 13 -200 -200 150 R 50 50 1 1 P
-X Pin_14 14 300 -200 150 L 50 50 1 1 P
-X Pin_15 15 -200 -300 150 R 50 50 1 1 P
-X Pin_16 16 300 -300 150 L 50 50 1 1 P
-X Pin_17 17 -200 -400 150 R 50 50 1 1 P
-X Pin_18 18 300 -400 150 L 50 50 1 1 P
-X Pin_19 19 -200 -500 150 R 50 50 1 1 P
-X Pin_2 2 300 400 150 L 50 50 1 1 P
-X Pin_20 20 300 -500 150 L 50 50 1 1 P
-X Pin_3 3 -200 300 150 R 50 50 1 1 P
-X Pin_4 4 300 300 150 L 50 50 1 1 P
-X Pin_5 5 -200 200 150 R 50 50 1 1 P
-X Pin_6 6 300 200 150 L 50 50 1 1 P
-X Pin_7 7 -200 100 150 R 50 50 1 1 P
-X Pin_8 8 300 100 150 L 50 50 1 1 P
-X Pin_9 9 -200 0 150 R 50 50 1 1 P
-ENDDRAW
-ENDDEF
-#
-# Connector_TestPoint
-#
-DEF Connector_TestPoint TP 0 30 N N 1 F N
-F0 "TP" 0 270 50 H V C CNN
-F1 "Connector_TestPoint" 0 200 50 H V C CNN
-F2 "" 200 0 50 H I C CNN
-F3 "" 200 0 50 H I C CNN
-$FPLIST
- Pin*
- Test*
-$ENDFPLIST
-DRAW
-C 0 130 30 0 1 0 N
-X 1 1 0 0 100 U 50 50 1 1 P
-ENDDRAW
-ENDDEF
-#
-# Connector_USB_B_Micro
-#
-DEF Connector_USB_B_Micro J 0 40 Y Y 1 F N
-F0 "J" -200 450 50 H V L CNN
-F1 "Connector_USB_B_Micro" -200 350 50 H V L CNN
-F2 "" 150 -50 50 H I C CNN
-F3 "" 150 -50 50 H I C CNN
-ALIAS USB_B_Mini
-$FPLIST
- USB*
-$ENDFPLIST
-DRAW
-C -150 85 25 0 1 10 F
-C -25 135 15 0 1 10 F
-S -200 -300 200 300 0 1 10 f
-S -5 -300 5 -270 0 1 0 N
-S 10 50 -20 20 0 1 10 F
-S 200 -205 170 -195 0 1 0 N
-S 200 -105 170 -95 0 1 0 N
-S 200 -5 170 5 0 1 0 N
-S 200 195 170 205 0 1 0 N
-P 2 0 1 10 -75 85 25 85 N
-P 4 0 1 10 -125 85 -100 85 -50 135 -25 135 N
-P 4 0 1 10 -100 85 -75 85 -50 35 0 35 N
-P 4 0 1 10 25 110 25 60 75 85 25 110 F
-P 5 0 1 0 -170 220 -70 220 -80 190 -160 190 -170 220 F
-P 9 0 1 0 -185 230 -185 220 -175 190 -175 180 -65 180 -65 190 -55 220 -55 230 -185 230 N
-X VBUS 1 300 200 100 L 50 50 1 1 w
-X D- 2 300 -100 100 L 50 50 1 1 P
-X D+ 3 300 0 100 L 50 50 1 1 P
-X ID 4 300 -200 100 L 50 50 1 1 P
-X GND 5 0 -400 100 U 50 50 1 1 w
-X Shield 6 -100 -400 100 U 50 50 1 1 P
-ENDDRAW
-ENDDEF
-#
-# Device_C
-#
-DEF Device_C C 0 10 N Y 1 F N
-F0 "C" 25 100 50 H V L CNN
-F1 "Device_C" 25 -100 50 H V L CNN
-F2 "" 38 -150 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-$FPLIST
- C_*
-$ENDFPLIST
-DRAW
-P 2 0 1 20 -80 -30 80 -30 N
-P 2 0 1 20 -80 30 80 30 N
-X ~ 1 0 150 110 D 50 50 1 1 P
-X ~ 2 0 -150 110 U 50 50 1 1 P
-ENDDRAW
-ENDDEF
-#
-# Device_L
-#
-DEF Device_L L 0 40 N N 1 F N
-F0 "L" -50 0 50 V V C CNN
-F1 "Device_L" 75 0 50 V V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-$FPLIST
- Choke_*
- *Coil*
- Inductor_*
- L_*
-$ENDFPLIST
-DRAW
-A 0 -75 25 -899 899 0 1 0 N 0 -100 0 -50
-A 0 -25 25 -899 899 0 1 0 N 0 -50 0 0
-A 0 25 25 -899 899 0 1 0 N 0 0 0 50
-A 0 75 25 -899 899 0 1 0 N 0 50 0 100
-X 1 1 0 150 50 D 50 50 1 1 P
-X 2 2 0 -150 50 U 50 50 1 1 P
-ENDDRAW
-ENDDEF
-#
-# Device_LED
-#
-DEF Device_LED D 0 40 N N 1 F N
-F0 "D" 0 100 50 H V C CNN
-F1 "Device_LED" 0 -100 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-$FPLIST
- LED*
- LED_SMD:*
- LED_THT:*
-$ENDFPLIST
-DRAW
-P 2 0 1 8 -50 -50 -50 50 N
-P 2 0 1 0 -50 0 50 0 N
-P 4 0 1 8 50 -50 50 50 -50 0 50 -50 N
-P 5 0 1 0 -120 -30 -180 -90 -150 -90 -180 -90 -180 -60 N
-P 5 0 1 0 -70 -30 -130 -90 -100 -90 -130 -90 -130 -60 N
-X K 1 -150 0 100 R 50 50 1 1 P
-X A 2 150 0 100 L 50 50 1 1 P
-ENDDRAW
-ENDDEF
-#
-# Device_R
-#
-DEF Device_R R 0 0 N Y 1 F N
-F0 "R" 80 0 50 V V C CNN
-F1 "Device_R" 0 0 50 V V C CNN
-F2 "" -70 0 50 V I C CNN
-F3 "" 0 0 50 H I C CNN
-$FPLIST
- R_*
-$ENDFPLIST
-DRAW
-S -40 -100 40 100 0 1 10 N
-X ~ 1 0 150 50 D 50 50 1 1 P
-X ~ 2 0 -150 50 U 50 50 1 1 P
-ENDDRAW
-ENDDEF
-#
-# Switch_SW_Push
-#
-DEF Switch_SW_Push SW 0 40 N N 1 F N
-F0 "SW" 50 100 50 H V L CNN
-F1 "Switch_SW_Push" 0 -60 50 H V C CNN
-F2 "" 0 200 50 H I C CNN
-F3 "" 0 200 50 H I C CNN
-DRAW
-C -80 0 20 0 1 0 N
-C 80 0 20 0 1 0 N
-P 2 0 1 0 0 50 0 120 N
-P 2 0 1 0 100 50 -100 50 N
-X 1 1 -200 0 100 R 50 50 0 1 P
-X 2 2 200 0 100 L 50 50 0 1 P
 ENDDRAW
 ENDDEF
 #
