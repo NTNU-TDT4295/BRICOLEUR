@@ -20,7 +20,7 @@ U 1 1 5BBE2CE4
 P 9050 2100
 F 0 "J2" H 9100 2717 50  0000 C CNN
 F 1 "Conn_02x10_Odd_Even" H 9100 2626 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_2x10_P2.54mm_Vertical" H 9050 2100 50  0001 C CNN
+F 2 "Connector_IDC:IDC-Header_2x10_P2.54mm_Vertical" H 9050 2100 50  0001 C CNN
 F 3 "~" H 9050 2100 50  0001 C CNN
 	1    9050 2100
 	1    0    0    -1  
@@ -139,8 +139,6 @@ Wire Wire Line
 	9950 2150 9950 2500
 Text GLabel 9950 2500 3    50   Input ~ 0
 DEBUG_EXT_CABLE_ATTACH
-Text Notes 10400 2150 1    50   ~ 0
-UNFINISHED\n
 $Comp
 L Device:LED D1
 U 1 1 5BA42EDE
