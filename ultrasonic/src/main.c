@@ -29,17 +29,26 @@ struct line {
     float b;
 };
 
+struct buffer {
+	int head;
+	int tail;
+	int length;
+	int maxLength;
+	bool wrapped;
+};
+
 typedef struct position2D Position2D;
 typedef struct position3D Position3D;
 typedef struct line Line;
+typedef struct buffer Buffer;
 
 void getPosition2D(Position2D *position, float r1, float r2);
 void getPosition3D(Position3D *position, float r1, float r2, float r3);
-void getLine(Line *line, Position2D positions[], int length);
+void getLine(Line *line, Position2D positions[], Buffer *buffer);
 void getInput(float distances[], int length);
 bool willCollide2D(Line *line);
 void panic();
-bool isMoving(Position2D positions[], int positionsLength);
+bool isMoving(Position2D positions[], Buffer *buffer);
 
 void getPosition2D(Position2D *position, float r1, float r2) {
     position->x = (x2*x2 + r1*r1 - r2*r2) / (2 * x2);
@@ -52,24 +61,24 @@ void getPosition3D(Position3D *position, float r1, float r2, float r3) {
     position->z = sqrtf(r1*r1 - position->x * position->x - position->y * position->y);
 }
 
-void getLine(Line *line, Position2D positions[], int length) {
+void getLine(Line *line, Position2D positions[], Buffer *buffer) {
     // Algorithm: Ordinary linear least squares method
 
     float x_avg = 0;
     float y_avg = 0;
 
-    for (int i = 0; i < length; i++) {
+    for (int i = buffer->head; i != buffer->tail; i = (i + 1) % buffer->maxLength) {
         x_avg += positions[i].x;
         y_avg += positions[i].y;
     }
 
-    x_avg /= length;
-    y_avg /= length;
+    x_avg /= buffer->length;
+    y_avg /= buffer->length;
 
-    float x_diff[length];
-    float y_diff[length];
+    float x_diff[buffer->length];
+    float y_diff[buffer->length];
 
-    for (int i = 0; i < length; i++) {
+    for (int i = buffer->head; i != buffer->tail; i = (i + 1) % buffer->maxLength) {
         x_diff[i] = positions[i].x - x_avg;
         y_diff[i] = positions[i].y - y_avg;
     }
@@ -77,7 +86,7 @@ void getLine(Line *line, Position2D positions[], int length) {
     float S_xy = 0;
     float S_x2 = 0;
 
-    for (int i = 0; i < length; i++) {
+    for (int i = buffer->head; i != buffer->tail; i = (i + 1) % buffer->maxLength) {
         S_xy += x_diff[i] * y_diff[i];
         S_x2 += x_diff[i] * x_diff[i];
     }
@@ -114,17 +123,23 @@ void panic() {
 	SegmentLCD_Write("Panic");
 }
 
-bool isMoving(Position2D positions[], int positionsLength) {
-	return ((positions[positionsLength - 1].x == positions[positionsLength - 2].x) &&
-		    (positions[positionsLength - 1].y == positions[positionsLength - 2].y));
+bool isMoving(Position2D positions[], Buffer *buffer) {
+	return ((positions[buffer->length - 1].x != positions[buffer->length - 2].x) ||
+			(positions[buffer->length - 1].y == positions[buffer->length - 2].y));
 }
 
 int main() {
 	SegmentLCD_Init(false);
 	char buf[20];
 
-	Position2D positions[1000];
-	int positionsLength = 0;
+	Buffer buffer;
+	buffer.head = 0;
+	buffer.tail = 0;
+	buffer.length = 0;
+	buffer.maxLength = 100;
+	buffer.wrapped = false;
+
+	Position2D positions[buffer.maxLength];
 
 	int distancesLength = 2;  // 1 distance for each sensor
 	float distances[distancesLength];
@@ -136,21 +151,29 @@ int main() {
 		getInput(distances, distancesLength);
 
 		getPosition2D(&position, distances[0], distances[1]);
-		positions[positionsLength] = position;
-		positionsLength++;
+		positions[buffer.tail] = position;
+		buffer.tail = (buffer.tail + 1) % buffer.maxLength;
+
+		if (buffer.head == buffer.tail) {
+			buffer.wrapped = true;
+		}
+
+		if (buffer.wrapped) {
+			buffer.length = buffer.maxLength;
+			buffer.head = (buffer.head + 1) % buffer.maxLength;
+		} else {
+			buffer.length = buffer.tail - buffer.head;
+		}
 
 		// This avoids working outside the positions array. However, it means
 		// we sometimes get a really short buffer, and sometimes a very long
 		// one. Some sort of circular buffer could be better.
-		if (positionsLength > 1000) {
-			positionsLength = 0;
-		}
 
 		// It doesn't make sense to make a line from one point (and we would
 		// get a division by zero)
 
-		if ((positionsLength > 1) && (isMoving(positions, positionsLength))) {
-			getLine(&line, positions, positionsLength);
+		if ((buffer.length > 1) && (isMoving(positions, &buffer))) {
+			getLine(&line, positions, &buffer);
 
 			if (willCollide2D(&line)) {
 				panic();
@@ -159,7 +182,6 @@ int main() {
 			// snprintf(buf, 20, "%d", (int)line.a);
 			// SegmentLCD_Write(buf);
 		}
-
 	}
 
     // Dummy data for y = 2x + 3
