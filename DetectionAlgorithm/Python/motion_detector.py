@@ -7,40 +7,33 @@ from imutils.video import VideoStream
 import argparse
 import datetime
 import imutils
-import time
 import cv2
 import time
+import os
+import sys
 
-entire_file = time.time()
-parsing = time.time()
+# Working from PyCharm, so just making sure I'm actually running on the PYNQ
+full_path = os.path.realpath(__file__)
+print(full_path)
+
+start = time.time()
+total_time_f = 0
+
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-v", "--video", help="path to the video file")
 ap.add_argument("-a", "--min-area", type=int, default=500, help="minimum area size")
 args = vars(ap.parse_args())
-end_parsing = time.time()
-print("parsing = ", (end_parsing - parsing)*1000)
-# if the video argument is None, then we are reading from webcam
-#if args.get("video", None) is None:
-#    vs = VideoStream(src=0).start()
-#    time.sleep(2.0)
 
-# otherwise, we are reading from a video file
-#else:
-#    vs = cv2.VideoCapture(args["video"])
-get_images = time.time()
-vs = cv2.VideoCapture("../TestData/img%d.png")
-# vs = cv2.VideoCapture("/home/xilinx/Code/BRICOLEUR/DetectionAlgorithm/TestData/IMG_%04d.jpg")
-fin_get_images = time.time()
-
-print("fetching images = ", (fin_get_images - get_images)*1000)
+vs = cv2.VideoCapture("/home/xilinx/Code/BRICOLEUR/DetectionAlgorithm/TestData/%d-img.png")
 
 # initialize the first frame in the video stream
 firstFrame = None
 
 oldBoundingBox = (0, 0, 0, 0)
 
-def compareBoundingBoxes(b1, b2):
+
+def compare_bounding_boxes(b1, b2):
     """
     Returns true if b1 is bigger than b2, otherwise false
     """
@@ -50,97 +43,99 @@ def compareBoundingBoxes(b1, b2):
     c1 = w1 + w1 + h1 + h1
     c2 = w2 + w2 + h2 + h2
 
-    print("new = ", c1, "old = ", c2, "new > old = ", c1 > c2)
-
     return c1 > c2
-startAll = time.time()
+
+
 i = 0
+
 # loop over the frames of the video
 while True:
-    start = time.time()
-    # grab the current frame and initialize the occupied/unoccupied
-    # text
+    # Print the currently processed image in a nice way (replaces the previous print)
+    sys.stdout.write("\rProcessing image {}".format(i))
+    sys.stdout.flush()
+
+    # grab the current frame and initialize the occupied/unoccupied text
+    # start_r = time.time()
     frame = vs.read()[1]
-    #frame = frame if args.get("video", None) is None else frame[1]
-    # text = "Unoccupied"
+    # end_r = time.time()
+
+    # total_time_f += end_r - start_r
+
     # if the frame could not be grabbed, then we have reached the end
     # of the vide
     if frame is None:
         break
+
     # resize the frame, convert it to grayscale, and blur it
-    #frame = imutils.resize(frame, width=500)
+    # start_cvt = time.time()
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    # end_cvt = time.time()
+
+    # total_time_f += (end_cvt - start_cvt)
+
+    # start_gb = time.time()
+
     gray = cv2.GaussianBlur(gray, (21, 21), 0)
+
+    # end_gb = time.time()
+    # total_time_f += end_gb - start_gb
 
     # if the first frame is None, initialize it
     if firstFrame is None:
         firstFrame = gray
         continue
-    # compute the absolute difference between the current frame and
-    # first frame
+
+    # compute the absolute difference between the current frame and first frame
     frameDelta = cv2.absdiff(firstFrame, gray)
     thresh = cv2.threshold(frameDelta, 25, 255, cv2.THRESH_BINARY)[1]
 
-    # dilate the thresholded image to fill in holes, then find contours
-    # on thresholded image
+    # dilate the thresholded image to fill in holes, then find contours on thresholded image
+    # start_d = time.time()
     thresh = cv2.dilate(thresh, None, iterations=2)
-    cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL,
-                            cv2.CHAIN_APPROX_SIMPLE)
+    # end_d = time.time()
+    # total_time_f += end_d - start_d
+
+    start_fc = time.time()
+    cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    end_fc = time.time()
+    total_time_f += end_fc - start_fc
+
     cnts = cnts[0] if imutils.is_cv2() else cnts[1]
+
+    # Use this to keep track of the previous bounding box
     newBoundingBox = (0, 0, 0, 0)
+
     # loop over the contours
     for c in cnts:
         # if the contour is too small, ignore it
         if cv2.contourArea(c) < args["min_area"]:
             continue
 
-        # compute the bounding box for the contour, draw it on the frame,
-        # and update the text
+        # compute the bounding box for the contour, draw it on the frame, and update the text
         (x, y, w, h) = cv2.boundingRect(c)
-        if(w*h > newBoundingBox[2]*newBoundingBox[3]):
+
+        if w * h > newBoundingBox[2] * newBoundingBox[3]:
             newBoundingBox = (x, y, w, h)
         else:
-            print("smaller")
+            pass
 
-        #if compareBoundingBoxes((x, y, w, h), oldBoundingBox):
-        #    print("Appraching objec")
-
-        #oldBoundingBox = (x, y, w, h)
         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-        # text = "Occupied"
 
-    if compareBoundingBoxes(newBoundingBox, oldBoundingBox):
-        print("Approaching")
+    if compare_bounding_boxes(newBoundingBox, oldBoundingBox):
+        pass
     else:
-        print("Going away")
+        pass
 
     oldBoundingBox = newBoundingBox
 
+    i += 1
 
-
-    # draw the text and timestamp on the frame
-    #cv2.putText(frame, "Room Status: {}".format(text), (10, 20),
-    #            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
-    #cv2.putText(frame, datetime.datetime.now().strftime("%A %d %B %Y %I:%M:%S%p"),
-    #            (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 0, 255), 1)
-
-    # show the frame and record if the user presses a key
-    cv2.imwrite(format("./Output/tracked%d.png"%i), frame)
-    i+=1
-    end = time.time()
-    print("time for one image = ", (end - start)*1000)
-    #cv2.imwrite("Thresh", thresh)
-    #cv2.imwrite("Frame Delta", frameDelta)
-    # key = cv2.waitKey(1) & 0xFF
-
-    # if the `q` key is pressed, break from the lop
-    # if key == ord("q"):
-        # break
-
-stopAll = time.time()
-print("everything but video in = ", (stopAll - startAll)*1000)
 # cleanup the camera and close any open windows
-#vs.stop() if args.get("video", None) is None else vs.release()
 cv2.destroyAllWindows()
-end_entire_file = time.time()
-print("entire file = ", ( end_entire_file - entire_file )*1000)
+
+end = time.time()
+total_time = end - start
+
+print("\nTotal time in <function> is = ", total_time_f * 1000, "ms")
+
+print("\nTime = ", total_time * 1000)
