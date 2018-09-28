@@ -1,10 +1,11 @@
 from PIL import Image #Prøver å bruke minst mulig av hjelpebibloteker, mulig å la være å bruke PIL
 #Read image
-im1 = Image.open( 'scene1.row3.col1.ppm' ) #Bilde 1, for å sammenligne med bilde 2
-im2 = Image.open( 'scene1.row3.col2.ppm' ) #Bilde 2, for å sammenligne med bilde 1
-
-dep = Image.open( 'scene1.row3.col1.ppm' ) #Bildet vi kommer til å fargelegge, kopi av bilde 1
-
+#im1 = Image.open( 'scene1.row3.col1.ppm' ) #Bilde 1, for å sammenligne med bilde 2
+#im2 = Image.open( 'scene1.row3.col5.ppm' ) #Bilde 2, for å sammenligne med bilde 1
+im1 = Image.open( 'im0.ppm' )
+im2 = Image.open( 'im8.ppm' )
+#dep = Image.open( 'scene1.row3.col1.ppm' ) #Bildet vi kommer til å fargelegge, kopi av bilde 1
+dep = Image.open( 'im0.pgm' )
 #im1 = im1.resize((200,200))
 #im2 = im2.resize((200,200))
 #dep = dep.resize((200, 200))
@@ -28,9 +29,9 @@ depthRed = 0
 depthGreen = 0
 depthBlue = 0
 
-offset = 5
+offset = 6
 increment = 3
-searchRadCol = 100
+searchRadCol = 160
 searchRadRow = 1
 
 rowStart = 0
@@ -123,27 +124,27 @@ for row in range(0, H):
             depthRed = tempDepth*6
             depthGreen = 0
             depthBlue = tempDepth*6
-        if (tempDepth >43 and tempDepth < 85):
+        elif (tempDepth > 42 and tempDepth < 85):
             depthRed = 255 - (tempDepth-43)*6
             depthGreen = 0
             depthBlue = tempDepth * 6
-        if (tempDepth>84 and tempDepth <128):
+        elif (tempDepth>84 and tempDepth <128):
             depthRed = 0
             depthGreen = (tempDepth-85)*6
             depthBlue = 255
-        if (tempDepth>127 and tempDepth <169):
+        elif (tempDepth>127 and tempDepth <169):
             depthRed = 0
             depthGreen = 255
             depthBlue = 255 - (tempDepth-128)*6
-        if (tempDepth>168 and tempDepth <212): 
+        elif (tempDepth>168 and tempDepth <212): 
             depthRed = (tempDepth-169)*6
             depthGreen = 255
             depthBlue = 0
-        if (tempDepth >211 and tempDepth < 254):
+        elif (tempDepth >211 and tempDepth < 254):
             depthRed = 255 
             deptGreen = 255 - (tempDepth-212)*6
             depthBlue = 0
-        if (tempDepth > 255):
+        elif (tempDepth > 255):
             depthRed = 255
             deptGreen = 0
             depthBlue = 0
