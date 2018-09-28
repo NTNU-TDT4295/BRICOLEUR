@@ -19,7 +19,7 @@ ap.add_argument("-v", "--video", help="path to the video file")
 ap.add_argument("-a", "--min-area", type=int, default=500, help="minimum area size")
 args = vars(ap.parse_args())
 end_parsing = time.time()
-print("parsing = ", (end_parsing - parsing))
+print("parsing = ", (end_parsing - parsing)*1000)
 # if the video argument is None, then we are reading from webcam
 #if args.get("video", None) is None:
 #    vs = VideoStream(src=0).start()
@@ -29,7 +29,7 @@ print("parsing = ", (end_parsing - parsing))
 #else:
 #    vs = cv2.VideoCapture(args["video"])
 get_images = time.time()
-vs = cv2.VideoCapture("./TestData/img%d.png")
+vs = cv2.VideoCapture("../TestData/img%d.png")
 # vs = cv2.VideoCapture("/home/xilinx/Code/BRICOLEUR/DetectionAlgorithm/TestData/IMG_%04d.jpg")
 fin_get_images = time.time()
 
