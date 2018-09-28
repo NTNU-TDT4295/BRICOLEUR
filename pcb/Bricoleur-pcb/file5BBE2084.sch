@@ -4,7 +4,7 @@ EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 2 3
+Sheet 2 18
 Title ""
 Date ""
 Rev ""
@@ -31,10 +31,6 @@ Text GLabel 8650 2950 3    50   Input ~ 0
 GND
 Text GLabel 7850 1700 0    50   Input ~ 0
 DH_VTARGET
-Text GLabel 7850 1800 0    50   Input ~ 0
-DH_#TRST
-Text GLabel 7850 1900 0    50   Input ~ 0
-DH_TDI
 Text GLabel 7850 2000 0    50   Input ~ 0
 DH_TMS_SWDIO
 Text GLabel 7850 2100 0    50   Input ~ 0
@@ -390,37 +386,15 @@ DBG_PB_2
 Text GLabel 3850 3850 0    50   Input ~ 0
 DBG_PB_3
 Wire Wire Line
-	3850 3100 4800 3100
-Wire Wire Line
-	6100 3500 5150 3500
-Wire Wire Line
-	6100 3850 5500 3850
-Wire Wire Line
 	5150 2550 5150 2700
-Wire Wire Line
-	5500 2700 5150 2700
-Connection ~ 5150 2700
-Wire Wire Line
-	5150 2700 4800 2700
-Wire Wire Line
-	4800 3000 4800 3100
-Connection ~ 4800 3100
-Wire Wire Line
-	4800 3100 6100 3100
-Wire Wire Line
-	4800 3100 4800 4150
 Wire Wire Line
 	5150 3000 5150 3500
 Connection ~ 5150 3500
-Wire Wire Line
-	5150 3500 3850 3500
 Wire Wire Line
 	5150 3500 5150 4150
 Wire Wire Line
 	5500 3000 5500 3850
 Connection ~ 5500 3850
-Wire Wire Line
-	5500 3850 3850 3850
 Wire Wire Line
 	5500 3850 5500 4150
 Wire Wire Line
@@ -431,27 +405,9 @@ Wire Wire Line
 Text GLabel 5150 4550 3    50   Input ~ 0
 GND
 Wire Wire Line
-	5500 4450 5150 4450
-Connection ~ 5150 4450
-Wire Wire Line
-	5150 4450 4800 4450
-Wire Wire Line
 	5150 4550 5150 4450
-$Comp
-L Bricoleur-pcb-rescue:VESD05A8A-HNH-Bricoleur-pcb-cache U10
-U 1 1 5BA605D7
-P 8300 1550
-F 0 "U10" H 7722 979 50  0000 R CNN
-F 1 "VESD05A8A-HNH" H 7722 1070 50  0000 R CNN
-F 2 "Bricoleur-custom:VESD05A8A-HNH" H 8300 1550 50  0001 C CNN
-F 3 "" H 8300 1550 50  0001 C CNN
-	1    8300 1550
-	-1   0    0    1   
-$EndComp
 Wire Wire Line
 	7100 2200 8850 2200
-Text GLabel 8050 750  2    50   Input ~ 0
-GND
 $Comp
 L Device:R R17
 U 1 1 5BA97D26
@@ -470,57 +426,131 @@ VMCU
 NoConn ~ 9350 1700
 Wire Wire Line
 	9350 2500 9950 2500
-Text GLabel 8050 2450 3    50   Input ~ 0
-DEBUG_EXT_CABLE_ATTACH
 Wire Wire Line
-	7850 2100 8350 2100
+	3850 3100 4800 3100
 Wire Wire Line
-	7850 2300 8250 2300
+	4800 3100 4800 4150
 Wire Wire Line
-	7850 2400 8150 2400
+	4800 3000 4800 3100
+Connection ~ 4800 3100
 Wire Wire Line
-	7850 2000 8750 2000
+	4800 3100 6100 3100
 Wire Wire Line
-	7850 1900 8650 1900
+	6100 3500 5150 3500
 Wire Wire Line
-	7850 1700 8450 1700
+	6100 3850 5500 3850
+Connection ~ 5150 2700
 Wire Wire Line
-	7850 1800 8550 1800
+	5500 2700 5150 2700
 Wire Wire Line
-	8450 1300 8450 1700
-Connection ~ 8450 1700
+	5150 2700 4800 2700
+Connection ~ 5150 4450
 Wire Wire Line
-	8450 1700 8850 1700
+	5500 4450 5150 4450
 Wire Wire Line
-	8550 1300 8550 1800
-Connection ~ 8550 1800
+	5150 4450 4800 4450
 Wire Wire Line
-	8550 1800 8850 1800
+	5150 3500 3850 3500
 Wire Wire Line
-	8650 1300 8650 1900
-Connection ~ 8650 1900
+	5500 3850 3850 3850
+NoConn ~ 8850 1800
+NoConn ~ 8850 1900
+$Comp
+L Diode:BAT54S D5
+U 1 1 5BB434F5
+P 8600 4750
+F 0 "D5" V 8646 4837 50  0000 L CNN
+F 1 "BAT54S" V 8555 4837 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 8675 4875 50  0001 L CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds11005.pdf" H 8480 4750 50  0001 C CNN
+	1    8600 4750
+	0    1    -1   0   
+$EndComp
 Wire Wire Line
-	8650 1900 8850 1900
+	7850 2400 8850 2400
 Wire Wire Line
-	8750 1300 8750 2000
-Connection ~ 8750 2000
+	7850 2300 8850 2300
 Wire Wire Line
-	8750 2000 8850 2000
+	7850 2100 8850 2100
 Wire Wire Line
-	8350 1300 8350 2100
-Connection ~ 8350 2100
+	7850 1700 8850 1700
 Wire Wire Line
-	8350 2100 8850 2100
+	7850 2000 8850 2000
+Text GLabel 8400 4750 0    50   Input ~ 0
+DH_TMS_SWDIO
+Text GLabel 9700 4750 0    50   Input ~ 0
+DH_TCK_SWCLK
+$Comp
+L Diode:BAT54S D6
+U 1 1 5BB4DE32
+P 9900 4750
+F 0 "D6" V 9946 4837 50  0000 L CNN
+F 1 "BAT54S" V 9855 4837 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 9975 4875 50  0001 L CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds11005.pdf" H 9780 4750 50  0001 C CNN
+	1    9900 4750
+	0    1    -1   0   
+$EndComp
+Text GLabel 10850 4750 0    50   Input ~ 0
+DH_TDO_SWO
+$Comp
+L Diode:BAT54S D7
+U 1 1 5BB4DEDC
+P 11050 4750
+F 0 "D7" V 11096 4837 50  0000 L CNN
+F 1 "BAT54S" V 11005 4837 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 11125 4875 50  0001 L CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds11005.pdf" H 10930 4750 50  0001 C CNN
+	1    11050 4750
+	0    1    -1   0   
+$EndComp
 Wire Wire Line
-	8250 1300 8250 2300
-Connection ~ 8250 2300
+	11050 5050 11050 5200
 Wire Wire Line
-	8250 2300 8850 2300
+	11050 5200 9900 5200
 Wire Wire Line
-	8150 1300 8150 2400
-Connection ~ 8150 2400
+	8600 5200 8600 5050
 Wire Wire Line
-	8150 2400 8850 2400
+	9900 5050 9900 5200
+Connection ~ 9900 5200
 Wire Wire Line
-	8050 1300 8050 2450
+	9900 5200 8600 5200
+Wire Wire Line
+	11050 4450 11050 4350
+Wire Wire Line
+	11050 4350 9900 4350
+Wire Wire Line
+	8600 4350 8600 4450
+Wire Wire Line
+	9900 4450 9900 4350
+Connection ~ 9900 4350
+Wire Wire Line
+	9900 4350 8600 4350
+Text GLabel 9900 5200 3    50   Input ~ 0
+GND
+Text GLabel 9900 4350 1    50   Input ~ 0
+VMCU
+Text GLabel 7150 4700 0    50   Input ~ 0
+DH_#RESET
+$Comp
+L Diode:BAT54S D4
+U 1 1 5BB621C0
+P 7350 4700
+F 0 "D4" V 7396 4787 50  0000 L CNN
+F 1 "BAT54S" V 7305 4787 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 7425 4825 50  0001 L CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds11005.pdf" H 7230 4700 50  0001 C CNN
+	1    7350 4700
+	0    1    -1   0   
+$EndComp
+Wire Wire Line
+	8600 4350 7350 4350
+Wire Wire Line
+	7350 4350 7350 4400
+Connection ~ 8600 4350
+Wire Wire Line
+	8600 5200 7350 5200
+Wire Wire Line
+	7350 5200 7350 5000
+Connection ~ 8600 5200
 $EndSCHEMATC

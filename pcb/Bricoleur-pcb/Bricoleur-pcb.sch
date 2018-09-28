@@ -4,7 +4,7 @@ EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 3
+Sheet 1 18
 Title ""
 Date ""
 Rev ""
@@ -59,39 +59,6 @@ F 3 "" H 6150 1200 60  0000 C CNN
 	1    6150 1200
 	1    0    0    -1  
 $EndComp
-$Comp
-L Bricoleur-pcb-rescue:Bricoleur-pcb-cache_Ultrasonic-LV-EZ0-Bricoleur-pcb-cache U1
-U 1 1 5B9AE131
-P 4150 1450
-F 0 "U1" V 4665 1419 50  0000 C CNN
-F 1 "Ultrasonic-LV-EZ0" V 4574 1419 50  0000 C CNN
-F 2 "Connector_IDC:IDC-Header_2x03_P2.54mm_Vertical" H 4150 1500 50  0001 C CNN
-F 3 "" H 4150 1500 50  0001 C CNN
-	1    4150 1450
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Bricoleur-pcb-rescue:Bricoleur-pcb-cache_Ultrasonic-LV-EZ0-Bricoleur-pcb-cache U3
-U 1 1 5B9AE194
-P 5450 2300
-F 0 "U3" V 5950 2250 50  0000 L CNN
-F 1 "Ultrasonic-LV-EZ0" V 5850 1950 50  0000 L CNN
-F 2 "Connector_IDC:IDC-Header_2x03_P2.54mm_Vertical" H 5450 2350 50  0001 C CNN
-F 3 "" H 5450 2350 50  0001 C CNN
-	1    5450 2300
-	0    1    -1   0   
-$EndComp
-$Comp
-L Bricoleur-pcb-rescue:Bricoleur-pcb-cache_Ultrasonic-LV-EZ0-Bricoleur-pcb-cache U4
-U 1 1 5B9AE2C4
-P 4100 2600
-F 0 "U4" V 4600 2550 50  0000 L CNN
-F 1 "Ultrasonic-LV-EZ0" V 4500 2250 50  0000 L CNN
-F 2 "Connector_IDC:IDC-Header_2x03_P2.54mm_Vertical" H 4100 2650 50  0001 C CNN
-F 3 "" H 4100 2650 50  0001 C CNN
-	1    4100 2600
-	0    -1   -1   0   
-$EndComp
 Text Label 2350 4800 0    50   ~ 0
 CAM_CLK
 Text Label 3950 5700 3    50   ~ 0
@@ -101,15 +68,15 @@ CAM_CLK
 $Comp
 L Connector:USB_B_Micro J1
 U 1 1 5B9CF6E3
-P 9900 1150
-F 0 "J1" H 9671 1048 50  0000 R CNN
-F 1 "USB_B_Micro" H 9671 1139 50  0000 R CNN
-F 2 "Connector_USB:USB_B_OST_USB-B1HSxx_Horizontal" H 10050 1100 50  0001 C CNN
-F 3 "~" H 10050 1100 50  0001 C CNN
-	1    9900 1150
+P 11000 1850
+F 0 "J1" H 10771 1748 50  0000 R CNN
+F 1 "USB_B_Micro" H 10771 1839 50  0000 R CNN
+F 2 "Connector_USB:USB_Micro-B_Amphenol_10103594-0001LF_Horizontal" H 11150 1800 50  0001 C CNN
+F 3 "~" H 11150 1800 50  0001 C CNN
+	1    11000 1850
 	-1   0    0    1   
 $EndComp
-Text Label 9900 750  1    50   ~ 0
+Text Label 11000 1450 1    50   ~ 0
 GND
 Text Label 950  3500 2    50   ~ 0
 PYNQ_5V0
@@ -163,111 +130,101 @@ Wire Wire Line
 	9050 3300 9600 3300
 Connection ~ 9050 3300
 Wire Wire Line
-	9600 3000 9600 2550
-Wire Wire Line
 	8350 3800 9300 3800
 Wire Wire Line
-	9300 3800 9300 3050
+	9300 3800 9300 3650
 Wire Wire Line
-	9300 1050 9600 1050
+	9300 1750 10700 1750
 $Comp
 L Device:R R2
 U 1 1 5BA032BF
-P 9300 2900
-F 0 "R2" H 9231 2854 50  0000 R CNN
-F 1 "15R" H 9231 2945 50  0000 R CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" V 9230 2900 50  0001 C CNN
-F 3 "~" H 9300 2900 50  0001 C CNN
-	1    9300 2900
+P 9300 3500
+F 0 "R2" H 9231 3454 50  0000 R CNN
+F 1 "15R" H 9231 3545 50  0000 R CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" V 9230 3500 50  0001 C CNN
+F 3 "~" H 9300 3500 50  0001 C CNN
+	1    9300 3500
 	1    0    0    1   
 $EndComp
 Wire Wire Line
-	9300 1050 9300 2300
+	9300 1750 9300 2750
 Wire Wire Line
-	9600 1150 9400 1150
+	10700 1850 9400 1850
 Wire Wire Line
-	9400 1150 9400 2200
+	9400 1850 9400 2650
 Wire Wire Line
 	9400 3700 8350 3700
 $Comp
 L Device:R R3
 U 1 1 5BA06B86
-P 9400 2900
-F 0 "R3" H 9470 2946 50  0000 L CNN
-F 1 "15R" H 9470 2855 50  0000 L CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" V 9330 2900 50  0001 C CNN
-F 3 "~" H 9400 2900 50  0001 C CNN
-	1    9400 2900
+P 9400 3500
+F 0 "R3" H 9470 3546 50  0000 L CNN
+F 1 "15R" H 9470 3455 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" V 9330 3500 50  0001 C CNN
+F 3 "~" H 9400 3500 50  0001 C CNN
+	1    9400 3500
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	9400 3050 9400 3700
+	9400 3650 9400 3700
 $Comp
 L Bricoleur-pcb-rescue:IP4220CZ6-IP4220CZ6 U9
 U 1 1 5BA09E46
-P 10450 2300
-F 0 "U9" H 10450 1630 50  0000 C CNN
-F 1 "IP4220CZ6" H 10450 1721 50  0000 C CNN
-F 2 "Bricoleur-custom:IP4220CZ6" H 10450 2300 50  0001 L BNN
-F 3 "Unavailable" H 10450 2300 50  0001 L BNN
-F 4 "Integrated circuit: ESD protection; SOT457" H 10450 2300 50  0001 L BNN "Field4"
-F 5 "IP4220CZ6" H 10450 2300 50  0001 L BNN "Field5"
-F 6 "None" H 10450 2300 50  0001 L BNN "Field6"
-F 7 "TSOP-6 NXP Semiconductors" H 10450 2300 50  0001 L BNN "Field7"
-F 8 "NXP Semiconductors" H 10450 2300 50  0001 L BNN "Field8"
-	1    10450 2300
+P 10450 2750
+F 0 "U9" H 10450 2080 50  0000 C CNN
+F 1 "IP4220CZ6" H 10450 2171 50  0000 C CNN
+F 2 "Bricoleur-custom:IP4220CZ6" H 10450 2750 50  0001 L BNN
+F 3 "Unavailable" H 10450 2750 50  0001 L BNN
+F 4 "Integrated circuit: ESD protection; SOT457" H 10450 2750 50  0001 L BNN "Field4"
+F 5 "IP4220CZ6" H 10450 2750 50  0001 L BNN "Field5"
+F 6 "None" H 10450 2750 50  0001 L BNN "Field6"
+F 7 "TSOP-6 NXP Semiconductors" H 10450 2750 50  0001 L BNN "Field7"
+F 8 "NXP Semiconductors" H 10450 2750 50  0001 L BNN "Field8"
+	1    10450 2750
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	9750 2300 9300 2300
-Connection ~ 9300 2300
-Wire Wire Line
-	9300 2300 9300 2750
-Text Label 11150 2100 1    50   ~ 0
+	9750 2750 9300 2750
+Connection ~ 9300 2750
+Text Label 11150 2550 1    50   ~ 0
 GND
 Wire Wire Line
-	11150 2300 11150 2550
+	11150 2750 11150 3000
 Wire Wire Line
-	11150 2550 9600 2550
-Connection ~ 9600 2550
+	11150 3000 9600 3000
+Connection ~ 9600 3000
 Wire Wire Line
-	9600 2550 9600 1350
+	9600 3000 9600 2050
 Wire Wire Line
-	9750 2200 9400 2200
-Connection ~ 9400 2200
+	9750 2650 9400 2650
+Connection ~ 9400 2650
 Wire Wire Line
-	9400 2200 9400 2750
-Text Label 10000 750  1    50   ~ 0
+	9400 2650 9400 3350
+Text Label 11100 1450 1    50   ~ 0
 GND
 $Comp
-L Bricoleur-pcb-rescue:UART_BOOT-Bricoleur-pcb-cache U8
+L Connector_Generic:Conn_02x03_Odd_Even U8
 U 1 1 5BA26E40
-P 8800 1100
-F 0 "U8" H 8750 1200 50  0000 L CNN
-F 1 "UART_BOOT" H 8500 1300 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 8750 1200 50  0001 C CNN
-F 3 "" H 8750 1200 50  0001 C CNN
-	1    8800 1100
-	1    0    0    -1  
+P 8750 1150
+F 0 "U8" H 8700 1250 50  0000 L CNN
+F 1 "UART_BOOT" H 8450 1350 50  0000 L CNN
+F 2 "Connector_IDC:IDC-Header_2x03_P2.54mm_Vertical" H 8700 1250 50  0001 C CNN
+F 3 "" H 8700 1250 50  0001 C CNN
+	1    8750 1150
+	0    1    1    0   
 $EndComp
-Wire Wire Line
-	8650 1800 8350 1800
 Wire Wire Line
 	8350 3600 8850 3600
 Wire Wire Line
 	8850 3600 8850 2650
 Wire Wire Line
-	8750 1650 8750 1700
-Entry Wire Line
-	8850 4400 8950 4300
+	8750 1450 8750 1550
 Entry Wire Line
 	3050 5100 2950 5200
 Entry Wire Line
 	3050 4800 2950 4900
 Text Label 8350 4300 0    50   ~ 0
 US0_CLK
-Text Label 8350 4400 0    50   ~ 0
-US0_CS
 Text Label 8350 4200 0    50   ~ 0
 US0_RX
 Text Label 8350 4100 0    50   ~ 0
@@ -278,8 +235,6 @@ Text Label 2350 5200 0    50   ~ 0
 US0_RX
 Text Label 2350 4900 0    50   ~ 0
 US0_CLK
-Text Label 2350 4000 0    50   ~ 0
-US0_CS
 Entry Wire Line
 	8850 4100 8950 4000
 Entry Wire Line
@@ -516,36 +471,6 @@ Text Label 2350 3300 0    50   ~ 0
 CAM1_SDATA
 Text Label 2350 4100 0    50   ~ 0
 CAM1_SCL
-Text Label 4400 1200 0    50   ~ 0
-GND
-Text Label 4350 2350 0    50   ~ 0
-GND
-Text Label 5200 2050 2    50   ~ 0
-GND
-Text Label 4400 1300 0    50   ~ 0
-PYNQ_3V3
-Text Label 4350 2450 0    50   ~ 0
-PYNQ_3V3
-Text Label 5200 2150 2    50   ~ 0
-PYNQ_3V3
-Wire Wire Line
-	4400 1700 4800 1700
-Wire Wire Line
-	4800 1700 4800 1200
-Wire Wire Line
-	4800 1200 5900 1200
-Wire Wire Line
-	4350 2850 4900 2850
-Wire Wire Line
-	4900 2850 4900 1300
-Wire Wire Line
-	4900 1300 5900 1300
-Wire Wire Line
-	5200 2550 5000 2550
-Wire Wire Line
-	5000 2550 5000 1400
-Wire Wire Line
-	5000 1400 6000 1400
 Text Label 8350 2900 0    50   ~ 0
 GND
 Text Label 10850 5500 0    50   ~ 0
@@ -578,8 +503,6 @@ Text Label 10000 5800 2    50   ~ 0
 VDDU7
 Text Label 10150 5500 3    50   ~ 0
 VMCU
-Wire Wire Line
-	9600 5500 9750 5500
 $Comp
 L Device:C C8
 U 1 1 5BA5C7A0
@@ -846,14 +769,14 @@ Wire Wire Line
 Wire Wire Line
 	4700 4700 4650 4700
 $Sheet
-S 4050 3150 1300 1200
+S 3150 3400 1300 1200
 U 5BBE2085
 F0 "debug" 50
 F1 "file5BBE2084.sch" 50
 $EndSheet
 Text GLabel 10000 5500 3    50   Input ~ 0
 VMCU
-Text GLabel 5800 2100 3    50   Input ~ 0
+Text GLabel 5800 2100 0    50   Input ~ 0
 DEBUG_EXT_CABLE_ATTACH
 Wire Wire Line
 	6150 2100 5800 2100
@@ -873,20 +796,6 @@ Text GLabel 6150 4900 0    50   Input ~ 0
 DBG_PB_2
 Text GLabel 6150 5000 0    50   Input ~ 0
 DBG_PB_3
-Wire Wire Line
-	4400 1500 6150 1500
-Wire Wire Line
-	6150 1600 4850 1600
-Wire Wire Line
-	4850 1600 4850 2650
-Wire Wire Line
-	4850 2650 4350 2650
-Wire Wire Line
-	5200 2350 5050 2350
-Wire Wire Line
-	5050 2350 5050 1700
-Wire Wire Line
-	5050 1700 6150 1700
 Text GLabel 950  3700 0    50   Input ~ 0
 GND
 Text Label 5500 4400 0    50   ~ 0
@@ -897,13 +806,7 @@ Text GLabel 8950 2550 1    50   Input ~ 0
 DH_TCK_SWCLK
 Text GLabel 8350 3400 2    50   Input ~ 0
 DH_TDO_SWO
-NoConn ~ 9750 2000
-$Sheet
-S 700  700  1950 1950
-U 5BACB073
-F0 "Imponator" 50
-F1 "file5BACB072.sch" 50
-$EndSheet
+NoConn ~ 9750 2450
 $Comp
 L Bricoleur-pcb-rescue:SW_DP3T-Bricoleur-pcb-cache U11
 U 1 1 5BAC4FA8
@@ -923,21 +826,17 @@ Wire Wire Line
 	10900 5300 10700 5300
 Wire Wire Line
 	10700 5500 10850 5500
-Text Label 10850 5700 0    50   ~ 0
-DBG_Supply
 Wire Wire Line
 	10850 5700 10700 5700
 Wire Wire Line
-	8650 1650 8650 1800
-Wire Wire Line
-	8750 1700 8350 1700
+	8650 1450 8650 1500
 Wire Wire Line
 	8950 2550 8950 2650
 Wire Wire Line
 	8950 2650 8850 2650
 Connection ~ 8850 2650
 Wire Wire Line
-	8850 2650 8850 1650
+	8850 2650 8850 1600
 Wire Bus Line
 	8950 2700 9100 2700
 Wire Bus Line
@@ -948,8 +847,6 @@ Wire Wire Line
 	8350 4200 8850 4200
 Wire Wire Line
 	8350 4300 8850 4300
-Wire Wire Line
-	8350 4400 8850 4400
 Text Label 4850 5700 3    50   ~ 0
 GND
 Text Label 3550 6950 1    50   ~ 0
@@ -959,59 +856,23 @@ DH_#RESET
 Wire Wire Line
 	5500 4700 6150 4700
 $Comp
-L Connector:TestPoint TP1
+L Connector:TestPoint_2Pole TP1
 U 1 1 5BC50B15
-P 9750 5500
-F 0 "TP1" H 9808 5620 50  0000 L CNN
-F 1 "Test_VMCU" H 9808 5529 50  0000 L CNN
-F 2 "" H 9950 5500 50  0001 C CNN
-F 3 "~" H 9950 5500 50  0001 C CNN
-	1    9750 5500
-	1    0    0    -1  
+P 10650 3950
+F 0 "TP1" H 10708 4070 50  0000 L CNN
+F 1 "Test_VMCU" H 10708 3979 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x02_P2.54mm_Vertical" H 10850 3950 50  0001 C CNN
+F 3 "~" H 10850 3950 50  0001 C CNN
+	1    10650 3950
+	0    1    1    0   
 $EndComp
-Connection ~ 9750 5500
-Wire Wire Line
-	9750 5500 10350 5500
-NoConn ~ 9600 950 
-Entry Wire Line
-	3000 2600 3100 2700
-Entry Wire Line
-	3000 2900 3100 3000
-Entry Wire Line
-	3000 2800 3100 2900
-Entry Wire Line
-	3000 3000 3100 3100
-Text Label 3400 3100 2    50   ~ 0
+NoConn ~ 10700 1650
+Text Label 2450 1700 0    50   ~ 0
 US0_TX
-Text Label 3400 3000 2    50   ~ 0
+Text Label 2450 1550 0    50   ~ 0
 US0_RX
-Text Label 3400 2900 2    50   ~ 0
+Text Label 2450 1400 0    50   ~ 0
 US0_CLK
-Text Label 3400 2700 2    50   ~ 0
-US0_CS
-Wire Wire Line
-	3100 2700 3400 2700
-$Comp
-L Connector:Conn_01x04_Male J3
-U 1 1 5BC708B0
-P 3750 3000
-F 0 "J3" H 3723 2880 50  0000 R CNN
-F 1 "Conn_01x04_Male" H 3723 2971 50  0000 R CNN
-F 2 "" H 3750 3000 50  0001 C CNN
-F 3 "~" H 3750 3000 50  0001 C CNN
-	1    3750 3000
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	3100 3100 3550 3100
-Wire Wire Line
-	3100 3000 3550 3000
-Wire Wire Line
-	3100 2900 3550 2900
-Wire Wire Line
-	3400 2700 3400 2800
-Wire Wire Line
-	3400 2800 3550 2800
 NoConn ~ 950  5400
 NoConn ~ 950  5300
 NoConn ~ 950  5200
@@ -1052,13 +913,10 @@ NoConn ~ 6150 2300
 NoConn ~ 6150 2400
 NoConn ~ 6150 2500
 NoConn ~ 6150 2600
-NoConn ~ 6150 2900
-NoConn ~ 6150 3000
 NoConn ~ 6150 3100
 NoConn ~ 6150 3200
 NoConn ~ 6150 3300
 NoConn ~ 6150 3400
-NoConn ~ 6150 3500
 NoConn ~ 6150 3600
 NoConn ~ 6150 3700
 NoConn ~ 6150 3800
@@ -1087,17 +945,7 @@ NoConn ~ 8350 5100
 NoConn ~ 8350 4700
 NoConn ~ 8350 4600
 NoConn ~ 8350 4500
-NoConn ~ 9750 2100
-Wire Wire Line
-	5900 1300 5900 1200
-Connection ~ 5900 1200
-Wire Wire Line
-	5900 1200 6000 1200
-Wire Wire Line
-	6000 1400 6000 1200
-Connection ~ 6000 1200
-Wire Wire Line
-	6000 1200 6150 1200
+NoConn ~ 9750 2550
 NoConn ~ 6150 1300
 NoConn ~ 6150 1400
 $Comp
@@ -1128,8 +976,6 @@ Wire Wire Line
 	2800 4600 2350 4600
 Wire Wire Line
 	2800 4700 2350 4700
-Wire Wire Line
-	2350 4000 2800 4000
 Wire Wire Line
 	2350 4300 2800 4300
 Wire Wire Line
@@ -1200,28 +1046,165 @@ Entry Wire Line
 	3050 5600 2950 5700
 Wire Wire Line
 	2950 4900 2350 4900
-Wire Wire Line
-	2950 5200 2350 5200
 Wire Bus Line
 	3000 650  9100 650 
+Text GLabel 6150 1200 0    50   Input ~ 0
+PULSE
+$Sheet
+S 9200 700  400  500 
+U 5BB71F0F
+F0 "Sheet5BB71F0E" 50
+F1 "ESD-BAT54S.sch" 50
+F2 "INP" I B 9400 1200 50 
+$EndSheet
+$Sheet
+S 9950 700  400  500 
+U 5BB7B6EA
+F0 "sheet5BB7B6EA" 50
+F1 "ESD-BAT54S.sch" 50
+F2 "INP" I B 10150 1200 50 
+$EndSheet
+Wire Wire Line
+	9300 2750 9300 3350
+Wire Wire Line
+	10700 2050 9600 2050
+$Sheet
+S 10600 700  400  500 
+U 5BCBFDFB
+F0 "sheet5BCBFDFB" 50
+F1 "ESD-BAT54S.sch" 50
+F2 "INP" I B 10800 1200 50 
+$EndSheet
+Wire Wire Line
+	9400 1200 9400 1500
+Wire Wire Line
+	9400 1500 8650 1500
+Wire Wire Line
+	10150 1200 10150 1550
+Wire Wire Line
+	10150 1550 8750 1550
+Wire Wire Line
+	10800 1200 10800 1400
+Wire Wire Line
+	10650 1600 8850 1600
+Connection ~ 8850 1600
+Wire Wire Line
+	8850 1600 8850 1450
+Wire Wire Line
+	10800 1400 10650 1400
+Wire Wire Line
+	10650 1400 10650 1600
+$Sheet
+S 5300 1350 550  500 
+U 5BDAE386
+F0 "Ultra" 50
+F1 "Ultra.sch" 50
+F2 "RX0" I R 5850 1500 50 
+F3 "RX1" I R 5850 1600 50 
+F4 "RX2" I R 5850 1700 50 
+$EndSheet
+Wire Wire Line
+	6150 1500 5850 1500
+Wire Wire Line
+	5850 1600 6150 1600
+Wire Wire Line
+	6150 1700 5850 1700
+NoConn ~ 2350 4000
+NoConn ~ 8350 4400
+Entry Wire Line
+	2800 5100 2900 5200
+Entry Wire Line
+	2800 5000 2900 5100
+$Sheet
+S 1400 1250 1050 700 
+U 5BEB800B
+F0 "USART-INTERCOM" 50
+F1 "USART.sch" 50
+F2 "CLK" I R 2450 1400 50 
+F3 "RX" I R 2450 1550 50 
+F4 "TX" I R 2450 1700 50 
+$EndSheet
+Entry Wire Line
+	5600 1650 5700 1750
+Entry Wire Line
+	2900 1400 3000 1500
+Entry Wire Line
+	2900 1550 3000 1650
+Entry Wire Line
+	2900 1700 3000 1800
+Wire Wire Line
+	2450 1700 2900 1700
+Wire Wire Line
+	2900 1550 2450 1550
+Wire Wire Line
+	2450 1400 2900 1400
+Text Label 5600 2900 0    50   ~ 0
+US1_TX
+Text Label 5600 3000 0    50   ~ 0
+US1_RX
+Text Label 5600 3200 0    50   ~ 0
+US1_CLK
+$Sheet
+S 4550 2600 1050 700 
+U 5BEE7FFD
+F0 "USART-AUX" 50
+F1 "USART.sch" 50
+F2 "CLK" I R 5600 3200 50 
+F3 "RX" I R 5600 3000 50 
+F4 "TX" I R 5600 2900 50 
+$EndSheet
+Wire Wire Line
+	6150 3500 5750 3500
+Wire Wire Line
+	6150 2900 5600 2900
+Wire Wire Line
+	6150 3000 5600 3000
+Wire Wire Line
+	5750 3500 5750 3200
+Wire Wire Line
+	5750 3200 5600 3200
+Text GLabel 10650 3750 1    50   Input ~ 0
+VMCU
+Text GLabel 10650 4150 3    50   Input ~ 0
+GND
+Wire Wire Line
+	9600 5500 10350 5500
+NoConn ~ 10850 5700
+Text Label 8650 950  2    50   ~ 0
+GND
+Wire Wire Line
+	8650 950  8750 950 
+Connection ~ 8750 950 
+Wire Wire Line
+	8750 950  8850 950 
+Wire Wire Line
+	8650 1500 8650 1700
+Wire Wire Line
+	8650 1700 8350 1700
+Connection ~ 8650 1500
+Wire Wire Line
+	8750 1800 8750 1550
+Wire Wire Line
+	8350 1800 8750 1800
+Wire Wire Line
+	2350 5700 2950 5700
 Wire Wire Line
 	8350 4000 9050 4000
 Wire Wire Line
-	2350 5700 2950 5700
+	2350 5200 2950 5200
+Wire Bus Line
+	8950 2700 8950 4200
 Wire Bus Line
 	3050 4750 3050 5650
-Wire Bus Line
-	8950 2700 8950 4300
 Wire Bus Line
 	3000 650  3000 4750
 Wire Bus Line
 	2900 6550 4850 6550
 Wire Bus Line
-	2900 5300 2900 6550
+	2900 5100 2900 6550
 Wire Bus Line
 	3000 6250 4850 6250
 Wire Bus Line
 	2900 3600 2900 4850
-Text GLabel 5900 1200 1    50   Input ~ 0
-PULSE
+Connection ~ 8750 1550
 $EndSCHEMATC
