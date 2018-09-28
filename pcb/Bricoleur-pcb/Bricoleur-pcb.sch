@@ -147,8 +147,6 @@ F 3 "~" H 9300 3500 50  0001 C CNN
 	1    0    0    1   
 $EndComp
 Wire Wire Line
-	9300 1750 9300 2750
-Wire Wire Line
 	10700 1850 9400 1850
 Wire Wire Line
 	9400 1850 9400 2650
@@ -183,16 +181,10 @@ F 8 "NXP Semiconductors" H 10450 2750 50  0001 L BNN "Field8"
 	1    10450 2750
 	-1   0    0    1   
 $EndComp
-Wire Wire Line
-	9750 2750 9300 2750
-Connection ~ 9300 2750
 Text Label 11150 2550 1    50   ~ 0
 GND
 Wire Wire Line
 	11150 2750 11150 3000
-Wire Wire Line
-	11150 3000 9600 3000
-Connection ~ 9600 3000
 Wire Wire Line
 	9600 3000 9600 2050
 Wire Wire Line
@@ -1065,8 +1057,6 @@ F1 "ESD-BAT54S.sch" 50
 F2 "INP" I B 10150 1200 50 
 $EndSheet
 Wire Wire Line
-	9300 2750 9300 3350
-Wire Wire Line
 	10700 2050 9600 2050
 $Sheet
 S 10600 700  400  500 
@@ -1124,8 +1114,6 @@ F2 "CLK" I R 2450 1400 50
 F3 "RX" I R 2450 1550 50 
 F4 "TX" I R 2450 1700 50 
 $EndSheet
-Entry Wire Line
-	5600 1650 5700 1750
 Entry Wire Line
 	2900 1400 3000 1500
 Entry Wire Line
@@ -1186,25 +1174,35 @@ Wire Wire Line
 	8750 1800 8750 1550
 Wire Wire Line
 	8350 1800 8750 1800
-Wire Wire Line
-	2350 5700 2950 5700
-Wire Wire Line
-	8350 4000 9050 4000
-Wire Wire Line
-	2350 5200 2950 5200
+Connection ~ 8750 1550
 Wire Bus Line
-	8950 2700 8950 4200
-Wire Bus Line
-	3050 4750 3050 5650
-Wire Bus Line
-	3000 650  3000 4750
-Wire Bus Line
-	2900 6550 4850 6550
-Wire Bus Line
-	2900 5100 2900 6550
+	2900 3600 2900 4850
 Wire Bus Line
 	3000 6250 4850 6250
 Wire Bus Line
-	2900 3600 2900 4850
-Connection ~ 8750 1550
+	2900 5100 2900 6550
+Wire Bus Line
+	2900 6550 4850 6550
+Wire Bus Line
+	3000 650  3000 4750
+Wire Bus Line
+	3050 4750 3050 5650
+Wire Bus Line
+	8950 2700 8950 4200
+Wire Wire Line
+	2350 5200 2950 5200
+Wire Wire Line
+	8350 4000 9050 4000
+Wire Wire Line
+	2350 5700 2950 5700
+Wire Wire Line
+	11150 3000 9600 3000
+Connection ~ 9600 3000
+Wire Wire Line
+	9300 2750 9300 3350
+Wire Wire Line
+	9300 1750 9300 2750
+Connection ~ 9300 2750
+Wire Wire Line
+	9750 2750 9300 2750
 $EndSCHEMATC

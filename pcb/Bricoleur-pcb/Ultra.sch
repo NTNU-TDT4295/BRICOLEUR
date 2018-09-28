@@ -4,7 +4,7 @@ EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 7 18
+Sheet 6 18
 Title ""
 Date ""
 Rev ""
@@ -27,10 +27,6 @@ F 3 "" H 4600 3150 50  0001 C CNN
 	1    4600 3100
 	0    -1   1    0   
 $EndComp
-Text Label 4850 3350 0    50   ~ 0
-GND
-Text Label 4850 3250 0    50   ~ 0
-PYNQ_3V3
 $Comp
 L Bricoleur-pcb-rescue:Bricoleur-pcb-cache_Ultrasonic-LV-EZ0-Bricoleur-pcb-cache U?
 U 1 1 5BDAE442
@@ -57,14 +53,6 @@ F 3 "" H 4600 4950 50  0001 C CNN
 	1    4600 4900
 	0    -1   1    0   
 $EndComp
-Text Label 4850 4150 0    50   ~ 0
-PYNQ_3V3
-Text Label 4850 5050 0    50   ~ 0
-PYNQ_3V3
-Text Label 4850 4250 0    50   ~ 0
-GND
-Text Label 4850 5150 0    50   ~ 0
-GND
 Text GLabel 4850 2850 2    50   Input ~ 0
 PULSE
 Text GLabel 4850 3750 2    50   Input ~ 0
@@ -142,4 +130,18 @@ F2 "INP" I L 5650 2400 50
 $EndSheet
 Wire Wire Line
 	5650 2400 5300 2400
+Text GLabel 4850 3250 2    50   Input ~ 0
+VMCU
+Text GLabel 5100 4450 2    50   Input ~ 0
+VMCU
+Text GLabel 4850 4150 2    50   Input ~ 0
+VMCU
+Text GLabel 4850 5050 2    50   Input ~ 0
+VMCU
+Text GLabel 4850 3350 2    50   Input ~ 0
+GND
+Text GLabel 4850 4250 2    50   Input ~ 0
+GND
+Text GLabel 4850 5150 2    50   Input ~ 0
+GND
 $EndSCHEMATC

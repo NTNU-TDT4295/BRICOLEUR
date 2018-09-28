@@ -29,8 +29,6 @@ Text GLabel 5150 2550 1    50   Input ~ 0
 VMCU
 Text GLabel 8650 2950 3    50   Input ~ 0
 GND
-Text GLabel 7850 1700 0    50   Input ~ 0
-DH_VTARGET
 Text GLabel 7850 2000 0    50   Input ~ 0
 DH_TMS_SWDIO
 Text GLabel 7850 2100 0    50   Input ~ 0
@@ -421,7 +419,7 @@ F 3 "~" H 7100 2350 50  0001 C CNN
 $EndComp
 Text GLabel 7100 2500 3    50   Input ~ 0
 GND
-Text GLabel 7900 1700 1    50   Input ~ 0
+Text GLabel 7900 1600 1    50   Input ~ 0
 VMCU
 NoConn ~ 9350 1700
 Wire Wire Line
@@ -472,8 +470,6 @@ Wire Wire Line
 	7850 2300 8850 2300
 Wire Wire Line
 	7850 2100 8850 2100
-Wire Wire Line
-	7850 1700 8850 1700
 Wire Wire Line
 	7850 2000 8850 2000
 Text GLabel 8400 4750 0    50   Input ~ 0
@@ -553,4 +549,8 @@ Wire Wire Line
 Wire Wire Line
 	7350 5200 7350 5000
 Connection ~ 8600 5200
+Wire Wire Line
+	7900 1700 7900 1600
+Wire Wire Line
+	7900 1700 8850 1700
 $EndSCHEMATC
