@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name XTAL)(type KiCad)(uri /home/plotkin/UNIVER/COMPCONS/BRICOLEUR/pcb/Bricoleur-pcb/footprints/XTAL.pretty)(options "")(descr ""))
+)
