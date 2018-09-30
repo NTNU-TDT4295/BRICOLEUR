@@ -223,9 +223,9 @@ Text Label 8350 4100 0    50   ~ 0
 US0_TX
 Text Label 2350 5700 0    50   ~ 0
 US0_TX
-Text Label 2350 5200 0    50   ~ 0
-US0_RX
 Text Label 2350 4900 0    50   ~ 0
+US0_RX
+Text Label 2350 5200 0    50   ~ 0
 US0_CLK
 Entry Wire Line
 	8850 4100 8950 4000

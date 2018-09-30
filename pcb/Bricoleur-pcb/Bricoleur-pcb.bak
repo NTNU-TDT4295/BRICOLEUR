@@ -1233,35 +1233,11 @@ Wire Wire Line
 	5600 6050 5750 6050
 Connection ~ 5600 6050
 Wire Wire Line
-	6150 5400 5750 5400
-Wire Wire Line
 	5750 5400 5750 5550
 Connection ~ 5750 5550
 Wire Wire Line
-	6150 5300 5350 5300
-Wire Wire Line
 	5350 5300 5350 5550
 Connection ~ 5350 5550
-Wire Wire Line
-	2350 5700 2950 5700
-Wire Wire Line
-	8350 4000 9050 4000
-Wire Wire Line
-	2350 5200 2950 5200
-Wire Bus Line
-	8950 2700 8950 4200
-Wire Bus Line
-	3050 4750 3050 5650
-Wire Bus Line
-	3000 650  3000 4750
-Wire Bus Line
-	2900 6550 4850 6550
-Wire Bus Line
-	2900 5100 2900 6550
-Wire Bus Line
-	3000 6250 4850 6250
-Wire Bus Line
-	2900 3600 2900 4850
 $Comp
 L Device:C C18
 U 1 1 5BB1AE61
@@ -1284,4 +1260,28 @@ F 3 "~" H 5750 5900 50  0001 C CNN
 	1    5750 5900
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	6150 5400 5750 5400
+Wire Wire Line
+	5350 5300 6150 5300
+Wire Wire Line
+	2350 5700 2950 5700
+Wire Wire Line
+	8350 4000 9050 4000
+Wire Wire Line
+	2350 5200 2950 5200
+Wire Bus Line
+	8950 2700 8950 4200
+Wire Bus Line
+	3050 4750 3050 5650
+Wire Bus Line
+	3000 650  3000 4750
+Wire Bus Line
+	2900 6550 4850 6550
+Wire Bus Line
+	2900 5100 2900 6550
+Wire Bus Line
+	3000 6250 4850 6250
+Wire Bus Line
+	2900 3600 2900 4850
 $EndSCHEMATC
