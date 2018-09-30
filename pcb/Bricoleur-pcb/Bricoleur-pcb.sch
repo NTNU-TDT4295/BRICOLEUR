@@ -1175,26 +1175,6 @@ Wire Wire Line
 Wire Wire Line
 	8350 1800 8750 1800
 Connection ~ 8750 1550
-Wire Bus Line
-	2900 3600 2900 4850
-Wire Bus Line
-	3000 6250 4850 6250
-Wire Bus Line
-	2900 5100 2900 6550
-Wire Bus Line
-	2900 6550 4850 6550
-Wire Bus Line
-	3000 650  3000 4750
-Wire Bus Line
-	3050 4750 3050 5650
-Wire Bus Line
-	8950 2700 8950 4200
-Wire Wire Line
-	2350 5200 2950 5200
-Wire Wire Line
-	8350 4000 9050 4000
-Wire Wire Line
-	2350 5700 2950 5700
 Wire Wire Line
 	11150 3000 9600 3000
 Connection ~ 9600 3000
@@ -1205,4 +1185,28 @@ Wire Wire Line
 Connection ~ 9300 2750
 Wire Wire Line
 	9750 2750 9300 2750
+Wire Wire Line
+	2350 5200 2950 5200
+Wire Wire Line
+	8350 4000 9050 4000
+Wire Wire Line
+	2350 5700 2950 5700
+Wire Bus Line
+	8950 2700 8950 4200
+Wire Bus Line
+	3000 650  3000 4750
+Wire Bus Line
+	3050 4750 3050 5650
+Wire Bus Line
+	2900 6550 4850 6550
+Wire Bus Line
+	2900 5100 2900 6550
+Wire Bus Line
+	3000 6250 4850 6250
+Wire Bus Line
+	2900 3600 2900 4850
+Text Label 10050 1750 0    50   ~ 0
+USB_D-
+Text Label 10050 1850 0    50   ~ 0
+USB_D+
 $EndSCHEMATC
