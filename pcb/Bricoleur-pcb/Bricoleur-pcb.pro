@@ -1,4 +1,4 @@
-update=Fri 28 Sep 2018 02:44:59 PM CEST
+update=Sun 30 Sep 2018 06:19:55 PM CEST
 version=1
 last_client=kicad
 [general]
@@ -64,7 +64,7 @@ Type=3
 [pcbnew/Netclasses/1]
 Name=Power
 Clearance=0.1
-TrackWidth=0.635
+TrackWidth=0.254
 ViaDiameter=0.8
 ViaDrill=0.4
 uViaDiameter=0.3
