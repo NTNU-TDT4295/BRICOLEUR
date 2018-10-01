@@ -113,7 +113,7 @@ Wire Wire Line
 Text GLabel 9500 2900 3    50   Input ~ 0
 GND
 Text GLabel 9950 1650 1    50   Input ~ 0
-PYNQ_3V3
+VMCU
 $Comp
 L Device:R R16
 U 1 1 5BBF7D34

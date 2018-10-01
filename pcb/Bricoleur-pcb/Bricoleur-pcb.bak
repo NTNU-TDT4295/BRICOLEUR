@@ -149,8 +149,6 @@ $EndComp
 Wire Wire Line
 	10700 1850 9400 1850
 Wire Wire Line
-	9400 1850 9400 2650
-Wire Wire Line
 	9400 3700 8350 3700
 $Comp
 L Device:R R3
@@ -187,11 +185,6 @@ Wire Wire Line
 	11150 2750 11150 3000
 Wire Wire Line
 	9600 3000 9600 2050
-Wire Wire Line
-	9750 2650 9400 2650
-Connection ~ 9400 2650
-Wire Wire Line
-	9400 2650 9400 3350
 Text Label 11100 1450 1    50   ~ 0
 GND
 $Comp
@@ -223,9 +216,9 @@ Text Label 8350 4100 0    50   ~ 0
 US0_TX
 Text Label 2350 5700 0    50   ~ 0
 US0_TX
-Text Label 2350 5200 0    50   ~ 0
-US0_RX
 Text Label 2350 4900 0    50   ~ 0
+US0_RX
+Text Label 2350 5200 0    50   ~ 0
 US0_CLK
 Entry Wire Line
 	8850 4100 8950 4000
@@ -331,11 +324,11 @@ Text Label 4950 6950 1    50   ~ 0
 CAM0_SCL
 Text Label 2350 5600 0    50   ~ 0
 CAM0_DOUT2
-Text Label 2350 6400 0    50   ~ 0
+Text Label 2350 6300 0    50   ~ 0
 CAM0_DOUT3
 Text Label 2350 5500 0    50   ~ 0
 CAM0_DOUT4
-Text Label 2350 6300 0    50   ~ 0
+Text Label 2350 6400 0    50   ~ 0
 CAM0_DOUT5
 Text Label 2350 5400 0    50   ~ 0
 CAM0_DOUT6
@@ -798,7 +791,6 @@ Text GLabel 8950 2550 1    50   Input ~ 0
 DH_TCK_SWCLK
 Text GLabel 8350 3400 2    50   Input ~ 0
 DH_TDO_SWO
-NoConn ~ 9750 2450
 $Comp
 L Bricoleur-pcb-rescue:SW_DP3T-Bricoleur-pcb-cache U11
 U 1 1 5BAC4FA8
@@ -1265,17 +1257,31 @@ Wire Wire Line
 Wire Wire Line
 	5350 5300 6150 5300
 Wire Wire Line
-	2350 5700 2950 5700
+	9400 1850 9400 2450
+Wire Wire Line
+	9750 2450 9400 2450
+Connection ~ 9400 2450
+Wire Wire Line
+	9400 2450 9400 3350
+NoConn ~ 9750 2650
+Text Label 10000 2050 0    50   ~ 0
+USB_5v
+Text Label 8400 3700 0    50   ~ 0
+USB_R_D-
+Text Label 8400 3800 0    50   ~ 0
+USB_R_D+
+Wire Wire Line
+	2350 5200 2950 5200
 Wire Wire Line
 	8350 4000 9050 4000
 Wire Wire Line
-	2350 5200 2950 5200
+	2350 5700 2950 5700
 Wire Bus Line
 	8950 2700 8950 4200
 Wire Bus Line
-	3050 4750 3050 5650
-Wire Bus Line
 	3000 650  3000 4750
+Wire Bus Line
+	3050 4750 3050 5650
 Wire Bus Line
 	2900 6550 4850 6550
 Wire Bus Line

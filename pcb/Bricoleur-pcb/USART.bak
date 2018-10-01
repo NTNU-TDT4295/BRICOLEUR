@@ -4,7 +4,7 @@ EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 15 18
+Sheet 11 18
 Title ""
 Date ""
 Rev ""
@@ -41,7 +41,7 @@ U 1 1 5BEC0490
 P 3700 2350
 AR Path="/5BEB800B/5BEC0490" Ref="J3"  Part="1" 
 AR Path="/5BEE7FFD/5BEC0490" Ref="J4"  Part="1" 
-F 0 "J4" V 3796 2162 50  0000 R CNN
+F 0 "J3" V 3796 2162 50  0000 R CNN
 F 1 "Conn_02x03_Odd_Even" V 3705 2162 50  0000 R CNN
 F 2 "Connector_IDC:IDC-Header_2x03_P2.54mm_Vertical" H 3700 2350 50  0001 C CNN
 F 3 "~" H 3700 2350 50  0001 C CNN
