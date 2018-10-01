@@ -322,35 +322,35 @@ Text Label 4850 6950 1    50   ~ 0
 CAM0_SDATA
 Text Label 4950 6950 1    50   ~ 0
 CAM0_SCL
-Text Label 2350 6300 0    50   ~ 0
+Text Label 2350 5000 0    50   ~ 0
 CAM0_DOUT2
-Text Label 2350 5600 0    50   ~ 0
+Text Label 2350 5900 0    50   ~ 0
 CAM0_DOUT3
-Text Label 2350 5500 0    50   ~ 0
+Text Label 2350 5800 0    50   ~ 0
 CAM0_DOUT4
-Text Label 2350 6400 0    50   ~ 0
-CAM0_DOUT5
-Text Label 2350 5400 0    50   ~ 0
-CAM0_DOUT6
-Text Label 2350 6200 0    50   ~ 0
-CAM0_DOUT7
-Text Label 2350 5300 0    50   ~ 0
-CAM0_DOUT8
-Text Label 2350 6100 0    50   ~ 0
-CAM0_DOUT9
-Text Label 2350 6000 0    50   ~ 0
-CAM0_PCLK
 Text Label 2350 5100 0    50   ~ 0
+CAM0_DOUT5
+Text Label 2350 6000 0    50   ~ 0
+CAM0_DOUT6
+Text Label 2350 5300 0    50   ~ 0
+CAM0_DOUT7
+Text Label 2350 6100 0    50   ~ 0
+CAM0_DOUT8
+Text Label 2350 5400 0    50   ~ 0
+CAM0_DOUT9
+Text Label 2350 6200 0    50   ~ 0
+CAM0_PCLK
+Text Label 2350 6300 0    50   ~ 0
 CAM0_HREF
 Entry Wire Line
 	2800 5400 2900 5500
 Entry Wire Line
 	2800 5300 2900 5400
-Text Label 2350 5900 0    50   ~ 0
+Text Label 2350 5500 0    50   ~ 0
 CAM0_VSYNC
-Text Label 2350 5000 0    50   ~ 0
+Text Label 2350 6400 0    50   ~ 0
 CAM0_SDATA
-Text Label 2350 5800 0    50   ~ 0
+Text Label 2350 5600 0    50   ~ 0
 CAM0_SCL
 Entry Wire Line
 	3450 6150 3550 6250
@@ -448,9 +448,9 @@ Text Label 2350 4400 0    50   ~ 0
 CAM1_DOUT9
 Text Label 2350 4300 0    50   ~ 0
 CAM1_PCLK
-Text Label 2350 3500 0    50   ~ 0
-CAM1_HREF
 Text Label 2350 4200 0    50   ~ 0
+CAM1_HREF
+Text Label 2350 3500 0    50   ~ 0
 CAM1_VSYNC
 Text Label 2350 3300 0    50   ~ 0
 CAM1_SDATA

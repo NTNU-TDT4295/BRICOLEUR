@@ -1,4 +1,4 @@
-update=Mon 01 Oct 2018 09:51:16 AM CEST
+update=Mon 01 Oct 2018 09:50:55 PM CEST
 version=1
 last_client=kicad
 [general]
@@ -34,8 +34,8 @@ TrackWidth3=0.3302
 TrackWidth4=0.635
 ViaDiameter1=0.8
 ViaDrill1=0.4
-dPairWidth1=0.2
-dPairGap1=0.25
+dPairWidth1=0.3302
+dPairGap1=0.2032
 dPairViaGap1=0.25
 dPairWidth2=0.3302
 dPairGap2=0.2032
@@ -71,6 +71,17 @@ Type=3
 Name=Power
 Clearance=0.1
 TrackWidth=0.635
+ViaDiameter=0.8
+ViaDrill=0.4
+uViaDiameter=0.3
+uViaDrill=0.1
+dPairWidth=0.2
+dPairGap=0.25
+dPairViaGap=0.25
+[pcbnew/Netclasses/2]
+Name=USB
+Clearance=0
+TrackWidth=0.254
 ViaDiameter=0.8
 ViaDrill=0.4
 uViaDiameter=0.3
