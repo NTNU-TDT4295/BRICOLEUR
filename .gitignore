@@ -1,10 +1,13 @@
 *.o
+*.cproject
 *.d
 *.axf
 *.bin
 *.hex
 *.map
+*.mk
 *.s37
 
 .vscode
 ultrasonic/ultrasonic
+ultrasonic/GNU ARM v7.2.1 - Debug/makefile

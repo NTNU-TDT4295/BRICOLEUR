@@ -5,6 +5,8 @@
 #include "em_cmu.h"
 #include "em_gpio.h"
 #include "segmentlcd.h"
+#include "em_gpio.c"
+#include "em_timer.c"
 #include <stdio.h>
 
 #define BUF_LEN 8

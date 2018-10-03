@@ -15,43 +15,38 @@
 float xTest = 1;
 float yTest = 5;
 
-struct position2D {
+typedef struct Position2D {
     float x;
     float y;
-};
+} Position2D;
 
-struct position3D {
+typedef struct Position3D {
     float x;
     float y;
     float z;
-};
+} Position3D;
 
 // 2D line on the form y = ax + b
-struct line {
+typedef struct Line {
     float a;
     float b;
-};
+} Line;
 
-struct buffer {
-	int head;
-	int tail;
-	int length;
-	int maxLength;
+typedef struct Buffer {
+	unsigned int head;
+	unsigned int tail;
+	unsigned int length;
+	unsigned int maxLength;
 	bool wrapped;
-};
-
-typedef struct position2D Position2D;
-typedef struct position3D Position3D;
-typedef struct line Line;
-typedef struct buffer Buffer;
+} Buffer;
 
 void getPosition2D(Position2D *position, float r1, float r2);
 void getPosition3D(Position3D *position, float r1, float r2, float r3);
-void getLine(Line *line, Position2D positions[], int length);
-void getInput(float distances[], int length);
+void getLine(Line *line, Position2D positions[], unsigned int length);
+void getInput(float distances[], unsigned int length);
 bool willCollide2D(Line *line);
 void panic();
-bool isMoving(Position2D positions[], int length);
+bool isMoving(Position2D positions[], unsigned int length);
 
 void getPosition2D(Position2D *position, float r1, float r2) {
     position->x = (x2*x2 + r1*r1 - r2*r2) / (2 * x2);
@@ -64,13 +59,13 @@ void getPosition3D(Position3D *position, float r1, float r2, float r3) {
     position->z = sqrtf(r1*r1 - position->x * position->x - position->y * position->y);
 }
 
-void getLine(Line *line, Position2D positions[], int length) {
+void getLine(Line *line, Position2D positions[], unsigned int length) {
     // Algorithm: Ordinary linear least squares method
 
     float x_avg = 0;
     float y_avg = 0;
 
-    for (int i = 0; i < length; i++) {
+    for (unsigned int i = 0; i < length; i++) {
         x_avg += positions[i].x;
         y_avg += positions[i].y;
     }
@@ -81,7 +76,7 @@ void getLine(Line *line, Position2D positions[], int length) {
     float x_diff[length];
     float y_diff[length];
 
-    for (int i = 0; i < length; i++) {
+    for (unsigned int i = 0; i < length; i++) {
         x_diff[i] = positions[i].x - x_avg;
         y_diff[i] = positions[i].y - y_avg;
     }
@@ -89,7 +84,7 @@ void getLine(Line *line, Position2D positions[], int length) {
     float S_xy = 0;
     float S_x2 = 0;
 
-    for (int i = 0; i < length; i++) {
+    for (unsigned int i = 0; i < length; i++) {
         S_xy += x_diff[i] * y_diff[i];
         S_x2 += x_diff[i] * x_diff[i];
     }
@@ -105,7 +100,7 @@ void getLine(Line *line, Position2D positions[], int length) {
     // SegmentLCD_Write(buf);
 }
 
-void getInput(float distances[], int length) {
+void getInput(float distances[], unsigned int length) {
 	/*
 	for (int i = 0; i < length; i++) {
 		// Get input somehow, i.e. go to sleep and wait for interrupt, then
@@ -143,12 +138,12 @@ void panic() {
 	SegmentLCD_Write("Panic");
 }
 
-bool isMoving(Position2D positions[], int length) {
+bool isMoving(Position2D positions[], unsigned int length) {
 	return ((positions[length - 1].x != positions[length - 2].x) ||
 			(positions[length - 1].y == positions[length - 2].y));
 }
 
-int main() {
+int not_main() {
 	SegmentLCD_Init(false);
 	char buf[20];
 
@@ -160,7 +155,7 @@ int main() {
 
 	Position2D positions[buffer.maxLength];
 
-	int distancesLength = 2;  // 1 distance for each sensor
+	unsigned int distancesLength = 2;  // 1 distance for each sensor
 	float distances[distancesLength];
 
 	Position2D position;
@@ -210,6 +205,8 @@ int main() {
 			// snprintf(buf, 20, "%d", (int)line.b);
 			// SegmentLCD_Write(buf);
 		}
+
+		sensor_main();
 	}
 
     // Dummy data for y = 2x + 3
