@@ -9,7 +9,7 @@
 #define SRC_SENSOR_H_
 
 typedef struct Triggers {
-	unsigned int port;
+	GPIO_Port_TypeDef port;
 	unsigned int pin;
 } Triggers;
 
