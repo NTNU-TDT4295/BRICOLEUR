@@ -2,7 +2,7 @@
 
   (general
     (thickness 1.6)
-    (drawings 131)
+    (drawings 133)
     (tracks 887)
     (zones 0)
     (modules 78)
@@ -11,8 +11,8 @@
 
   (page A4)
   (layers
-    (0 F.Cu jumper hide)
-    (31 B.Cu signal hide)
+    (0 F.Cu jumper)
+    (31 B.Cu signal)
     (32 B.Adhes user)
     (33 F.Adhes user)
     (34 B.Paste user)
@@ -3970,6 +3970,12 @@
       (net 24 "Net-(R13-Pad2)"))
   )
 
+  (gr_text "Richard Bachmann\nFritz-Olav Myrvang\nValentin Plotkin\nEirik Vale Aase\nJoakim Lier\nMarius Kohmann\nOla Toft\nEirik Smithsen\nEinar Hov\nMathias Lundteigen Mohus\n" (at 39.6937 150.4695 270) (layer F.SilkS)
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (gr_text BRICOLEUR (at 33.8517 122.1485 270) (layer F.SilkS)
+    (effects (font (size 2 2) (thickness 0.15)))
+  )
   (gr_line (start 33.3437 132.6895) (end 38.4237 137.7695) (layer F.SilkS) (width 0.15) (tstamp 5BB6655F))
   (gr_line (start 45.4087 128.2445) (end 42.8687 125.7045) (layer F.SilkS) (width 0.15) (tstamp 5BB6655E))
   (gr_arc (start 44.1387 133.3245) (end 44.773699 132.689501) (angle -90) (layer F.SilkS) (width 0.15) (tstamp 5BB6655D))
@@ -4996,7 +5002,7 @@
   (segment (start 106.6226 124.2985) (end 107.10519 124.78109) (width 0.3302) (layer F.Cu) (net 76))
   (segment (start 106.6226 123.9035) (end 106.6226 124.2985) (width 0.3302) (layer F.Cu) (net 76))
 
-  (zone (net 1) (net_name GND) (layer B.Cu) (tstamp 5BB168BE) (hatch edge 0.508)
+  (zone (net 1) (net_name GND) (layer B.Cu) (tstamp 5BB716C6) (hatch edge 0.508)
     (connect_pads (clearance 0.5))
     (min_thickness 0.5)
     (fill yes (arc_segments 16) (thermal_gap 0.508) (thermal_bridge_width 0.508))
@@ -5529,7 +5535,7 @@
       )
     )
   )
-  (zone (net 69) (net_name VMCU) (layer F.Cu) (tstamp 0) (hatch edge 0.508)
+  (zone (net 69) (net_name VMCU) (layer F.Cu) (tstamp 5BB716C3) (hatch edge 0.508)
     (connect_pads (clearance 0.35))
     (min_thickness 0.254)
     (fill yes (arc_segments 16) (thermal_gap 0.508) (thermal_bridge_width 0.508))
