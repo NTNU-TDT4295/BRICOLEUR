@@ -13,6 +13,11 @@
 #define TRIGGER_PORT gpioPortD
 #define TRIGGER_PIN 6
 
+const Triggers triggers[] = {
+	{.port = gpioPortD, .pin = 6}
+	// Add more trigger port-pin pairs for more sensors here
+};
+
 volatile unsigned long milliseconds = 0;
 float timer0_ticks_per_us;
 
@@ -52,8 +57,8 @@ float ping_hc_sr04(GPIO_Port_TypeDef port, unsigned int pin) {
 	return cm_distance;
 }
 
-float getDistance(void) {
-	float cm_distance = ping_hc_sr04(TRIGGER_PORT, TRIGGER_PIN);
+float getDistance(unsigned int i) {
+	float cm_distance = ping_hc_sr04(triggers[i].port, triggers[i].pin);
 
 	char dist_str[BUF_LEN];
 	snprintf(dist_str, BUF_LEN, "%f", cm_distance);

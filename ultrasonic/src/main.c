@@ -68,11 +68,16 @@ void getLine(Line *line, Position2D positions[], unsigned int length) {
 }
 
 void getInput(float distances[], unsigned int length) {
+	// Note: At this point, it would be possible to merge getInput and getDistance.
+	// Arguments for merging: Simpler, shorter code, less function calls.
+	// Argument against: The current implementation gives a nice, logical split
+	// between getting input (sensor.c) and using input (main.c).
+
 	for (int i = 0; i < length; i++) {
 		// Get input somehow, i.e. go to sleep and wait for interrupt, then
-		// read input. Right now we use a dummy value.
+		// read input.
 		// distances[i] = 1;
-		distances[i] = getDistance();
+		distances[i] = getDistance(i);
 	}
 
 	/*
