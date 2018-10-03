@@ -348,9 +348,9 @@ Entry Wire Line
 	2800 5300 2900 5400
 Text Label 2350 5500 0    50   ~ 0
 CAM0_VSYNC
-Text Label 250  5750 0    50   ~ 0
+Text Label 2350 6400 0    50   ~ 0
 CAM0_SDATA
-Text Label 150  5100 0    50   ~ 0
+Text Label 2350 5600 0    50   ~ 0
 CAM0_SCL
 Entry Wire Line
 	3450 6150 3550 6250
