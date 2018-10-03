@@ -5,8 +5,6 @@
 #include "em_cmu.h"
 #include "em_gpio.h"
 #include "segmentlcd.h"
-#include "em_gpio.c"
-#include "em_timer.c"
 #include <stdio.h>
 
 #define BUF_LEN 8
@@ -53,12 +51,17 @@ float ping_hc_sr04(GPIO_Port_TypeDef port, unsigned int pin) {
 	return cm_distance;
 }
 
-int main(void) {
-	/* Chip errata */
-	CHIP_Init();
+float getDistance(void) {
+	float cm_distance = ping_hc_sr04(TRIGGER_PORT, TRIGGER_PIN);
 
-	SegmentLCD_Init(false);
+	char dist_str[BUF_LEN];
+	snprintf(dist_str, BUF_LEN, "%f", cm_distance);
+	SegmentLCD_Write(dist_str);
 
+	return cm_distance;
+}
+
+void setupSensor(void) {
 	CMU_ClockEnable(cmuClock_TIMER0, true);
 	CMU_ClockEnable(cmuClock_TIMER1, true);
 	CMU_ClockEnable(cmuClock_GPIO, true);
@@ -100,13 +103,4 @@ int main(void) {
 
 	// A small delay so that the sensors can start up
 	delay(1000);
-
-	/* Infinite loop */
-	while (1) {
-		float cm_distance = ping_hc_sr04(TRIGGER_PORT, TRIGGER_PIN);
-
-		char dist_str[BUF_LEN];
-		snprintf(dist_str, BUF_LEN, "%f", cm_distance);
-		SegmentLCD_Write(dist_str);
-	}
 }

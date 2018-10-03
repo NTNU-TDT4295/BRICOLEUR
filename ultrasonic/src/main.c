@@ -3,9 +3,7 @@
 
 #include "em_device.h"
 #include "em_chip.h"
-#include "em_lcd.c"
-#include "em_cmu.c"
-#include "segmentlcd.c"
+#include "segmentlcd.h"
 #include <stdio.h>
 #include <math.h>
 
@@ -101,18 +99,20 @@ void getLine(Line *line, Position2D positions[], unsigned int length) {
 }
 
 void getInput(float distances[], unsigned int length) {
-	/*
 	for (int i = 0; i < length; i++) {
 		// Get input somehow, i.e. go to sleep and wait for interrupt, then
 		// read input. Right now we use a dummy value.
-		distances[i] = 1;
+		// distances[i] = 1;
+		distances[i] = getDistance();
 	}
-	*/
+
+	/*
 	distances[0] = xTest;
 	distances[1] = yTest;
 
 	xTest += 2;
 	yTest += 3;
+	*/
 
 	/*
 	char buf[20];
@@ -143,9 +143,10 @@ bool isMoving(Position2D positions[], unsigned int length) {
 			(positions[length - 1].y == positions[length - 2].y));
 }
 
-int not_main() {
+int main() {
+	CHIP_Init();
 	SegmentLCD_Init(false);
-	char buf[20];
+	setupSensor();
 
 	Buffer buffer;
 	buffer.tail = 0;
@@ -166,14 +167,13 @@ int not_main() {
 
 		getPosition2D(&position, distances[0], distances[1]);
 
+		/*
 		position.x = xTest;
 		position.y = yTest;
 
 		xTest += 1;
 		yTest += 2;
-
-		// snprintf(buf, 20, "%d", (int)position.x);
-		// SegmentLCD_Write(buf);
+		*/
 
 		positions[buffer.tail] = position;
 		buffer.tail = (buffer.tail + 1) % buffer.maxLength;
@@ -201,24 +201,8 @@ int not_main() {
 			if (willCollide2D(&line)) {
 				panic();
 			}
-
-			// snprintf(buf, 20, "%d", (int)line.b);
-			// SegmentLCD_Write(buf);
 		}
-
-		sensor_main();
 	}
 
-    // Dummy data for y = 2x + 3
-	/*
-	Position2D positions[3];
-    positions[0].x = 1;
-    positions[0].y = 5;
-    positions[1].x = 2;
-    positions[1].y = 7;
-    positions[2].x = 3;
-    positions[2].y = 9;
-    */
-
-    return 0;
+	return 0;
 }

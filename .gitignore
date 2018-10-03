@@ -1,5 +1,4 @@
 *.o
-*.cproject
 *.d
 *.axf
 *.bin
@@ -10,4 +9,4 @@
 
 .vscode
 ultrasonic/ultrasonic
-ultrasonic/GNU ARM v7.2.1 - Debug/makefile
+ultrasonic/GNU ARM v7.2.1 - Debug
