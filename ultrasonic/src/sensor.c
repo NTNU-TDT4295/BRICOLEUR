@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "em_device.h"
 #include "em_chip.h"
 #include "em_timer.h"
@@ -5,7 +6,7 @@
 #include "em_cmu.h"
 #include "em_gpio.h"
 #include "segmentlcd.h"
-#include <stdio.h>
+#include "sensor.h"
 
 #define BUF_LEN 8
 
