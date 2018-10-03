@@ -10,11 +10,11 @@
 
 #define BUF_LEN 8
 
-#define TRIGGER_PORT gpioPortD
-#define TRIGGER_PIN 6
+#define NUM_TRIGGERS 2
 
 const Triggers triggers[] = {
-	{.port = gpioPortD, .pin = 6}
+	{.port = gpioPortD, .pin = 6},
+	{.port = gpioPortD, .pin = 5}
 	// Add more trigger port-pin pairs for more sensors here
 };
 
@@ -101,8 +101,10 @@ void setupSensor(void) {
 	TIMER_TopSet(TIMER1, timer1_top);
 	TIMER_IntEnable(TIMER1, TIMER_IF_OF);
 
-	// Set trigger pin as output
-	GPIO_PinModeSet(TRIGGER_PORT, TRIGGER_PIN, gpioModePushPull, 0);
+	// Set trigger pins as output
+	for (int i = 0; i < NUM_TRIGGERS; i++) {
+		GPIO_PinModeSet(triggers[i].port, triggers[i].pin, gpioModePushPull, 0);
+	}
 
 	timer0_ticks_per_us = 1000 * 1000
 			/ (float) CMU_ClockFreqGet(cmuClock_TIMER0);
