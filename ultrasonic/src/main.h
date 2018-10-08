@@ -40,5 +40,7 @@ void getInput(float distances[], unsigned int length);
 bool willCollide2D(Line *line);
 void panic();
 bool isMoving(Position2D positions[], unsigned int length);
+void sendString(USART_TypeDef *usart, char *string);
+void setupUsart(void);
 
 #endif /* SRC_MAIN_H_ */

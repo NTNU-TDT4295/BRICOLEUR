@@ -5,6 +5,9 @@
 #include <math.h>
 #include "em_device.h"
 #include "em_chip.h"
+#include "em_usart.h"
+#include "em_cmu.h"
+#include "em_gpio.h"
 #include "segmentlcd.h"
 #include "main.h"
 #include "sensor.h"
@@ -78,7 +81,19 @@ void getInput(float distances[], unsigned int length) {
 		// read input.
 		// distances[i] = 1;
 		distances[i] = getDistance(i);
+
+		// Send reading on UART
+		char buf[15];
+		snprintf(buf, 15, "US %d: %3d cm; ", i, (int)distances[i]);
+		sendString(USART1, buf);
 	}
+	// End line of sensor readings
+	sendString(USART1, "\n");
+
+	// Write integer distances from sensor 0 and 1 to LCD
+	char dist_str[8];
+	snprintf(dist_str, 8, "%3d %3d", (int)distances[0], (int)distances[1]);
+	SegmentLCD_Write(dist_str);
 
 	/*
 	distances[0] = xTest;
@@ -117,10 +132,42 @@ bool isMoving(Position2D positions[], unsigned int length) {
 			(positions[length - 1].y == positions[length - 2].y));
 }
 
+void sendString(USART_TypeDef *usart, char *string) {
+	/* Send a string on the given USART.
+	 * USART_Tx calls will stall if TX buffer is full,
+	 * which means that this function blocks until sending is completed.
+	 */
+	for (int i = 0; string[i] != '\0'; i++) {
+		USART_Tx(usart, string[i]);
+	}
+}
+
+void setupUsart(void) {
+	CMU_ClockEnable(cmuClock_HFPER, true);
+	CMU_ClockEnable(cmuClock_USART1, true);
+	CMU_ClockEnable(cmuClock_GPIO, true);
+
+	USART_InitAsync_TypeDef initAsync = USART_INITASYNC_DEFAULT;
+	initAsync.baudrate = 9600;
+	initAsync.enable = usartEnableTx;
+	USART_InitAsync(USART1, &initAsync);
+
+	/* The location used in these two variables should be the same */
+	int USART_LOCATION_MASK = USART_ROUTE_LOCATION_LOC1;
+	int USART_LOCATION = 1;
+
+	USART1->ROUTE = USART_ROUTE_TXPEN | USART_LOCATION_MASK;
+
+	/* To avoid false start, configure TX pin as initial high */
+	GPIO_PinModeSet((GPIO_Port_TypeDef)AF_USART1_TX_PORT(USART_LOCATION),
+			AF_USART1_TX_PIN(USART_LOCATION), gpioModePushPull, 1);
+}
+
 int main() {
 	CHIP_Init();
 	SegmentLCD_Init(false);
 	setupSensor();
+	setupUsart();
 
 	Buffer buffer;
 	buffer.tail = 0;
