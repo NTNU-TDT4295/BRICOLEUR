@@ -12,22 +12,71 @@
 #include "main.h"
 #include "sensor.h"
 
-#define x2 4  // Distance along the x axis from origo to sensor 2
-#define y3 4  // Distance along the y axis from origo to sensor 3
+const unsigned int numberOfSensors = 2;
 
-float xTest = 1;
-float yTest = 5;
+// The x-coordinate offset from origo for each of the sensors
+const float sensorOffset2D[] = {0, -7.5};
 
-void getPosition2D(Position2D *position, float r1, float r2) {
-    position->x = (x2*x2 + r1*r1 - r2*r2) / (2 * x2);
-    position->y = sqrtf(r1*r1 - position->x * position->x);
+void getPosition2D(Position2D *position, float distances[], unsigned int length) {
+	// Approach 1
+	// For every pair of distances, calculate a position entry. Then compute
+	// the average position of the position entries.
+
+	// The number of pairs of distances is equal to the number of different
+	// handshakes in a group of people, known as the handshake problem.
+	unsigned int positionsLength = (length * (length - 1)) / 2;
+	Position2D positions[positionsLength];
+	unsigned int positionsIndex = 0;
+
+	for (unsigned int i = 0; i < length - 1; i++) {
+		for (unsigned int j = i + 1; j < length; j++) {
+			Position2D positionEntry;
+
+			float r1 = distances[i];
+			float r2 = distances[j];
+
+			float x1 = sensorOffset2D[i];
+			float x2 = sensorOffset2D[j];
+
+			positionEntry.x = (x1*x1 - x2*x2 - r1*r1 + r2*r2) / (2 * (x1 - x2));
+			positionEntry.y = (0.5) *
+							   sqrtf(-(((r1*r1*r1*r1 - 2*r1*r1*(r2*r2 + (x1-x2)*(x1-x2))) + (r2*r2 - (x1-x2)*(x1-x2)) * (r2*r2 - (x1-x2) * (x1-x2)))
+							   / ((x1-x2) * (x1-x2))));
+
+			positions[positionsIndex++] = positionEntry;
+		}
+	}
+
+	// Find the average position
+	for (unsigned int i = 0; i < positionsLength; i++) {
+		position->x += positions[i].x;
+		position->y += positions[i].y;
+	}
+
+	position->x /= positionsLength;
+	position->y /= positionsLength;
+
+	// Approach 2
+	// Find the 2 sensors that are closest to the object, and use the position
+	// given by that distance pair, assuming that the closest sensors give the
+	// most precise results.
+
+	// Approach 3
+	// Some combination of approach 1 and 2, i.e. weighting the closest sensors
+	// more, or using the n closest sensors.
+
+	// Old approach, only supports 2 sensors, where one of them is in origo
+	// position->x = (x2*x2 + r1*r1 - r2*r2) / (2 * x2);
+	// position->y = sqrtf(r1*r1 - position->x * position->x);
 }
 
+/*
 void getPosition3D(Position3D *position, float r1, float r2, float r3) {
     position->x = (x2*x2 + r1*r1 - r2*r2) / (2 * x2);
     position->y = (y3*y3 + r1*r1 - r3*r3) / (2 * y3);
     position->z = sqrtf(r1*r1 - position->x * position->x - position->y * position->y);
 }
+*/
 
 void getLine(Line *line, Position2D positions[], unsigned int length) {
     // Algorithm: Ordinary linear least squares method
@@ -76,7 +125,7 @@ void getInput(float distances[], unsigned int length) {
 	// Argument against: The current implementation gives a nice, logical split
 	// between getting input (sensor.c) and using input (main.c).
 
-	for (int i = 0; i < length; i++) {
+	for (unsigned int i = 0; i < length; i++) {
 		// Get input somehow, i.e. go to sleep and wait for interrupt, then
 		// read input.
 		// distances[i] = 1;
@@ -91,23 +140,9 @@ void getInput(float distances[], unsigned int length) {
 	sendString(USART1, "\n");
 
 	// Write integer distances from sensor 0 and 1 to LCD
-	char dist_str[8];
-	snprintf(dist_str, 8, "%3d %3d", (int)distances[0], (int)distances[1]);
-	SegmentLCD_Write(dist_str);
-
-	/*
-	distances[0] = xTest;
-	distances[1] = yTest;
-
-	xTest += 2;
-	yTest += 3;
-	*/
-
-	/*
-	char buf[20];
-	snprintf(buf, 20, "%d", (int)xTest);
-	SegmentLCD_Write(buf);
-	*/
+	// char dist_str[8];
+	// snprintf(dist_str, 8, "%3d %3d", (int)distances[0], (int)distances[1]);
+	// SegmentLCD_Write(dist_str);
 }
 
 bool willCollide2D(Line *line) {
@@ -116,14 +151,11 @@ bool willCollide2D(Line *line) {
 	float x = -(line->b / line->a);
 	// This only checks if the object will hit the front of the system.
 	// TODO: Check if the object hits the side of the object
-	return (x >= 0) && (x <= x2); // Check if object hits between sensor1 and sensor2
+	return (x >= sensorOffset2D[0]) && (x <= sensorOffset2D[numberOfSensors - 1]); // Check if object hits between sensor1 and sensor2
 }
 
 void panic() {
 	// Do some fancy output
-	// SegmentLCD_Init(false);
-	// char buf[20];
-	// snprintf(buf, 20, "Panic");
 	SegmentLCD_Write("Panic");
 }
 
@@ -177,24 +209,15 @@ int main() {
 
 	Position2D positions[buffer.maxLength];
 
-	unsigned int distancesLength = 2;  // 1 distance for each sensor
-	float distances[distancesLength];
+	float distances[numberOfSensors];
 
 	Position2D position;
 	Line line;
 
 	while (true) {
-		getInput(distances, distancesLength);
+		getInput(distances, numberOfSensors);
 
-		getPosition2D(&position, distances[0], distances[1]);
-
-		/*
-		position.x = xTest;
-		position.y = yTest;
-
-		xTest += 1;
-		yTest += 2;
-		*/
+		getPosition2D(&position, distances, numberOfSensors);
 
 		positions[buffer.tail] = position;
 		buffer.tail = (buffer.tail + 1) % buffer.maxLength;
@@ -208,10 +231,6 @@ int main() {
 		} else {
 			buffer.length = buffer.tail;
 		}
-
-		// This avoids working outside the positions array. However, it means
-		// we sometimes get a really short buffer, and sometimes a very long
-		// one. Some sort of circular buffer could be better.
 
 		// It doesn't make sense to make a line from one point (and we would
 		// get a division by zero)

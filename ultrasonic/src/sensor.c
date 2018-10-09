@@ -60,9 +60,11 @@ float ping_hc_sr04(GPIO_Port_TypeDef port, unsigned int pin) {
 float getDistance(unsigned int i) {
 	float cm_distance = ping_hc_sr04(triggers[i].port, triggers[i].pin);
 
+	/*
 	char dist_str[BUF_LEN];
 	snprintf(dist_str, BUF_LEN, "%f", cm_distance);
 	SegmentLCD_Write(dist_str);
+	*/
 
 	return cm_distance;
 }
