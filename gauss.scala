@@ -12,7 +12,7 @@ class FIFO(depth: Int) extends Module{
     
   })
   val bank = Array.fill(depth) {RegInit(UInt(8.W), 0.U)}
-  println("Depth is", depth)
+  //println("Depth is", depth)
   if (depth > 1){
   
     for (ii <- 1 until depth){
@@ -53,7 +53,8 @@ class GaussianBlur extends Module {
   val fifo7_8 = Module(new FIFO(1))
 
 
-  println("Before fifo init")
+  //println("Before fifo init")
+  
   fifo0_1.io.dataIn := io.dataIn
   fifo1_2.io.dataIn := fifo0_1.io.dataOut
   fifo2_3.io.dataIn := fifo1_2.io.dataOut
@@ -65,7 +66,7 @@ class GaussianBlur extends Module {
   
   //fifo7_8.io.dataOut := 0.U // Is this necessary?
 
-  println("Got to after fifo wiring")
+  //println("Got to after fifo wiring")
 
   val kernel_0 = RegInit(UInt(8.W), 0.U)
   val kernel_1 = RegInit(UInt(8.W), 0.U)
