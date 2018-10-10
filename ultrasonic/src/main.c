@@ -24,9 +24,9 @@ void getPosition2D(Position2D *position, float distances[], unsigned int length)
 
 	// The number of pairs of distances is equal to the number of different
 	// handshakes in a group of people, known as the handshake problem.
-	unsigned int positionsLength = (length * (length - 1)) / 2;
-	Position2D positions[positionsLength];
-	unsigned int positionsIndex = 0;
+	unsigned int positionsMaxLength = (length * (length - 1)) / 2;
+	Position2D positions[positionsMaxLength];
+	unsigned int positionsLength = 0;
 
 	for (unsigned int i = 0; i < length - 1; i++) {
 		for (unsigned int j = i + 1; j < length; j++) {
@@ -38,12 +38,20 @@ void getPosition2D(Position2D *position, float distances[], unsigned int length)
 			float x1 = sensorOffset2D[i];
 			float x2 = sensorOffset2D[j];
 
+			// If the difference between the distance measured by each sensor
+			// is greater than the distance between the sensors
+			if (fabsf(r1 - r2) > fabsf(x1 - x2)) {
+				// This is not possible if both sensors detected the object
+				// Therefore, do not use this sensor pair
+				continue;
+			}
+
 			positionEntry.x = (x1*x1 - x2*x2 - r1*r1 + r2*r2) / (2 * (x1 - x2));
 			positionEntry.y = (0.5) *
 							   sqrtf(-(((r1*r1*r1*r1 - 2*r1*r1*(r2*r2 + (x1-x2)*(x1-x2))) + (r2*r2 - (x1-x2)*(x1-x2)) * (r2*r2 - (x1-x2) * (x1-x2)))
 							   / ((x1-x2) * (x1-x2))));
 
-			positions[positionsIndex++] = positionEntry;
+			positions[positionsLength++] = positionEntry;
 		}
 	}
 
