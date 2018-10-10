@@ -38,19 +38,19 @@ void delay(unsigned int m) {
 	}
 }
 
-float ping_hc_sr04(GPIO_Port_TypeDef port, unsigned int pin) {
-	/* How to operate HC-SR04:
+float ping_ez0(GPIO_Port_TypeDef port, unsigned int pin) {
+	/* How to operate LV-MaxSonar EZ0:
 	 *   set trigger high
 	 *   wait 1 ms
 	 *   set trigger low
-	 *   wait 50 ms
-	 *   read pulse length on echo, uS / 58 = centimeters
+	 *   wait 40 ms
+	 *   read pulse length on echo, uS / 58 = centimeters (147 us / inch)
 	 *   wait 10 ms
 	 **/
 	GPIO_PinOutSet(port, pin);
 	delay(1);
 	GPIO_PinOutClear(port, pin);
-	delay(50);
+	delay(40);
 	float pulse_length_us = TIMER_CaptureGet(TIMER0, 0) * timer0_ticks_per_us;
 	float cm_distance = pulse_length_us / 58;
 	delay(10);
@@ -58,7 +58,7 @@ float ping_hc_sr04(GPIO_Port_TypeDef port, unsigned int pin) {
 }
 
 float getDistance(unsigned int i) {
-	float cm_distance = ping_hc_sr04(triggers[i].port, triggers[i].pin);
+	float cm_distance = ping_ez0(triggers[i].port, triggers[i].pin);
 
 	/*
 	char dist_str[BUF_LEN];
@@ -93,6 +93,11 @@ void setupSensor(void) {
 	TIMER_Init_TypeDef timer0_init = TIMER_INIT_DEFAULT;
 	timer0_init.riseAction = timerInputActionReloadStart;
 	timer0_init.enable = false;
+	/* Use 32 as prescaler so that the timer doesn't overflow
+	 * It is possible to calculate the "correct" prescaler (max pulse is 37.5 mS),
+	 * but 32 works up to at least 1.70 m
+	 */
+	timer0_init.prescale = timerPrescale32;
 	TIMER_Init(TIMER0, &timer0_init);
 
 	// TIMER1 used for time keeping, interrupt on overflow every millisecond
@@ -108,8 +113,9 @@ void setupSensor(void) {
 		GPIO_PinModeSet(triggers[i].port, triggers[i].pin, gpioModePushPull, 0);
 	}
 
+	// Have to divide timer freq. by prescaler
 	timer0_ticks_per_us = 1000 * 1000
-			/ (float) CMU_ClockFreqGet(cmuClock_TIMER0);
+			/ ((float) CMU_ClockFreqGet(cmuClock_TIMER0) / 32);
 
 	// A small delay so that the sensors can start up
 	delay(1000);
