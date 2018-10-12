@@ -4,17 +4,13 @@ import chisel3.iotesters.TesterOptionsManager
 import chisel3.iotesters.PeekPokeTester
 import chisel3.util.Counter
 
-class FIFO(depth: Int) extends Module{
+class FIFO(depth: Int) extends Module{ // Defining the behaviour of the FIFO queue
   val io = IO(new Bundle{
     val dataIn = Input(UInt(8.W))
     val dataOut = Output(UInt(8.W))
-    //val move = Input(Bool())
-    //val isFull = Output(Bool())
-    //val isEmpty = Output(Bool())
     
   })
   val bank = Array.fill(depth) {RegInit(UInt(8.W), 0.U)}
-  //println("Depth is", depth)
   if (depth > 1){ 
     for (ii <- 1 until depth){
       bank(ii) := bank(ii-1)
@@ -25,7 +21,7 @@ class FIFO(depth: Int) extends Module{
 
 }
 
-class GaussianBlur(width: Int, height: Int) extends Module {
+class GaussianBlur(width: Int, height: Int) extends Module { //TODO: would be nice to pass kernel constants and kernel size into the Module as a parameter
   val io = IO(new Bundle{
   val dataIn = Input(UInt(8.W))
   val dataOut = Output(UInt(8.W))
@@ -34,36 +30,20 @@ class GaussianBlur(width: Int, height: Int) extends Module {
 
     })
 
-  //Screwy counter logic, no time to explain
+  //Screwy counter logic, idea is to wait until all queues are loaded, then skip a few cycles when at the edge of image by enabling and disabling io.valid
+  // When all valid data has been computed, stop asserting the io.valid signal
   val counterStart = Counter(1+1+1+1+width-3+1+1+width-3+1+1)
   val counterEdge = Counter(2)
   val endOfOutput = Counter((width-2)*(height-2))
-  //val counterWidth = RegInit(UInt(32.W), 0.U)
-  //counterWidth := counterWidth
   val counterProcess = Counter(8)
-  //val discard = Reginit()
   val computationStarted = RegInit(UInt(8.W), 0.U)
-  //computationStarted := computationStarted
   val processWrapped = RegInit(UInt(8.W), 0.U)
-  //countingToEdge := countingToEdge
-  //val countingOverEdge = RegInit(UInt(8.W), 0.U)
-  //countingOverEdge :=countingOverEdge
   val computationEnded = RegInit(UInt(8.W), 0.U)
-  val delay1 = RegInit(UInt(8.W), 0.U)
    
-  //processWrapped := delay1
-
-  //val accProcess = RegInit(UInt(8.W), 0.U)
-  //val accEdge = RegInit(UInt(8.W), 0.U)
-  // accProcess := accProcess
-  // accEdge := accEdge
-
   
 
   when(counterStart.inc()){
     computationStarted := 1.U
-    //counterWidth := 1.U+counterWidth
-    //io.valid := true.B
   }
 
   when(computationStarted === 1.U){
@@ -99,6 +79,7 @@ class GaussianBlur(width: Int, height: Int) extends Module {
   //See paper for explanation
   //Idea is deep pipelines
   //
+  //These are not much FIFOS as delay_Ns
   val fifo1_0 = Module(new FIFO(1))
   val fifo2_1 = Module(new FIFO(1))
   val fifo3_2 = Module(new FIFO(width-3))
@@ -109,8 +90,7 @@ class GaussianBlur(width: Int, height: Int) extends Module {
   val fifo8_7 = Module(new FIFO(1))
   
 
-  //println("Before fifo init")
-  
+  //Connect inputs and outputs
   fifo8_7.io.dataIn := io.dataIn
   fifo7_6.io.dataIn := fifo8_7.io.dataOut
   fifo6_5.io.dataIn := fifo7_6.io.dataOut
@@ -120,10 +100,8 @@ class GaussianBlur(width: Int, height: Int) extends Module {
   fifo2_1.io.dataIn := fifo3_2.io.dataOut
   fifo1_0.io.dataIn := fifo2_1.io.dataOut
   
-  //fifo7_8.io.dataOut := 0.U // Is this necessary?
 
-  //println("Got to after fifo wiring")
-
+  // Store the computed kernel snippets in theese registers
   val kernel_0 = RegInit(UInt(8.W), 0.U)
   val kernel_1 = RegInit(UInt(8.W), 0.U)
   val kernel_2 = RegInit(UInt(8.W), 0.U)
@@ -136,7 +114,7 @@ class GaussianBlur(width: Int, height: Int) extends Module {
   
 
   
-  //Kernel constants 
+  //Kernel constants, in this case set to an identity matrix 
   val kernelC0  = 0.U
   val kernelC1  = 0.U
   val kernelC2  = 0.U
@@ -147,7 +125,7 @@ class GaussianBlur(width: Int, height: Int) extends Module {
   val kernelC7  = 0.U
   val kernelC8  = 0.U
   
-  
+  // Computing the value of each kernel corner
   kernel_8 := io.dataIn * kernelC8
   kernel_7 := fifo8_7.io.dataOut*kernelC7
   kernel_6 := fifo7_6.io.dataOut*kernelC6
@@ -158,19 +136,18 @@ class GaussianBlur(width: Int, height: Int) extends Module {
   kernel_1 := fifo2_1.io.dataOut*kernelC1
   kernel_0 := fifo1_0.io.dataOut*kernelC0
   
-  
+  // The output function
   io.dataOut := kernel_0+kernel_1+kernel_2+kernel_3+kernel_4+kernel_5+kernel_6+kernel_7+kernel_8
   
 
 }
-//TEster for the Gauss module, lots of moving parts, this could probably be more elegant
+//Tester for the Gauss module, lots of moving parts, this could probably be more elegant
 class GaussTester(c: GaussianBlur) extends PeekPokeTester(c){
   //Testdata to be fed into the pipe
   
   var testArray = Array.fill(c.myWidth*c.myHeight) { 0.U }
   for (jj <- 0 until testArray.length){
     testArray(jj) = jj.U
-    //testArray(jj) = 1.U
   }
   //Array for the values that comes out of the pipe
   val resultArray = Array.fill((c.myWidth-2)*(c.myHeight-2)){ 0 }
@@ -184,7 +161,6 @@ class GaussTester(c: GaussianBlur) extends PeekPokeTester(c){
   while(isNotDone){ // Do some testing
     
     if (ii<testArray.length){
-      //println("pushing data " + testArray(ii).toInt)
       poke(c.io.dataIn, testArray(ii))
       ii +=1
     }
@@ -192,21 +168,19 @@ class GaussTester(c: GaussianBlur) extends PeekPokeTester(c){
       poke(c.io.dataIn, 0.U)
     }
  
-    //println("data out is " + peek(c.io.dataOut).toInt)
     
     if(resultIndex<resultArray.length){
       dataValid = peek(c.io.valid).toInt
       if (dataValid==1){
         resultArray(resultIndex) = peek(c.io.dataOut).toInt
       
-        //resultIndex +=1
          resultIndex +=1
       }
     }
     steps +=1
     step(1)// Cycles the module, letting registers update etc
    
-    if (steps>max_steps){
+    if (steps>max_steps){ // Runs until designated amount of cycles has passed
       isNotDone = false
     }
   
@@ -235,15 +209,9 @@ class GaussTester(c: GaussianBlur) extends PeekPokeTester(c){
 
 
 }
-/**
-object GaussDriver extends App{
-  chisel3.Driver.execute(args, () => new GaussianBlur )
   
-}
-*/
 // after copying the file, run sbt, then compile, then run the Tester
 object Tester extends App{
-  //val gauss = new GaussianBlur
   
   // The arguments for GaussianBlur determines the dimensions of the data to be put in, aka the image size
   chisel3.iotesters.Driver.execute(() => new GaussianBlur(10, 10), new TesterOptionsManager) {(c) => new GaussTester(c)}   
