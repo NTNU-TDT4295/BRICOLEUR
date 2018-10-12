@@ -36,11 +36,9 @@ class GaussianBlur(width: Int, height: Int) extends Module { //TODO: would be ni
   val counterEdge = Counter(2)
   val endOfOutput = Counter((width-2)*(height-2))
   val counterProcess = Counter(8)
-  val computationStarted = RegInit(UInt(8.W), 0.U)
-  val processWrapped = RegInit(UInt(8.W), 0.U)
-  val computationEnded = RegInit(UInt(8.W), 0.U)
-   
-  
+  val computationStarted = RegInit(UInt(1.W), 0.U)
+  val processWrapped = RegInit(UInt(1.W), 0.U)
+  val computationEnded = RegInit(UInt(1.W), 0.U) 
 
   when(counterStart.inc()){
     computationStarted := 1.U
@@ -124,7 +122,13 @@ class GaussianBlur(width: Int, height: Int) extends Module { //TODO: would be ni
   val kernelC6  = 0.U
   val kernelC7  = 0.U
   val kernelC8  = 0.U
-  
+ 
+  // Guss 3x3 kernel with standard deviation = 1
+  //0.077847	0.123317	0.077847
+  //0.123317	0.195346	0.123317
+  //0.077847	0.123317	0.077847
+  //
+
   // Computing the value of each kernel corner
   kernel_8 := io.dataIn * kernelC8
   kernel_7 := fifo8_7.io.dataOut*kernelC7
@@ -212,7 +216,7 @@ class GaussTester(c: GaussianBlur) extends PeekPokeTester(c){
   
 // after copying the file, run sbt, then compile, then run the Tester
 object Tester extends App{
-  
+  //chisel3.Driver.execute(args, () => new GaussianBlur(320, 240)) 
   // The arguments for GaussianBlur determines the dimensions of the data to be put in, aka the image size
   chisel3.iotesters.Driver.execute(() => new GaussianBlur(10, 10), new TesterOptionsManager) {(c) => new GaussTester(c)}   
 
