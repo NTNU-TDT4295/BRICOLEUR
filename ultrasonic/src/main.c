@@ -12,12 +12,16 @@
 #include "main.h"
 #include "sensor.h"
 
+unsigned int totalStringLength = 0;
+char totalString[200];
+
 const unsigned int numberOfSensors = 2;
 
 // The x-coordinate offset from origo for each of the sensors
-const float sensorOffset2D[] = {0, -7.5};
+const float sensorOffset2D[] = {0, 14.5};
 
-void getPosition2D(Position2D *position, float distances[], unsigned int length) {
+// return 0 if valid, 1 if not valid
+int getPosition2D(Position2D *position, float distances[], unsigned int length) {
 	// Approach 1
 	// For every pair of distances, calculate a position entry. Then compute
 	// the average position of the position entries.
@@ -38,6 +42,11 @@ void getPosition2D(Position2D *position, float distances[], unsigned int length)
 			float x1 = sensorOffset2D[i];
 			float x2 = sensorOffset2D[j];
 
+			char buf2[50];
+			snprintf(buf2, 50, "%.4f; %.4f", r1, r2);
+			// snprintf(buf2, 50, "r1: %.2f ; r2: %.2f ; ", r1, r2);
+			buildString(buf2, 50);
+
 			// If the difference between the distance measured by each sensor
 			// is greater than the distance between the sensors
 			if (fabsf(r1 - r2) > fabsf(x1 - x2)) {
@@ -52,8 +61,19 @@ void getPosition2D(Position2D *position, float distances[], unsigned int length)
 							   / ((x1-x2) * (x1-x2))));
 
 			positions[positionsLength++] = positionEntry;
+
+			char buf1[50];
+			snprintf(buf1, 50, "x: %.2f ; y: %.2f ; ", positionEntry.x, positionEntry.y);
+			// buildString(buf1, 50);
 		}
 	}
+
+	if (positionsLength == 0) {
+		return 1;
+	}
+
+	position->x = 0;
+	position->y = 0;
 
 	// Find the average position
 	for (unsigned int i = 0; i < positionsLength; i++) {
@@ -63,6 +83,16 @@ void getPosition2D(Position2D *position, float distances[], unsigned int length)
 
 	position->x /= positionsLength;
 	position->y /= positionsLength;
+
+	return 0;
+
+//	char buf[50];
+//	snprintf(buf, 50, "x: %.2f y: %.2f l: %u ; ", position->x, position->y, positionsLength);
+//	buildString(buf, 50);
+
+//	char buf[30];
+//	snprintf(buf, 30, "x: %f y: %f\n; ", position->x, position->y);
+//	sendString(USART1, buf);
 
 	// Approach 2
 	// Find the 2 sensors that are closest to the object, and use the position
@@ -122,9 +152,16 @@ void getLine(Line *line, Position2D positions[], unsigned int length) {
     line->a = S_xy / S_x2;
     line->b = y_avg - (line->a * x_avg);
 
-    // char buf[20];
-    // snprintf(buf, 20, "%d", (int)line->b);
-    // SegmentLCD_Write(buf);
+    char buf[60];
+    snprintf(buf, 50, "x_avg = %.2f y_avg = %.2f y = %.2fx + %.2f ; ", x_avg, y_avg, line->a, line->b);
+    // buildString(buf, 50);
+
+    //char buf[30];
+    //snprintf(buf, 30, "y = %fx + %f\n; ", line->a, line->b);
+    //sendString(USART1, buf);
+
+    // End line of sensor readings
+    // sendString(USART1, "\n");
 }
 
 void getInput(float distances[], unsigned int length) {
@@ -140,12 +177,16 @@ void getInput(float distances[], unsigned int length) {
 		distances[i] = getDistance(i);
 
 		// Send reading on UART
+
+		/*
 		char buf[15];
 		snprintf(buf, 15, "US %d: %3d cm; ", i, (int)distances[i]);
 		sendString(USART1, buf);
+		*/
+
 	}
 	// End line of sensor readings
-	sendString(USART1, "\n");
+	// sendString(USART1, "\n");
 
 	// Write integer distances from sensor 0 and 1 to LCD
 	// char dist_str[8];
@@ -159,7 +200,13 @@ bool willCollide2D(Line *line) {
 	float x = -(line->b / line->a);
 	// This only checks if the object will hit the front of the system.
 	// TODO: Check if the object hits the side of the object
-	return (x >= sensorOffset2D[0]) && (x <= sensorOffset2D[numberOfSensors - 1]); // Check if object hits between sensor1 and sensor2
+	bool willCollide = (x >= sensorOffset2D[0] - 10) && (x <= sensorOffset2D[numberOfSensors - 1] + 10);
+
+	char buf[20];
+	snprintf(buf, 20, "Will collide: %d", willCollide);
+	// buildString(buf, 20);
+
+	return willCollide; // Check if object hits between sensor1 and sensor2
 }
 
 void panic() {
@@ -170,6 +217,16 @@ void panic() {
 bool isMoving(Position2D positions[], unsigned int length) {
 	return ((positions[length - 1].x != positions[length - 2].x) ||
 			(positions[length - 1].y == positions[length - 2].y));
+}
+
+void buildString(char *string, unsigned int length) {
+	int i;
+
+	for (i = 0; string[i] != '\0'; i++) {
+		totalString[totalStringLength + i] = string[i];
+	}
+
+	totalStringLength += i;
 }
 
 void sendString(USART_TypeDef *usart, char *string) {
@@ -188,7 +245,7 @@ void setupUsart(void) {
 	CMU_ClockEnable(cmuClock_GPIO, true);
 
 	USART_InitAsync_TypeDef initAsync = USART_INITASYNC_DEFAULT;
-	initAsync.baudrate = 9600;
+	initAsync.baudrate = 115200;
 	initAsync.enable = usartEnableTx;
 	USART_InitAsync(USART1, &initAsync);
 
@@ -212,7 +269,7 @@ int main() {
 	Buffer buffer;
 	buffer.tail = 0;
 	buffer.length = 0;
-	buffer.maxLength = 100;
+	buffer.maxLength = 2;
 	buffer.wrapped = false;
 
 	Position2D positions[buffer.maxLength];
@@ -225,7 +282,11 @@ int main() {
 	while (true) {
 		getInput(distances, numberOfSensors);
 
-		getPosition2D(&position, distances, numberOfSensors);
+		int status = getPosition2D(&position, distances, numberOfSensors);
+
+		if (status != 0) {
+			continue;
+		}
 
 		positions[buffer.tail] = position;
 		buffer.tail = (buffer.tail + 1) % buffer.maxLength;
@@ -248,8 +309,15 @@ int main() {
 
 			if (willCollide2D(&line)) {
 				panic();
+			} else {
+				SegmentLCD_Write("Relax");
 			}
 		}
+
+		buildString("\n", 1);
+		totalString[totalStringLength] = '\0';
+		sendString(USART1, totalString);
+		totalStringLength = 0;
 	}
 
 	return 0;
