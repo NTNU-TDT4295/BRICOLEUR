@@ -1,1 +1,7 @@
 .idea
+.DS_Store
+scalastyle-config.xml
+scalastyle-test-config.xml
+test_run_dir
+project/target
+target

@@ -1,8 +1,8 @@
+package accelerators
+
 import chisel3._
-import chisel3.iotesters.TesterOptionsManager
-import chisel3.iotesters.PeekPokeTester
 import chisel3.core.FixedPoint
-import chisel3.core.Data
+import chisel3.iotesters.{PeekPokeTester, TesterOptionsManager}
 
 class Fixed() extends Module {
   val io = IO(new Bundle {
@@ -91,7 +91,7 @@ class FPCoreTester(c: Fixed) extends PeekPokeTester(c){
 }
 
 object fixedTester extends App{
-  // chisel3.iotesters.Driver.execute(() => new Fixed(), new TesterOptionsManager) {(c) => new FPCoreTester(c)}
+  // chisel3.iotesters.Driver.execute(() => new accelerators.Fixed(), new TesterOptionsManager) {(c) => new accelerators.FPCoreTester(c)}
   chisel3.iotesters.Driver.execute(() => new FixedPointMultiply(16,8), new TesterOptionsManager) {(c) => new FPMulTester(c,16,8)}
   chisel3.Driver.execute(args, () => new FixedPointMultiply(16,8))
 
