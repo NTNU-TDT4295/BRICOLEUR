@@ -1,6 +1,7 @@
 package accelerators.Grayscale
 
 import chisel3._
+import chisel3.core.FixedPoint
 import chisel3.iotesters.{ChiselFlatSpec, PeekPokeTester, TesterOptionsManager}
 
 class GrayscaleUnitTester(c: Grayscale) extends PeekPokeTester(c) {
@@ -15,8 +16,7 @@ class GrayscaleUnitTester(c: Grayscale) extends PeekPokeTester(c) {
   poke(c.io.loadingValues, false.B)
 
   step(2)
-
-  expect(c.io.dataOut, 2.U)
+  expect(c.io.dataOut, FixedPoint.fromDouble(0.0, 32.W, 16.BP))
 }
 
 class GrayscaleTester extends ChiselFlatSpec {
