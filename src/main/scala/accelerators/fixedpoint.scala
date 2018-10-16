@@ -1,8 +1,8 @@
+package accelerators
+
 import chisel3._
-import chisel3.iotesters.TesterOptionsManager
-import chisel3.iotesters.PeekPokeTester
 import chisel3.core.FixedPoint
-import chisel3.core.Data
+import chisel3.iotesters.{PeekPokeTester, TesterOptionsManager}
 
 /**
  * Wrapper for doing fixed point division
@@ -106,7 +106,7 @@ class FPMulTester(c: FixedPointMultiply, w: Int, bp: Int) extends PeekPokeTester
 }
 
 object fixedTester extends App{
-  // chisel3.iotesters.Driver.execute(() => new FixedPointMultiplyv2(16,8), new TesterOptionsManager) {(c) => new FPMulTesterv2(c,16,8)}
+  // chisel3.iotesters.Driver.execute(() => new accelerators.Fixed(), new TesterOptionsManager) {(c) => new accelerators.FPCoreTester(c)}
   chisel3.iotesters.Driver.execute(() => new FixedPointMultiply(16,8), new TesterOptionsManager) {(c) => new FPMulTester(c,16,8)}
   // chisel3.Driver.execute(args, () => new FixedPointMultiply(16,8))
 

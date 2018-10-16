@@ -1,11 +1,12 @@
+package accelerators
+
 import chisel3._
 import chisel3.core.Input
 import chisel3.core.FixedPoint
-import chisel3.iotesters.TesterOptionsManager
-import chisel3.iotesters.PeekPokeTester
+import chisel3.iotesters.{PeekPokeTester, TesterOptionsManager}
 import chisel3.util.Counter
 
-class FIFO(depth: Int) extends Module{ // Defining the behaviour of the FIFO queue
+class FIFO(depth: Int) extends Module{ // Defining the behaviour of the accelerators.FIFO queue
   val io = IO(new Bundle{
     val dataIn = Input(FixedPoint(16.W,8.BP))
     val dataOut = Output(FixedPoint(16.W,8.BP))
@@ -147,7 +148,7 @@ class GaussianBlur(width: Int, height: Int) extends Module { //TODO: would be ni
     // io.dataOut := FixedPoint.fromDouble(0.5,16.W,8.BP)
 
 }
-//Tester for the Gauss module, lots of moving parts, this could probably be more elegant
+//accelerators.Tester for the Gauss module, lots of moving parts, this could probably be more elegant
 class GaussTester(c: GaussianBlur) extends PeekPokeTester(c){
   //Testdata to be fed into the pipe
 

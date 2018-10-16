@@ -1,3 +1,5 @@
+package accelerators
+
  import chisel3._
 
   class GCD extends Module {
