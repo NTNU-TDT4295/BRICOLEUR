@@ -9,14 +9,15 @@ class GrayscaleUnitTester(c: Grayscale) extends PeekPokeTester(c) {
   val array = Array(1, 2, 3)
 
   for (i <- array) {
-	poke(c.io.dataIn, i)
+	poke(c.io.dataIn, FixedPoint.fromDouble(i, 16.W, 8.BP))
 	step(1)
   }
 
   poke(c.io.loadingValues, false.B)
 
   step(2)
-  expect(c.io.dataOut, FixedPoint.fromDouble(0.0, 32.W, 16.BP))
+
+  expect(c.io.dataOut, 256)
 }
 
 class GrayscaleTester extends ChiselFlatSpec {
