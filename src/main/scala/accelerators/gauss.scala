@@ -25,7 +25,15 @@ class FIFO(depth: Int) extends Module{ // Defining the behaviour of the accelera
 
 }
 
-class GaussianBlur(width: Int, height: Int) extends Module { //TODO: would be nice to pass kernel constants and kernel size into the Module as a parameter
+class GaussianBlur(width: Int, height: Int) extends Module {
+  // TODO:
+  // would be nice to pass kernel constants
+  // and kernel size into the Module as a parameter
+
+  // TODO:
+  // also pass in data width and binary point values
+  // as parameters
+  //  - Joakim
   val io = IO(new Bundle{
     val dataIn = Input(FixedPoint(16.W,8.BP))
     val dataOut = Output(UInt(16.W))
@@ -35,6 +43,12 @@ class GaussianBlur(width: Int, height: Int) extends Module { //TODO: would be ni
 
   //Screwy counter logic, idea is to wait until all queues are loaded, then skip a few cycles when at the edge of image by enabling and disabling io.valid
   // When all valid data has been computed, stop asserting the io.valid signal
+
+  // TODO:
+  // Rewrite this logic in a more general fashion
+  // so we can easily change the kernel size to, say, 5x5 without
+  // chaging any code, just the kernel constants
+  //  - Joakim
   val counterStart = Counter(1+1+1+1+width-3+1+1+width-3+1+1)
   val counterEdge = Counter(2)
   val endOfOutput = Counter((width-2)*(height-2))
@@ -144,11 +158,23 @@ class GaussianBlur(width: Int, height: Int) extends Module { //TODO: would be ni
     kernel_0 := fifo1_0.io.dataOut*kernelC0
 
     // The output function
-    io.dataOut := ( kernel_0 +kernel_1+kernel_2+kernel_3+kernel_4+kernel_5+kernel_6+kernel_7+kernel_8 ).asUInt
-    // io.dataOut := FixedPoint.fromDouble(0.5,16.W,8.BP)
+    io.dataOut := (
+      kernel_0 +
+      kernel_1 +
+      kernel_2 +
+      kernel_3 +
+      kernel_4 +
+      kernel_5 +
+      kernel_6 +
+      kernel_7 +
+      kernel_8 ).asUInt
 
 }
 //accelerators.Tester for the Gauss module, lots of moving parts, this could probably be more elegant
+// TODO:
+// rewrite for use with sbt test
+// expect some nice shit
+//  - Joakim
 class GaussTester(c: GaussianBlur) extends PeekPokeTester(c){
   //Testdata to be fed into the pipe
 
