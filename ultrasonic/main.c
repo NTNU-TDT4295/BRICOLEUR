@@ -3,22 +3,23 @@
 
 #include <stdio.h>
 #include <math.h>
-#include "em_device.h"
-#include "em_chip.h"
-#include "em_usart.h"
-#include "em_cmu.h"
-#include "em_gpio.h"
-#include "segmentlcd.h"
+#include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
 #include "main.h"
-#include "sensor.h"
 
 unsigned int totalStringLength = 0;
-char totalString[200];
+#define totalStringMaxLength 200
+char totalString[totalStringMaxLength];
 
-const unsigned int numberOfSensors = 2;
+#define numberOfSensors 2
 
 // The x-coordinate offset from origo for each of the sensors
 const float sensorOffset2D[] = {0, 14.5};
+
+#define numberOfData 551
+unsigned int distancePairIndex = 0;
+float distancePair[numberOfData][numberOfSensors];
 
 // return 0 if valid, 1 if not valid
 int getPosition2D(Position2D *position, float distances[], unsigned int length) {
@@ -43,8 +44,8 @@ int getPosition2D(Position2D *position, float distances[], unsigned int length) 
 			float x2 = sensorOffset2D[j];
 
 			char buf2[50];
-			snprintf(buf2, 50, "%.4f; %.4f", r1, r2);
-			// snprintf(buf2, 50, "r1: %.2f ; r2: %.2f ; ", r1, r2);
+			// snprintf(buf2, 50, "r1: %.4f ; r2: %.4f ", r1, r2);
+			snprintf(buf2, 50, "r1: %.2f ; r2: %.2f ; ", r1, r2);
 			buildString(buf2, 50);
 
 			// If the difference between the distance measured by each sensor
@@ -64,7 +65,7 @@ int getPosition2D(Position2D *position, float distances[], unsigned int length) 
 
 			char buf1[50];
 			snprintf(buf1, 50, "x: %.2f ; y: %.2f ; ", positionEntry.x, positionEntry.y);
-			// buildString(buf1, 50);
+			buildString(buf1, 50);
 		}
 	}
 
@@ -154,7 +155,7 @@ void getLine(Line *line, Position2D positions[], unsigned int length) {
 
     char buf[60];
     snprintf(buf, 50, "x_avg = %.2f y_avg = %.2f y = %.2fx + %.2f ; ", x_avg, y_avg, line->a, line->b);
-    // buildString(buf, 50);
+    buildString(buf, 50);
 
     //char buf[30];
     //snprintf(buf, 30, "y = %fx + %f\n; ", line->a, line->b);
@@ -174,7 +175,8 @@ void getInput(float distances[], unsigned int length) {
 		// Get input somehow, i.e. go to sleep and wait for interrupt, then
 		// read input.
 		// distances[i] = 1;
-		distances[i] = getDistance(i);
+		// distances[i] = getDistance(i);
+		distances[i] = distancePair[distancePairIndex][i];
 
 		// Send reading on UART
 
@@ -185,6 +187,9 @@ void getInput(float distances[], unsigned int length) {
 		*/
 
 	}
+
+	distancePairIndex++;
+
 	// End line of sensor readings
 	// sendString(USART1, "\n");
 
@@ -204,14 +209,14 @@ bool willCollide2D(Line *line) {
 
 	char buf[20];
 	snprintf(buf, 20, "Will collide: %d", willCollide);
-	// buildString(buf, 20);
+	buildString(buf, 20);
 
 	return willCollide; // Check if object hits between sensor1 and sensor2
 }
 
 void panic() {
 	// Do some fancy output
-	SegmentLCD_Write("Panic");
+	// SegmentLCD_Write("Panic");
 }
 
 bool isMoving(Position2D positions[], unsigned int length) {
@@ -229,42 +234,46 @@ void buildString(char *string, unsigned int length) {
 	totalStringLength += i;
 }
 
-void sendString(USART_TypeDef *usart, char *string) {
+void sendString(char *string) {
 	/* Send a string on the given USART.
 	 * USART_Tx calls will stall if TX buffer is full,
 	 * which means that this function blocks until sending is completed.
 	 */
-	for (int i = 0; string[i] != '\0'; i++) {
-		USART_Tx(usart, string[i]);
-	}
+
+	printf("%s", string);
 }
 
-void setupUsart(void) {
-	CMU_ClockEnable(cmuClock_HFPER, true);
-	CMU_ClockEnable(cmuClock_USART1, true);
-	CMU_ClockEnable(cmuClock_GPIO, true);
+void setupData() {
+	FILE *file;
+	file = fopen("data.txt", "r");
+	char line[255];
 
-	USART_InitAsync_TypeDef initAsync = USART_INITASYNC_DEFAULT;
-	initAsync.baudrate = 115200;
-	initAsync.enable = usartEnableTx;
-	USART_InitAsync(USART1, &initAsync);
+	if (file == NULL) {
+		printf("Error when opening file");
+		exit(1);
+	}
 
-	/* The location used in these two variables should be the same */
-	int USART_LOCATION_MASK = USART_ROUTE_LOCATION_LOC1;
-	int USART_LOCATION = 1;
 
-	USART1->ROUTE = USART_ROUTE_TXPEN | USART_LOCATION_MASK;
+	for (unsigned int i = 0; i < numberOfData; i++) {
+		for (unsigned int j = 0; j < numberOfSensors; j++) {
+			int inputLength = fscanf(file, "%s", line);
+			
+			if (inputLength > totalStringMaxLength) {
+				printf("Error: Input too long");
+				exit(1);
+			}
 
-	/* To avoid false start, configure TX pin as initial high */
-	GPIO_PinModeSet((GPIO_Port_TypeDef)AF_USART1_TX_PORT(USART_LOCATION),
-			AF_USART1_TX_PIN(USART_LOCATION), gpioModePushPull, 1);
+			distancePair[i][j] = atof(line);
+		}
+	}
+
+	// for (unsigned int i = 0; i < numberOfData; i++) {
+	// 	printf("%f %f\n", distancePair[i][0], distancePair[i][1]);
+	// }
 }
 
 int main() {
-	CHIP_Init();
-	SegmentLCD_Init(false);
-	setupSensor();
-	setupUsart();
+	setupData();
 
 	Buffer buffer;
 	buffer.tail = 0;
@@ -279,12 +288,17 @@ int main() {
 	Position2D position;
 	Line line;
 
-	while (true) {
+	// while (true) {
+	for (unsigned int i = 0; i < numberOfData; i++) {
 		getInput(distances, numberOfSensors);
 
 		int status = getPosition2D(&position, distances, numberOfSensors);
 
 		if (status != 0) {
+			buildString("\n", 1);
+			totalString[totalStringLength] = '\0';
+			sendString(totalString);
+			totalStringLength = 0;
 			continue;
 		}
 
@@ -308,15 +322,15 @@ int main() {
 			getLine(&line, positions, buffer.length);
 
 			if (willCollide2D(&line)) {
-				panic();
+				// panic();
 			} else {
-				SegmentLCD_Write("Relax");
+				// SegmentLCD_Write("Relax");
 			}
 		}
 
 		buildString("\n", 1);
 		totalString[totalStringLength] = '\0';
-		sendString(USART1, totalString);
+		sendString(totalString);
 		totalStringLength = 0;
 	}
 

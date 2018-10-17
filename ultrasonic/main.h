@@ -8,6 +8,8 @@
 #ifndef SRC_MAIN_H_
 #define SRC_MAIN_H_
 
+#include <stdbool.h>
+
 typedef struct Position2D {
     float x;
     float y;
@@ -41,7 +43,6 @@ bool willCollide2D(Line *line);
 void panic();
 bool isMoving(Position2D positions[], unsigned int length);
 void buildString(char *string, unsigned int length);
-void sendString(USART_TypeDef *usart, char *string);
-void setupUsart(void);
+void sendString(char *string);
 
 #endif /* SRC_MAIN_H_ */
