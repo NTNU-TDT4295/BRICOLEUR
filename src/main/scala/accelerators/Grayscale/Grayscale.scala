@@ -1,6 +1,6 @@
 package accelerators.Grayscale
 
-import chisel3._
+import chisel3.{UInt, _}
 import chisel3.util.Counter
 import chisel3.experimental.FixedPoint
 
@@ -19,41 +19,35 @@ class Grayscale extends Module {
 	val dataValid = Output(Bool())
   })
 
-  val factors = Array(0.3, 0.59, 0.11)
-  val v = RegInit(FixedPoint(16.W, 8.BP), FixedPoint.fromDouble(0.0, 16.W, 8.BP))
-  val byteArray = Array(
-	FixedPoint.fromDouble(0, 16.W, 8.BP),
-	FixedPoint.fromDouble(0, 16.W, 8.BP),
-	FixedPoint.fromDouble(0, 16.W, 8.BP)
-  )
+  // The three factors that R, G and B color channels should be multipled with, respectively
+  val f0: FixedPoint = FixedPoint.fromDouble(0.3, 16.W, 8.BP)
+  val f1: FixedPoint = FixedPoint.fromDouble(0.59, 16.W, 8.BP)
+  val f2: FixedPoint = FixedPoint.fromDouble(0.11, 16.W, 8.BP)
+
+  // Registers for the individual byte values coming in
+  val b0 = RegInit(FixedPoint(16.W, 8.BP), FixedPoint.fromDouble(0, 16.W, 8.BP))
+  val b1 = RegInit(FixedPoint(16.W, 8.BP), FixedPoint.fromDouble(0, 16.W, 8.BP))
+  val b2 = RegInit(FixedPoint(16.W, 8.BP), FixedPoint.fromDouble(0, 16.W, 8.BP))
+
   val counter = Counter(3)
 
   io.dataValid := false.B
   io.dataOut := FixedPoint.fromDouble(0.0, 16.W, 8.BP)
 
-  // Fill the byte array as the value comes in
   when(io.loadingValues) {
-	for (i <- 0 until 3) {
-	  when(counter.value === i.U) {
-		byteArray(i) = io.dataIn
-		printf(p"byteArray(${i.U}) = ${io.dataIn.asUInt()}\n")
-	  }
+	when(counter.value === 0.U) {
+	  b0 := io.dataIn
+	}
+	when(counter.value === 1.U) {
+	  b1 := io.dataIn
+	}
+	when(counter.value === 2.U) {
+	  b2 := io.dataIn
 	}
   }
 
-  // When the byte array is filled, loop over, compute and send signal out
   when(counter.inc()) {
-	for (i <- 0 until 3) {
-	  val byte = byteArray(i).asFixedPoint(8.BP)
-	  val factor = FixedPoint.fromDouble(factors(i), 16.W, 8.BP)
-	  v := v + byte
-	  printf(p"i = ${i.U}\n")
-	  printf(p"byte = ${byte.asUInt()}\n")
-	  printf(p"factor = ${factor.asUInt()}\n")
-	  printf(p"v = ${v.asUInt()}\n\n")
-	}
-
+	io.dataOut := b0 * f0 + b1 * f1 + b2 * f2
 	io.dataValid := true.B
-	io.dataOut := v
   }
 }

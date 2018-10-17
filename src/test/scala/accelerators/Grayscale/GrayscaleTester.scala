@@ -17,7 +17,11 @@ class GrayscaleUnitTester(c: Grayscale) extends PeekPokeTester(c) {
 
   step(2)
 
-  expect(c.io.dataOut, 256)
+  // (463 & ((1 << 8) -1) = 207)
+  // ((463 - 207 + 1) & ((1 << 8) - 1) = 1) integer value
+  // (207 / (1 << 8) = 0,81) decimal value
+  // 463 is equivalent to 1.81
+  expect(c.io.dataOut, 463)
 }
 
 class GrayscaleTester extends ChiselFlatSpec {
