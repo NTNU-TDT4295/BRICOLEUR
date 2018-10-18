@@ -66,7 +66,7 @@ class Dilation(width: Int, height: Int) extends Module {
   val myHeight = height
 
 
-  // K[0][0] K[1][0] K[2][0]  kernel element 0, 1, 2
+  // K[0][0] K[1][0] K[2][0] kernel element 0, 1, 2
   // K[0][1] K[1][1] K[2][1] kernel element 3, 4, 5
   // K[0][2] K[1][2] K[2][2] kernel element 6, 7, 8
 
@@ -109,22 +109,19 @@ class Dilation(width: Int, height: Int) extends Module {
 
 
 
-  //Kernel constants, in this case set to an identity matrix
-  val kernelC0 = FixedPoint.fromDouble(0.077847,16.W,8.BP)
-  val kernelC1 = FixedPoint.fromDouble(0.123317,16.W,8.BP)
-  val kernelC2 = FixedPoint.fromDouble(0.077847,16.W,8.BP)
-  val kernelC3 = FixedPoint.fromDouble(0.123317,16.W,8.BP)
-  val kernelC4 = FixedPoint.fromDouble(0.195346,16.W,8.BP)
-  val kernelC5 = FixedPoint.fromDouble(0.123317,16.W,8.BP)
-  val kernelC6 = FixedPoint.fromDouble(0.077847,16.W,8.BP)
-  val kernelC7 = FixedPoint.fromDouble(0.123317,16.W,8.BP)
-  val kernelC8 = FixedPoint.fromDouble(0.077847,16.W,8.BP)
-
-  // Guss 3x3 kernel with standard deviation = 1
-  //0.077847	0.123317	0.077847
-  //0.123317	0.195346	0.123317
-  //0.077847	0.123317	0.077847
-  //
+  // Kernel constants, look like this:
+  // 0 1 0
+  // 1 1 1
+  // 0 1 0
+  val kernelC0 = FixedPoint.fromDouble(0,16.W,8.BP)
+  val kernelC1 = FixedPoint.fromDouble(1,16.W,8.BP)
+  val kernelC2 = FixedPoint.fromDouble(0,16.W,8.BP)
+  val kernelC3 = FixedPoint.fromDouble(1,16.W,8.BP)
+  val kernelC4 = FixedPoint.fromDouble(1,16.W,8.BP)
+  val kernelC5 = FixedPoint.fromDouble(1,16.W,8.BP)
+  val kernelC6 = FixedPoint.fromDouble(0,16.W,8.BP)
+  val kernelC7 = FixedPoint.fromDouble(1,16.W,8.BP)
+  val kernelC8 = FixedPoint.fromDouble(0,16.W,8.BP)
 
   // Computing the value of each kernel corner
   kernel_8 := io.dataIn * kernelC8
@@ -148,5 +145,4 @@ class Dilation(width: Int, height: Int) extends Module {
 		  kernel_6 +
 		  kernel_7 +
 		  kernel_8 ).asUInt
-
 }

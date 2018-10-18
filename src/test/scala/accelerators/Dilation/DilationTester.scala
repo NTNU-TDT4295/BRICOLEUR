@@ -8,7 +8,7 @@ import chisel3.iotesters.{ChiselFlatSpec, PeekPokeTester, TesterOptionsManager}
 // rewrite for use with sbt test
 // expect some nice shit
 //  - Joakim
-class DilationTester(c: Dilation) extends PeekPokeTester(c) {
+class DilationUnitTester(c: Dilation) extends PeekPokeTester(c) {
   //Testdata to be fed into the pipe
 
   var testArray = Array.fill(c.myWidth * c.myHeight) {
@@ -84,12 +84,12 @@ class DilationTester(c: Dilation) extends PeekPokeTester(c) {
 }
 
 // after copying the file, run sbt, then compile, then run the Tester
-class Tester extends ChiselFlatSpec {
+class DilationTester extends ChiselFlatSpec {
   "Dilation" should "correctly dilate an image" in {
 	//chisel3.Driver.execute(args, () => new GaussianBlur(320, 240))
 	// The arguments for Dilation determines the dimensions of the data to be put in, aka the image size
 	iotesters.Driver.execute(() => new Dilation(10, 10), new TesterOptionsManager) {
-	  c => new DilationTester(c)
+	  c => new DilationUnitTester(c)
 	}
   }
 }
