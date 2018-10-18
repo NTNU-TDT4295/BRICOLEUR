@@ -6,12 +6,9 @@ import chisel3.iotesters.{ChiselFlatSpec, PeekPokeTester, TesterOptionsManager}
 class FIFOUnitTester(c: FIFO) extends PeekPokeTester(c) {
   poke(c.io.dataIn, 3)
 
-  step(6)
+  step(5)
 
-  val test = peek(c.io.dataOut)
-
-  // TODO: This evaluates to true regardless of the expected value, so not sure what to do
-  expectFixedPoint(c.io.dataOut, 3.0, "Didn't get expected fixed point")
+  expect(c.io.dataOut, 3)
 }
 
 class FIFOTester extends ChiselFlatSpec {
