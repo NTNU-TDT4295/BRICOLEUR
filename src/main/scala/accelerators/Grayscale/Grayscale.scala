@@ -1,8 +1,8 @@
 package accelerators.Grayscale
 
-import chisel3.{UInt, _}
-import chisel3.util.Counter
 import chisel3.experimental.FixedPoint
+import chisel3.util.Counter
+import chisel3.{UInt, _}
 
 /**
   * accelerators.RGB2Gray module that calculates the grayscale value of a pixel by doing (R + G + B) / 3.
