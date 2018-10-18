@@ -1,29 +1,9 @@
-package accelerators
+package accelerators.GaussianBlur
 
 import chisel3._
-import chisel3.core.Input
-import chisel3.core.FixedPoint
-import chisel3.iotesters.{PeekPokeTester, TesterOptionsManager}
+import chisel3.core.{FixedPoint, Input}
 import chisel3.util.Counter
-
-class FIFO(depth: Int) extends Module{ // Defining the behaviour of the accelerators.FIFO queue
-  val io = IO(new Bundle{
-    val dataIn = Input(FixedPoint(16.W,8.BP))
-    val dataOut = Output(FixedPoint(16.W,8.BP))
-
-  })
-  // val bank = Array.fill(depth) {RegInit(UInt(8.W), 0.U)}
-  val bank = Array.fill(depth) {RegInit(FixedPoint(16.W,8.BP),
-  FixedPoint.fromDouble(0.0,16.W,8.BP))}
-  if (depth > 1){
-    for (ii <- 1 until depth){
-      bank(ii) := bank(ii-1)
-    }
-  }
-  io.dataOut := bank(depth-1)
-  bank(0) := io.dataIn
-
-}
+import helpers.FIFO.FIFO
 
 class GaussianBlur(width: Int, height: Int) extends Module {
   // TODO:
@@ -170,89 +150,3 @@ class GaussianBlur(width: Int, height: Int) extends Module {
       kernel_8 ).asUInt
 
 }
-//accelerators.Tester for the Gauss module, lots of moving parts, this could probably be more elegant
-// TODO:
-// rewrite for use with sbt test
-// expect some nice shit
-//  - Joakim
-class GaussTester(c: GaussianBlur) extends PeekPokeTester(c){
-  //Testdata to be fed into the pipe
-
-  var testArray = Array.fill(c.myWidth*c.myHeight) { 0.U }
-  for (jj <- 0 until testArray.length){
-    testArray(jj) = jj.U
-  }
-  //Array for the values that comes out of the pipe
-  val resultArray = Array.fill((c.myWidth-2)*(c.myHeight-2)){ 0 }
-
-  var resultIndex = 0
-  var ii = 0
-  var isNotDone = true
-  var steps = 0
-  var max_steps = 10000
-  var dataValid = 0
-  while(isNotDone){ // Do some testing
-
-    if (ii<testArray.length){
-      poke(c.io.dataIn, testArray(ii))
-      ii +=1
-    }
-    else{
-      poke(c.io.dataIn, 0.U)
-    }
-
-
-    if(resultIndex<resultArray.length){
-      dataValid = peek(c.io.valid).toInt
-      if (dataValid==1){
-        resultArray(resultIndex) = peek(c.io.dataOut).toInt
-
-        resultIndex +=1
-      }
-    }
-    steps +=1
-    step(1)// Cycles the module, letting registers update etc
-
-    if (steps>max_steps){ // Runs until designated amount of cycles has passed
-      isNotDone = false
-    }
-  }
-
-  // Below is output formatting to get a nice overview of what is happening
-  var inputString = ""
-  var outputString = ""
-  val bp = 8
-
-  for (ii <- 0 until testArray.length){
-    if ((ii%c.myWidth)==0){
-      inputString += "\n"
-    }
-    inputString += testArray(ii).toInt + "\t"
-
-  }
-  println(inputString)
-  for (ii <- 0 until resultArray.length){
-    if ((ii%(c.myWidth-2))==0){
-      println("")
-    }
-    var intpart =  resultArray(ii) >> bp
-    var floatpart = (resultArray(ii) & (1 << bp)-1)
-    var test = floatpart.toFloat / (1 << bp).toFloat
-    print(s"${resultArray(ii)}${test.toString.substring(1)} ")
-
-  }
-  println(outputString)
-
-
-}
-
-// after copying the file, run sbt, then compile, then run the Tester
-object Tester extends App{
-  //chisel3.Driver.execute(args, () => new GaussianBlur(320, 240))
-  // The arguments for GaussianBlur determines the dimensions of the data to be put in, aka the image size
-  chisel3.iotesters.Driver.execute(() => new GaussianBlur(10, 10), new TesterOptionsManager) {(c) => new GaussTester(c)}
-
-}
-
-
-
