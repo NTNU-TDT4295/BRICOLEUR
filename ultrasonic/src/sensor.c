@@ -113,10 +113,20 @@ void setupSensor(void) {
 		GPIO_PinModeSet(triggers[i].port, triggers[i].pin, gpioModePushPull, 0);
 	}
 
+	// Sensors needs 250 ms to start up after power on
+	delay(300);
+
+	// Run calibration cycle, i.e. let each sensor do two 49 ms cycles
+	for (int i = 0; i < NUM_TRIGGERS; i++) {
+		GPIO_PinOutSet(triggers[i].port, triggers[i].pin);
+		// Set RX low after second cycle has started so that it doesn't start a third reading
+		delay(75);
+		GPIO_PinOutClear(triggers[i].port, triggers[i].pin);
+		// Wait rest of cycle
+		delay(25);
+	}
+
 	// Have to divide timer freq. by prescaler
 	timer0_ticks_per_us = 1000 * 1000
 			/ ((float) CMU_ClockFreqGet(cmuClock_TIMER0) / 32);
-
-	// A small delay so that the sensors can start up
-	delay(1000);
 }
