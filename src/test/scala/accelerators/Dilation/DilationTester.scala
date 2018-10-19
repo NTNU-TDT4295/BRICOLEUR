@@ -3,22 +3,21 @@ package accelerators.Dilation
 import chisel3._
 import chisel3.iotesters.{ChiselFlatSpec, PeekPokeTester, TesterOptionsManager}
 
-//accelerators.Dilation.Tester for the Dilation module, lots of moving parts, this could probably be more elegant
-// TODO:
-// rewrite for use with sbt test
-// expect some nice shit
-//  - Joakim
+/**
+  * Test the dilation module
+  * @param c: The dilation module to be tested
+  */
 class DilationUnitTester(c: Dilation) extends PeekPokeTester(c) {
   //Testdata to be fed into the pipe
 
-  var testArray = Array.fill(c.myWidth * c.myHeight) {
+  var testArray: Array[UInt] = Array.fill(c.myWidth * c.myHeight) {
 	0.U
   }
-  for (jj <- 0 until testArray.length) {
+  for (jj <- testArray.indices) {
 	testArray(jj) = jj.U
   }
   //Array for the values that comes out of the pipe
-  val resultArray = Array.fill((c.myWidth - 2) * (c.myHeight - 2)) {
+  val resultArray: Array[Int] = Array.fill((c.myWidth - 2) * (c.myHeight - 2)) {
 	0
   }
 
@@ -60,7 +59,7 @@ class DilationUnitTester(c: Dilation) extends PeekPokeTester(c) {
   var outputString = ""
   val bp = 8
 
-  for (ii <- 0 until testArray.length) {
+  for (ii <- testArray.indices) {
 	if ((ii % c.myWidth) == 0) {
 	  inputString += "\n"
 	}
@@ -68,25 +67,22 @@ class DilationUnitTester(c: Dilation) extends PeekPokeTester(c) {
 
   }
   println(inputString)
-  for (ii <- 0 until resultArray.length) {
+  for (ii <- resultArray.indices) {
 	if ((ii % (c.myWidth - 2)) == 0) {
 	  println("")
 	}
 	var intpart = resultArray(ii) >> bp
-	var floatpart = (resultArray(ii) & (1 << bp) - 1)
-	var test = floatpart.toFloat / (1 << bp).toFloat
+	val floatpart = resultArray(ii) & (1 << bp) - 1
+	val test = floatpart.toFloat / (1 << bp).toFloat
 	print(s"${resultArray(ii)}${test.toString.substring(1)} ")
 
   }
+
   println(outputString)
-
-
 }
 
-// after copying the file, run sbt, then compile, then run the Tester
 class DilationTester extends ChiselFlatSpec {
   "Dilation" should "correctly dilate an image" in {
-	//chisel3.Driver.execute(args, () => new GaussianBlur(320, 240))
 	// The arguments for Dilation determines the dimensions of the data to be put in, aka the image size
 	iotesters.Driver.execute(() => new Dilation(10, 10), new TesterOptionsManager) {
 	  c => new DilationUnitTester(c)

@@ -144,5 +144,5 @@ class Dilation(width: Int, height: Int) extends Module {
 		  kernel_5 +
 		  kernel_6 +
 		  kernel_7 +
-		  kernel_8 ).asUInt
+		  kernel_8 ).asUInt()
 }
