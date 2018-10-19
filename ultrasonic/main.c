@@ -21,6 +21,8 @@ const float sensorOffset2D[] = {0, 14.5};
 unsigned int distancePairIndex = 0;
 float distancePair[numberOfData][numberOfSensors];
 
+unsigned int collisions = 0;
+
 // return 0 if valid, 1 if not valid
 int getPosition2D(Position2D *position, float distances[], unsigned int length) {
 	// Approach 1
@@ -207,6 +209,10 @@ bool willCollide2D(Line *line) {
 	// TODO: Check if the object hits the side of the object
 	bool willCollide = (x >= sensorOffset2D[0] - 10) && (x <= sensorOffset2D[numberOfSensors - 1] + 10);
 
+	if (willCollide) {
+		collisions++;
+	}
+
 	char buf[20];
 	snprintf(buf, 20, "Will collide: %d", willCollide);
 	buildString(buf, 20);
@@ -219,9 +225,17 @@ void panic() {
 	// SegmentLCD_Write("Panic");
 }
 
-bool isMoving(Position2D positions[], unsigned int length) {
-	return ((positions[length - 1].x != positions[length - 2].x) ||
-			(positions[length - 1].y == positions[length - 2].y));
+bool isMoving(float distances[], float previousDistances[]) {
+	for (unsigned int i = 0; i < numberOfSensors; i++) {
+		// If the difference in the distance is less than the error margin, we
+		// can't guarantee that the distance is actually different and that the
+		// object is actually moving
+		if (fabsf(distances[i] - previousDistances[i]) > 1) {
+			return true;
+		}
+	}
+
+	return false;
 }
 
 void buildString(char *string, unsigned int length) {
@@ -257,7 +271,7 @@ void setupData() {
 	for (unsigned int i = 0; i < numberOfData; i++) {
 		for (unsigned int j = 0; j < numberOfSensors; j++) {
 			int inputLength = fscanf(file, "%s", line);
-			
+
 			if (inputLength > totalStringMaxLength) {
 				printf("Error: Input too long");
 				exit(1);
@@ -266,10 +280,6 @@ void setupData() {
 			distancePair[i][j] = atof(line);
 		}
 	}
-
-	// for (unsigned int i = 0; i < numberOfData; i++) {
-	// 	printf("%f %f\n", distancePair[i][0], distancePair[i][1]);
-	// }
 }
 
 int main() {
@@ -284,6 +294,7 @@ int main() {
 	Position2D positions[buffer.maxLength];
 
 	float distances[numberOfSensors];
+	float previousDistances[numberOfSensors];
 
 	Position2D position;
 	Line line;
@@ -318,7 +329,7 @@ int main() {
 		// It doesn't make sense to make a line from one point (and we would
 		// get a division by zero)
 
-		if ((buffer.length > 1) && (isMoving(positions, buffer.length))) {
+		if ((buffer.length > 1) && (isMoving(distances, previousDistances))) {
 			getLine(&line, positions, buffer.length);
 
 			if (willCollide2D(&line)) {
@@ -328,11 +339,16 @@ int main() {
 			}
 		}
 
+		// Pseudocode: previousDistances = distances
+		memcpy(previousDistances, distances, numberOfSensors * sizeof(float));
+
 		buildString("\n", 1);
 		totalString[totalStringLength] = '\0';
 		sendString(totalString);
 		totalStringLength = 0;
 	}
+
+	printf("\nNumber of collisions detected: %u\n", collisions);
 
 	return 0;
 }

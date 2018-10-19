@@ -41,7 +41,7 @@ void getLine(Line *line, Position2D positions[], unsigned int length);
 void getInput(float distances[], unsigned int length);
 bool willCollide2D(Line *line);
 void panic();
-bool isMoving(Position2D positions[], unsigned int length);
+bool isMoving(float distances[], float previousDistances[]);
 void buildString(char *string, unsigned int length);
 void sendString(char *string);
 
