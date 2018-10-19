@@ -288,7 +288,7 @@ int main() {
 	Buffer buffer;
 	buffer.tail = 0;
 	buffer.length = 0;
-	buffer.maxLength = 2;
+	buffer.maxLength = 3;
 	buffer.wrapped = false;
 
 	Position2D positions[buffer.maxLength];
@@ -329,14 +329,23 @@ int main() {
 		// It doesn't make sense to make a line from one point (and we would
 		// get a division by zero)
 
-		if ((buffer.length > 1) && (isMoving(distances, previousDistances))) {
-			getLine(&line, positions, buffer.length);
 
-			if (willCollide2D(&line)) {
-				// panic();
-			} else {
-				// SegmentLCD_Write("Relax");
+		if (isMoving(distances, previousDistances)) {
+			if (buffer.length > 1) {
+				getLine(&line, positions, buffer.length);
+
+				if (willCollide2D(&line)) {
+					// panic();
+				} else {
+					// SegmentLCD_Write("Relax");
+				}
 			}
+
+		} else {
+			// Flush buffer, only keep the last element
+			buffer.tail = 0;
+			buffer.length = 0;
+			buffer.wrapped = false;
 		}
 
 		// Pseudocode: previousDistances = distances
