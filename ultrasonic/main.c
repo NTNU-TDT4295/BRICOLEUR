@@ -23,6 +23,9 @@ float distancePair[numberOfData][numberOfSensors];
 
 unsigned int collisions = 0;
 
+float wallDistances[numberOfSensors];
+unsigned int dataUsedForCalibration = 0;
+
 // return 0 if valid, 1 if not valid
 int getPosition2D(Position2D *position, float distances[], unsigned int length) {
 	// Approach 1
@@ -282,8 +285,40 @@ void setupData() {
 	}
 }
 
+void setWallDistances(float wallDistances[]) {
+	// Increasing this value will increase our confidence that we are seeing
+	// the wall, but also require a longer setup time
+	unsigned int distancePairCount = 3;
+	float distancePairs[distancePairCount][numberOfSensors];
+	bool moving = true;
+
+	// Run until we get <distancePairCount> number of measurements without movement
+	while (moving) {
+		moving = false;
+
+		for (unsigned int i = 0; i < distancePairCount; i++) {
+			getInput(distancePairs[i], numberOfSensors);
+			dataUsedForCalibration++;
+
+			if (i > 0) {
+				if (isMoving(distancePairs[i], distancePairs[i - 1])) {
+					memset(distancePairs, 0, sizeof(distancePairs)); // Clear array
+					moving = true;
+					continue;
+				}
+			}
+		}
+	}
+
+	memcpy(wallDistances, distancePairs[0], numberOfSensors * sizeof(float));
+}
+
 int main() {
 	setupData();
+
+	// Calibrate to know where wall is
+	setWallDistances(wallDistances);
+	printf("Wall distances: %f %f\n", wallDistances[0], wallDistances[1]);
 
 	Buffer buffer;
 	buffer.tail = 0;
@@ -300,7 +335,7 @@ int main() {
 	Line line;
 
 	// while (true) {
-	for (unsigned int i = 0; i < numberOfData; i++) {
+	for (unsigned int i = 0; i < numberOfData - dataUsedForCalibration; i++) {
 		getInput(distances, numberOfSensors);
 
 		int status = getPosition2D(&position, distances, numberOfSensors);
