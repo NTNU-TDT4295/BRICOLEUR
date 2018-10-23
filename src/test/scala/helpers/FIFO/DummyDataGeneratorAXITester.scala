@@ -4,6 +4,8 @@ import chisel3._
 import chisel3.iotesters.{ChiselFlatSpec, PeekPokeTester, TesterOptionsManager}
 
 class DummyDataGeneratorAXIUnitTester(c: DummyDataGeneratorAXI) extends PeekPokeTester(c) {
+  poke(c.io.tready, true)
+
   expect(c.io.tvalid, true)
   expect(c.io.tkeep, 1) // 4 bit signal is high => (1111)_2 = (15)_10
   expect(c.io.tlast, false)
