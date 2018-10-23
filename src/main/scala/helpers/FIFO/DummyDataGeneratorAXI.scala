@@ -34,6 +34,6 @@ class DummyDataGeneratorAXI extends Module {
   }
 }
 
-object DummyDataGeneratorAXI extends App {
-  chisel3.Driver.execute(args, () => new DummyDataGenerator)
-}
+//object DummyDataGeneratorAXI extends App {
+//  chisel3.Driver.execute(args, () => new DummyDataGenerator)
+//}

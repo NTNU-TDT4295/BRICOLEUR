@@ -152,7 +152,7 @@ class GaussianBlur(width: Int, height: Int) extends Module {
 }
 
 
-object GaussDriver extends App{
-  chisel3.Driver.execute(args, () => new GaussianBlur(10, 10))
+//object GaussDriver extends App{
+//  chisel3.Driver.execute(args, () => new GaussianBlur(10, 10))
 
-}
+//}
