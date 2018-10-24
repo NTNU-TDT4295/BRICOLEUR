@@ -14,10 +14,10 @@ char totalString[totalStringMaxLength];
 
 #define numberOfSensors 2
 
-// The x-coordinate offset from origo for each of the sensors
-const float sensorOffset2D[] = {0, 14.5};
+// The x-coordinate offset from origo for each of the sensors in inches
+const float sensorOffset2D[] = {0, 5.7};
 
-#define numberOfData 551
+#define numberOfData 217
 unsigned int distancePairIndex = 0;
 float distancePair[numberOfData][numberOfSensors];
 
@@ -228,12 +228,12 @@ void panic() {
 	// SegmentLCD_Write("Panic");
 }
 
-bool isMoving(float distances[], float previousDistances[]) {
+bool isMoving(float distances[], float previousDistances[], float treshold) {
 	for (unsigned int i = 0; i < numberOfSensors; i++) {
 		// If the difference in the distance is less than the error margin, we
 		// can't guarantee that the distance is actually different and that the
 		// object is actually moving
-		if (fabsf(distances[i] - previousDistances[i]) > 1) {
+		if (fabsf(distances[i] - previousDistances[i]) > treshold) {
 			return true;
 		}
 	}
@@ -262,7 +262,7 @@ void sendString(char *string) {
 
 void setupData() {
 	FILE *file;
-	file = fopen("data.txt", "r");
+	file = fopen("data4.txt", "r");
 	char line[255];
 
 	if (file == NULL) {
@@ -301,7 +301,7 @@ void setWallDistances(float wallDistances[]) {
 			dataUsedForCalibration++;
 
 			if (i > 0) {
-				if (isMoving(distancePairs[i], distancePairs[i - 1])) {
+				if (isMoving(distancePairs[i], distancePairs[i - 1], 0.5)) {
 					memset(distancePairs, 0, sizeof(distancePairs)); // Clear array
 					moving = true;
 					continue;
@@ -316,7 +316,7 @@ void setWallDistances(float wallDistances[]) {
 // Detect if we what we see is a moving object (either fast or slow)
 bool isObject(float distances[]) {
 	// If what we see is not the wall, we assume it is a moving object
-	return isMoving(distances, wallDistances);
+	return isMoving(distances, wallDistances, 1.5);
 }
 
 int main() {
