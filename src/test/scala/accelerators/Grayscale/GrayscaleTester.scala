@@ -3,6 +3,10 @@ package accelerators.Grayscale
 import chisel3._
 import chisel3.core.FixedPoint
 import chisel3.iotesters.{ChiselFlatSpec, PeekPokeTester, TesterOptionsManager}
+import java.awt.image.BufferedImage
+import javax.imageio.ImageIO
+import java.io._
+import scala.math.abs
 
 class GrayscaleUnitTester(c: Grayscale) extends PeekPokeTester(c) {
   poke(c.io.loadingValues, true.B)
@@ -24,10 +28,62 @@ class GrayscaleUnitTester(c: Grayscale) extends PeekPokeTester(c) {
   expect(c.io.dataOut, 463)
 }
 
+class GrayscaleImageTester(c: Grayscale) extends PeekPokeTester(c) {
+  /* Load testimage from file, and read out the individual RGB values */
+  val image = ImageIO.read(new File("data/image.jpg")) 
+  val height = image.getHeight
+  val width = image.getWidth
+  val chiselImage = new BufferedImage(width, height, image.getType())
+  val testImage = new BufferedImage(width, height, image.getType())
+  
+  /* Loop through the chisel component, and check that the value is the same as the calculated manually*/
+  var error = 0;
+  for(y <- 0 until height){
+    for(x <- 0 until width){
+      val color = image.getRGB(x, y)
+      val red = ((color & 0xff0000) >> 16)
+      val green = ((color & 0xff00) >> 8)
+      val blue = ((color & 0xff))
+      val testColor = (0.3*red + 0.59*green + 0.11*blue)
+      testImage.setRGB(x, y, testColor.toInt*(65536 + 256 + 1))
+
+      poke(c.io.loadingValues, true.B)
+      poke(c.io.dataIn, red << 7)
+      step(1)
+      poke(c.io.dataIn, green << 7)
+      step(1)
+      poke(c.io.dataIn, blue << 7)
+      
+      val chiselColor = (peek(c.io.dataOut) >> 7)
+
+      chiselImage.setRGB(x, y, chiselColor.toInt*(65536 + 256 + 1))
+
+      step(1)
+
+      error = error + Math.abs(chiselColor.toInt - testColor.toInt)
+
+    }
+  }
+  //
+  
+  /* Show the loaded images */
+  ImageIO.write(testImage, "jpg", new File("data/grayscale/testImage.jpg"))
+  ImageIO.write(chiselImage, "jpg", new File("data/grayscale/chiselImage.jpg"))
+  
+
+  //Check that the average error is less than 1
+  expect(((error / (width*height)) < 1.0).B, true.B)
+}
+
 class GrayscaleTester extends ChiselFlatSpec {
   "Grayscale" should "correctly average a single RGB value" in {
 	iotesters.Driver.execute(() => new Grayscale(), new TesterOptionsManager) {
 	  c => new GrayscaleUnitTester(c)
 	} should be(true)
+  }
+  "Grayscale" should "correctly grayscale any image" in {
+        iotesters.Driver.execute(() => new Grayscale(), new TesterOptionsManager) {
+          c => new GrayscaleImageTester(c)
+        } should be (true)
   }
 }
