@@ -262,11 +262,11 @@ void sendString(char *string) {
 
 void setupData() {
 	FILE *file;
-	file = fopen("data4.txt", "r");
+	file = fopen("data2.txt", "r");
 	char line[255];
 
 	if (file == NULL) {
-		printf("Error when opening file");
+		printf("Error when opening file\n");
 		exit(1);
 	}
 
@@ -291,6 +291,7 @@ void setWallDistances(float wallDistances[]) {
 	unsigned int distancePairCount = 3;
 	float distancePairs[distancePairCount][numberOfSensors];
 	bool moving = true;
+	int treshold = 0.5;
 
 	// Run until we get <distancePairCount> number of measurements without movement
 	while (moving) {
@@ -300,8 +301,12 @@ void setWallDistances(float wallDistances[]) {
 			getInput(distancePairs[i], numberOfSensors);
 			dataUsedForCalibration++;
 
+			if (dataUsedForCalibration > 10) {
+				treshold = 1.5;
+			}
+
 			if (i > 0) {
-				if (isMoving(distancePairs[i], distancePairs[i - 1], 0.5)) {
+				if (isMoving(distancePairs[i], distancePairs[i - 1], treshold)) {
 					memset(distancePairs, 0, sizeof(distancePairs)); // Clear array
 					moving = true;
 					continue;
