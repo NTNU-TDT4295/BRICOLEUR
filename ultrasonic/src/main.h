@@ -33,10 +33,10 @@ typedef struct Buffer {
 	bool wrapped;
 } Buffer;
 
-int getPosition2D(Position2D *position, float distances[], unsigned int length);
+int getPosition2D(Position2D *position, unsigned int distances[], unsigned int length);
 void getPosition3D(Position3D *position, float r1, float r2, float r3);
 void getLine(Line *line, Position2D positions[], unsigned int length);
-void getInput(float distances[], unsigned int length);
+void getInput(unsigned int distances[], unsigned int length);
 bool willCollide2D(Line *line);
 void panic();
 bool isMoving(Position2D positions[], unsigned int length);

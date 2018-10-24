@@ -21,7 +21,7 @@ const unsigned int numberOfSensors = 2;
 const float sensorOffset2D[] = {0, 14.5};
 
 // return 0 if valid, 1 if not valid
-int getPosition2D(Position2D *position, float distances[], unsigned int length) {
+int getPosition2D(Position2D *position, unsigned int distances[], unsigned int length) {
 	// Approach 1
 	// For every pair of distances, calculate a position entry. Then compute
 	// the average position of the position entries.
@@ -36,8 +36,8 @@ int getPosition2D(Position2D *position, float distances[], unsigned int length) 
 		for (unsigned int j = i + 1; j < length; j++) {
 			Position2D positionEntry;
 
-			float r1 = distances[i];
-			float r2 = distances[j];
+			float r1 = ((float)distances[i])*2.54;
+			float r2 = ((float)distances[j])*2.54;
 
 			float x1 = sensorOffset2D[i];
 			float x2 = sensorOffset2D[j];
@@ -164,7 +164,7 @@ void getLine(Line *line, Position2D positions[], unsigned int length) {
     // sendString(USART1, "\n");
 }
 
-void getInput(float distances[], unsigned int length) {
+void getInput(unsigned int distances[], unsigned int length) {
 	// Note: At this point, it would be possible to merge getInput and getDistance.
 	// Arguments for merging: Simpler, shorter code, less function calls.
 	// Argument against: The current implementation gives a nice, logical split
@@ -179,8 +179,8 @@ void getInput(float distances[], unsigned int length) {
 		// Send reading on UART
 
 		/*
-		char buf[15];
-		snprintf(buf, 15, "US %d: %3d cm; ", i, (int)distances[i]);
+		char buf[20];
+		snprintf(buf, 20, "US %d: %3d inches; ", i, distances[i]);
 		sendString(USART1, buf);
 		*/
 
@@ -245,19 +245,21 @@ void setupUsart(void) {
 	CMU_ClockEnable(cmuClock_GPIO, true);
 
 	USART_InitAsync_TypeDef initAsync = USART_INITASYNC_DEFAULT;
-	initAsync.baudrate = 115200;
-	initAsync.enable = usartEnableTx;
+	initAsync.baudrate = 9600;
 	USART_InitAsync(USART1, &initAsync);
 
 	/* The location used in these two variables should be the same */
 	int USART_LOCATION_MASK = USART_ROUTE_LOCATION_LOC1;
 	int USART_LOCATION = 1;
 
-	USART1->ROUTE = USART_ROUTE_TXPEN | USART_LOCATION_MASK;
+	USART1->ROUTE = USART_ROUTE_RXPEN | USART_ROUTE_TXPEN | USART_LOCATION_MASK;
+	USART1->CTRL |= USART_CTRL_RXINV;
 
 	/* To avoid false start, configure TX pin as initial high */
 	GPIO_PinModeSet((GPIO_Port_TypeDef)AF_USART1_TX_PORT(USART_LOCATION),
 			AF_USART1_TX_PIN(USART_LOCATION), gpioModePushPull, 1);
+	GPIO_PinModeSet((GPIO_Port_TypeDef)AF_USART1_RX_PORT(USART_LOCATION),
+			AF_USART1_RX_PIN(USART_LOCATION), gpioModeInput, 0);
 }
 
 int main() {
@@ -274,7 +276,7 @@ int main() {
 
 	Position2D positions[buffer.maxLength];
 
-	float distances[numberOfSensors];
+	unsigned int distances[numberOfSensors];
 
 	Position2D position;
 	Line line;

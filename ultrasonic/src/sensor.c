@@ -5,6 +5,7 @@
 #include "em_lcd.h"
 #include "em_cmu.h"
 #include "em_gpio.h"
+#include "em_usart.h"
 #include "segmentlcd.h"
 #include "sensor.h"
 
@@ -38,67 +39,34 @@ void delay(unsigned int m) {
 	}
 }
 
-float ping_ez0(GPIO_Port_TypeDef port, unsigned int pin) {
+unsigned int ping_ez0(GPIO_Port_TypeDef port, unsigned int pin) {
 	/* How to operate LV-MaxSonar EZ0:
 	 *   set trigger high
-	 *   wait 1 ms
+	 *   wait until R is received over UART
 	 *   set trigger low
-	 *   wait 40 ms
-	 *   read pulse length on echo, uS / 58 = centimeters (147 us / inch)
-	 *   wait 10 ms
+	 *   distance in inches is received as three ASCII digits, most significant digit first
+	 *   a carriage return is received
+	 *   wait 5 ms
 	 **/
 	GPIO_PinOutSet(port, pin);
-	delay(1);
+	while (USART_Rx(USART1) != 'R') {};  // Wait till start of response
 	GPIO_PinOutClear(port, pin);
-	delay(40);
-	float pulse_length_us = TIMER_CaptureGet(TIMER0, 0) * timer0_ticks_per_us;
-	float cm_distance = pulse_length_us / 58;
-	delay(10);
-	return cm_distance;
+	unsigned int digit3 = USART_Rx(USART1) - '0';
+	unsigned int digit2 = USART_Rx(USART1) - '0';
+	unsigned int digit1 = USART_Rx(USART1) - '0';
+	USART_Rx(USART1);  // \r
+	unsigned int inch_distance = digit3 * 100 + digit2 * 10 + digit1;
+	delay(5);
+	return inch_distance;
 }
 
-float getDistance(unsigned int i) {
-	float cm_distance = ping_ez0(triggers[i].port, triggers[i].pin);
-
-	/*
-	char dist_str[BUF_LEN];
-	snprintf(dist_str, BUF_LEN, "%f", cm_distance);
-	SegmentLCD_Write(dist_str);
-	*/
-
-	return cm_distance;
+unsigned int getDistance(unsigned int i) {
+	return ping_ez0(triggers[i].port, triggers[i].pin);
 }
 
 void setupSensor(void) {
-	CMU_ClockEnable(cmuClock_TIMER0, true);
 	CMU_ClockEnable(cmuClock_TIMER1, true);
 	CMU_ClockEnable(cmuClock_GPIO, true);
-
-	// TIMER0 is set up so that it will capture the length of high pulses on the TIMER0_CC0 pin
-
-	// Set up PD1 as input, is pin connected to TIMER0_CC0
-	GPIO_PinModeSet(gpioPortD, 1, gpioModeInput, 0);
-
-	// Set up capture channel 0 on TIMER0 so that it captures when the pin input falls
-	TIMER_InitCC_TypeDef timerCC_init = TIMER_INITCC_DEFAULT;
-	timerCC_init.edge = timerEdgeFalling;
-	timerCC_init.prsInput = false;
-	timerCC_init.mode = timerCCModeCapture;
-	TIMER_InitCC(TIMER0, 0, &timerCC_init);
-
-	// Enable CC0 input, TIMER1_CC0 is pin PD1 in location 3
-	TIMER0->ROUTE |= TIMER_ROUTE_CC0PEN | TIMER_ROUTE_LOCATION_LOC3;
-
-	// Set up TIMER0 so that it reloads (sets counter value to 0) and starts the timer when CC0 rises
-	TIMER_Init_TypeDef timer0_init = TIMER_INIT_DEFAULT;
-	timer0_init.riseAction = timerInputActionReloadStart;
-	timer0_init.enable = false;
-	/* Use 32 as prescaler so that the timer doesn't overflow
-	 * It is possible to calculate the "correct" prescaler (max pulse is 37.5 mS),
-	 * but 32 works up to at least 1.70 m
-	 */
-	timer0_init.prescale = timerPrescale32;
-	TIMER_Init(TIMER0, &timer0_init);
 
 	// TIMER1 used for time keeping, interrupt on overflow every millisecond
 	NVIC_EnableIRQ(TIMER1_IRQn);
@@ -125,8 +93,4 @@ void setupSensor(void) {
 		// Wait rest of cycle
 		delay(25);
 	}
-
-	// Have to divide timer freq. by prescaler
-	timer0_ticks_per_us = 1000 * 1000
-			/ ((float) CMU_ClockFreqGet(cmuClock_TIMER0) / 32);
 }

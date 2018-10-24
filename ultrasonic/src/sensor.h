@@ -16,8 +16,8 @@ typedef struct Triggers {
 void TIMER1_IRQHandler(void);
 unsigned long millis(void);
 void delay(unsigned int m);
-float ping_hc_sr04(GPIO_Port_TypeDef port, unsigned int pin);
-float getDistance(unsigned int i);
+unsigned int ping_ez0(GPIO_Port_TypeDef port, unsigned int pin);
+unsigned int getDistance(unsigned int i);
 void setupSensor(void);
 
 #endif /* SRC_SENSOR_H_ */

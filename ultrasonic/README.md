@@ -10,12 +10,13 @@ Current setup uses an EFM Giant Gecko Starter Kit and two EZ0 rangefinders.
 ### Wiring (ultrasonic)
 
 See the User Guide for the Starter Kit for the mapping of pin names to positions.
+The EZ0 sends range data over UART.
 
 | MCU | EZ0    |
 |-----|--------|
 | 3V3 |  +5    |
 | GND | GND    |
-| PD1 | PW\*   |
+| PD1 | TX\*   |
 | PD5 | RX\*\* |
 | PD6 | RX\*\* |
 
@@ -26,4 +27,4 @@ This means that the signal from each sensor must go trough a diode before the si
 
 ### Wiring (UART)
 
-The Gecko outputs debug data over UART. PD0 is the TX pin, RX is not enabled. See the code for baud rate.
+The Gecko outputs debug data over UART. PD0 is the TX pin, RX is used for the sensors. See the code for baud rate.
