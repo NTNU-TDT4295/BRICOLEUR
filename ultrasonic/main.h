@@ -42,6 +42,7 @@ void getInput(float distances[], unsigned int length);
 bool willCollide2D(Line *line);
 void panic();
 bool isMoving(float distances[], float previousDistances[]);
+void setWallDistances(float wallDistances[]);
 void buildString(char *string, unsigned int length);
 void sendString(char *string);
 

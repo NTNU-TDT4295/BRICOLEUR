@@ -313,12 +313,17 @@ void setWallDistances(float wallDistances[]) {
 	memcpy(wallDistances, distancePairs[0], numberOfSensors * sizeof(float));
 }
 
+// Detect if we what we see is a moving object (either fast or slow)
+bool isObject(float distances[]) {
+	// If what we see is not the wall, we assume it is a moving object
+	return isMoving(distances, wallDistances);
+}
+
 int main() {
 	setupData();
 
 	// Calibrate to know where wall is
 	setWallDistances(wallDistances);
-	printf("Wall distances: %f %f\n", wallDistances[0], wallDistances[1]);
 
 	Buffer buffer;
 	buffer.tail = 0;
@@ -361,11 +366,9 @@ int main() {
 			buffer.length = buffer.tail;
 		}
 
-		// It doesn't make sense to make a line from one point (and we would
-		// get a division by zero)
-
-
-		if (isMoving(distances, previousDistances)) {
+		if (isObject(distances)) {
+			// It doesn't make sense to make a line from one point (and we would
+			// get a division by zero)
 			if (buffer.length > 1) {
 				getLine(&line, positions, buffer.length);
 
@@ -392,7 +395,8 @@ int main() {
 		totalStringLength = 0;
 	}
 
-	printf("\nNumber of collisions detected: %u\n", collisions);
+	printf("\nWall distances: %.2f ; %.2f\n", wallDistances[0], wallDistances[1]);
+	printf("Number of collisions detected: %u\n", collisions);
 
 	return 0;
 }
