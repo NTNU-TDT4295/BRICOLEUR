@@ -16,7 +16,7 @@ class GaussianBlur(width: Int, height: Int) extends Module {
   //  - Joakim
   val io = IO(new Bundle{
     val dataIn = Input(FixedPoint(16.W,8.BP))
-    val dataOut = Output(UInt(16.W))
+    val dataOut = Output(FixedPoint(16.W,8.BP))
     val clock = Input(Bool())
     val valid = Output(Bool())
   })
@@ -147,6 +147,12 @@ class GaussianBlur(width: Int, height: Int) extends Module {
       kernel_5 +
       kernel_6 +
       kernel_7 +
-      kernel_8 ).asUInt
+      kernel_8 )
 
 }
+
+
+//object GaussDriver extends App{
+//  chisel3.Driver.execute(args, () => new GaussianBlur(10, 10))
+
+//}

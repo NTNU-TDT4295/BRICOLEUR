@@ -1,6 +1,7 @@
 package accelerators.GaussianBlur
 
 import chisel3._
+import chisel3.core.{FixedPoint}
 import chisel3.iotesters.{ChiselFlatSpec, PeekPokeTester, TesterOptionsManager}
 
 //accelerators.GaussianBlur.Tester for the Gauss module, lots of moving parts, this could probably be more elegant
@@ -12,10 +13,10 @@ class GaussianBlurUnitTester(c: GaussianBlur) extends PeekPokeTester(c) {
   //Testdata to be fed into the pipe
 
   var testArray = Array.fill(c.myWidth * c.myHeight) {
-	0.U
+    FixedPoint.fromDouble(0, 16.W, 8.BP)
   }
   for (jj <- 0 until testArray.length) {
-	testArray(jj) = jj.U
+	testArray(jj) = FixedPoint.fromDouble(jj, 16.W, 8.BP)
   }
   //Array for the values that comes out of the pipe
   val resultArray = Array.fill((c.myWidth - 2) * (c.myHeight - 2)) {
@@ -56,15 +57,15 @@ class GaussianBlurUnitTester(c: GaussianBlur) extends PeekPokeTester(c) {
   }
 
   // Below is output formatting to get a nice overview of what is happening
-  var inputString = ""
+  var inputString  = ""
   var outputString = ""
-  val bp = 8
+  val bp           = 8
 
   for (ii <- 0 until testArray.length) {
 	if ((ii % c.myWidth) == 0) {
 	  inputString += "\n"
 	}
-	inputString += testArray(ii).toInt + "\t"
+    inputString += ( testArray(ii).toInt >> 8 ) + "\t"
 
   }
   println(inputString)
@@ -72,10 +73,11 @@ class GaussianBlurUnitTester(c: GaussianBlur) extends PeekPokeTester(c) {
 	if ((ii % (c.myWidth - 2)) == 0) {
 	  println("")
 	}
+    // print(s"${resultArray(ii)} ")
 	var intpart = resultArray(ii) >> bp
 	var floatpart = (resultArray(ii) & (1 << bp) - 1)
 	var test = floatpart.toFloat / (1 << bp).toFloat
-	print(s"${resultArray(ii)}${test.toString.substring(1)} ")
+	print(s"${intpart}${test.toString.substring(1)} ")
 
   }
   println(outputString)

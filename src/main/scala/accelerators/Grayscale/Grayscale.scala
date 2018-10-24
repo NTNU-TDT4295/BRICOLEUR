@@ -24,30 +24,33 @@ class Grayscale extends Module {
   val f1: FixedPoint = FixedPoint.fromDouble(0.59, 16.W, 8.BP)
   val f2: FixedPoint = FixedPoint.fromDouble(0.11, 16.W, 8.BP)
 
-  // Registers for the individual byte values coming in
-  val b0 = RegInit(FixedPoint(16.W, 8.BP), FixedPoint.fromDouble(0, 16.W, 8.BP))
-  val b1 = RegInit(FixedPoint(16.W, 8.BP), FixedPoint.fromDouble(0, 16.W, 8.BP))
-  val b2 = RegInit(FixedPoint(16.W, 8.BP), FixedPoint.fromDouble(0, 16.W, 8.BP))
+  val out = RegInit(FixedPoint(16.W, 8.BP), FixedPoint.fromDouble(0, 16.W, 8.BP))
 
+  val started =RegInit(Bool(), false.B)
   val counter = Counter(3)
 
   io.dataValid := false.B
-  io.dataOut := FixedPoint.fromDouble(0.0, 16.W, 8.BP)
+  io.dataOut := out
 
   when(io.loadingValues) {
 	when(counter.value === 0.U) {
-	  b0 := io.dataIn
+      out := io.dataIn * f0
+
+      when(started){
+        io.dataValid := true.B
+      }.otherwise{
+        started := true.B
+      }
+
 	}
 	when(counter.value === 1.U) {
-	  b1 := io.dataIn
+      out := out +  io.dataIn * f1
 	}
 	when(counter.value === 2.U) {
-	  b2 := io.dataIn
+      out := out +  io.dataIn * f2
 	}
   }
 
-  when(counter.inc()) {
-	io.dataOut := b0 * f0 + b1 * f1 + b2 * f2
-	io.dataValid := true.B
-  }
+  counter.inc()
+
 }
