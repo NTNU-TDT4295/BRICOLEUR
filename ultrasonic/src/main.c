@@ -156,7 +156,7 @@ int getPosition(Position *position, unsigned int distances[], unsigned int lengt
 
 			char buf1[50];
 			snprintf(buf1, 50, "x: %.2f ; y: %.2f ; ", positionEntry.x, positionEntry.y);
-			buildString(buf1, 50);
+			strcat(totalString, buf1);
 		}
 	}
 
