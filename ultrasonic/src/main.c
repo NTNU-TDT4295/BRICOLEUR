@@ -95,23 +95,7 @@ void getInput(unsigned int distances[], unsigned int length) {
 		// read input.
 		// distances[i] = 1;
 		distances[i] = getDistance(i);
-
-		// Send reading on UART
-
-		/*
-		char buf[20];
-		snprintf(buf, 20, "US %d: %3d inches; ", i, distances[i]);
-		sendString(USART1, buf);
-		*/
-
 	}
-	// End line of sensor readings
-	// sendString(USART1, "\n");
-
-	// Write integer distances from sensor 0 and 1 to LCD
-	// char dist_str[8];
-	// snprintf(dist_str, 8, "%3d %3d", (int)distances[0], (int)distances[1]);
-	// SegmentLCD_Write(dist_str);
 }
 
 
@@ -152,7 +136,6 @@ int getPosition(Position *position, unsigned int distances[], unsigned int lengt
 			float x2 = sensorOffset2D[j];
 
 			char buf2[50];
-			// snprintf(buf2, 50, "%.4f; %.4f", r1, r2);
 			snprintf(buf2, 50, "r1: %.2f ; r2: %.2f ; ", r1, r2);
 			strcat(totalString, buf2);
 
@@ -173,7 +156,7 @@ int getPosition(Position *position, unsigned int distances[], unsigned int lengt
 
 			char buf1[50];
 			snprintf(buf1, 50, "x: %.2f ; y: %.2f ; ", positionEntry.x, positionEntry.y);
-			// buildString(buf1, 50);
+			buildString(buf1, 50);
 		}
 	}
 
@@ -194,14 +177,6 @@ int getPosition(Position *position, unsigned int distances[], unsigned int lengt
 	position->y /= positionsLength;
 
 	return 0;
-
-//	char buf[50];
-//	snprintf(buf, 50, "x: %.2f y: %.2f l: %u ; ", position->x, position->y, positionsLength);
-//	buildString(buf, 50);
-
-//	char buf[30];
-//	snprintf(buf, 30, "x: %f y: %f\n; ", position->x, position->y);
-//	sendString(USART1, buf);
 
 	// Approach 2
 	// Find the 2 sensors that are closest to the object, and use the position
@@ -275,13 +250,6 @@ void getLine(Line *line, Position positions[], unsigned int length) {
     char buf[60];
     snprintf(buf, 50, "x_avg = %.2f y_avg = %.2f y = %.2fx + %.2f ; ", x_avg, y_avg, line->a, line->b);
     strcat(totalString, buf);
-
-    //char buf[30];
-    //snprintf(buf, 30, "y = %fx + %f\n; ", line->a, line->b);
-    //sendString(USART1, buf);
-
-    // End line of sensor readings
-    // sendString(USART1, "\n");
 }
 
 
