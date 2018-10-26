@@ -24,6 +24,111 @@ const float sensorOffset2D[] = {0, 5.7};
 
 unsigned int wallDistances[numberOfSensors];
 
+
+void setupUsart(void) {
+	CMU_ClockEnable(cmuClock_HFPER, true);
+	CMU_ClockEnable(cmuClock_USART1, true);
+	CMU_ClockEnable(cmuClock_GPIO, true);
+
+	USART_InitAsync_TypeDef initAsync = USART_INITASYNC_DEFAULT;
+	initAsync.baudrate = 9600;
+	USART_InitAsync(USART1, &initAsync);
+
+	/* The location used in these two variables should be the same */
+	int USART_LOCATION_MASK = USART_ROUTE_LOCATION_LOC1;
+	int USART_LOCATION = 1;
+
+	USART1->ROUTE = USART_ROUTE_RXPEN | USART_ROUTE_TXPEN | USART_LOCATION_MASK;
+	USART1->CTRL |= USART_CTRL_RXINV;
+
+	/* To avoid false start, configure TX pin as initial high */
+	GPIO_PinModeSet((GPIO_Port_TypeDef)AF_USART1_TX_PORT(USART_LOCATION),
+			AF_USART1_TX_PIN(USART_LOCATION), gpioModePushPull, 1);
+	GPIO_PinModeSet((GPIO_Port_TypeDef)AF_USART1_RX_PORT(USART_LOCATION),
+			AF_USART1_RX_PIN(USART_LOCATION), gpioModeInput, 0);
+}
+
+
+void setWallDistances(unsigned int wallDistances[]) {
+	// Increasing this value will increase our confidence that we are seeing
+	// the wall, but also require a longer setup time
+	const unsigned int distancePairCount = 3;
+	unsigned int distancePairs[distancePairCount][numberOfSensors];
+	bool moving = true;
+	unsigned int treshold = 0;
+	unsigned int attempts = 0;
+
+	// Run until we get <distancePairCount> number of measurements without movement
+	while (moving) {
+		moving = false;
+
+		for (unsigned int i = 0; i < distancePairCount; i++) {
+			getInput(distancePairs[i], numberOfSensors);
+			attempts++;
+
+			if (attempts > 10) {
+				treshold = 1;
+			}
+
+			if (i > 0) {
+				if (isMoving(distancePairs[i], distancePairs[i - 1], treshold)) {
+					memset(distancePairs, 0, sizeof(distancePairs)); // Clear array
+					moving = true;
+					continue;
+				}
+			}
+		}
+	}
+
+	memcpy(wallDistances, distancePairs[0], numberOfSensors * sizeof(float));
+}
+
+
+void getInput(unsigned int distances[], unsigned int length) {
+	// Note: At this point, it would be possible to merge getInput and getDistance.
+	// Arguments for merging: Simpler, shorter code, less function calls.
+	// Argument against: The current implementation gives a nice, logical split
+	// between getting input (sensor.c) and using input (main.c).
+
+	for (unsigned int i = 0; i < length; i++) {
+		// Get input somehow, i.e. go to sleep and wait for interrupt, then
+		// read input.
+		// distances[i] = 1;
+		distances[i] = getDistance(i);
+
+		// Send reading on UART
+
+		/*
+		char buf[20];
+		snprintf(buf, 20, "US %d: %3d inches; ", i, distances[i]);
+		sendString(USART1, buf);
+		*/
+
+	}
+	// End line of sensor readings
+	// sendString(USART1, "\n");
+
+	// Write integer distances from sensor 0 and 1 to LCD
+	// char dist_str[8];
+	// snprintf(dist_str, 8, "%3d %3d", (int)distances[0], (int)distances[1]);
+	// SegmentLCD_Write(dist_str);
+}
+
+
+bool isMoving(unsigned int distances[], unsigned int previousDistances[], unsigned int treshold) {
+	for (unsigned int i = 0; i < numberOfSensors; i++) {
+		// If the difference in the distance is less than the error margin, we
+		// can't guarantee that the distance is actually different and that the
+		// object is actually moving
+		if (abs((int)distances[i] - (int)previousDistances[i]) > treshold) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
 // return 0 if valid, 1 if not valid
 int getPosition2D(Position2D *position, unsigned int distances[], unsigned int length) {
 	// Approach 1
@@ -112,13 +217,24 @@ int getPosition2D(Position2D *position, unsigned int distances[], unsigned int l
 	// position->y = sqrtf(r1*r1 - position->x * position->x);
 }
 
-/*
-void getPosition3D(Position3D *position, float r1, float r2, float r3) {
-    position->x = (x2*x2 + r1*r1 - r2*r2) / (2 * x2);
-    position->y = (y3*y3 + r1*r1 - r3*r3) / (2 * y3);
-    position->z = sqrtf(r1*r1 - position->x * position->x - position->y * position->y);
+
+void sendString(USART_TypeDef *usart, char *string) {
+	/* Send a string on the given USART.
+	 * USART_Tx calls will stall if TX buffer is full,
+	 * which means that this function blocks until sending is completed.
+	 */
+	for (int i = 0; string[i] != '\0'; i++) {
+		USART_Tx(usart, string[i]);
+	}
 }
-*/
+
+
+// Detect if we what we see is a moving object (either fast or slow)
+bool isObject(unsigned int distances[]) {
+	// If what we see is not the wall, we assume it is a moving object
+	return isMoving(distances, wallDistances, 1);
+}
+
 
 void getLine(Line *line, Position2D positions[], unsigned int length) {
     // Algorithm: Ordinary linear least squares method
@@ -168,35 +284,6 @@ void getLine(Line *line, Position2D positions[], unsigned int length) {
     // sendString(USART1, "\n");
 }
 
-void getInput(unsigned int distances[], unsigned int length) {
-	// Note: At this point, it would be possible to merge getInput and getDistance.
-	// Arguments for merging: Simpler, shorter code, less function calls.
-	// Argument against: The current implementation gives a nice, logical split
-	// between getting input (sensor.c) and using input (main.c).
-
-	for (unsigned int i = 0; i < length; i++) {
-		// Get input somehow, i.e. go to sleep and wait for interrupt, then
-		// read input.
-		// distances[i] = 1;
-		distances[i] = getDistance(i);
-
-		// Send reading on UART
-
-		/*
-		char buf[20];
-		snprintf(buf, 20, "US %d: %3d inches; ", i, distances[i]);
-		sendString(USART1, buf);
-		*/
-
-	}
-	// End line of sensor readings
-	// sendString(USART1, "\n");
-
-	// Write integer distances from sensor 0 and 1 to LCD
-	// char dist_str[8];
-	// snprintf(dist_str, 8, "%3d %3d", (int)distances[0], (int)distances[1]);
-	// SegmentLCD_Write(dist_str);
-}
 
 bool willCollide2D(Line *line) {
 	// TODO: Handle division by zero
@@ -218,91 +305,15 @@ void panic() {
 	SegmentLCD_Write("Panic");
 }
 
-bool isMoving(unsigned int distances[], unsigned int previousDistances[], unsigned int treshold) {
-	for (unsigned int i = 0; i < numberOfSensors; i++) {
-		// If the difference in the distance is less than the error margin, we
-		// can't guarantee that the distance is actually different and that the
-		// object is actually moving
-		if (abs((int)distances[i] - (int)previousDistances[i]) > treshold) {
-			return true;
-		}
-	}
 
-	return false;
+/*
+void getPosition3D(Position3D *position, float r1, float r2, float r3) {
+    position->x = (x2*x2 + r1*r1 - r2*r2) / (2 * x2);
+    position->y = (y3*y3 + r1*r1 - r3*r3) / (2 * y3);
+    position->z = sqrtf(r1*r1 - position->x * position->x - position->y * position->y);
 }
+*/
 
-void sendString(USART_TypeDef *usart, char *string) {
-	/* Send a string on the given USART.
-	 * USART_Tx calls will stall if TX buffer is full,
-	 * which means that this function blocks until sending is completed.
-	 */
-	for (int i = 0; string[i] != '\0'; i++) {
-		USART_Tx(usart, string[i]);
-	}
-}
-
-void setupUsart(void) {
-	CMU_ClockEnable(cmuClock_HFPER, true);
-	CMU_ClockEnable(cmuClock_USART1, true);
-	CMU_ClockEnable(cmuClock_GPIO, true);
-
-	USART_InitAsync_TypeDef initAsync = USART_INITASYNC_DEFAULT;
-	initAsync.baudrate = 9600;
-	USART_InitAsync(USART1, &initAsync);
-
-	/* The location used in these two variables should be the same */
-	int USART_LOCATION_MASK = USART_ROUTE_LOCATION_LOC1;
-	int USART_LOCATION = 1;
-
-	USART1->ROUTE = USART_ROUTE_RXPEN | USART_ROUTE_TXPEN | USART_LOCATION_MASK;
-	USART1->CTRL |= USART_CTRL_RXINV;
-
-	/* To avoid false start, configure TX pin as initial high */
-	GPIO_PinModeSet((GPIO_Port_TypeDef)AF_USART1_TX_PORT(USART_LOCATION),
-			AF_USART1_TX_PIN(USART_LOCATION), gpioModePushPull, 1);
-	GPIO_PinModeSet((GPIO_Port_TypeDef)AF_USART1_RX_PORT(USART_LOCATION),
-			AF_USART1_RX_PIN(USART_LOCATION), gpioModeInput, 0);
-}
-
-void setWallDistances(unsigned int wallDistances[]) {
-	// Increasing this value will increase our confidence that we are seeing
-	// the wall, but also require a longer setup time
-	const unsigned int distancePairCount = 3;
-	unsigned int distancePairs[distancePairCount][numberOfSensors];
-	bool moving = true;
-	unsigned int treshold = 0;
-	unsigned int attempts = 0;
-
-	// Run until we get <distancePairCount> number of measurements without movement
-	while (moving) {
-		moving = false;
-
-		for (unsigned int i = 0; i < distancePairCount; i++) {
-			getInput(distancePairs[i], numberOfSensors);
-			attempts++;
-
-			if (attempts > 10) {
-				treshold = 1;
-			}
-
-			if (i > 0) {
-				if (isMoving(distancePairs[i], distancePairs[i - 1], treshold)) {
-					memset(distancePairs, 0, sizeof(distancePairs)); // Clear array
-					moving = true;
-					continue;
-				}
-			}
-		}
-	}
-
-	memcpy(wallDistances, distancePairs[0], numberOfSensors * sizeof(float));
-}
-
-// Detect if we what we see is a moving object (either fast or slow)
-bool isObject(unsigned int distances[]) {
-	// If what we see is not the wall, we assume it is a moving object
-	return isMoving(distances, wallDistances, 1);
-}
 
 int main() {
 	CHIP_Init();
