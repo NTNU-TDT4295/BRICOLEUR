@@ -130,7 +130,7 @@ bool isMoving(unsigned int distances[], unsigned int previousDistances[], unsign
 
 
 // return 0 if valid, 1 if not valid
-int getPosition2D(Position2D *position, unsigned int distances[], unsigned int length) {
+int getPosition(Position *position, unsigned int distances[], unsigned int length) {
 	// Approach 1
 	// For every pair of distances, calculate a position entry. Then compute
 	// the average position of the position entries.
@@ -138,12 +138,12 @@ int getPosition2D(Position2D *position, unsigned int distances[], unsigned int l
 	// The number of pairs of distances is equal to the number of different
 	// handshakes in a group of people, known as the handshake problem.
 	unsigned int positionsMaxLength = (length * (length - 1)) / 2;
-	Position2D positions[positionsMaxLength];
+	Position positions[positionsMaxLength];
 	unsigned int positionsLength = 0;
 
 	for (unsigned int i = 0; i < length - 1; i++) {
 		for (unsigned int j = i + 1; j < length; j++) {
-			Position2D positionEntry;
+			Position positionEntry;
 
 			float r1 = (float)distances[i];
 			float r2 = (float)distances[j];
@@ -236,7 +236,7 @@ bool isObject(unsigned int distances[]) {
 }
 
 
-void getLine(Line *line, Position2D positions[], unsigned int length) {
+void getLine(Line *line, Position positions[], unsigned int length) {
     // Algorithm: Ordinary linear least squares method
 
     float x_avg = 0;
@@ -306,15 +306,6 @@ void panic() {
 }
 
 
-/*
-void getPosition3D(Position3D *position, float r1, float r2, float r3) {
-    position->x = (x2*x2 + r1*r1 - r2*r2) / (2 * x2);
-    position->y = (y3*y3 + r1*r1 - r3*r3) / (2 * y3);
-    position->z = sqrtf(r1*r1 - position->x * position->x - position->y * position->y);
-}
-*/
-
-
 int main() {
 	CHIP_Init();
 	SegmentLCD_Init(false);
@@ -330,18 +321,18 @@ int main() {
 	buffer.maxLength = 2;
 	buffer.wrapped = false;
 
-	Position2D positions[buffer.maxLength];
+	Position positions[buffer.maxLength];
 
 	unsigned int distances[numberOfSensors];
 	unsigned int previousDistances[numberOfSensors];
 
-	Position2D position;
+	Position position;
 	Line line;
 
 	while (true) {
 		getInput(distances, numberOfSensors);
 
-		int status = getPosition2D(&position, distances, numberOfSensors);
+		int status = getPosition(&position, distances, numberOfSensors);
 
 		if (status != 0) {
 			strcat(totalString, "\n");
