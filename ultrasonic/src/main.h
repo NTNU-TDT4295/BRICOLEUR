@@ -44,7 +44,6 @@ void panic();
 bool isMoving(unsigned int distances[], unsigned int previousDistances[], unsigned int treshold);
 bool isObject(unsigned int distances[]);
 void setWallDistances(unsigned int wallDistances[]);
-void buildString(char *string, unsigned int length);
 void sendString(USART_TypeDef *usart, char *string);
 void setupUsart(void);
 

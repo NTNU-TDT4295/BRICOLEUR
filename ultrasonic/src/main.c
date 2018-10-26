@@ -15,7 +15,7 @@
 #include "sensor.h"
 
 unsigned int totalStringLength = 0;
-char totalString[200];
+char totalString[200] = {0};
 
 #define numberOfSensors 2
 
@@ -49,7 +49,7 @@ int getPosition2D(Position2D *position, unsigned int distances[], unsigned int l
 			char buf2[50];
 			// snprintf(buf2, 50, "%.4f; %.4f", r1, r2);
 			snprintf(buf2, 50, "r1: %.2f ; r2: %.2f ; ", r1, r2);
-			buildString(buf2, 50);
+			strcat(totalString, buf2);
 
 			// If the difference between the distance measured by each sensor
 			// is greater than the distance between the sensors
@@ -158,7 +158,7 @@ void getLine(Line *line, Position2D positions[], unsigned int length) {
 
     char buf[60];
     snprintf(buf, 50, "x_avg = %.2f y_avg = %.2f y = %.2fx + %.2f ; ", x_avg, y_avg, line->a, line->b);
-    buildString(buf, 50);
+    strcat(totalString, buf);
 
     //char buf[30];
     //snprintf(buf, 30, "y = %fx + %f\n; ", line->a, line->b);
@@ -208,7 +208,7 @@ bool willCollide2D(Line *line) {
 
 	char buf[20];
 	snprintf(buf, 20, "Will collide: %d", willCollide);
-	buildString(buf, 20);
+	strcat(totalString, buf);
 
 	return willCollide; // Check if object hits between sensor1 and sensor2
 }
@@ -229,16 +229,6 @@ bool isMoving(unsigned int distances[], unsigned int previousDistances[], unsign
 	}
 
 	return false;
-}
-
-void buildString(char *string, unsigned int length) {
-	int i;
-
-	for (i = 0; string[i] != '\0'; i++) {
-		totalString[totalStringLength + i] = string[i];
-	}
-
-	totalStringLength += i;
 }
 
 void sendString(USART_TypeDef *usart, char *string) {
@@ -343,7 +333,7 @@ int main() {
 		int status = getPosition2D(&position, distances, numberOfSensors);
 
 		if (status != 0) {
-			buildString("\n", 1);
+			strcat(totalString, "\n");
 			totalString[totalStringLength] = '\0';
 			sendString(USART1, totalString);
 			totalStringLength = 0;
@@ -389,7 +379,7 @@ int main() {
 		// Pseudocode: previousDistances = distances
 		memcpy(previousDistances, distances, numberOfSensors * sizeof(float));
 
-		buildString("\n", 1);
+		strcat(totalString, "\n");
 		totalString[totalStringLength] = '\0';
 		sendString(USART1, totalString);
 		totalStringLength = 0;
