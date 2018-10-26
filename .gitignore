@@ -5,3 +5,4 @@ scalastyle-test-config.xml
 test_run_dir
 project/target
 target
+data
