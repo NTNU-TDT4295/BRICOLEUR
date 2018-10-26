@@ -13,10 +13,14 @@ import chisel3.{UInt, _}
 class Grayscale extends Module {
 
   val io = IO(new Bundle {
-	val dataIn = Input(FixedPoint(16.W, 8.BP))
-	val loadingValues = Input(Bool())
-	val dataOut = Output(FixedPoint(16.W, 8.BP))
-	val dataValid = Output(Bool())
+    val dataIn = Input(FixedPoint(16.W, 8.BP))
+
+    // AXI signals
+    val tready = Input(Bool())
+    val tvalid = Output(Bool())
+    val tlast = Output(Bool())
+    val tdata = Output(FixedPoint(16.W, 8.BP))
+    val tkeep = Output(UInt(4.W))
   })
 
   // The three factors that R, G and B color channels should be multipled with, respectively
@@ -26,31 +30,35 @@ class Grayscale extends Module {
 
   val out = RegInit(FixedPoint(16.W, 8.BP), FixedPoint.fromDouble(0, 16.W, 8.BP))
 
-  val started =RegInit(Bool(), false.B)
+  val started = RegInit(Bool(), false.B)
   val counter = Counter(3)
 
-  io.dataValid := false.B
-  io.dataOut := out
+  io.tlast := false.B
+  io.tkeep := ~0.U
+  io.tvalid := false.B
+  io.tdata := out
 
-  when(io.loadingValues) {
-	when(counter.value === 0.U) {
-      out := io.dataIn * f0
+  when(counter.value === 0.U) {
+    out := io.dataIn * f0
 
-      when(started){
-        io.dataValid := true.B
-      }.otherwise{
-        started := true.B
-      }
+    when(started) {
+      io.tvalid := true.B
+    }.otherwise {
+      started := true.B
+    }
+  }
 
-	}
-	when(counter.value === 1.U) {
-      out := out +  io.dataIn * f1
-	}
-	when(counter.value === 2.U) {
-      out := out +  io.dataIn * f2
-	}
+  when(counter.value === 1.U) {
+    out := out + io.dataIn * f1
+  }
+
+  when(counter.value === 2.U) {
+    out := out + io.dataIn * f2
+  }
+
+  when(io.tready) {
+    io.tdata := out
   }
 
   counter.inc()
-
 }

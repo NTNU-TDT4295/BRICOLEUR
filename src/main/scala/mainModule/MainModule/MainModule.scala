@@ -1,13 +1,9 @@
 package mainModule.MainModule
 
-import chisel3._
-import chisel3.core.Input
-import chisel3.core.FixedPoint
-import chisel3.iotesters.{PeekPokeTester, TesterOptionsManager}
-import chisel3.util.Counter
-import accelerators.Grayscale.Grayscale
 import accelerators.GaussianBlur.GaussianBlur
-import accelerators.Dilation.Dilation
+import accelerators.Grayscale.Grayscale
+import chisel3._
+import chisel3.core.{FixedPoint, Input}
 
 /**
  * Main Module that wraps the pipeline containing the
@@ -39,14 +35,14 @@ class MainModule(dataWidth: Int, binarypoint: Int, width: Int, height: Int) exte
   // val dilate        = Module(new Dilation(10,10)).io
 
   grayscale.dataIn        := io.dataIn
-  grayscale.loadingValues := io.loadingValues
-  io.dataOutGray          := grayscale.dataOut
+  grayscale.tready        := true.B
+  io.dataOutGray          := grayscale.tdata
 
-  gaussblur.dataIn        := grayscale.dataOut
-  gaussblur.clock         := grayscale.dataValid
+  gaussblur.dataIn        := grayscale.tdata
+  gaussblur.clock         := grayscale.tvalid
   io.dataOutGauss          := gaussblur.dataOut
 
   io.gaussValid := gaussblur.valid
-  io.grayValid := grayscale.dataValid
+  io.grayValid := grayscale.tvalid
 
 }
