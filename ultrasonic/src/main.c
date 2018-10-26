@@ -14,8 +14,8 @@
 #include "main.h"
 #include "sensor.h"
 
-unsigned int totalStringLength = 0;
-char totalString[200] = {0};
+#define totalStringLength 200
+char totalString[totalStringLength] = {0};
 
 #define numberOfSensors 2
 
@@ -345,9 +345,8 @@ int main() {
 
 		if (status != 0) {
 			strcat(totalString, "\n");
-			totalString[totalStringLength] = '\0';
+			memset(totalString, 0, totalStringLength);
 			sendString(USART1, totalString);
-			totalStringLength = 0;
 			continue;
 		}
 
@@ -391,9 +390,8 @@ int main() {
 		memcpy(previousDistances, distances, numberOfSensors * sizeof(float));
 
 		strcat(totalString, "\n");
-		totalString[totalStringLength] = '\0';
+		memset(totalString, 0, totalStringLength);
 		sendString(USART1, totalString);
-		totalStringLength = 0;
 	}
 
 	return 0;
