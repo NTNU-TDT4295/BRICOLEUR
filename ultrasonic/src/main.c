@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
+#include <string.h>
 #include "em_device.h"
 #include "em_chip.h"
 #include "em_usart.h"
@@ -38,8 +40,8 @@ int getPosition2D(Position2D *position, unsigned int distances[], unsigned int l
 		for (unsigned int j = i + 1; j < length; j++) {
 			Position2D positionEntry;
 
-			float r1 = ((float)distances[i])*2.54;
-			float r2 = ((float)distances[j])*2.54;
+			float r1 = (float)distances[i];
+			float r2 = (float)distances[j];
 
 			float x1 = sensorOffset2D[i];
 			float x2 = sensorOffset2D[j];
@@ -216,12 +218,12 @@ void panic() {
 	SegmentLCD_Write("Panic");
 }
 
-bool isMoving(unsigned int distances[], unsigned int previousDistances[], float treshold) {
+bool isMoving(unsigned int distances[], unsigned int previousDistances[], unsigned int treshold) {
 	for (unsigned int i = 0; i < numberOfSensors; i++) {
 		// If the difference in the distance is less than the error margin, we
 		// can't guarantee that the distance is actually different and that the
 		// object is actually moving
-		if (fabsf((float)distances[i] - (float)previousDistances[i]) > treshold) {
+		if (abs((int)distances[i] - (int)previousDistances[i]) > treshold) {
 			return true;
 		}
 	}
@@ -278,7 +280,7 @@ void setWallDistances(unsigned int wallDistances[]) {
 	const unsigned int distancePairCount = 3;
 	unsigned int distancePairs[distancePairCount][numberOfSensors];
 	bool moving = true;
-	float treshold = 0.5;
+	unsigned int treshold = 0;
 	unsigned int attempts = 0;
 
 	// Run until we get <distancePairCount> number of measurements without movement
@@ -290,7 +292,7 @@ void setWallDistances(unsigned int wallDistances[]) {
 			attempts++;
 
 			if (attempts > 10) {
-				treshold = 1.5;
+				treshold = 1;
 			}
 
 			if (i > 0) {
@@ -309,7 +311,7 @@ void setWallDistances(unsigned int wallDistances[]) {
 // Detect if we what we see is a moving object (either fast or slow)
 bool isObject(unsigned int distances[]) {
 	// If what we see is not the wall, we assume it is a moving object
-	return isMoving(distances, wallDistances, 1.5);
+	return isMoving(distances, wallDistances, 1);
 }
 
 int main() {

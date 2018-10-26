@@ -41,7 +41,7 @@ void getLine(Line *line, Position2D positions[], unsigned int length);
 void getInput(unsigned int distances[], unsigned int length);
 bool willCollide2D(Line *line);
 void panic();
-bool isMoving(unsigned int distances[], unsigned int previousDistances[], float treshold);
+bool isMoving(unsigned int distances[], unsigned int previousDistances[], unsigned int treshold);
 bool isObject(unsigned int distances[]);
 void setWallDistances(unsigned int wallDistances[]);
 void buildString(char *string, unsigned int length);
