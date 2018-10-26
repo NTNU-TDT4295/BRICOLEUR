@@ -15,10 +15,12 @@
 unsigned int totalStringLength = 0;
 char totalString[200];
 
-const unsigned int numberOfSensors = 2;
+#define numberOfSensors 2
 
-// The x-coordinate offset from origo for each of the sensors
-const float sensorOffset2D[] = {0, 14.5};
+// The x-coordinate offset from origo for each of the sensors in inches
+const float sensorOffset2D[] = {0, 5.7};
+
+unsigned int wallDistances[numberOfSensors];
 
 // return 0 if valid, 1 if not valid
 int getPosition2D(Position2D *position, unsigned int distances[], unsigned int length) {
@@ -43,8 +45,8 @@ int getPosition2D(Position2D *position, unsigned int distances[], unsigned int l
 			float x2 = sensorOffset2D[j];
 
 			char buf2[50];
-			snprintf(buf2, 50, "%.4f; %.4f", r1, r2);
-			// snprintf(buf2, 50, "r1: %.2f ; r2: %.2f ; ", r1, r2);
+			// snprintf(buf2, 50, "%.4f; %.4f", r1, r2);
+			snprintf(buf2, 50, "r1: %.2f ; r2: %.2f ; ", r1, r2);
 			buildString(buf2, 50);
 
 			// If the difference between the distance measured by each sensor
@@ -154,7 +156,7 @@ void getLine(Line *line, Position2D positions[], unsigned int length) {
 
     char buf[60];
     snprintf(buf, 50, "x_avg = %.2f y_avg = %.2f y = %.2fx + %.2f ; ", x_avg, y_avg, line->a, line->b);
-    // buildString(buf, 50);
+    buildString(buf, 50);
 
     //char buf[30];
     //snprintf(buf, 30, "y = %fx + %f\n; ", line->a, line->b);
@@ -204,7 +206,7 @@ bool willCollide2D(Line *line) {
 
 	char buf[20];
 	snprintf(buf, 20, "Will collide: %d", willCollide);
-	// buildString(buf, 20);
+	buildString(buf, 20);
 
 	return willCollide; // Check if object hits between sensor1 and sensor2
 }
@@ -214,9 +216,17 @@ void panic() {
 	SegmentLCD_Write("Panic");
 }
 
-bool isMoving(Position2D positions[], unsigned int length) {
-	return ((positions[length - 1].x != positions[length - 2].x) ||
-			(positions[length - 1].y == positions[length - 2].y));
+bool isMoving(unsigned int distances[], unsigned int previousDistances[], float treshold) {
+	for (unsigned int i = 0; i < numberOfSensors; i++) {
+		// If the difference in the distance is less than the error margin, we
+		// can't guarantee that the distance is actually different and that the
+		// object is actually moving
+		if (fabsf((float)distances[i] - (float)previousDistances[i]) > treshold) {
+			return true;
+		}
+	}
+
+	return false;
 }
 
 void buildString(char *string, unsigned int length) {
@@ -262,11 +272,54 @@ void setupUsart(void) {
 			AF_USART1_RX_PIN(USART_LOCATION), gpioModeInput, 0);
 }
 
+void setWallDistances(unsigned int wallDistances[]) {
+	// Increasing this value will increase our confidence that we are seeing
+	// the wall, but also require a longer setup time
+	const unsigned int distancePairCount = 3;
+	unsigned int distancePairs[distancePairCount][numberOfSensors];
+	bool moving = true;
+	float treshold = 0.5;
+	unsigned int attempts = 0;
+
+	// Run until we get <distancePairCount> number of measurements without movement
+	while (moving) {
+		moving = false;
+
+		for (unsigned int i = 0; i < distancePairCount; i++) {
+			getInput(distancePairs[i], numberOfSensors);
+			attempts++;
+
+			if (attempts > 10) {
+				treshold = 1.5;
+			}
+
+			if (i > 0) {
+				if (isMoving(distancePairs[i], distancePairs[i - 1], treshold)) {
+					memset(distancePairs, 0, sizeof(distancePairs)); // Clear array
+					moving = true;
+					continue;
+				}
+			}
+		}
+	}
+
+	memcpy(wallDistances, distancePairs[0], numberOfSensors * sizeof(float));
+}
+
+// Detect if we what we see is a moving object (either fast or slow)
+bool isObject(unsigned int distances[]) {
+	// If what we see is not the wall, we assume it is a moving object
+	return isMoving(distances, wallDistances, 1.5);
+}
+
 int main() {
 	CHIP_Init();
 	SegmentLCD_Init(false);
 	setupSensor();
 	setupUsart();
+
+	// Calibrate to know where wall is
+	setWallDistances(wallDistances);
 
 	Buffer buffer;
 	buffer.tail = 0;
@@ -277,6 +330,7 @@ int main() {
 	Position2D positions[buffer.maxLength];
 
 	unsigned int distances[numberOfSensors];
+	unsigned int previousDistances[numberOfSensors];
 
 	Position2D position;
 	Line line;
@@ -287,6 +341,10 @@ int main() {
 		int status = getPosition2D(&position, distances, numberOfSensors);
 
 		if (status != 0) {
+			buildString("\n", 1);
+			totalString[totalStringLength] = '\0';
+			sendString(USART1, totalString);
+			totalStringLength = 0;
 			continue;
 		}
 
@@ -306,15 +364,28 @@ int main() {
 		// It doesn't make sense to make a line from one point (and we would
 		// get a division by zero)
 
-		if ((buffer.length > 1) && (isMoving(positions, buffer.length))) {
-			getLine(&line, positions, buffer.length);
+		if (isObject(distances)) {
+			// It doesn't make sense to make a line from one point (and we would
+			// get a division by zero)
+			if (buffer.length > 1) {
+				getLine(&line, positions, buffer.length);
 
-			if (willCollide2D(&line)) {
-				panic();
-			} else {
-				SegmentLCD_Write("Relax");
+				if (willCollide2D(&line)) {
+					panic();
+				} else {
+					SegmentLCD_Write("Relax");
+				}
 			}
+
+		} else {
+			// Flush buffer, only keep the last element
+			buffer.tail = 0;
+			buffer.length = 0;
+			buffer.wrapped = false;
 		}
+
+		// Pseudocode: previousDistances = distances
+		memcpy(previousDistances, distances, numberOfSensors * sizeof(float));
 
 		buildString("\n", 1);
 		totalString[totalStringLength] = '\0';
