@@ -18,18 +18,25 @@ class DummyDataGeneratorAXI extends Module {
   io.tvalid := true.B
   io.tlast := false.B
   io.tkeep := ~(0.U(4.W))
-  io.tdata := 0.U
 
   val data = RegInit(UInt(32.W), 0.U)
-  var counter = RegInit(UInt(8.W), 0.U)
-
+  var counter = RegInit(UInt(8.W), 1.U)
+ 
+  io.tdata := data
+  
+  //io.tdata := counter
   when(io.tready) {
     when(counter === 1.U) {
-      io.tdata := ~data
-      counter := 0.U
-    }.otherwise {
-      io.tdata := data
+      data := 10.U
       counter := counter + 1.U
+    }
+    when(counter === 2.U){
+      data := 20.U
+      counter := counter + 1.U
+    }
+    when(counter === 3.U){
+      data := 30.U
+      counter := 1.U
     }
   }
 }
