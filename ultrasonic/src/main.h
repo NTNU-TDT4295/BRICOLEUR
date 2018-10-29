@@ -38,6 +38,6 @@ bool isMoving(unsigned int distances[], unsigned int previousDistances[], unsign
 bool isObject(unsigned int distances[]);
 void setWallDistances(unsigned int wallDistances[]);
 void sendString(USART_TypeDef *usart, char *string);
-void setupUsart(void);
+void setupDebugUsart(void);
 
 #endif /* SRC_MAIN_H_ */

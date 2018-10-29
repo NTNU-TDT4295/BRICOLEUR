@@ -24,28 +24,28 @@ const float sensorOffset2D[] = {0, 5.7};
 
 unsigned int wallDistances[numberOfSensors];
 
-
-void setupUsart(void) {
+void setupDebugUsart(void) {
+	/* Set up USART1 for transmitting.
+	 * Used to output debug data.
+	 */
 	CMU_ClockEnable(cmuClock_HFPER, true);
 	CMU_ClockEnable(cmuClock_USART1, true);
 	CMU_ClockEnable(cmuClock_GPIO, true);
 
 	USART_InitAsync_TypeDef initAsync = USART_INITASYNC_DEFAULT;
-	initAsync.baudrate = 9600;
+	initAsync.baudrate = 115200;
+	initAsync.enable = usartEnableTx;
 	USART_InitAsync(USART1, &initAsync);
 
 	/* The location used in these two variables should be the same */
 	int USART_LOCATION_MASK = USART_ROUTE_LOCATION_LOC1;
 	int USART_LOCATION = 1;
 
-	USART1->ROUTE = USART_ROUTE_RXPEN | USART_ROUTE_TXPEN | USART_LOCATION_MASK;
-	USART1->CTRL |= USART_CTRL_RXINV;
+	USART1->ROUTE = USART_ROUTE_TXPEN | USART_LOCATION_MASK;
 
 	/* To avoid false start, configure TX pin as initial high */
 	GPIO_PinModeSet((GPIO_Port_TypeDef)AF_USART1_TX_PORT(USART_LOCATION),
 			AF_USART1_TX_PIN(USART_LOCATION), gpioModePushPull, 1);
-	GPIO_PinModeSet((GPIO_Port_TypeDef)AF_USART1_RX_PORT(USART_LOCATION),
-			AF_USART1_RX_PIN(USART_LOCATION), gpioModeInput, 0);
 }
 
 
@@ -278,7 +278,7 @@ int main() {
 	CHIP_Init();
 	SegmentLCD_Init(false);
 	setupSensor();
-	setupUsart();
+	setupDebugUsart();
 
 	// Calibrate to know where wall is
 	setWallDistances(wallDistances);
