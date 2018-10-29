@@ -304,8 +304,8 @@ int main() {
 
 		if (status != 0) {
 			strcat(totalString, "\n");
-			memset(totalString, 0, totalStringLength);
 			sendString(USART1, totalString);
+			memset(totalString, 0, totalStringLength);
 			continue;
 		}
 
@@ -349,8 +349,8 @@ int main() {
 		memcpy(previousDistances, distances, numberOfSensors * sizeof(float));
 
 		strcat(totalString, "\n");
-		memset(totalString, 0, totalStringLength);
 		sendString(USART1, totalString);
+		memset(totalString, 0, totalStringLength);
 	}
 
 	return 0;
