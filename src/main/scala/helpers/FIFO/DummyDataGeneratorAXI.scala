@@ -17,7 +17,7 @@ class DummyDataGeneratorAXI extends Module {
 
   io.tvalid := true.B
   io.tlast := false.B
-  io.tkeep := ~0.U
+  io.tkeep := ~(0.U(4.W))
   io.tdata := 0.U
 
   val data = RegInit(UInt(32.W), 0.U)

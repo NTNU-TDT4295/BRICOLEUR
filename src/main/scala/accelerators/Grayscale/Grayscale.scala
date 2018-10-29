@@ -34,7 +34,7 @@ class Grayscale extends Module {
   val counter = Counter(3)
 
   io.tlast := false.B
-  io.tkeep := ~0.U
+  io.tkeep := ~(0.U(4.W))
   io.tvalid := false.B
   io.tdata := out
 
