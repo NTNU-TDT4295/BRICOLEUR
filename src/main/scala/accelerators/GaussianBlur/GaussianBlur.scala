@@ -16,9 +16,7 @@ class GaussianBlur(width: Int, height: Int) extends Module {
   //  - Joakim
   val io = IO(new Bundle{
     val dataIn = Input(FixedPoint(16.W,8.BP))
-    //val dataOut = Output(UInt(16.W))
     val clock = Input(Bool())
-    //val valid = Output(Bool())
 
     // AXI signals
     val tdata = Output(UInt(16.W))

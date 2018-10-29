@@ -11,6 +11,7 @@ import chisel3.iotesters.{ChiselFlatSpec, PeekPokeTester, TesterOptionsManager}
 //  - Joakim
 class GaussianBlurUnitTester(c: GaussianBlur) extends PeekPokeTester(c) {
   //Testdata to be fed into the pipe
+  poke(c.io.tready, true.B)
 
   var testArray = Array.fill(c.myWidth * c.myHeight) {
     FixedPoint.fromDouble(0, 16.W, 8.BP)
