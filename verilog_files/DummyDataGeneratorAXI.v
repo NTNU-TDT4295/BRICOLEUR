@@ -24,7 +24,7 @@ module DummyDataGeneratorAXI( // @[:@3.2]
   assign io_tvalid = 1'h1; // @[DummyDataGeneratorAXI.scala 18:13:@8.4]
   assign io_tlast = 1'h0; // @[DummyDataGeneratorAXI.scala 19:12:@9.4]
   assign io_tdata = io_tready ? _GEN_0 : 32'h0; // @[DummyDataGeneratorAXI.scala 21:12:@12.4 DummyDataGeneratorAXI.scala 28:16:@19.8 DummyDataGeneratorAXI.scala 31:16:@23.8]
-  assign io_tkeep = 4'h1; // @[DummyDataGeneratorAXI.scala 20:12:@11.4]
+  assign io_tkeep = 4'hf; // @[DummyDataGeneratorAXI.scala 20:12:@11.4]
 `ifdef RANDOMIZE_GARBAGE_ASSIGN
 `define RANDOMIZE
 `endif

@@ -7,28 +7,28 @@ class DummyDataGeneratorAXIUnitTester(c: DummyDataGeneratorAXI) extends PeekPoke
   poke(c.io.tready, true)
 
   expect(c.io.tvalid, true)
-  expect(c.io.tkeep, 1) // 4 bit signal is high => (1111)_2 = (15)_10
+  expect(c.io.tkeep, 15) // 4 bit signal is high => (1111)_2 = (15)_10
   expect(c.io.tlast, false)
   expect(c.io.tdata, 0)
 
   step(1)
 
   expect(c.io.tvalid, true)
-  expect(c.io.tkeep, 1) // 4 bit signal is high => (1111)_2 = (15)_10
+  expect(c.io.tkeep, 15) // 4 bit signal is high => (1111)_2 = (15)_10
   expect(c.io.tlast, false)
   expect(c.io.tdata, 4294967295L)
 
   step(1)
 
   expect(c.io.tvalid, true)
-  expect(c.io.tkeep, 1) // 4 bit signal is high => (1111)_2 = (15)_10
+  expect(c.io.tkeep, 15) // 4 bit signal is high => (1111)_2 = (15)_10
   expect(c.io.tlast, false)
   expect(c.io.tdata, 0)
 
   step(1)
 
   expect(c.io.tvalid, true)
-  expect(c.io.tkeep, 1) // 4 bit signal is high => (1111)_2 = (15)_10
+  expect(c.io.tkeep, 15) // 4 bit signal is high => (1111)_2 = (15)_10
   expect(c.io.tlast, false)
   expect(c.io.tdata, 4294967295L)
 }
