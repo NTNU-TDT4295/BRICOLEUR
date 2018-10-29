@@ -1,7 +1,7 @@
 package accelerators.GaussianBlur
 
 import chisel3._
-import chisel3.core.{FixedPoint}
+import chisel3.core.FixedPoint
 import chisel3.iotesters.{ChiselFlatSpec, PeekPokeTester, TesterOptionsManager}
 
 //accelerators.GaussianBlur.Tester for the Gauss module, lots of moving parts, this could probably be more elegant
@@ -41,9 +41,9 @@ class GaussianBlurUnitTester(c: GaussianBlur) extends PeekPokeTester(c) {
 
 
 	if (resultIndex < resultArray.length) {
-	  dataValid = peek(c.io.valid).toInt
+	  dataValid = peek(c.io.tvalid).toInt
 	  if (dataValid == 1) {
-		resultArray(resultIndex) = peek(c.io.dataOut).toInt
+		resultArray(resultIndex) = peek(c.io.tdata).toInt
 
 		resultIndex += 1
 	  }
