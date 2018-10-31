@@ -4,6 +4,8 @@ import chisel3._
 import chisel3.core.{FixedPoint, Input}
 import chisel3.util.Counter
 import helpers.FIFO.FIFO
+import helpers.FIFO.FIFOAlt
+import scala.math
 
 class GaussianBlur(width: Int, height: Int) extends Module {
   // TODO:
@@ -163,6 +165,93 @@ class GaussianBlur(width: Int, height: Int) extends Module {
 
 }
 
+class GaussianBlurGeneral(width: Int, height: Int, n: Int, std: Double) extends Module {
+  val io = IO(new Bundle{
+    val dataIn = Input(FixedPoint(16.W, 8.BP))
+    val dataOut = Output(FixedPoint(16.W, 8.BP))
+    val valid = Output(Bool())
+    val writeEnable = Input(Bool())
+  })
+
+  io.valid := false.B
+
+  //Generate the kernel values
+  //println("GaussianBlurGeneral testing kernel")
+  var kernel = Array.fill(n*n){RegInit(FixedPoint(16.W, 8.BP), FixedPoint.fromDouble(0.0, 16.W, 8.BP))}
+  printf(p"Kernel: \n")
+  var kernelScalingValue = 0.0 
+  for(y <- 0 until n){
+    //val temp = Vec(n)
+    for(x <- 0 until n){
+      val kernelValue = math.exp(-(math.pow((n-1)/2 - x, 2) + math.pow((n-1)/2- y, 2))/(2*math.pow(std, 2)))/(2*math.Pi*math.pow(std, 2))
+      
+
+      kernel(y*n + x) := FixedPoint.fromDouble(kernelValue, 16.W, 8.BP)
+      kernelScalingValue += kernelValue
+
+      //print(kernelValue)
+      //print(" ")
+      printf(p"${(kernel(y*n + x).asUInt)} ")
+    }
+    printf(p"\n")
+    //println("")
+  }
+  val kernelScaling = RegInit(FixedPoint.fromDouble(1/kernelScalingValue, 16.W, 8.BP))
+  
+
+  val valueMatrix = Array.fill(n*n){RegInit(FixedPoint(16.W, 8.BP), FixedPoint.fromDouble(0.0, 16.W, 8.BP))}
+  for(y <- 0 until n){
+    for(x <- 1 until n){
+
+      when(io.writeEnable){
+        valueMatrix(y*n + x) := valueMatrix(y*n + x - 1)
+      }.otherwise{
+        valueMatrix(y*n + x) := valueMatrix(y*n + x)
+      }
+    }
+
+    if(y < n - 1){
+      val queue = Module(new FIFOAlt(width - n))
+
+      queue.io.pushing := io.writeEnable
+      queue.io.dataIn := valueMatrix(y*n + n - 1)
+      when(io.writeEnable){
+        valueMatrix(y*n + n) := queue.io.dataOut
+      }.otherwise{
+        valueMatrix(y*n + n) := valueMatrix(y*n + n)
+      }
+    }
+  }
+
+  when(io.writeEnable){
+    valueMatrix(0) := io.dataIn
+  }.otherwise{
+    valueMatrix(0) := valueMatrix(0)
+  }
+
+
+  //Logic to sum all the values
+  var addMatrix = Array.fill(2*n*n - 1){Wire(FixedPoint(16.W, 8.BP))}
+
+  //The first half of the array is for the nodes, with the child-nodes being
+  //2*o and 2*o + 1
+  for(o <- 0 until n*n - 1){
+    addMatrix(o) := addMatrix(2*o + 1) + addMatrix(2*o + 2)
+  }
+  //All the leaf-nodes are in the last half of the array, already connected to the other nodes
+  //add the values from the kernel and input-values
+  //printf(p"Iteration: \n")
+  for(o <- 0 until n*n){
+    addMatrix(o + n*n - 1) := kernel(o)*valueMatrix(o)
+
+    //printf(p"${kernel(o).asUInt}\n")
+    //printf(p"${valueMatrix(o).asUInt}\n")
+    //printf(p"${(valueMatrix(o).asUInt)*(kernel(o).asUInt)}\n")
+    //printf(p"${addMatrix(o + n*n - 1).asUInt}\n\n")
+  }
+
+  io.dataOut := addMatrix(0) * kernelScaling
+}
 
 //object GaussDriver extends App{
 //  chisel3.Driver.execute(args, () => new GaussianBlur(10, 10))

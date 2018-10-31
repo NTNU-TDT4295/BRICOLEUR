@@ -3,6 +3,8 @@ package accelerators.GaussianBlur
 import chisel3._
 import chisel3.core.FixedPoint
 import chisel3.iotesters.{ChiselFlatSpec, PeekPokeTester, TesterOptionsManager}
+import java.awt.image.BufferedImage
+import javax.imageio.ImageIO
 
 //accelerators.GaussianBlur.Tester for the Gauss module, lots of moving parts, this could probably be more elegant
 // TODO:
@@ -86,6 +88,43 @@ class GaussianBlurUnitTester(c: GaussianBlur) extends PeekPokeTester(c) {
 
 }
 
+class GaussGeneralTester(c: GaussianBlurGeneral) extends PeekPokeTester(c) {
+  for(i <- 0 until 50){
+    poke(c.io.dataIn, FixedPoint.fromDouble(10.0, 16.W, 8.BP))
+    poke(c.io.writeEnable, true.B)
+    
+    step(1)
+    print("GaussTester: ")
+    print(peek(c.io.dataOut))
+    print(" ")
+    print(peek(c.io.valid).toInt)
+    println("")
+  }
+}
+
+//Test that the gaussian blur element is working with an actual image
+/*
+class GaussianImageTester(c: GaussianBlur) extends PeekPoketester {
+  //Load the image
+  val image = ImageIO.read(new File("data/image.jpg"))
+  val height = image.getHeight
+  val width = image.getWidth
+  val chiselImage = new BuffredIMage(width, height, image.getType)
+  val testImage = new BuffredIMage(width, height, image.getType)
+
+  //Do the gaussian blur in scala
+  
+
+  //Do the gaussian blur with chisel
+
+
+  //Verify the results
+
+
+  //Save the images
+}
+*/
+
 // after copying the file, run sbt, then compile, then run the Tester
 class GaussianBlurTester extends ChiselFlatSpec {
   "GaussianBlur" should "correctly blur an image" in {
@@ -94,5 +133,11 @@ class GaussianBlurTester extends ChiselFlatSpec {
 	iotesters.Driver.execute(() => new GaussianBlur(10, 10), new TesterOptionsManager) {
 	  c => new GaussianBlurUnitTester(c)
 	}
+  }
+
+  "GaussianBlurGeneral" should "work" in {
+    iotesters.Driver.execute(() => new GaussianBlurGeneral(4, 240, 3, 0.84), new TesterOptionsManager) {
+      c => new GaussGeneralTester(c)
+    }
   }
 }
