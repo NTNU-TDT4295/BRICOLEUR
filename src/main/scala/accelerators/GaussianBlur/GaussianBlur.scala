@@ -178,7 +178,7 @@ class GaussianBlurGeneral(width: Int, height: Int, n: Int, std: Double) extends 
   //Generate the kernel values
   //println("GaussianBlurGeneral testing kernel")
   var kernel = Array.fill(n*n){RegInit(FixedPoint(16.W, 8.BP), FixedPoint.fromDouble(0.0, 16.W, 8.BP))}
-  printf(p"Kernel: \n")
+  //printf(p"Kernel: \n")
   var kernelScalingValue = 0.0 
   for(y <- 0 until n){
     //val temp = Vec(n)
@@ -191,9 +191,9 @@ class GaussianBlurGeneral(width: Int, height: Int, n: Int, std: Double) extends 
 
       //print(kernelValue)
       //print(" ")
-      printf(p"${(kernel(y*n + x).asUInt)} ")
+      //printf(p"${(kernel(y*n + x).asUInt)} ")
     }
-    printf(p"\n")
+    //printf(p"\n")
     //println("")
   }
   val kernelScaling = RegInit(FixedPoint.fromDouble(1/kernelScalingValue, 16.W, 8.BP))
@@ -250,7 +250,48 @@ class GaussianBlurGeneral(width: Int, height: Int, n: Int, std: Double) extends 
     //printf(p"${addMatrix(o + n*n - 1).asUInt}\n\n")
   }
 
-  io.dataOut := addMatrix(0) * kernelScaling
+  val yInCounter = Counter(height)
+  val xInCounter = Counter(width)
+  val yOutCounter = Counter(height)
+  val xOutCounter = Counter(width)
+
+
+  when(io.writeEnable){
+    when(xInCounter.inc()){
+      when(yInCounter.inc()){
+      }
+    }
+  }
+
+  val inPos = Wire(UInt())
+  inPos := yInCounter.value*width.asUInt + xInCounter.value
+  io.valid := false.B
+  when(inPos < ((n - 1)/2).U*(width.asUInt + 1.U)){
+    io.valid := true.B
+  }.elsewhen(inPos >= ((n - 1)/2).U*(width.asUInt + 1.U) && inPos <= (n - 1).U*(width.asUInt + 1.U)){
+    io.valid := false.B
+  }.elsewhen(inPos > (n - 1).U*(width.asUInt + 1.U)){
+
+    io.valid := true.B
+  }
+
+  when(io.valid && io.writeEnable){
+    when(xOutCounter.inc()){
+      when(yOutCounter.inc()){
+      }
+    }
+  }
+  
+  //Start and end, values is just passed through
+  when(yOutCounter.value < ((n - 1)/2).U || yOutCounter.value > (height - (n - 1)/2).U){
+    io.dataOut := io.dataIn
+  }.otherwise{
+    when(xOutCounter.value < ((n - 1)/2).U || xOutCounter.value > (width - (n - 1)/2).U){
+      io.dataOut := io.dataIn
+    }.otherwise{
+      io.dataOut := addMatrix(0) * kernelScaling
+    }
+  }
 }
 
 //object GaussDriver extends App{
