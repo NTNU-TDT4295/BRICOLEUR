@@ -18,10 +18,20 @@ class GaussianBlur(width: Int, height: Int) extends Module {
   //  - Joakim
   val io = IO(new Bundle{
     val dataIn = Input(FixedPoint(16.W,8.BP))
-    val dataOut = Output(FixedPoint(16.W,8.BP))
     val clock = Input(Bool())
-    val valid = Output(Bool())
+
+    // AXI signals
+    val tdata = Output(UInt(16.W))
+    val tvalid = Output(Bool())
+    val tready = Input(Bool())
+    val tlast = Output(Bool())
+    val tkeep = Output(UInt(4.W))
   })
+
+  io.tdata := 0.U
+  io.tlast := false.B
+  io.tkeep := ~0.U
+  io.tvalid := false.B
 
   //Screwy counter logic, idea is to wait until all queues are loaded, then skip a few cycles when at the edge of image by enabling and disabling io.valid
   // When all valid data has been computed, stop asserting the io.valid signal
@@ -59,9 +69,9 @@ class GaussianBlur(width: Int, height: Int) extends Module {
     when(endOfOutput.inc()){
       computationEnded := 1.U
     }
-    io.valid := true.B
+    io.tvalid := true.B
     }.otherwise{
-      io.valid := false.B
+      io.tvalid := false.B
     }
     // Save these values, is used in the tester
     val myWidth = width
@@ -139,17 +149,19 @@ class GaussianBlur(width: Int, height: Int) extends Module {
     kernel_1 := fifo2_1.io.dataOut*kernelC1
     kernel_0 := fifo1_0.io.dataOut*kernelC0
 
-    // The output function
-    io.dataOut := (
-      kernel_0 +
-      kernel_1 +
-      kernel_2 +
-      kernel_3 +
-      kernel_4 +
-      kernel_5 +
-      kernel_6 +
-      kernel_7 +
-      kernel_8 )
+    when (io.tready) {
+      // The output function
+      io.tdata := (
+        kernel_0 +
+          kernel_1 +
+          kernel_2 +
+          kernel_3 +
+          kernel_4 +
+          kernel_5 +
+          kernel_6 +
+          kernel_7 +
+          kernel_8 ).asUInt
+    }
 
 }
 

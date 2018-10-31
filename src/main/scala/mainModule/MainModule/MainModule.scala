@@ -25,7 +25,7 @@ class MainModule(dataWidth: Int, binarypoint: Int, width: Int, height: Int) exte
     // The below outputs are for debugging purposes.
     // Will add a dataIn and dataValid for the entire module later
     val dataOutGray   = Output(FixedPoint(16.W,8.BP))
-    val dataOutGauss  = Output(FixedPoint(16.W,8.BP))
+    val dataOutGauss  = Output(UInt(16.W))
     val gaussValid    = Output(Bool())
     val grayValid     = Output(Bool())
   })
@@ -39,10 +39,11 @@ class MainModule(dataWidth: Int, binarypoint: Int, width: Int, height: Int) exte
   io.dataOutGray          := grayscale.tdata
 
   gaussblur.dataIn        := grayscale.tdata
+  gaussblur.tready        := true.B
   gaussblur.clock         := grayscale.tvalid
-  io.dataOutGauss          := gaussblur.dataOut
+  io.dataOutGauss          := gaussblur.tdata
 
-  io.gaussValid := gaussblur.valid
+  io.gaussValid := gaussblur.tvalid
   io.grayValid := grayscale.tvalid
 
 }

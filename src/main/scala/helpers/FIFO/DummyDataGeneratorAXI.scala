@@ -1,6 +1,7 @@
 package helpers.FIFO
 
 import chisel3._
+import chisel3.experimental.FixedPoint
 
 /**
   * A dummy data generator that spits out an infinite series of 32 bits bytes oscillating between
@@ -11,25 +12,32 @@ class DummyDataGeneratorAXI extends Module {
     val tready = Input(Bool())
     val tvalid = Output(Bool())
     val tlast = Output(Bool())
-    val tdata = Output(UInt(32.W))
+    val tdata = Output(FixedPoint(16.W, 8.BP))
     val tkeep = Output(UInt(4.W))
   })
 
   io.tvalid := true.B
   io.tlast := false.B
-  io.tkeep := ~0.U
-  io.tdata := 0.U
+  io.tkeep := ~(0.U(4.W))
 
-  val data = RegInit(UInt(32.W), 0.U)
-  var counter = RegInit(UInt(8.W), 0.U)
-
+  val data = RegInit(FixedPoint(16.W, 8.BP), FixedPoint.fromDouble(0, 16.W, 8.BP))
+  var counter = RegInit(UInt(8.W), 1.U)
+ 
+  io.tdata := data
+  
+  //io.tdata := counter
   when(io.tready) {
     when(counter === 1.U) {
-      io.tdata := ~data
-      counter := 0.U
-    }.otherwise {
-      io.tdata := data
+      data :=  FixedPoint.fromDouble(10, 16.W, 8.BP)
       counter := counter + 1.U
+    }
+    when(counter === 2.U){
+      data :=  FixedPoint.fromDouble(20, 16.W, 8.BP)
+      counter := counter + 1.U
+    }
+    when(counter === 3.U){
+      data :=  FixedPoint.fromDouble(30, 16.W, 8.BP)
+      counter := 1.U
     }
   }
 }

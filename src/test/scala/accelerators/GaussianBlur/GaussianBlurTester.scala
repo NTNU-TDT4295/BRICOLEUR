@@ -1,7 +1,7 @@
 package accelerators.GaussianBlur
 
 import chisel3._
-import chisel3.core.{FixedPoint}
+import chisel3.core.FixedPoint
 import chisel3.iotesters.{ChiselFlatSpec, PeekPokeTester, TesterOptionsManager}
 import java.awt.image.BufferedImage
 import javax.imageio.ImageIO
@@ -13,6 +13,7 @@ import javax.imageio.ImageIO
 //  - Joakim
 class GaussianBlurUnitTester(c: GaussianBlur) extends PeekPokeTester(c) {
   //Testdata to be fed into the pipe
+  poke(c.io.tready, true.B)
 
   var testArray = Array.fill(c.myWidth * c.myHeight) {
     FixedPoint.fromDouble(0, 16.W, 8.BP)
@@ -43,9 +44,9 @@ class GaussianBlurUnitTester(c: GaussianBlur) extends PeekPokeTester(c) {
 
 
 	if (resultIndex < resultArray.length) {
-	  dataValid = peek(c.io.valid).toInt
+	  dataValid = peek(c.io.tvalid).toInt
 	  if (dataValid == 1) {
-		resultArray(resultIndex) = peek(c.io.dataOut).toInt
+		resultArray(resultIndex) = peek(c.io.tdata).toInt
 
 		resultIndex += 1
 	  }
