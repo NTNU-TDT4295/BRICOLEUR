@@ -4,8 +4,7 @@ import chisel3._
 import chisel3.experimental.FixedPoint
 
 /**
-  * A dummy data generator that spits out an infinite series of 32 bits bytes oscillating between
-  * 0 and pow(2,32).
+  * A dummy data generator that spits out an infinite series of 16 bits, alternating between the fixpoint rep of 10, 20 and 30
   */
 class DummyDataGeneratorAXI extends Module {
   val io = IO(new Bundle {
@@ -22,11 +21,11 @@ class DummyDataGeneratorAXI extends Module {
 
   val data = RegInit(FixedPoint(16.W, 8.BP), FixedPoint.fromDouble(0, 16.W, 8.BP))
   var counter = RegInit(UInt(8.W), 1.U)
- 
+  var isReady = RegInit(UInt(1.W), 0.U)
   io.tdata := data
   
   //io.tdata := counter
-  when(io.tready) {
+  when(isReady === 1.U) {
     when(counter === 1.U) {
       data :=  FixedPoint.fromDouble(10, 16.W, 8.BP)
       counter := counter + 1.U
@@ -39,6 +38,9 @@ class DummyDataGeneratorAXI extends Module {
       data :=  FixedPoint.fromDouble(30, 16.W, 8.BP)
       counter := 1.U
     }
+  }
+  when(io.tready){
+    isReady := 1.U
   }
 }
 

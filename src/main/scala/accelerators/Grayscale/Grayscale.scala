@@ -1,6 +1,6 @@
 package accelerators.Grayscale
 
-import chisel3.experimental.FixedPoint
+import chisel3.core.FixedPoint
 import chisel3.util.Counter
 import chisel3.{UInt, _}
 
@@ -31,16 +31,18 @@ class Grayscale extends Module {
   val out = RegInit(FixedPoint(16.W, 8.BP), FixedPoint.fromDouble(0, 16.W, 8.BP))
 
   val started = RegInit(Bool(), false.B)
-  val counter = Counter(3)
-
+  //val counter = Counter(3)
+  val counter = RegInit(UInt(4.W), 0.U)
   io.tlast := false.B
   io.tkeep := ~(0.U(4.W))
   io.tvalid := false.B
-  io.tdata := out
+  io.tdata := FixedPoint.fromDouble(0, 16.W, 8.BP)
+  val isReady = RegInit(UInt(1.W), 0.U)
 
-  when(counter.value === 0.U) {
+
+  when(counter === 0.U) {
     out := io.dataIn * f0
-
+    counter := counter +1.U
     when(started) {
       io.tvalid := true.B
     }.otherwise {
@@ -48,17 +50,22 @@ class Grayscale extends Module {
     }
   }
 
-  when(counter.value === 1.U) {
+  when(counter === 1.U) {
     out := out + io.dataIn * f1
+    counter := counter +1.U
   }
 
-  when(counter.value === 2.U) {
+  when(counter === 2.U) {
     out := out + io.dataIn * f2
+    counter := 0.U
   }
 
   when(io.tready) {
+    isReady := 1.U
+  }
+  when(isReady === 1.U){
     io.tdata := out
   }
-
-  counter.inc()
+  //counter.inc()
+  //counter := counter +1.U
 }

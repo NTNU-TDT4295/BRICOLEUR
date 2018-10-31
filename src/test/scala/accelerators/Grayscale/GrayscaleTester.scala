@@ -13,7 +13,7 @@ class GrayscaleOne(c: Grayscale) extends PeekPokeTester(c) {
   //poke(c.io.loadingValues, true.B)
   val array = Array(1, 2, 3)
   var steps = 0
-
+  poke(c.io.tready, true.B)
   for (i <- array) {
 
     println("cycle:" + steps.toString + "\t output: " + peek(c.io.tdata).toString() + "\tvalid: " + peek(c.io.tvalid).toString())
@@ -41,6 +41,7 @@ class GrayscaleImageTester(c: Grayscale) extends PeekPokeTester(c) {
   val chiselImage = new BufferedImage(width, height, image.getType())
   val testImage = new BufferedImage(width, height, image.getType())
 
+  poke(c.io.tready, true.B)
   /* Loop through the chisel component, and check that the value is the same as the calculated manually*/
   var error = 0;
   for (y <- 0 until height) {
@@ -89,6 +90,7 @@ class GrayscaleSeveral(c: Grayscale) extends PeekPokeTester(c) {
   val expected = Array(463, 719, 975, 1231)
   val cycles = Array(3, 6, 9, 12)
 
+  poke(c.io.tready, true.B)
   for (i <- array) {
     println("cycle:" + steps.toString + "\t output: " + peek(c.io.tdata).toString() + "\tvalid: " + peek(c.io.tvalid).toString())
 
