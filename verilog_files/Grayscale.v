@@ -12,62 +12,70 @@ module Grayscale( // @[:@3.2]
   reg [31:0] _RAND_0;
   reg  started; // @[Grayscale.scala 33:24:@9.4]
   reg [31:0] _RAND_1;
-  reg [1:0] value; // @[Counter.scala 26:33:@10.4]
+  reg [3:0] counter; // @[Grayscale.scala 35:24:@10.4]
   reg [31:0] _RAND_2;
-  wire  _T_28; // @[Grayscale.scala 41:22:@16.4]
-  wire [31:0] _T_29; // @[Grayscale.scala 42:22:@18.6]
-  wire  _GEN_1; // @[Grayscale.scala 44:19:@20.6]
-  wire [23:0] _GEN_9; // @[Grayscale.scala 41:31:@17.4]
-  wire [23:0] _GEN_10; // @[Grayscale.scala 41:31:@17.4]
-  wire [31:0] _GEN_2; // @[Grayscale.scala 41:31:@17.4]
-  wire  _GEN_4; // @[Grayscale.scala 41:31:@17.4]
-  wire  _T_33; // @[Grayscale.scala 51:22:@27.4]
-  wire [31:0] _T_34; // @[Grayscale.scala 52:28:@29.6]
-  wire [31:0] _GEN_13; // @[Grayscale.scala 52:16:@30.6]
-  wire [32:0] _T_35; // @[Grayscale.scala 52:16:@30.6]
-  wire [31:0] _T_36; // @[Grayscale.scala 52:16:@31.6]
-  wire [31:0] _T_37; // @[Grayscale.scala 52:16:@32.6]
-  wire [31:0] _GEN_5; // @[Grayscale.scala 51:31:@28.4]
-  wire  _T_39; // @[Grayscale.scala 55:22:@35.4]
-  wire [31:0] _T_40; // @[Grayscale.scala 56:28:@37.6]
-  wire [32:0] _T_41; // @[Grayscale.scala 56:16:@38.6]
-  wire [31:0] _T_42; // @[Grayscale.scala 56:16:@39.6]
-  wire [31:0] _T_43; // @[Grayscale.scala 56:16:@40.6]
-  wire [31:0] _GEN_6; // @[Grayscale.scala 55:31:@36.4]
-  wire [2:0] _T_47; // @[Counter.scala 35:22:@47.4]
-  wire [1:0] _T_48; // @[Counter.scala 35:22:@48.4]
-  wire [1:0] _GEN_8; // @[Counter.scala 37:21:@50.4]
-  wire [23:0] _GEN_17; // @[Grayscale.scala 42:9:@19.6 Grayscale.scala 52:9:@33.6 Grayscale.scala 56:9:@41.6]
-  wire [15:0] _GEN_18; // @[Grayscale.scala 42:9:@19.6 Grayscale.scala 52:9:@33.6 Grayscale.scala 56:9:@41.6]
-  assign _T_28 = value == 2'h0; // @[Grayscale.scala 41:22:@16.4]
-  assign _T_29 = $signed(io_dataIn) * $signed(16'sh4d); // @[Grayscale.scala 42:22:@18.6]
-  assign _GEN_1 = started ? started : 1'h1; // @[Grayscale.scala 44:19:@20.6]
-  assign _GEN_9 = {{8{out[15]}},out}; // @[Grayscale.scala 41:31:@17.4]
-  assign _GEN_10 = $signed(_GEN_9) << 8; // @[Grayscale.scala 41:31:@17.4]
-  assign _GEN_2 = _T_28 ? $signed(_T_29) : $signed({{8{_GEN_10[23]}},_GEN_10}); // @[Grayscale.scala 41:31:@17.4]
-  assign _GEN_4 = _T_28 ? _GEN_1 : started; // @[Grayscale.scala 41:31:@17.4]
-  assign _T_33 = value == 2'h1; // @[Grayscale.scala 51:22:@27.4]
-  assign _T_34 = $signed(io_dataIn) * $signed(16'sh97); // @[Grayscale.scala 52:28:@29.6]
-  assign _GEN_13 = {{8{_GEN_10[23]}},_GEN_10}; // @[Grayscale.scala 52:16:@30.6]
-  assign _T_35 = $signed(_GEN_13) + $signed(_T_34); // @[Grayscale.scala 52:16:@30.6]
-  assign _T_36 = _T_35[31:0]; // @[Grayscale.scala 52:16:@31.6]
-  assign _T_37 = $signed(_T_36); // @[Grayscale.scala 52:16:@32.6]
-  assign _GEN_5 = _T_33 ? $signed(_T_37) : $signed(_GEN_2); // @[Grayscale.scala 51:31:@28.4]
-  assign _T_39 = value == 2'h2; // @[Grayscale.scala 55:22:@35.4]
-  assign _T_40 = $signed(io_dataIn) * $signed(16'sh1c); // @[Grayscale.scala 56:28:@37.6]
-  assign _T_41 = $signed(_GEN_13) + $signed(_T_40); // @[Grayscale.scala 56:16:@38.6]
-  assign _T_42 = _T_41[31:0]; // @[Grayscale.scala 56:16:@39.6]
-  assign _T_43 = $signed(_T_42); // @[Grayscale.scala 56:16:@40.6]
-  assign _GEN_6 = _T_39 ? $signed(_T_43) : $signed(_GEN_5); // @[Grayscale.scala 55:31:@36.4]
-  assign _T_47 = value + 2'h1; // @[Counter.scala 35:22:@47.4]
-  assign _T_48 = _T_47[1:0]; // @[Counter.scala 35:22:@48.4]
-  assign _GEN_8 = _T_39 ? 2'h0 : _T_48; // @[Counter.scala 37:21:@50.4]
-  assign io_tvalid = _T_28 ? started : 1'h0; // @[Grayscale.scala 38:13:@14.4 Grayscale.scala 45:17:@21.8]
+  reg  isReady; // @[Grayscale.scala 40:24:@16.4]
+  reg [31:0] _RAND_3;
+  wire  _T_31; // @[Grayscale.scala 43:16:@17.4]
+  wire [31:0] _T_32; // @[Grayscale.scala 44:22:@19.6]
+  wire [4:0] _T_34; // @[Grayscale.scala 45:24:@21.6]
+  wire [3:0] _T_35; // @[Grayscale.scala 45:24:@22.6]
+  wire  _GEN_1; // @[Grayscale.scala 46:19:@24.6]
+  wire [23:0] _GEN_12; // @[Grayscale.scala 43:25:@18.4]
+  wire [23:0] _GEN_13; // @[Grayscale.scala 43:25:@18.4]
+  wire [31:0] _GEN_2; // @[Grayscale.scala 43:25:@18.4]
+  wire [3:0] _GEN_3; // @[Grayscale.scala 43:25:@18.4]
+  wire  _GEN_5; // @[Grayscale.scala 43:25:@18.4]
+  wire  _T_39; // @[Grayscale.scala 53:16:@31.4]
+  wire [31:0] _T_40; // @[Grayscale.scala 54:28:@33.6]
+  wire [31:0] _GEN_16; // @[Grayscale.scala 54:16:@34.6]
+  wire [32:0] _T_41; // @[Grayscale.scala 54:16:@34.6]
+  wire [31:0] _T_42; // @[Grayscale.scala 54:16:@35.6]
+  wire [31:0] _T_43; // @[Grayscale.scala 54:16:@36.6]
+  wire [31:0] _GEN_6; // @[Grayscale.scala 53:25:@32.4]
+  wire [3:0] _GEN_7; // @[Grayscale.scala 53:25:@32.4]
+  wire  _T_48; // @[Grayscale.scala 58:16:@42.4]
+  wire [31:0] _T_49; // @[Grayscale.scala 59:28:@44.6]
+  wire [32:0] _T_50; // @[Grayscale.scala 59:16:@45.6]
+  wire [31:0] _T_51; // @[Grayscale.scala 59:16:@46.6]
+  wire [31:0] _T_52; // @[Grayscale.scala 59:16:@47.6]
+  wire [31:0] _GEN_8; // @[Grayscale.scala 58:25:@43.4]
+  wire [3:0] _GEN_9; // @[Grayscale.scala 58:25:@43.4]
+  wire  _GEN_10; // @[Grayscale.scala 63:19:@51.4]
+  wire [23:0] _GEN_20; // @[Grayscale.scala 44:9:@20.6 Grayscale.scala 54:9:@37.6 Grayscale.scala 59:9:@48.6]
+  wire [15:0] _GEN_21; // @[Grayscale.scala 44:9:@20.6 Grayscale.scala 54:9:@37.6 Grayscale.scala 59:9:@48.6]
+  assign _T_31 = counter == 4'h0; // @[Grayscale.scala 43:16:@17.4]
+  assign _T_32 = $signed(io_dataIn) * $signed(16'sh4d); // @[Grayscale.scala 44:22:@19.6]
+  assign _T_34 = counter + 4'h1; // @[Grayscale.scala 45:24:@21.6]
+  assign _T_35 = _T_34[3:0]; // @[Grayscale.scala 45:24:@22.6]
+  assign _GEN_1 = started ? started : 1'h1; // @[Grayscale.scala 46:19:@24.6]
+  assign _GEN_12 = {{8{out[15]}},out}; // @[Grayscale.scala 43:25:@18.4]
+  assign _GEN_13 = $signed(_GEN_12) << 8; // @[Grayscale.scala 43:25:@18.4]
+  assign _GEN_2 = _T_31 ? $signed(_T_32) : $signed({{8{_GEN_13[23]}},_GEN_13}); // @[Grayscale.scala 43:25:@18.4]
+  assign _GEN_3 = _T_31 ? _T_35 : counter; // @[Grayscale.scala 43:25:@18.4]
+  assign _GEN_5 = _T_31 ? _GEN_1 : started; // @[Grayscale.scala 43:25:@18.4]
+  assign _T_39 = counter == 4'h1; // @[Grayscale.scala 53:16:@31.4]
+  assign _T_40 = $signed(io_dataIn) * $signed(16'sh97); // @[Grayscale.scala 54:28:@33.6]
+  assign _GEN_16 = {{8{_GEN_13[23]}},_GEN_13}; // @[Grayscale.scala 54:16:@34.6]
+  assign _T_41 = $signed(_GEN_16) + $signed(_T_40); // @[Grayscale.scala 54:16:@34.6]
+  assign _T_42 = _T_41[31:0]; // @[Grayscale.scala 54:16:@35.6]
+  assign _T_43 = $signed(_T_42); // @[Grayscale.scala 54:16:@36.6]
+  assign _GEN_6 = _T_39 ? $signed(_T_43) : $signed(_GEN_2); // @[Grayscale.scala 53:25:@32.4]
+  assign _GEN_7 = _T_39 ? _T_35 : _GEN_3; // @[Grayscale.scala 53:25:@32.4]
+  assign _T_48 = counter == 4'h2; // @[Grayscale.scala 58:16:@42.4]
+  assign _T_49 = $signed(io_dataIn) * $signed(16'sh1c); // @[Grayscale.scala 59:28:@44.6]
+  assign _T_50 = $signed(_GEN_16) + $signed(_T_49); // @[Grayscale.scala 59:16:@45.6]
+  assign _T_51 = _T_50[31:0]; // @[Grayscale.scala 59:16:@46.6]
+  assign _T_52 = $signed(_T_51); // @[Grayscale.scala 59:16:@47.6]
+  assign _GEN_8 = _T_48 ? $signed(_T_52) : $signed(_GEN_6); // @[Grayscale.scala 58:25:@43.4]
+  assign _GEN_9 = _T_48 ? 4'h0 : _GEN_7; // @[Grayscale.scala 58:25:@43.4]
+  assign _GEN_10 = io_tready ? 1'h1 : isReady; // @[Grayscale.scala 63:19:@51.4]
+  assign io_tvalid = _T_31 ? started : 1'h0; // @[Grayscale.scala 38:13:@14.4 Grayscale.scala 47:17:@25.8]
   assign io_tlast = 1'h0; // @[Grayscale.scala 36:12:@11.4]
-  assign io_tdata = out; // @[Grayscale.scala 39:12:@15.4 Grayscale.scala 60:14:@44.6]
+  assign io_tdata = isReady ? $signed(out) : $signed(16'sh0); // @[Grayscale.scala 39:12:@15.4 Grayscale.scala 67:14:@56.6]
   assign io_tkeep = 4'hf; // @[Grayscale.scala 37:12:@13.4]
-  assign _GEN_17 = _GEN_6[31:8]; // @[Grayscale.scala 42:9:@19.6 Grayscale.scala 52:9:@33.6 Grayscale.scala 56:9:@41.6]
-  assign _GEN_18 = _GEN_17[15:0]; // @[Grayscale.scala 42:9:@19.6 Grayscale.scala 52:9:@33.6 Grayscale.scala 56:9:@41.6]
+  assign _GEN_20 = _GEN_8[31:8]; // @[Grayscale.scala 44:9:@20.6 Grayscale.scala 54:9:@37.6 Grayscale.scala 59:9:@48.6]
+  assign _GEN_21 = _GEN_20[15:0]; // @[Grayscale.scala 44:9:@20.6 Grayscale.scala 54:9:@37.6 Grayscale.scala 59:9:@48.6]
 `ifdef RANDOMIZE_GARBAGE_ASSIGN
 `define RANDOMIZE
 `endif
@@ -106,7 +114,11 @@ module Grayscale( // @[:@3.2]
   `endif // RANDOMIZE_REG_INIT
   `ifdef RANDOMIZE_REG_INIT
   _RAND_2 = {1{`RANDOM}};
-  value = _RAND_2[1:0];
+  counter = _RAND_2[3:0];
+  `endif // RANDOMIZE_REG_INIT
+  `ifdef RANDOMIZE_REG_INIT
+  _RAND_3 = {1{`RANDOM}};
+  isReady = _RAND_3[0:0];
   `endif // RANDOMIZE_REG_INIT
   end
 `endif // RANDOMIZE
@@ -114,24 +126,37 @@ module Grayscale( // @[:@3.2]
     if (reset) begin
       out <= 16'sh0;
     end else begin
-      out <= $signed(_GEN_18);
+      out <= $signed(_GEN_21);
     end
     if (reset) begin
       started <= 1'h0;
     end else begin
-      if (_T_28) begin
+      if (_T_31) begin
         if (!(started)) begin
           started <= 1'h1;
         end
       end
     end
     if (reset) begin
-      value <= 2'h0;
+      counter <= 4'h0;
     end else begin
-      if (_T_39) begin
-        value <= 2'h0;
+      if (_T_48) begin
+        counter <= 4'h0;
       end else begin
-        value <= _T_48;
+        if (_T_39) begin
+          counter <= _T_35;
+        end else begin
+          if (_T_31) begin
+            counter <= _T_35;
+          end
+        end
+      end
+    end
+    if (reset) begin
+      isReady <= 1'h0;
+    end else begin
+      if (io_tready) begin
+        isReady <= 1'h1;
       end
     end
   end
