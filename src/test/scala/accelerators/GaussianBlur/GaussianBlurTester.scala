@@ -1,7 +1,7 @@
 package accelerators.GaussianBlur
 
 import chisel3._
-import chisel3.core.FixedPoint
+import chisel3.core.{FixedPoint}
 import chisel3.iotesters.{ChiselFlatSpec, PeekPokeTester, TesterOptionsManager}
 import java.awt.image.BufferedImage
 import javax.imageio.ImageIO
@@ -11,9 +11,9 @@ import javax.imageio.ImageIO
 // rewrite for use with sbt test
 // expect some nice shit
 //  - Joakim
+/*
 class GaussianBlurUnitTester(c: GaussianBlur) extends PeekPokeTester(c) {
   //Testdata to be fed into the pipe
-  poke(c.io.tready, true.B)
 
   var testArray = Array.fill(c.myWidth * c.myHeight) {
     FixedPoint.fromDouble(0, 16.W, 8.BP)
@@ -44,9 +44,9 @@ class GaussianBlurUnitTester(c: GaussianBlur) extends PeekPokeTester(c) {
 
 
 	if (resultIndex < resultArray.length) {
-	  dataValid = peek(c.io.tvalid).toInt
+	  dataValid = peek(c.io.valid).toInt
 	  if (dataValid == 1) {
-		resultArray(resultIndex) = peek(c.io.tdata).toInt
+		resultArray(resultIndex) = peek(c.io.dataOut).toInt
 
 		resultIndex += 1
 	  }
@@ -87,20 +87,27 @@ class GaussianBlurUnitTester(c: GaussianBlur) extends PeekPokeTester(c) {
 
 
 }
+*/
 
 class GaussGeneralTester(c: GaussianBlurGeneral) extends PeekPokeTester(c) {
-  for(i <- 0 until 50){
+  var validCounter = 0
+  for(i <- 0 until 200){
     poke(c.io.dataIn, FixedPoint.fromDouble(10.0, 16.W, 8.BP))
     poke(c.io.writeEnable, true.B)
     
     step(1)
-    print("GaussTester: ")
+    println("")
     print(peek(c.io.dataOut))
     print(" ")
-    print(peek(c.io.valid).toInt)
-    println("")
+    val valid = peek(c.io.valid).toInt
+    
+    validCounter += valid
+    
   }
+  print("Valid Counter: ")
+  print(validCounter)
 }
+
 
 //Test that the gaussian blur element is working with an actual image
 /*
@@ -127,16 +134,17 @@ class GaussianImageTester(c: GaussianBlur) extends PeekPoketester {
 
 // after copying the file, run sbt, then compile, then run the Tester
 class GaussianBlurTester extends ChiselFlatSpec {
+  /*
   "GaussianBlur" should "correctly blur an image" in {
 	//chisel3.Driver.execute(args, () => new GaussianBlur(320, 240))
 	// The arguments for GaussianBlur determines the dimensions of the data to be put in, aka the image size
 	iotesters.Driver.execute(() => new GaussianBlur(10, 10), new TesterOptionsManager) {
 	  c => new GaussianBlurUnitTester(c)
 	}
-  }
+  }*/
 
   "GaussianBlurGeneral" should "work" in {
-    iotesters.Driver.execute(() => new GaussianBlurGeneral(4, 240, 3, 0.84), new TesterOptionsManager) {
+    iotesters.Driver.execute(() => new GaussianBlurGeneral(30, 240, 5, 0.84), new TesterOptionsManager) {
       c => new GaussGeneralTester(c)
     }
   }
