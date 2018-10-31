@@ -115,11 +115,12 @@ class GrayscaleTester extends ChiselFlatSpec {
       c => new GrayscaleOne(c)
     } should be(true)
   }
-  "Grayscale" should "correctly grayscale any image" in {
+  /*"Grayscale" should "correctly grayscale any image" in {
     iotesters.Driver.execute(() => new Grayscale(), new TesterOptionsManager) {
       c => new GrayscaleImageTester(c)
     } should be(true)
   }
+  */
   "Grayscale" should "correctly average four RGB values" in {
     iotesters.Driver.execute(() => new Grayscale(), new TesterOptionsManager) {
       c => new GrayscaleSeveral(c)
