@@ -22,7 +22,7 @@ class Grayscale extends Module {
     val tkeep = Output(UInt(4.W))
 
     val tvalidIn = Input(Bool())
-    val treadyOut = Input(Bool())
+    val treadyOut = Output(Bool())
   })
 
   // Assert tready out only once
