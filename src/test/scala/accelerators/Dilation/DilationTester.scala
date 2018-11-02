@@ -2,6 +2,7 @@ package accelerators.Dilation
 
 import chisel3._
 import chisel3.iotesters.{ChiselFlatSpec, PeekPokeTester, TesterOptionsManager}
+import chisel3.core.{FixedPoint}
 
 /**
   * Test the dilation module
@@ -11,11 +12,11 @@ import chisel3.iotesters.{ChiselFlatSpec, PeekPokeTester, TesterOptionsManager}
 class DilationUnitTester(c: Dilation) extends PeekPokeTester(c) {
   //Testdata to be fed into the pipe
 
-  var testArray: Array[UInt] = Array.fill(c.myWidth * c.myHeight) {
-    0.U
+  var testArray = Array.fill(c.myWidth * c.myHeight) {
+    FixedPoint.fromDouble(0, 32.W, 16.BP)
   }
   for (jj <- testArray.indices) {
-    testArray(jj) = jj.U
+	testArray(jj) = FixedPoint.fromDouble(127, 32.W, 16.BP)
   }
   //Array for the values that comes out of the pipe
   val resultArray: Array[Int] = Array.fill((c.myWidth - 2) * (c.myHeight - 2)) {
@@ -26,9 +27,17 @@ class DilationUnitTester(c: Dilation) extends PeekPokeTester(c) {
   var ii = 0
   var isNotDone = true
   var steps = 0
-  var max_steps = 10000
+
+  // FIXME:
+  // finn på noe smart
+  // med denne variablene
+  // max_steps
+  // - Joakim
+  var max_steps = 80000
   var dataValid = 0
+  poke(c.io.tvalidIn, true.B)
   poke(c.io.tready, true.B)
+  step(1)
   while (isNotDone) { // Do some testing
     if (ii < testArray.length) {
       poke(c.io.dataIn, testArray(ii))
@@ -58,13 +67,13 @@ class DilationUnitTester(c: Dilation) extends PeekPokeTester(c) {
   // Below is output formatting to get a nice overview of what is happening
   var inputString = ""
   var outputString = ""
-  val bp = 8
+  val bp = 16
 
   for (ii <- testArray.indices) {
     if ((ii % c.myWidth) == 0) {
       inputString += "\n"
     }
-    inputString += testArray(ii).toInt + "\t"
+    inputString += ( testArray(ii).toInt >> bp ) + "\t"
 
   }
   println(inputString)
@@ -75,7 +84,7 @@ class DilationUnitTester(c: Dilation) extends PeekPokeTester(c) {
     var intpart = resultArray(ii) >> bp
     val floatpart = resultArray(ii) & (1 << bp) - 1
     val test = floatpart.toFloat / (1 << bp).toFloat
-    print(s"${resultArray(ii)}${test.toString.substring(1)} ")
+    print(s"${intpart}${test.toString.substring(1)} ")
 
   }
 
