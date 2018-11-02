@@ -112,7 +112,7 @@ class MainModuleUnitTester(c: MainModule, width: Int, height: Int) extends PeekP
 
   // for (i <- array) {
   for( i <- 0 until 99 ){
-    println("cycle:"+ steps.toString+ "\t outputgrey: " + peek(c.io.dataOutGray).toString + "\tvalidgray: " + peek(c.io.grayValid).toString +" outputgauss: " + peek(c.io.dataOutGauss).toString() + "\tvalidgauss: " + peek(c.io.gaussValid).toString() )
+    // println("cycle:"+ steps.toString+ "\t outputgrey: " + peek(c.io.dataOutGray).toString + "\tvalidgray: " + peek(c.io.grayValid).toString +" outputgauss: " + peek(c.io.dataOutGauss).toString() + "\tvalidgauss: " + peek(c.io.gaussValid).toString() )
 
     if(i < array.length){
       poke(c.io.dataIn, FixedPoint.fromDouble(array(i), 16.W, 8.BP))
@@ -124,7 +124,7 @@ class MainModuleUnitTester(c: MainModule, width: Int, height: Int) extends PeekP
     steps += 1
   }
 
-    println("cycle:"+ steps.toString+ "\t outputgrey: " + peek(c.io.dataOutGray).toString + "\tvalidgray: " + peek(c.io.grayValid).toString +" outputgauss: " + peek(c.io.dataOutGauss).toString() + "\tvalidgauss: " + peek(c.io.gaussValid).toString() )
+    // println("cycle:"+ steps.toString+ "\t outputgrey: " + peek(c.io.dataOutGray).toString + "\tvalidgray: " + peek(c.io.grayValid).toString +" outputgauss: " + peek(c.io.dataOutGauss).toString() + "\tvalidgauss: " + peek(c.io.gaussValid).toString() )
 
   expect(c.io.gaussValid, 1)
 
