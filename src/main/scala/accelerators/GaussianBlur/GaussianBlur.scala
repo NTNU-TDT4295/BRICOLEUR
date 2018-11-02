@@ -17,15 +17,16 @@ class GaussianBlur(width: Int, height: Int) extends Module {
   // as parameters
   //  - Joakim
   val io = IO(new Bundle{
-    val dataIn = Input(FixedPoint(16.W,8.BP))
-    val clock  = Input(Bool())
+    val dataIn   = Input(FixedPoint(32.W,16.BP))
 
     // AXI signals
-    val tdata  = Output(UInt(16.W))
-    val tvalid = Output(Bool())
-    val tready = Input(Bool())
-    val tlast  = Output(Bool())
-    val tkeep  = Output(UInt(4.W))
+    val tready    = Input(Bool())
+    val tvalidIn  = Input(Bool())
+    val treadyOut = Input(Bool())
+    val tvalid    = Output(Bool())
+    val tlast     = Output(Bool())
+    val tdata     = Output(UInt(32.W))
+    val tkeep     = Output(UInt(4.W))
   })
 
   io.tdata := 0.U
@@ -33,7 +34,8 @@ class GaussianBlur(width: Int, height: Int) extends Module {
   io.tkeep := ~0.U
   io.tvalid := false.B
 
-  //Screwy counter logic, idea is to wait until all queues are loaded, then skip a few cycles when at the edge of image by enabling and disabling io.valid
+  // Screwy counter logic, idea is to wait until all queues are loaded,
+  // then skip a few cycles when at the edge of image by enabling and disabling io.valid
   // When all valid data has been computed, stop asserting the io.valid signal
 
   // TODO:
@@ -44,15 +46,16 @@ class GaussianBlur(width: Int, height: Int) extends Module {
   val counterStart = Counter(1+1+1+1+width-3+1+1+width-3+1+1)
   val counterEdge = Counter(2)
   val endOfOutput = Counter((width-2)*(height-2))
-  val counterProcess = Counter(8)
+  val counterProcess = Counter(width-2)
   val computationStarted = RegInit(UInt(1.W), 0.U)
   val processWrapped = RegInit(UInt(1.W), 0.U)
   val computationEnded = RegInit(UInt(1.W), 0.U)
+  val isReady = RegInit(UInt(1.W), 0.U)
 
   val myWidth = width
   val myHeight = height
 
-  when (io.clock) {
+  when (isReady === 1.U && io.tvalidIn) {
     when(counterStart.inc()){
       computationStarted := 1.U
     }
@@ -74,20 +77,18 @@ class GaussianBlur(width: Int, height: Int) extends Module {
         computationEnded := 1.U
       }
       io.tvalid := true.B
-      }.otherwise{
-        io.tvalid := false.B
-      }
-      // Save these values, is used in the tester
+    }.otherwise{
+      io.tvalid := false.B
+    }
 
 
-      // K[0][0] K[1][0] K[2][0]  kernel element 0, 1, 2
+      // K[0][0] K[1][0] K[2][0] kernel element 0, 1, 2
       // K[0][1] K[1][1] K[2][1] kernel element 3, 4, 5
       // K[0][2] K[1][2] K[2][2] kernel element 6, 7, 8
 
-
       //See paper for explanation
       //Idea is deep pipelines
-      //
+
       //These are not much FIFOS as delay_Ns
       val fifo1_0 = Module(new FIFO(1))
       val fifo2_1 = Module(new FIFO(1))
@@ -111,33 +112,31 @@ class GaussianBlur(width: Int, height: Int) extends Module {
 
 
       // Store the computed kernel snippets in theese registers
-      val kernel_0 = RegInit(FixedPoint(16.W,8.BP), FixedPoint.fromDouble(0.0,16.W,8.BP))
-      val kernel_1 = RegInit(FixedPoint(16.W,8.BP), FixedPoint.fromDouble(0.0,16.W,8.BP))
-      val kernel_2 = RegInit(FixedPoint(16.W,8.BP), FixedPoint.fromDouble(0.0,16.W,8.BP))
-      val kernel_3 = RegInit(FixedPoint(16.W,8.BP), FixedPoint.fromDouble(0.0,16.W,8.BP))
-      val kernel_4 = RegInit(FixedPoint(16.W,8.BP), FixedPoint.fromDouble(0.0,16.W,8.BP))
-      val kernel_5 = RegInit(FixedPoint(16.W,8.BP), FixedPoint.fromDouble(0.0,16.W,8.BP))
-      val kernel_6 = RegInit(FixedPoint(16.W,8.BP), FixedPoint.fromDouble(0.0,16.W,8.BP))
-      val kernel_7 = RegInit(FixedPoint(16.W,8.BP), FixedPoint.fromDouble(0.0,16.W,8.BP))
-      val kernel_8 = RegInit(FixedPoint(16.W,8.BP), FixedPoint.fromDouble(0.0,16.W,8.BP))
-
-
+      val kernel_0 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
+      val kernel_1 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
+      val kernel_2 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
+      val kernel_3 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
+      val kernel_4 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
+      val kernel_5 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
+      val kernel_6 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
+      val kernel_7 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
+      val kernel_8 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
 
       //Kernel constants, in this case set to an identity matrix
-      val kernelC0 = FixedPoint.fromDouble(0.077847,16.W,8.BP)
-      val kernelC1 = FixedPoint.fromDouble(0.123317,16.W,8.BP)
-      val kernelC2 = FixedPoint.fromDouble(0.077847,16.W,8.BP)
-      val kernelC3 = FixedPoint.fromDouble(0.123317,16.W,8.BP)
-      val kernelC4 = FixedPoint.fromDouble(0.195346,16.W,8.BP)
-      val kernelC5 = FixedPoint.fromDouble(0.123317,16.W,8.BP)
-      val kernelC6 = FixedPoint.fromDouble(0.077847,16.W,8.BP)
-      val kernelC7 = FixedPoint.fromDouble(0.123317,16.W,8.BP)
-      val kernelC8 = FixedPoint.fromDouble(0.077847,16.W,8.BP)
+      val kernelC0 = FixedPoint.fromDouble(0.077847,32.W,16.BP)
+      val kernelC1 = FixedPoint.fromDouble(0.123317,32.W,16.BP)
+      val kernelC2 = FixedPoint.fromDouble(0.077847,32.W,16.BP)
+      val kernelC3 = FixedPoint.fromDouble(0.123317,32.W,16.BP)
+      val kernelC4 = FixedPoint.fromDouble(0.195346,32.W,16.BP)
+      val kernelC5 = FixedPoint.fromDouble(0.123317,32.W,16.BP)
+      val kernelC6 = FixedPoint.fromDouble(0.077847,32.W,16.BP)
+      val kernelC7 = FixedPoint.fromDouble(0.123317,32.W,16.BP)
+      val kernelC8 = FixedPoint.fromDouble(0.077847,32.W,16.BP)
 
-      // Guss 3x3 kernel with standard deviation = 1
-      //0.077847	0.123317	0.077847
-      //0.123317	0.195346	0.123317
-      //0.077847	0.123317	0.077847
+      // Gauss 3x3 kernel with standard deviation = 1
+      // 0.077847	0.123317	0.077847
+      // 0.123317	0.195346	0.123317
+      // 0.077847	0.123317	0.077847
       //
 
       // Computing the value of each kernel corner
@@ -164,12 +163,15 @@ class GaussianBlur(width: Int, height: Int) extends Module {
         kernel_8 ).asUInt
   }
 
+  when(io.tready) {
+    isReady := 1.U
+  }
 }
 
 class GaussianBlurGeneral(width: Int, height: Int, n: Int, std: Double) extends Module {
   val io = IO(new Bundle{
-    val dataIn = Input(FixedPoint(16.W, 8.BP))
-    val dataOut = Output(FixedPoint(16.W, 8.BP))
+    val dataIn = Input(FixedPoint(32.W, 16.BP))
+    val dataOut = Output(FixedPoint(32.W, 16.BP))
     val valid = Output(Bool())
     val writeEnable = Input(Bool())
   })
@@ -178,16 +180,16 @@ class GaussianBlurGeneral(width: Int, height: Int, n: Int, std: Double) extends 
 
   //Generate the kernel values
   //println("GaussianBlurGeneral testing kernel")
-  var kernel = Array.fill(n*n){RegInit(FixedPoint(16.W, 8.BP), FixedPoint.fromDouble(0.0, 16.W, 8.BP))}
+  var kernel = Array.fill(n*n){RegInit(FixedPoint(32.W, 16.BP), FixedPoint.fromDouble(0.0, 32.W, 16.BP))}
   //printf(p"Kernel: \n")
-  var kernelScalingValue = 0.0 
+  var kernelScalingValue = 0.0
   for(y <- 0 until n){
     //val temp = Vec(n)
     for(x <- 0 until n){
       val kernelValue = math.exp(-(math.pow((n-1)/2 - x, 2) + math.pow((n-1)/2- y, 2))/(2*math.pow(std, 2)))/(2*math.Pi*math.pow(std, 2))
 
 
-      kernel(y*n + x) := FixedPoint.fromDouble(kernelValue, 16.W, 8.BP)
+      kernel(y*n + x) := FixedPoint.fromDouble(kernelValue, 32.W, 16.BP)
       kernelScalingValue += kernelValue
 
       //print(kernelValue)
@@ -197,10 +199,10 @@ class GaussianBlurGeneral(width: Int, height: Int, n: Int, std: Double) extends 
     //printf(p"\n")
     //println("")
   }
-  val kernelScaling = RegInit(FixedPoint.fromDouble(1/kernelScalingValue, 16.W, 8.BP))
+  val kernelScaling = RegInit(FixedPoint.fromDouble(1/kernelScalingValue, 32.W, 16.BP))
 
 
-  val valueMatrix = Array.fill(n*n){RegInit(FixedPoint(16.W, 8.BP), FixedPoint.fromDouble(0.0, 16.W, 8.BP))}
+  val valueMatrix = Array.fill(n*n){RegInit(FixedPoint(32.W, 16.BP), FixedPoint.fromDouble(0.0, 32.W, 16.BP))}
   for(y <- 0 until n){
     for(x <- 1 until n){
 
@@ -232,7 +234,7 @@ class GaussianBlurGeneral(width: Int, height: Int, n: Int, std: Double) extends 
 
 
     //Logic to sum all the values
-    var addMatrix = Array.fill(2*n*n - 1){Wire(FixedPoint(16.W, 8.BP))}
+    var addMatrix = Array.fill(2*n*n - 1){Wire(FixedPoint(32.W, 16.BP))}
 
     //The first half of the array is for the nodes, with the child-nodes being
     //2*o and 2*o + 1
@@ -251,48 +253,48 @@ class GaussianBlurGeneral(width: Int, height: Int, n: Int, std: Double) extends 
       //printf(p"${addMatrix(o + n*n - 1).asUInt}\n\n")
     }
 
-  val yInCounter = Counter(height)
-  val xInCounter = Counter(width)
-  val yOutCounter = Counter(height)
-  val xOutCounter = Counter(width)
+    val yInCounter = Counter(height)
+    val xInCounter = Counter(width)
+    val yOutCounter = Counter(height)
+    val xOutCounter = Counter(width)
 
 
-  when(io.writeEnable){
-    when(xInCounter.inc()){
-      when(yInCounter.inc()){
+    when(io.writeEnable){
+      when(xInCounter.inc()){
+        when(yInCounter.inc()){
+        }
       }
     }
-  }
 
-  val inPos = Wire(UInt())
-  inPos := yInCounter.value*width.asUInt + xInCounter.value
-  io.valid := false.B
-  when(inPos < ((n - 1)/2).U*(width.asUInt + 1.U)){
-    io.valid := true.B
-  }.elsewhen(inPos >= ((n - 1)/2).U*(width.asUInt + 1.U) && inPos <= (n - 1).U*(width.asUInt + 1.U)){
+    val inPos = Wire(UInt())
+    inPos := yInCounter.value*width.asUInt + xInCounter.value
     io.valid := false.B
-  }.elsewhen(inPos > (n - 1).U*(width.asUInt + 1.U)){
+    when(inPos < ((n - 1)/2).U*(width.asUInt + 1.U)){
+      io.valid := true.B
+      }.elsewhen(inPos >= ((n - 1)/2).U*(width.asUInt + 1.U) && inPos <= (n - 1).U*(width.asUInt + 1.U)){
+        io.valid := false.B
+        }.elsewhen(inPos > (n - 1).U*(width.asUInt + 1.U)){
 
-    io.valid := true.B
-  }
+          io.valid := true.B
+        }
 
-  when(io.valid && io.writeEnable){
-    when(xOutCounter.inc()){
-      when(yOutCounter.inc()){
-      }
-    }
-  }
-  
-  //Start and end, values is just passed through
-  when(yOutCounter.value < ((n - 1)/2).U || yOutCounter.value > (height - (n - 1)/2).U){
-    io.dataOut := io.dataIn
-  }.otherwise{
-    when(xOutCounter.value < ((n - 1)/2).U || xOutCounter.value > (width - (n - 1)/2).U){
-      io.dataOut := io.dataIn
-    }.otherwise{
-      io.dataOut := addMatrix(0) * kernelScaling
-    }
-  }
+        when(io.valid && io.writeEnable){
+          when(xOutCounter.inc()){
+            when(yOutCounter.inc()){
+            }
+          }
+        }
+
+        //Start and end, values is just passed through
+        when(yOutCounter.value < ((n - 1)/2).U || yOutCounter.value > (height - (n - 1)/2).U){
+          io.dataOut := io.dataIn
+          }.otherwise{
+            when(xOutCounter.value < ((n - 1)/2).U || xOutCounter.value > (width - (n - 1)/2).U){
+              io.dataOut := io.dataIn
+              }.otherwise{
+                io.dataOut := addMatrix(0) * kernelScaling
+              }
+          }
 }
 
 //object GaussDriver extends App{
