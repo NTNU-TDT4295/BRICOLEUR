@@ -38,7 +38,7 @@ class Grayscale extends Module {
   val f0: FixedPoint = FixedPoint.fromDouble(0.3, 16.W, 8.BP)
   val f1: FixedPoint = FixedPoint.fromDouble(0.59, 16.W, 8.BP)
   val f2: FixedPoint = FixedPoint.fromDouble(0.11, 16.W, 8.BP)
-
+  
   val out = RegInit(FixedPoint(16.W, 8.BP), FixedPoint.fromDouble(0, 16.W, 8.BP))
 
   val started = RegInit(Bool(), false.B)
@@ -52,7 +52,7 @@ class Grayscale extends Module {
 
   io.treadyOut := false.B
 
-  when(io.tvalidIn) {
+  when(io.tvalidIn && io.tready) {
     io.treadyOut := true.B
 
     when(counter === 0.U) {
