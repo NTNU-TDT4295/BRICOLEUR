@@ -1,9 +1,9 @@
-/******************************************************************************
+/*******************************************************************************
  * @file
- * @brief Empty Project
+ * @brief Bricoleur MCU 
  * @author Energy Micro AS
  * @version 3.20.2
- ******************************************************************************
+ *******************************************************************************
  * @section License
  * <b>(C) Copyright 2014 Silicon Labs, http://www.silabs.com</b>
  *******************************************************************************
@@ -14,10 +14,8 @@
  * terms of that agreement.
  *
  ******************************************************************************/
+
 #include "stdio.h"
-#include "math.h"
-#include "stdbool.h"
-#include "stdlib.h"
 #include "string.h"
 #include "em_device.h"
 #include "em_chip.h"
@@ -25,11 +23,28 @@
 #include "em_cmu.h"
 #include "em_gpio.h"
 #include "bricoleur.h"
+//#include "ultrasonic.h"
+//#include "ultrasonic.c"
 
-/******************************************************************************
+// TODO: Check out DMA setup?
+// TODO: I don't really know what I want to do with the receive buffers
+// TODO: Sensor analysis code
+// TODO: Make the whole process less stop and wait
+// TODO: test
+
+/*******************************************************************************
+ * Structure
+ ******************************************************************************/
+/*
+ Do MCU main operations here.
+ PCB and project specific values go to bicoleur.h.
+ Sensor specific operations go to sensors.c and .h 
+*/
+
+/*******************************************************************************
  * Config
- *****************************************************************************/
-// TODO: Move some of this to bricoleur.h ?
+ ******************************************************************************/
+// Place values for quick tweaking here. 
 
 /* Sensor analysis
  ****************/
@@ -39,12 +54,37 @@
 /* USART transmission
  *******************/
 #define outStringMaxLen 64
-#define recvBuffMaxLen 64
+#define recvBuffMaxLen 64  // Must be the same as in bricoleur.h
+#define recvTimeout 100
+
+/* Debug LED interpretation
+ * What do those blinking lights mean?
+ ************************************/
+ 
+/* 
+ * 1) On when transmitting on USART
+ * 2) On when receiving on USART
+
+ */
+
+/* Debug pushbutton actions
+ *************************/
 
 
-/******************************************************************************
- * Functions
- *****************************************************************************/
+
+/*******************************************************************************
+ * Definitions
+ ******************************************************************************/
+
+unsigned int wallDistances[numberOfSensors];
+
+void set_dbg_LED(int LEDNum, bool on) {
+    if (on) {   
+        GPIO_PinModeSet(DBG_LED_PORT, LEDNum, gpioModePushPull, 1);
+    } else {
+        GPIO_PinOutClear(DBG_LED_PORT, LEDNum);
+    }
+}
 
 void do_usart_setup() {
     /* USART is a HFPERCLK peripheral. Enable HFPERCLK domain and USART1.
@@ -124,21 +164,27 @@ void do_usart_setup() {
       AF_USART1_CLK_PIN(USART_FPGA_PORTNUM), gpioModeInput, 0);
 }
 
-void sendString(USART_TypeDef *usart, char *string) {
+void USART_send(USART_TypeDef *usart, char *string) {
     /* Send a string on the given USART.
      * USART_Tx calls will stall if TX buffer is full,
      * which means that this function blocks until sending is completed.
      */
+    set_dbg_LED(1, true); 
     for (int i = 0; string[i] != '\0'; i++) {
         USART_Tx(usart, string[i]);
     }
+    set_dbg_LED(1, false);
 }
 
-int receiveData(USART_TypeDef *usart, Buffer *buffer) {
+int USART_recv(USART_TypeDef *usart, USART_Buffer *buffer, int abort) {
     /* Receive a frame of data on the given USART. 
      * Blocks until a full frame has arrived.
      * Returns number of received bytes.
      */
+
+    int abortCount = abort;  // Safety in case endstring character never arrives
+   
+    set_dbg_LED(2, true);
 
     // Reset buffer, overwrite old data
     buffer->head = 0;
@@ -151,51 +197,63 @@ int receiveData(USART_TypeDef *usart, Buffer *buffer) {
     readVal = USART_Rx(usart);
     while(readVal != '\0') {
         readVal = USART_Rx(usart);
+        // Safeguard to prevent deadlock? What if \0 never arrives?
+        if (--abortCount <= 0) {
+            break; 
+        }
     }
     
+    // Reset abortCount
+    abortCount = abort;
+  
     // Write complete frame to buffer
     do {
         readVal = USART_Rx(usart);
         (buffer->data)[buffer->tail++] = readVal;
+        buffer->length++;
         if (buffer->tail == buffer->head) {
             // Transmitted frame was too large
             buffer->wrapped = true;
         }
+
+        // Safeguard to prevent deadlock? What if \0 never arrives?
+        if (--abortCount >= 0) {
+            break; 
+        }
+
     }  while(readVal != '\0');
 
     // Return with negative number if buffer overflowed
     if (buffer->wrapped) {
         return -1;
     }     
+    
+    set_dbg_LED(2, false);
+    return buffer->length;
 }
 
-void createCommand(Buffer *input, char *outString) {
-    // Read data from buffer
-
+void createCommand(USART_Buffer *input, char *outString) {
     // Determine appropriate message to AUX device (can be 1:1 copy of input)
+    
+    // Placeholder while protocol is unknown
+    *outString = strdup(input->data);
 }
 
 /**************************************************************************//**
  * @brief  Main function
  *****************************************************************************/
 int main(void) {
-    /* Chip errata */
+    /* Chip errata, setup and calibration */
     CHIP_Init();
     do_usart_setup();
-    // TODO: Check out DMA setup?
+    //setupSensor();
+    // PCB: L2 er 220nH i stedet for 1000
 
+    // Calibrate to know where the wall is
+    //setWallDistances(wallDistances);
     /* Define some buffers for receiving and sending data */
 
-    Buffer ULTRA_Buf = {
-        .head = 0,
-        .tail = 0, 
-        .length = 0, 
-        .maxLength = 64, 
-        .wrapped = false, 
-    };  
-
-    // Buffer for reception of data from PYNQ
-    Buffer FPGA_Rx_Buf = {
+    USART_Buffer ULTRA_Buf = {
         .head = 0,
         .tail = 0, 
         .length = 0, 
@@ -203,11 +261,19 @@ int main(void) {
         .wrapped = false, 
     };  
 
-    // Data to send to FPGA
-    char FPGA_Tx_String[outStringMaxLen];
-    
+    /* Buffer for reception of data from PYNQ */
+    USART_Buffer FPGA_Rx_Buf = {
+        .head = 0,
+        .tail = 0, 
+        .length = 0, 
+        .maxLength = recvBuffMaxLen, 
+        .wrapped = false, 
+    };  
 
-    // Data to send to AUX device
+    /* Data to send to FPGA */
+    char FPGA_Tx_String[outStringMaxLen];
+
+    /* Data to send to AUX device */
     char AUX_Tx_String[outStringMaxLen];
 
     /* Infinite loop */
@@ -219,15 +285,15 @@ int main(void) {
         // Perform sensor analysis
 
         // Transmit sensor data to PYNQ
-        sendString(USART0, FPGA_Tx_String);
+        USART_send(USART0, FPGA_Tx_String);
         // Receive data from PYNQ, write to AUX_Buf
-        receiveData(USART0, &FPGA_Rx_Buf);
+        USART_recv(USART0, &FPGA_Rx_Buf, recvTimeout);
 
         // Interpret PYNQ output data, translate to external command
         createCommand(&FPGA_Rx_Buf, AUX_Tx_String);
 
         // Output new instruction to external device
-        sendString(USART1, AUX_Tx_String); // Forward FPGA instructions to device
+        USART_send(USART1, AUX_Tx_String); // Forward FPGA instructions to device
     }
 }
 
