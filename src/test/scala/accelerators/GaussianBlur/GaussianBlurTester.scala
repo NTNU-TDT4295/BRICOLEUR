@@ -19,7 +19,7 @@ class GaussianBlurUnitTester(c: GaussianBlur) extends PeekPokeTester(c) {
     FixedPoint.fromDouble(0, 32.W, 16.BP)
   }
   for (jj <- 0 until testArray.length) {
-	testArray(jj) = FixedPoint.fromDouble(127, 32.W, 16.BP)
+	testArray(jj) = FixedPoint.fromDouble(jj, 32.W, 16.BP)
   }
   //Array for the values that comes out of the pipe
   val resultArray = Array.fill((c.myWidth - 2) * (c.myHeight - 2)) {
@@ -76,13 +76,14 @@ class GaussianBlurUnitTester(c: GaussianBlur) extends PeekPokeTester(c) {
   println(inputString)
   for (ii <- 0 until resultArray.length) {
 	if ((ii % (c.myWidth - 2)) == 0) {
-	  println("")
+	  outputString += "\n"
 	}
     // print(s"${resultArray(ii)} ")
 	var intpart = resultArray(ii) >> bp
 	var floatpart = (resultArray(ii) & (1 << bp) - 1)
 	var test = floatpart.toFloat / (1 << bp).toFloat
-	print(s"${intpart} ")
+	//print(s"${intpart} ")
+        outputString += intpart + "\t"
 	// print(s"${intpart}${test.toString.substring(1)} ")
 
   }
@@ -141,7 +142,7 @@ class GaussianBlurTester extends ChiselFlatSpec {
   "GaussianBlur" should "correctly blur an image" in {
 	//chisel3.Driver.execute(args, () => new GaussianBlur(320, 240))
 	// The arguments for GaussianBlur determines the dimensions of the data to be put in, aka the image size
-	iotesters.Driver.execute(() => new GaussianBlur(320,240), new TesterOptionsManager) {
+	iotesters.Driver.execute(() => new GaussianBlur(10,10), new TesterOptionsManager) {
 	  c => new GaussianBlurUnitTester(c)
 	}
   }
