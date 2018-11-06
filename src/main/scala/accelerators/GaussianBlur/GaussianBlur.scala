@@ -7,7 +7,7 @@ import helpers.FIFO.FIFO
 import helpers.FIFO.FIFOAlt
 import scala.math
 
-class GaussianBlur(width: Int, height: Int) extends Module {
+class GaussianBlur(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extends Module {
   // TODO:
   // would be nice to pass kernel constants
   // and kernel size into the Module as a parameter
@@ -17,7 +17,7 @@ class GaussianBlur(width: Int, height: Int) extends Module {
   // as parameters
   //  - Joakim
   val io = IO(new Bundle{
-    val dataIn   = Input(FixedPoint(32.W,16.BP))
+    val dataIn   = Input(FixedPoint(dataWidth.W,binaryPoint.BP))
 
     // AXI signals
     val tready    = Input(Bool())
@@ -25,8 +25,8 @@ class GaussianBlur(width: Int, height: Int) extends Module {
     val treadyOut = Output(Bool())
     val tvalid    = Output(Bool())
     val tlast     = Output(Bool())
-    val tdata     = Output(FixedPoint(32.W, 16.BP))
-    //val tdata      = Output(UInt(32.W))
+    val tdata     = Output(FixedPoint(dataWidth.W, binaryPoint.BP))
+    //val tdata      = Output(UInt(dataWidth.W))
     val tkeep     = Output(UInt(4.W))
   })
   // Screwy counter logic, idea is to wait until all queues are loaded,
@@ -52,13 +52,11 @@ class GaussianBlur(width: Int, height: Int) extends Module {
   val myWidth = width
   val myHeight = height
 
-  io.tdata := FixedPoint.fromDouble(0, 32.W, 16.BP)
+  io.tdata := FixedPoint.fromDouble(0, dataWidth.W, binaryPoint.BP)
   io.tlast := false.B
   io.tkeep := ~(0.U(4.W))
   io.tvalid := false.B
   io.treadyOut := isReadyOut
-
-
 
 
   when (isReady && io.tvalidIn) {
@@ -100,15 +98,15 @@ class GaussianBlur(width: Int, height: Int) extends Module {
       //See paper for explanation
       //Idea is deep pipelines
 
-      val fifo1_0 = Module(new FIFOAlt(1))
-      val fifo2_1 = Module(new FIFOAlt(1))
-      val fifo3_2 = Module(new FIFOAlt(width-3))
-      val fifo4_3 = Module(new FIFOAlt(1))
-      val fifo5_4 = Module(new FIFOAlt(1))
-      val fifo6_5 = Module(new FIFOAlt(width-3))
-      val fifo7_6 = Module(new FIFOAlt(1))
-      val fifo8_7 = Module(new FIFOAlt(1))
-      
+      val fifo1_0 = Module(new FIFOAlt(1      , dataWidth,binaryPoint))
+      val fifo2_1 = Module(new FIFOAlt(1      , dataWidth,binaryPoint))
+      val fifo3_2 = Module(new FIFOAlt(width-3, dataWidth,binaryPoint))
+      val fifo4_3 = Module(new FIFOAlt(1      , dataWidth,binaryPoint))
+      val fifo5_4 = Module(new FIFOAlt(1      , dataWidth,binaryPoint))
+      val fifo6_5 = Module(new FIFOAlt(width-3, dataWidth,binaryPoint))
+      val fifo7_6 = Module(new FIFOAlt(1      , dataWidth,binaryPoint))
+      val fifo8_7 = Module(new FIFOAlt(1      , dataWidth,binaryPoint))
+
 
       //Connect inputs and outputs
       fifo8_7.io.dataIn := io.dataIn
@@ -119,7 +117,7 @@ class GaussianBlur(width: Int, height: Int) extends Module {
       fifo3_2.io.dataIn := fifo4_3.io.dataOut
       fifo2_1.io.dataIn := fifo3_2.io.dataOut
       fifo1_0.io.dataIn := fifo2_1.io.dataOut
-      
+
       //Assert this as true when data is valid, as in make fifos update or not
       fifo8_7.io.pushing := isPushing
       fifo7_6.io.pushing := isPushing
@@ -131,28 +129,28 @@ class GaussianBlur(width: Int, height: Int) extends Module {
       fifo1_0.io.pushing := isPushing
 
       // Store the computed kernel snippets in theese registers
-      val kernel_0 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
-      val kernel_1 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
-      val kernel_2 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
-      val kernel_3 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
-      val kernel_4 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
-      val kernel_5 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
-      val kernel_6 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
-      val kernel_7 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
-      val kernel_8 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
+      val kernel_0 = RegInit(FixedPoint(dataWidth.W,binaryPoint.BP), FixedPoint.fromDouble(0.0,dataWidth.W,binaryPoint.BP))
+      val kernel_1 = RegInit(FixedPoint(dataWidth.W,binaryPoint.BP), FixedPoint.fromDouble(0.0,dataWidth.W,binaryPoint.BP))
+      val kernel_2 = RegInit(FixedPoint(dataWidth.W,binaryPoint.BP), FixedPoint.fromDouble(0.0,dataWidth.W,binaryPoint.BP))
+      val kernel_3 = RegInit(FixedPoint(dataWidth.W,binaryPoint.BP), FixedPoint.fromDouble(0.0,dataWidth.W,binaryPoint.BP))
+      val kernel_4 = RegInit(FixedPoint(dataWidth.W,binaryPoint.BP), FixedPoint.fromDouble(0.0,dataWidth.W,binaryPoint.BP))
+      val kernel_5 = RegInit(FixedPoint(dataWidth.W,binaryPoint.BP), FixedPoint.fromDouble(0.0,dataWidth.W,binaryPoint.BP))
+      val kernel_6 = RegInit(FixedPoint(dataWidth.W,binaryPoint.BP), FixedPoint.fromDouble(0.0,dataWidth.W,binaryPoint.BP))
+      val kernel_7 = RegInit(FixedPoint(dataWidth.W,binaryPoint.BP), FixedPoint.fromDouble(0.0,dataWidth.W,binaryPoint.BP))
+      val kernel_8 = RegInit(FixedPoint(dataWidth.W,binaryPoint.BP), FixedPoint.fromDouble(0.0,dataWidth.W,binaryPoint.BP))
 
       //Kernel constants, set to actual factual gauss values
-      
-      val kernelC0 = FixedPoint.fromDouble(0.077847,32.W,16.BP)
-      val kernelC1 = FixedPoint.fromDouble(0.123317,32.W,16.BP)
-      val kernelC2 = FixedPoint.fromDouble(0.077847,32.W,16.BP)
-      val kernelC3 = FixedPoint.fromDouble(0.123317,32.W,16.BP)
-      val kernelC4 = FixedPoint.fromDouble(0.195346,32.W,16.BP)
-      val kernelC5 = FixedPoint.fromDouble(0.123317,32.W,16.BP)
-      val kernelC6 = FixedPoint.fromDouble(0.077847,32.W,16.BP)
-      val kernelC7 = FixedPoint.fromDouble(0.123317,32.W,16.BP)
-      val kernelC8 = FixedPoint.fromDouble(0.077847,32.W,16.BP)
-      
+
+      val kernelC0 = FixedPoint.fromDouble(0.077847,dataWidth.W,binaryPoint.BP)
+      val kernelC1 = FixedPoint.fromDouble(0.123317,dataWidth.W,binaryPoint.BP)
+      val kernelC2 = FixedPoint.fromDouble(0.077847,dataWidth.W,binaryPoint.BP)
+      val kernelC3 = FixedPoint.fromDouble(0.123317,dataWidth.W,binaryPoint.BP)
+      val kernelC4 = FixedPoint.fromDouble(0.195346,dataWidth.W,binaryPoint.BP)
+      val kernelC5 = FixedPoint.fromDouble(0.123317,dataWidth.W,binaryPoint.BP)
+      val kernelC6 = FixedPoint.fromDouble(0.077847,dataWidth.W,binaryPoint.BP)
+      val kernelC7 = FixedPoint.fromDouble(0.123317,dataWidth.W,binaryPoint.BP)
+      val kernelC8 = FixedPoint.fromDouble(0.077847,dataWidth.W,binaryPoint.BP)
+
       /*
       val kernelC0 = FixedPoint.fromDouble(0 ,32.W,16.BP)
       val kernelC1 = FixedPoint.fromDouble(0 ,32.W,16.BP)
@@ -192,7 +190,7 @@ class GaussianBlur(width: Int, height: Int) extends Module {
         kernel_6 +
         kernel_7 +
         kernel_8 //).asUInt
-  
+
   }.otherwise{
     isPushing:=false.B
   }
@@ -249,7 +247,9 @@ class GaussianBlurGeneral(width: Int, height: Int, n: Int, std: Double) extends 
     }
 
     if(y < n - 1){
-      val queue = Module(new FIFOAlt(width - n))
+      //FIXME:
+      //hardcoded datawidth and binary point values here
+      val queue = Module(new FIFOAlt(width - n,32,16))
 
       queue.io.pushing := io.writeEnable
       queue.io.dataIn := valueMatrix(y*n + n - 1)

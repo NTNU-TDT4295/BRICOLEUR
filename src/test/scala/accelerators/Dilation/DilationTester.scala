@@ -9,14 +9,14 @@ import chisel3.core.{FixedPoint}
   *
   * @param c : The dilation module to be tested
   */
-class DilationUnitTester(c: Dilation) extends PeekPokeTester(c) {
+class DilationUnitTester(c: Dilation, dataWidth:Int, binaryPoint:Int) extends PeekPokeTester(c) {
   //Testdata to be fed into the pipe
 
   var testArray = Array.fill(c.myWidth * c.myHeight) {
-    FixedPoint.fromDouble(0, 32.W, 16.BP)
+    FixedPoint.fromDouble(0, dataWidth.W, binaryPoint.BP)
   }
   for (jj <- testArray.indices) {
-	testArray(jj) = FixedPoint.fromDouble(127, 32.W, 16.BP)
+	testArray(jj) = FixedPoint.fromDouble(127, dataWidth.W, binaryPoint.BP)
   }
   //Array for the values that comes out of the pipe
   val resultArray: Array[Int] = Array.fill((c.myWidth - 2) * (c.myHeight - 2)) {
@@ -67,13 +67,12 @@ class DilationUnitTester(c: Dilation) extends PeekPokeTester(c) {
   // Below is output formatting to get a nice overview of what is happening
   var inputString = ""
   var outputString = ""
-  val bp = 16
 
   for (ii <- testArray.indices) {
     if ((ii % c.myWidth) == 0) {
       inputString += "\n"
     }
-    inputString += ( testArray(ii).toInt >> bp ) + "\t"
+    inputString += ( testArray(ii).toInt >> binaryPoint ) + "\t"
 
   }
   println(inputString)
@@ -81,9 +80,9 @@ class DilationUnitTester(c: Dilation) extends PeekPokeTester(c) {
     if ((ii % (c.myWidth - 2)) == 0) {
       println("")
     }
-    var intpart = resultArray(ii) >> bp
-    val floatpart = resultArray(ii) & (1 << bp) - 1
-    val test = floatpart.toFloat / (1 << bp).toFloat
+    var intpart = resultArray(ii) >> binaryPoint
+    val floatpart = resultArray(ii) & (1 << binaryPoint) - 1
+    val test = floatpart.toFloat / (1 << binaryPoint).toFloat
     print(s"${intpart}${test.toString.substring(1)} ")
 
   }
@@ -92,10 +91,12 @@ class DilationUnitTester(c: Dilation) extends PeekPokeTester(c) {
 }
 
 class DilationTester extends ChiselFlatSpec {
+  val dataWidth:Int = 32
+  val binaryPoint:Int = 16
   "Dilation" should "correctly dilate an image" in {
     // The arguments for Dilation determines the dimensions of the data to be put in, aka the image size
-    iotesters.Driver.execute(() => new Dilation(10, 10), new TesterOptionsManager) {
-      c => new DilationUnitTester(c)
+    iotesters.Driver.execute(() => new Dilation(10, 10,dataWidth,binaryPoint), new TesterOptionsManager) {
+      c => new DilationUnitTester(c,dataWidth,binaryPoint)
     }
   }
 }

@@ -4,9 +4,10 @@ import chisel3._
 import chisel3.core.{FixedPoint, Input}
 import chisel3.util.Counter
 import helpers.FIFO.FIFO
+import helpers.FIFO.FIFOAlt
 import scala.math
 
-class Dilation(width: Int, height: Int) extends Module {
+class Dilation(width: Int, height: Int, dataWidth:Int, binaryPoint:Int) extends Module {
   // TODO:
   // would be nice to pass kernel constants
   // and kernel size into the Module as a parameter
@@ -16,7 +17,7 @@ class Dilation(width: Int, height: Int) extends Module {
   // as parameters
   //  - Joakim
   val io = IO(new Bundle{
-    val dataIn   = Input(FixedPoint(32.W,16.BP))
+    val dataIn   = Input(FixedPoint(dataWidth.W,binaryPoint.BP))
 
     // AXI signals
     val tready    = Input(Bool())
@@ -24,7 +25,7 @@ class Dilation(width: Int, height: Int) extends Module {
     val treadyOut = Input(Bool())
     val tvalid    = Output(Bool())
     val tlast     = Output(Bool())
-    val tdata     = Output(UInt(32.W))
+    val tdata     = Output(UInt(dataWidth.W))
     val tkeep     = Output(UInt(4.W))
   })
 
@@ -89,14 +90,14 @@ class Dilation(width: Int, height: Int) extends Module {
       //Idea is deep pipelines
 
       //These are not much FIFOS as delay_Ns
-      val fifo1_0 = Module(new FIFO(1))
-      val fifo2_1 = Module(new FIFO(1))
-      val fifo3_2 = Module(new FIFO(width-3))
-      val fifo4_3 = Module(new FIFO(1))
-      val fifo5_4 = Module(new FIFO(1))
-      val fifo6_5 = Module(new FIFO(width-3))
-      val fifo7_6 = Module(new FIFO(1))
-      val fifo8_7 = Module(new FIFO(1))
+      val fifo1_0 = Module(new FIFOAlt(1      , dataWidth,binaryPoint))
+      val fifo2_1 = Module(new FIFOAlt(1      , dataWidth,binaryPoint))
+      val fifo3_2 = Module(new FIFOAlt(width-3, dataWidth,binaryPoint))
+      val fifo4_3 = Module(new FIFOAlt(1      , dataWidth,binaryPoint))
+      val fifo5_4 = Module(new FIFOAlt(1      , dataWidth,binaryPoint))
+      val fifo6_5 = Module(new FIFOAlt(width-3, dataWidth,binaryPoint))
+      val fifo7_6 = Module(new FIFOAlt(1      , dataWidth,binaryPoint))
+      val fifo8_7 = Module(new FIFOAlt(1      , dataWidth,binaryPoint))
 
 
       //Connect inputs and outputs
@@ -111,26 +112,26 @@ class Dilation(width: Int, height: Int) extends Module {
 
 
       // Store the computed kernel snippets in theese registers
-      val kernel_0 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
-      val kernel_1 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
-      val kernel_2 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
-      val kernel_3 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
-      val kernel_4 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
-      val kernel_5 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
-      val kernel_6 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
-      val kernel_7 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
-      val kernel_8 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
+      val kernel_0 = RegInit(FixedPoint(dataWidth.W,binaryPoint.BP), FixedPoint.fromDouble(0.0,dataWidth.W,binaryPoint.BP))
+      val kernel_1 = RegInit(FixedPoint(dataWidth.W,binaryPoint.BP), FixedPoint.fromDouble(0.0,dataWidth.W,binaryPoint.BP))
+      val kernel_2 = RegInit(FixedPoint(dataWidth.W,binaryPoint.BP), FixedPoint.fromDouble(0.0,dataWidth.W,binaryPoint.BP))
+      val kernel_3 = RegInit(FixedPoint(dataWidth.W,binaryPoint.BP), FixedPoint.fromDouble(0.0,dataWidth.W,binaryPoint.BP))
+      val kernel_4 = RegInit(FixedPoint(dataWidth.W,binaryPoint.BP), FixedPoint.fromDouble(0.0,dataWidth.W,binaryPoint.BP))
+      val kernel_5 = RegInit(FixedPoint(dataWidth.W,binaryPoint.BP), FixedPoint.fromDouble(0.0,dataWidth.W,binaryPoint.BP))
+      val kernel_6 = RegInit(FixedPoint(dataWidth.W,binaryPoint.BP), FixedPoint.fromDouble(0.0,dataWidth.W,binaryPoint.BP))
+      val kernel_7 = RegInit(FixedPoint(dataWidth.W,binaryPoint.BP), FixedPoint.fromDouble(0.0,dataWidth.W,binaryPoint.BP))
+      val kernel_8 = RegInit(FixedPoint(dataWidth.W,binaryPoint.BP), FixedPoint.fromDouble(0.0,dataWidth.W,binaryPoint.BP))
 
       //Kernel constants, in this case set to an identity matrix
-      val kernelC0 = FixedPoint.fromDouble(0.0,32.W,16.BP)
-      val kernelC1 = FixedPoint.fromDouble(1.0,32.W,16.BP)
-      val kernelC2 = FixedPoint.fromDouble(0.0,32.W,16.BP)
-      val kernelC3 = FixedPoint.fromDouble(1.0,32.W,16.BP)
-      val kernelC4 = FixedPoint.fromDouble(1.0,32.W,16.BP)
-      val kernelC5 = FixedPoint.fromDouble(1.0,32.W,16.BP)
-      val kernelC6 = FixedPoint.fromDouble(0.0,32.W,16.BP)
-      val kernelC7 = FixedPoint.fromDouble(1.0,32.W,16.BP)
-      val kernelC8 = FixedPoint.fromDouble(0.0,32.W,16.BP)
+      val kernelC0 = FixedPoint.fromDouble(0.0,dataWidth.W,binaryPoint.BP)
+      val kernelC1 = FixedPoint.fromDouble(1.0,dataWidth.W,binaryPoint.BP)
+      val kernelC2 = FixedPoint.fromDouble(0.0,dataWidth.W,binaryPoint.BP)
+      val kernelC3 = FixedPoint.fromDouble(1.0,dataWidth.W,binaryPoint.BP)
+      val kernelC4 = FixedPoint.fromDouble(1.0,dataWidth.W,binaryPoint.BP)
+      val kernelC5 = FixedPoint.fromDouble(1.0,dataWidth.W,binaryPoint.BP)
+      val kernelC6 = FixedPoint.fromDouble(0.0,dataWidth.W,binaryPoint.BP)
+      val kernelC7 = FixedPoint.fromDouble(1.0,dataWidth.W,binaryPoint.BP)
+      val kernelC8 = FixedPoint.fromDouble(0.0,dataWidth.W,binaryPoint.BP)
 
       // dilation 3x3 kernel
       // 0 1 0

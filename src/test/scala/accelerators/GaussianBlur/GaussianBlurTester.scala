@@ -12,14 +12,14 @@ import javax.imageio.ImageIO
 // expect some nice shit
 //  - Joakim
 
-class GaussianBlurUnitTester(c: GaussianBlur) extends PeekPokeTester(c) {
+class GaussianBlurUnitTester(c: GaussianBlur,dataWidth: Int, binaryPoint: Int) extends PeekPokeTester(c) {
   //Testdata to be fed into the pipe
 
   var testArray = Array.fill(c.myWidth * c.myHeight) {
-    FixedPoint.fromDouble(0, 32.W, 16.BP)
+    FixedPoint.fromDouble(0, dataWidth.W, binaryPoint.BP)
   }
   for (jj <- 0 until testArray.length) {
-	testArray(jj) = FixedPoint.fromDouble(jj, 32.W, 16.BP)
+	testArray(jj) = FixedPoint.fromDouble(jj, dataWidth.W, binaryPoint.BP)
   }
   //Array for the values that comes out of the pipe
   val resultArray = Array.fill((c.myWidth - 2) * (c.myHeight - 2)) {
@@ -64,13 +64,12 @@ class GaussianBlurUnitTester(c: GaussianBlur) extends PeekPokeTester(c) {
   // Below is output formatting to get a nice overview of what is happening
   var inputString  = ""
   var outputString = ""
-  val bp           = 16
 
   for (ii <- 0 until testArray.length) {
 	if ((ii % c.myWidth) == 0) {
 	  inputString += "\n"
 	}
-    inputString += ( testArray(ii).toInt >> bp ) + "\t"
+    inputString += ( testArray(ii).toInt >> binaryPoint ) + "\t"
 
   }
   println(inputString)
@@ -79,9 +78,9 @@ class GaussianBlurUnitTester(c: GaussianBlur) extends PeekPokeTester(c) {
 	  outputString += "\n"
 	}
     // print(s"${resultArray(ii)} ")
-	var intpart = resultArray(ii) >> bp
-	var floatpart = (resultArray(ii) & (1 << bp) - 1)
-	var test = floatpart.toFloat / (1 << bp).toFloat
+	var intpart = resultArray(ii) >> binaryPoint
+	var floatpart = (resultArray(ii) & (1 << binaryPoint) - 1)
+	var test = floatpart.toFloat / (1 << binaryPoint).toFloat
 	//print(s"${intpart} ")
         outputString += intpart + "\t"
 	// print(s"${intpart}${test.toString.substring(1)} ")
@@ -139,11 +138,14 @@ class GaussianImageTester(c: GaussianBlur) extends PeekPoketester {
 // after copying the file, run sbt, then compile, then run the Tester
 class GaussianBlurTester extends ChiselFlatSpec {
 
+  val dataWidth:Int   = 32
+  val binaryPoint:Int = 16
+
   "GaussianBlur" should "correctly blur an image" in {
 	//chisel3.Driver.execute(args, () => new GaussianBlur(320, 240))
 	// The arguments for GaussianBlur determines the dimensions of the data to be put in, aka the image size
-	iotesters.Driver.execute(() => new GaussianBlur(10,10), new TesterOptionsManager) {
-	  c => new GaussianBlurUnitTester(c)
+	iotesters.Driver.execute(() => new GaussianBlur(10,10,dataWidth,binaryPoint), new TesterOptionsManager) {
+	  c => new GaussianBlurUnitTester(c,dataWidth,binaryPoint)
 	}
   }
 
