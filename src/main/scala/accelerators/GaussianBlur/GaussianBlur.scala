@@ -26,6 +26,7 @@ class GaussianBlur(width: Int, height: Int) extends Module {
     val tvalid    = Output(Bool())
     val tlast     = Output(Bool())
     val tdata     = Output(FixedPoint(32.W, 16.BP))
+    //val tdata      = Output(UInt(32.W))
     val tkeep     = Output(UInt(4.W))
   })
   // Screwy counter logic, idea is to wait until all queues are loaded,
@@ -42,9 +43,9 @@ class GaussianBlur(width: Int, height: Int) extends Module {
   val counterEdge = Counter(2)
   val endOfOutput = Counter((width-2)*(height-2))
   val counterProcess = Counter(width-2)
-  val computationStarted = RegInit(UInt(1.W), 0.U)
-  val processWrapped = RegInit(UInt(1.W), 0.U)
-  val computationEnded = RegInit(UInt(1.W), 0.U)
+  val computationStarted = RegInit(Bool(), false.B)
+  val processWrapped = RegInit(Bool(), false.B)
+  val computationEnded = RegInit(Bool(), false.B)
   val isReady = RegInit(Bool(), false.B)
   val isReadyOut = RegInit(Bool(), false.B)
   val isPushing = RegInit(Bool(), false.B)
@@ -58,32 +59,35 @@ class GaussianBlur(width: Int, height: Int) extends Module {
   io.treadyOut := isReadyOut
 
 
+
+
   when (isReady && io.tvalidIn) {
     isPushing := true.B
 
     when(counterStart.inc()){
-      computationStarted := 1.U
+      computationStarted := true.B
     }
 
-    when(computationStarted === 1.U){
+    when(computationStarted){
 
-      when (processWrapped === 0.U){
+      when (~processWrapped){
         when(counterProcess.inc()){
-          processWrapped := 1.U
+          processWrapped := true.B
         }
         }.otherwise{
           when(counterEdge.inc()){
-            processWrapped := 0.U
+            processWrapped := false.B
           }
         }
     }
-    when(processWrapped === 0.U && computationStarted === 1.U && computationEnded === 0.U){
+    when(~processWrapped && computationStarted && ~computationEnded){
       when(endOfOutput.inc()){
-        computationEnded := 1.U
+        computationEnded := true.B
       }
       io.tvalid := true.B
       isReady := false.B // Force circuit to recheck if DMA is ready
       isReadyOut := false.B
+      //isPushing := false.B
     }.otherwise{
       io.tvalid := false.B
     }
@@ -138,6 +142,7 @@ class GaussianBlur(width: Int, height: Int) extends Module {
       val kernel_8 = RegInit(FixedPoint(32.W,16.BP), FixedPoint.fromDouble(0.0,32.W,16.BP))
 
       //Kernel constants, set to actual factual gauss values
+      
       val kernelC0 = FixedPoint.fromDouble(0.077847,32.W,16.BP)
       val kernelC1 = FixedPoint.fromDouble(0.123317,32.W,16.BP)
       val kernelC2 = FixedPoint.fromDouble(0.077847,32.W,16.BP)
@@ -147,7 +152,18 @@ class GaussianBlur(width: Int, height: Int) extends Module {
       val kernelC6 = FixedPoint.fromDouble(0.077847,32.W,16.BP)
       val kernelC7 = FixedPoint.fromDouble(0.123317,32.W,16.BP)
       val kernelC8 = FixedPoint.fromDouble(0.077847,32.W,16.BP)
-
+      
+      /*
+      val kernelC0 = FixedPoint.fromDouble(0 ,32.W,16.BP)
+      val kernelC1 = FixedPoint.fromDouble(0 ,32.W,16.BP)
+      val kernelC2 = FixedPoint.fromDouble(0 ,32.W,16.BP)
+      val kernelC3 = FixedPoint.fromDouble(0 ,32.W,16.BP)
+      val kernelC4 = FixedPoint.fromDouble(1 ,32.W,16.BP)
+      val kernelC5 = FixedPoint.fromDouble(0 ,32.W,16.BP)
+      val kernelC6 = FixedPoint.fromDouble(0 ,32.W,16.BP)
+      val kernelC7 = FixedPoint.fromDouble(0 ,32.W,16.BP)
+      val kernelC8 = FixedPoint.fromDouble(0 ,32.W,16.BP)
+      */
       // Gauss 3x3 kernel with standard deviation = 1
       // 0.077847	0.123317	0.077847
       // 0.123317	0.195346	0.123317
@@ -176,6 +192,9 @@ class GaussianBlur(width: Int, height: Int) extends Module {
         kernel_6 +
         kernel_7 +
         kernel_8 //).asUInt
+  
+  }.otherwise{
+    isPushing:=false.B
   }
 
   when(io.tready) {
