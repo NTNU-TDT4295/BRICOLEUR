@@ -10,7 +10,6 @@
 #include "em_usart.h"
 #include "em_cmu.h"
 #include "em_gpio.h"
-#include "segmentlcd.h"
 #include "main.h"
 #include "sensor.h"
 
@@ -268,15 +267,9 @@ bool willCollide2D(Line *line) {
 	return willCollide; // Check if object hits between sensor1 and sensor2
 }
 
-void panic() {
-	// Do some fancy output
-	SegmentLCD_Write("Panic");
-}
-
 
 int main() {
 	CHIP_Init();
-	SegmentLCD_Init(false);
 	setupSensor();
 	setupDebugUsart();
 
@@ -330,12 +323,6 @@ int main() {
 			// get a division by zero)
 			if (buffer.length > 1) {
 				getLine(&line, positions, buffer.length);
-
-				if (willCollide2D(&line)) {
-					panic();
-				} else {
-					SegmentLCD_Write("Relax");
-				}
 			}
 
 		} else {
