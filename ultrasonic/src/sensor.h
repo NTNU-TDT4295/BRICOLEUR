@@ -8,6 +8,8 @@
 #ifndef SRC_SENSOR_H_
 #define SRC_SENSOR_H_
 
+#include "em_gpio.h"
+
 typedef struct Triggers {
 	GPIO_Port_TypeDef port;
 	unsigned int pin;
