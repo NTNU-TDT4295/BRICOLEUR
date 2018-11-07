@@ -23,8 +23,8 @@
 #include "em_cmu.h"
 #include "em_gpio.h"
 #include "bricoleur.h"
-//#include "ultrasonic.h"
-//#include "ultrasonic.c"
+#include "main.h"
+#include "ultrasonic.h"
 
 // TODO: Check out DMA setup?
 // TODO: I don't really know what I want to do with the receive buffers
@@ -246,11 +246,18 @@ int main(void) {
     /* Chip errata, setup and calibration */
     CHIP_Init();
     do_usart_setup();
-    //setupSensor();
+
+
+	Buffer buffer;
+	setupUltrasonic(&buffer);
+
+	Position positions[buffer.maxLength];
+
+	unsigned int previousDistances[numberOfSensors];
+
+
     // PCB: L2 er 220nH i stedet for 1000
 
-    // Calibrate to know where the wall is
-    //setWallDistances(wallDistances);
     /* Define some buffers for receiving and sending data */
 
     USART_Buffer ULTRA_Buf = {
@@ -283,6 +290,7 @@ int main(void) {
         // Read sensor data sequentially from active sensors
 
         // Perform sensor analysis
+		bool will_collide = willCollideUltrasonic(&buffer, positions, previousDistances);
 
         // Transmit sensor data to PYNQ
         USART_send(USART0, FPGA_Tx_String);
@@ -296,5 +304,3 @@ int main(void) {
         USART_send(USART1, AUX_Tx_String); // Forward FPGA instructions to device
     }
 }
-
-
