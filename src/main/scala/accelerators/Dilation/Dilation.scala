@@ -141,15 +141,15 @@ class Dilation(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extend
 
     //Kernel constants, set to actual factual dilation values
 
-    val kernelC0 = FixedPoint.fromDouble(0.077847, dataWidth.W, binaryPoint.BP)
-    val kernelC1 = FixedPoint.fromDouble(0.123317, dataWidth.W, binaryPoint.BP)
-    val kernelC2 = FixedPoint.fromDouble(0.077847, dataWidth.W, binaryPoint.BP)
-    val kernelC3 = FixedPoint.fromDouble(0.123317, dataWidth.W, binaryPoint.BP)
-    val kernelC4 = FixedPoint.fromDouble(0.195346, dataWidth.W, binaryPoint.BP)
-    val kernelC5 = FixedPoint.fromDouble(0.123317, dataWidth.W, binaryPoint.BP)
-    val kernelC6 = FixedPoint.fromDouble(0.077847, dataWidth.W, binaryPoint.BP)
-    val kernelC7 = FixedPoint.fromDouble(0.123317, dataWidth.W, binaryPoint.BP)
-    val kernelC8 = FixedPoint.fromDouble(0.077847, dataWidth.W, binaryPoint.BP)
+    val kernelC0 = FixedPoint.fromDouble(0.0, dataWidth.W, binaryPoint.BP)
+    val kernelC1 = FixedPoint.fromDouble(1.0, dataWidth.W, binaryPoint.BP)
+    val kernelC2 = FixedPoint.fromDouble(0.0, dataWidth.W, binaryPoint.BP)
+    val kernelC3 = FixedPoint.fromDouble(1.0, dataWidth.W, binaryPoint.BP)
+    val kernelC4 = FixedPoint.fromDouble(1.0, dataWidth.W, binaryPoint.BP)
+    val kernelC5 = FixedPoint.fromDouble(1.0, dataWidth.W, binaryPoint.BP)
+    val kernelC6 = FixedPoint.fromDouble(0.0, dataWidth.W, binaryPoint.BP)
+    val kernelC7 = FixedPoint.fromDouble(1.0, dataWidth.W, binaryPoint.BP)
+    val kernelC8 = FixedPoint.fromDouble(0.0, dataWidth.W, binaryPoint.BP)
 
     /*
     val kernelC0 = FixedPoint.fromDouble(0 ,32.W,16.BP)
