@@ -1,14 +1,9 @@
-#include <stdio.h>
-#include "em_chip.h"
 #include "em_cmu.h"
-#include "em_device.h"
 #include "em_emu.h"
 #include "em_gpio.h"
-#include "em_lcd.h"
 #include "em_timer.h"
 #include "em_prs.h"
 #include "em_usart.h"
-#include "segmentlcd.h"
 #include "sensor.h"
 
 #define SENSOR_USART UART0
