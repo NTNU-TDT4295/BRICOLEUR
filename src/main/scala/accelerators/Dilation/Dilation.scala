@@ -179,18 +179,6 @@ class Dilation(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extend
     kernel_0 := fifo1_0.io.dataOut * kernelC0
 
     // The output function
-    /*io.tdata := //(
-      kernel_0 +
-        kernel_1 +
-        kernel_2 +
-        kernel_3 +
-        kernel_4 +
-        kernel_5 +
-        kernel_6 +
-        kernel_7 +
-        kernel_8 //).asUInti
-        */
-
     val kernels = Array(
       fifo2_1.io.dataOut
       , fifo4_3.io.dataOut
@@ -208,8 +196,6 @@ class Dilation(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extend
     }
 
     io.tdata := kernels(0).max(kernels(1).max(kernels(2).max(kernels(3).max(kernels(4)))))
-
-
   }.otherwise {
     isPushing := false.B
   }
