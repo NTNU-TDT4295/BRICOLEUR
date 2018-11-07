@@ -7,12 +7,14 @@
 #include "sensor.h"
 
 #define SENSOR_USART UART0
+#define SENSOR_USART_PORT gpioPortA
+#define SENSOR_USART_PIN 0
 
 #define NUM_TRIGGERS 2
 
 const Triggers triggers[] = {
-	{.port = gpioPortD, .pin = 6},
-	{.port = gpioPortD, .pin = 5}
+	{.port = gpioPortA, .pin = 3},
+	{.port = gpioPortA, .pin = 4}
 	// Add more trigger port-pin pairs for more sensors here
 };
 
@@ -135,12 +137,12 @@ void setupSensor(void) {
 	SENSOR_USART->ROUTE = USART_ROUTE_RXPEN;
 	SENSOR_USART->CTRL |= USART_CTRL_RXINV;
 
-	GPIO_PinModeSet(gpioPortD, 2, gpioModeInput, 0);
-	GPIO_ExtIntConfig(gpioPortD, 2, 2, false, false, false);
+	GPIO_PinModeSet(SENSOR_USART_PORT, SENSOR_USART_PIN, gpioModeInput, 0);
+	GPIO_ExtIntConfig(SENSOR_USART_PORT, SENSOR_USART_PIN, SENSOR_USART_PIN, false, false, false);
 
 	PRS_SourceSignalSet(uartPRSchannel,
 						PRS_CH_CTRL_SOURCESEL_GPIOL,
-						PRS_CH_CTRL_SIGSEL_GPIOPIN2,
+						PRS_CH_CTRL_SIGSEL_GPIOPIN0,
 						prsEdgeOff);
 
 	NVIC_EnableIRQ(UART0_RX_IRQn);
