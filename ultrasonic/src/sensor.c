@@ -11,8 +11,6 @@
 #include "segmentlcd.h"
 #include "sensor.h"
 
-#define BUF_LEN 8
-
 #define SENSOR_USART UART0
 
 #define NUM_TRIGGERS 2
