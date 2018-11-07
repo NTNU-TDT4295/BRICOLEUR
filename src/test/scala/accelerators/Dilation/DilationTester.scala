@@ -16,7 +16,7 @@ class DilationUnitTester(c: Dilation, dataWidth:Int, binaryPoint:Int) extends Pe
     FixedPoint.fromDouble(0, dataWidth.W, binaryPoint.BP)
   }
   for (jj <- testArray.indices) {
-	testArray(jj) = FixedPoint.fromDouble(127, dataWidth.W, binaryPoint.BP)
+	testArray(jj) = FixedPoint.fromDouble(jj, dataWidth.W, binaryPoint.BP)
   }
   //Array for the values that comes out of the pipe
   val resultArray: Array[Int] = Array.fill((c.myWidth - 2) * (c.myHeight - 2)) {
