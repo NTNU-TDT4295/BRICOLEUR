@@ -48,11 +48,22 @@ while True:
     if frame is None:
         break
 
-    #resize the frame, convert it to grayscale, and blur it
+    # resize the frame, convert it to grayscale, and blur it
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-
     gray = cv2.GaussianBlur(gray, (21, 21), 0)
+    file = open(str(count) + ".txt", "w")
+    for y in range(0, 720):
+        for x in range(0, 1080):
+            if y == 720 - 1 and x == 1080 - 1:
+                file.write(str(gray[y][x]))
+                break
+
+            file.write(str(gray[y][x]))
+            file.write(" ")
+
+    print("image written")
+    count = count + 1
+    file.close()
 
     # if the first frame is None, initialize it
     if firstFrame is None:
