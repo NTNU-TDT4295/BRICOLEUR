@@ -75,6 +75,9 @@ x,y,w,h = 0,0,0,0
 # initialize the first frame in the video stream
 firstFrame = None
 
+# store the positions of the rectangles in the two last frames
+positions = d(maxlen=2)
+
 # Dictionary containing a circular framebuffer and a circular list containing 1 if the frame at the
 # same index showed something incoming or 0 if the frame at the same index didn't show something
 # incoming
@@ -96,6 +99,7 @@ while True:
     # make a new frame to draw rectangles on for visualization purposes
     # drawing on the orignal frame altered results so we keep a spare one
     frame = vs.read()[1]
+    frame = imutils.resize(frame, width=320)
     debugframe = copy.deepcopy(frame)
     # end_r = time.time()
 
@@ -150,6 +154,8 @@ while True:
     # Use this to keep track of the previous bounding box
     newBoundingBox = (0, 0, 0, 0)
 
+    rectangles = []
+
     # loop over the contours
     for c in cnts:
         # if the contour is too small, ignore it
@@ -165,6 +171,9 @@ while True:
         elif(heuristic == Heuristic.biggest):
             if(w*h > newBoundingBox[2]*newBoundingBox[3]):
                 newBoundingBox = (x, y, w, h)
+
+        elif(heuristic == Heuristic.closestpos):
+            rectangles.append((x,y, w, h))
 
         else:
             newBoundingBox = (x, y, w, h)
@@ -188,23 +197,44 @@ while True:
         cv2.rectangle(debugframe, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
     if(heuristic == Heuristic.closestpos):
-        # TODO: implement
-        oldpos = (x,y) # placeholder statement
+        positions.append(rectangles)
+
+        if len(positions) == 2:
+            oldpos = positions[0]
+            newpos = positions[1]
+
+            bestError = 9999
+            bestRectangle = None
+            for coordinateOld in oldpos:
+                for coordinateNew in newpos:
+                    deltaX = abs(coordinateOld[0] - coordinateNew[0])
+                    deltaY = abs(coordinateOld[1] - coordinateNew[1])
+                    error = deltaX + deltaY
+
+                    if error < bestError:
+                        bestError = error
+                        x, y, w, h = coordinateNew[0], coordinateNew[1], coordinateNew[2], coordinateNew[3]
+                        newBoundingBox = (coordinateNew[0], coordinateNew[1], coordinateNew[2], coordinateNew[3])
+                        cv2.rectangle(debugframe, (x, y), (x + w, y + h), (0, 255, 0), 2)
+
+
 
     if compare_bounding_boxes(newBoundingBox, oldBoundingBox):
-        debug['incoming'].append(1)
+    #    debug['incoming'].append(1)
+        print("box bigger")
     else:
-        debug['incoming'].append(0)
+        print("box smaller")
+    #debug['incoming'].append(0)
 
-    if(sum( debug['incoming'] ) > ( buffersize/2 )):
-        print("incoming!")
-    else:
-        print("not incoming!")
+    #if(sum( debug['incoming'] ) > ( buffersize/2 )):
+    #    print("incoming!")
+    #else:
+    #    print("not incoming!")
 
     oldBoundingBox = newBoundingBox
 
     cv2.imshow('thresh',thresh)
-    cv2.imshow('frame',debugframe)
+    cv2.imshow('debugframe',debugframe)
     if( cv2.waitKey(1) == 27):
         break
     firstFrame = gray
