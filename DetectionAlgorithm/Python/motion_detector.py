@@ -4,7 +4,9 @@
 
 # import the necessary packages
 from imutils.video import VideoStream
+from collections import deque as d
 from enum import Enum
+import numpy as np
 import argparse
 import datetime
 import imutils
@@ -12,6 +14,7 @@ import cv2
 import time
 import os
 import sys
+import copy
 
 # Working from PyCharm, so just making sure I'm actually running on the PYNQ
 full_path = os.path.realpath(__file__)
@@ -22,15 +25,17 @@ total_time_f = 0
 
 # add new heuristics here
 class Heuristic(Enum):
-    biggest = 0
-    last    = 1
-    closest = 2
+    biggest     = 0
+    last        = 1
+    closestsize = 2
+    closestpos  = 3
 
 # and here
 heuristicMap = {
-    "biggest" : Heuristic.biggest,
-    "last"    : Heuristic.last,
-    "closest" : Heuristic.closest,
+    "biggest"     : Heuristic.biggest,
+    "last"        : Heuristic.last,
+    "closestsize" : Heuristic.closestsize,
+    "closestpos"  : Heuristic.closestpos,
 }
 
 # construct the argument parser and parse the arguments
@@ -44,13 +49,10 @@ print(args["heuristic"])
 heuristic = heuristicMap[args["heuristic"]]
 print(heuristic)
 
-vs = cv2.VideoCapture("/home/xilinx/Code/BRICOLEUR/DetectionAlgorithm/TestData/%d-img.png")
-
-# initialize the first frame in the video stream
-firstFrame = None
+# vs = cv2.VideoCapture("/home/xilinx/Code/BRICOLEUR/DetectionAlgorithm/TestData/%d-img.png")
+vs = cv2.VideoCapture(0)
 
 oldBoundingBox = (0, 0, 0, 0)
-
 
 def compare_bounding_boxes(b1, b2):
     """
@@ -64,21 +66,37 @@ def compare_bounding_boxes(b1, b2):
 
     return c1 > c2
 
-
 i = 0
 
 old = -1
+oldpos = (-1,-1)
 x,y,w,h = 0,0,0,0
+
+# initialize the first frame in the video stream
+firstFrame = None
+
+# Dictionary containing a circular framebuffer and a circular list containing 1 if the frame at the
+# same index showed something incoming or 0 if the frame at the same index didn't show something
+# incoming
+buffersize = 5
+debug = {
+        'frameBuffer': d(maxlen=buffersize),
+        'incoming': d(maxlen=buffersize)
+        }
 
 # loop over the frames of the video
 while True:
     # Print the currently processed image in a nice way (replaces the previous print)
-    sys.stdout.write("\rProcessing image {}".format(i))
-    sys.stdout.flush()
+    # sys.stdout.write("\rProcessing image {}".format(i))
+    # sys.stdout.flush()
 
     # grab the current frame and initialize the occupied/unoccupied text
     # start_r = time.time()
+
+    # make a new frame to draw rectangles on for visualization purposes
+    # drawing on the orignal frame altered results so we keep a spare one
     frame = vs.read()[1]
+    debugframe = copy.deepcopy(frame)
     # end_r = time.time()
 
     # total_time_f += end_r - start_r
@@ -97,7 +115,6 @@ while True:
     # start_gb = time.time()
 
     gray = cv2.GaussianBlur(gray, (21, 21), 0)
-
     # end_gb = time.time()
     # total_time_f += end_gb - start_gb
 
@@ -108,11 +125,15 @@ while True:
 
     #compute the absolute difference between the current frame and the first frame
     frameDelta = cv2.absdiff(firstFrame, gray)
-    thresh = cv2.threshold(frameDelta, 25, 255, cv2.THRESH_BINARY)[1]
+    thresh = cv2.threshold(frameDelta, 5, 255, cv2.THRESH_BINARY)[1]
+
+    # Otsu thresholding yields nice results.
+    # thresh = cv2.threshold(frameDelta,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)[1]
 
     # dilate the thresholded image to fill in holes, then find contours on thresholded image
     # start_d = time.time()
-    thresh = cv2.dilate(thresh, None, iterations=2)
+    thresh = cv2.dilate(thresh,None, iterations=2)
+
     # end_d = time.time()
     # total_time_f += end_d - start_d
 
@@ -136,9 +157,9 @@ while True:
             continue
 
         (x, y, w, h) = cv2.boundingRect(c)
-        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
+        cv2.rectangle(debugframe, (x, y), (x + w, y + h), (0, 0, 255), 2)
 
-        if(heuristic == Heuristic.closest):
+        if(heuristic == Heuristic.closestsize):
             epsilon.append( ( (w*h - old),(x,y,w,h) ) )
 
         elif(heuristic == Heuristic.biggest):
@@ -148,7 +169,7 @@ while True:
         else:
             newBoundingBox = (x, y, w, h)
 
-    if(heuristic == Heuristic.closest):
+    if(heuristic == Heuristic.closestsize):
         best = (10000,(0,0,0,0))
         for tuples in epsilon:
             print(f"size: {(tuples[1][2] * tuples[1][3])} error: {abs(tuples[0])}")
@@ -164,21 +185,39 @@ while True:
 
     if(heuristic == Heuristic.biggest):
         (x, y, w, h) = newBoundingBox
-        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+        cv2.rectangle(debugframe, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
+    if(heuristic == Heuristic.closestpos):
+        # TODO: implement
+        oldpos = (x,y) # placeholder statement
 
     if compare_bounding_boxes(newBoundingBox, oldBoundingBox):
-        pass
+        debug['incoming'].append(1)
     else:
-        pass
+        debug['incoming'].append(0)
+
+    if(sum( debug['incoming'] ) > ( buffersize/2 )):
+        print("incoming!")
+    else:
+        print("not incoming!")
 
     oldBoundingBox = newBoundingBox
 
-    cv2.imwrite(format("../Output/tracked%d.png"%i), frame)
+    cv2.imshow('thresh',thresh)
+    cv2.imshow('frame',debugframe)
+    if( cv2.waitKey(1) == 27):
+        break
+    firstFrame = gray
+    debug['frameBuffer'].append(frame)
     i += 1
+    # print(frameBuffer)
+    # cv2.imwrite(format("../Output/tracked%d.png"%i), frame)
 
 # cleanup the camera and close any open windows
 cv2.destroyAllWindows()
+
+print(debug['incoming'])
+print(str( sum(debug['incoming']) )+"/" + str(buffersize))
 
 end = time.time()
 total_time = end - start
