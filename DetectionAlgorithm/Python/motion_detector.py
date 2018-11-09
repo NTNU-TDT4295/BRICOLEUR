@@ -51,6 +51,8 @@ print(heuristic)
 
 # vs = cv2.VideoCapture("/home/xilinx/Code/BRICOLEUR/DetectionAlgorithm/TestData/%d-img.png")
 vs = cv2.VideoCapture(0)
+vs.set(3,320)
+vs.set(4,240)
 
 oldBoundingBox = (0, 0, 0, 0)
 
@@ -68,7 +70,7 @@ def compare_bounding_boxes(b1, b2):
 
 i = 0
 
-old = -1
+oldsize = -1
 oldpos = (-1,-1)
 x,y,w,h = 0,0,0,0
 
@@ -129,14 +131,14 @@ while True:
 
     #compute the absolute difference between the current frame and the first frame
     frameDelta = cv2.absdiff(firstFrame, gray)
-    thresh = cv2.threshold(frameDelta, 5, 255, cv2.THRESH_BINARY)[1]
+    thresh = cv2.threshold(frameDelta, 10, 255, cv2.THRESH_BINARY)[1]
 
-    # Otsu thresholding yields nice results.
-    # thresh = cv2.threshold(frameDelta,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)[1]
+    # Otsu thresholding yields nice visual results.
+    # otsu = cv2.threshold(frameDelta,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)[1]
 
     # dilate the thresholded image to fill in holes, then find contours on thresholded image
     # start_d = time.time()
-    thresh = cv2.dilate(thresh,None, iterations=2)
+    thresh = cv2.dilate(thresh, None, iterations=3)
 
     # end_d = time.time()
     # total_time_f += end_d - start_d
@@ -166,7 +168,7 @@ while True:
         cv2.rectangle(debugframe, (x, y), (x + w, y + h), (0, 0, 255), 2)
 
         if(heuristic == Heuristic.closestsize):
-            epsilon.append( ( (w*h - old),(x,y,w,h) ) )
+            epsilon.append( ( (w*h - oldsize),(x,y,w,h) ) )
 
         elif(heuristic == Heuristic.biggest):
             if(w*h > newBoundingBox[2]*newBoundingBox[3]):
@@ -187,7 +189,7 @@ while True:
                 best = (abs( tuples[0] ) ,tuples[1])
 
         # prettify this. holy shit, why does python let me
-        old       = best[1][2] * best[1][3]
+        oldsize   = best[1][2] * best[1][3]
         (x,y,w,h) = best[1][0],best[1][1],best[1][2],best[1][3],
         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
         newBoundingBox = (x, y, w, h)
@@ -223,7 +225,6 @@ while True:
             cv2.rectangle(debugframe, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
 
-
     if compare_bounding_boxes(newBoundingBox, oldBoundingBox):
         framebuffer['incoming'].append(1)
         # print("box bigger")
@@ -239,7 +240,9 @@ while True:
     oldBoundingBox = newBoundingBox
 
     cv2.imshow('thresh',thresh)
+    # cv2.imshow('otsu',otsu)
     cv2.imshow('debugframe',debugframe)
+
     if( cv2.waitKey(1)&0xFF == 27):
         break
     firstFrame = gray
@@ -260,3 +263,6 @@ total_time = end - start
 print("\nTotal time in <function> is = ", total_time_f * 1000, "ms")
 
 print("\nTime = ", total_time * 1000)
+
+print(vs.get(3))
+print(vs.get(4))
