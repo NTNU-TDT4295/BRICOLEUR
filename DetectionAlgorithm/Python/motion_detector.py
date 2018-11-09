@@ -81,10 +81,10 @@ positions = d(maxlen=2)
 # Dictionary containing a circular framebuffer and a circular list containing 1 if the frame at the
 # same index showed something incoming or 0 if the frame at the same index didn't show something
 # incoming
-buffersize = 5
-debug = {
-        'frameBuffer': d(maxlen=buffersize),
-        'incoming': d(maxlen=buffersize)
+BUFFERSIZE = 5
+framebuffer = {
+        'frameBuffer': d(maxlen=BUFFERSIZE),
+        'incoming': d(maxlen=BUFFERSIZE)
         }
 
 # loop over the frames of the video
@@ -198,6 +198,7 @@ while True:
 
     if(heuristic == Heuristic.closestpos):
         positions.append(rectangles)
+        best = (0,0,0,0)
 
         if len(positions) == 2:
             oldpos = positions[0]
@@ -215,30 +216,34 @@ while True:
                         bestError = error
                         x, y, w, h = coordinateNew[0], coordinateNew[1], coordinateNew[2], coordinateNew[3]
                         newBoundingBox = (coordinateNew[0], coordinateNew[1], coordinateNew[2], coordinateNew[3])
-                        cv2.rectangle(debugframe, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                        best = (x,y,w,h)
+                        cv2.rectangle(debugframe, (x, y), (x + w, y + h), (0, 0, 255), 2)
+
+            (x,y,w,h) = best
+            cv2.rectangle(debugframe, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
 
 
     if compare_bounding_boxes(newBoundingBox, oldBoundingBox):
-    #    debug['incoming'].append(1)
-        print("box bigger")
+        framebuffer['incoming'].append(1)
+        # print("box bigger")
     else:
-        print("box smaller")
-    #debug['incoming'].append(0)
+        framebuffer['incoming'].append(0)
+        # print("box smaller")
 
-    #if(sum( debug['incoming'] ) > ( buffersize/2 )):
-    #    print("incoming!")
-    #else:
-    #    print("not incoming!")
+    if(sum( framebuffer['incoming'] ) > ( BUFFERSIZE/2 )):
+       print("box definitely bigger")
+    else:
+       print("box definitely smaller")
 
     oldBoundingBox = newBoundingBox
 
     cv2.imshow('thresh',thresh)
     cv2.imshow('debugframe',debugframe)
-    if( cv2.waitKey(1) == 27):
+    if( cv2.waitKey(1)&0xFF == 27):
         break
     firstFrame = gray
-    debug['frameBuffer'].append(frame)
+    framebuffer['frameBuffer'].append(frame)
     i += 1
     # print(frameBuffer)
     # cv2.imwrite(format("../Output/tracked%d.png"%i), frame)
@@ -246,8 +251,8 @@ while True:
 # cleanup the camera and close any open windows
 cv2.destroyAllWindows()
 
-print(debug['incoming'])
-print(str( sum(debug['incoming']) )+"/" + str(buffersize))
+print(framebuffer['incoming'])
+print(str( sum(framebuffer['incoming']) )+"/" + str(BUFFERSIZE))
 
 end = time.time()
 total_time = end - start
