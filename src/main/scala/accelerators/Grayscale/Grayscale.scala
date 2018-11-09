@@ -17,15 +17,16 @@ class Grayscale extends Module {
     // AXI signals
     val tready = Input(Bool())
     val tvalid = Output(Bool())
-    val tlast = Output(Bool())
     val tdata = Output(FixedPoint(32.W, 16.BP))
     val tkeep = Output(UInt(4.W))
-
+    val lastIn = Input(Bool())
+    val lastOut = Output(Bool())
     val tvalidIn = Input(Bool())
     val treadyOut = Output(Bool())
   })
 
   // Assert tready out only once
+  /*
   val hasAssertedTReadyOut = RegInit(Bool(), false.B)
   when(!hasAssertedTReadyOut) {
     io.treadyOut := true.B
@@ -33,7 +34,7 @@ class Grayscale extends Module {
   }.otherwise {
     io.treadyOut := false.B
   }
-
+*/
   // The three factors that R, G and B color channels should be multipled with, respectively
   val f0: FixedPoint = FixedPoint.fromDouble(0.3, 32.W, 16.BP)
   val f1: FixedPoint = FixedPoint.fromDouble(0.59, 32.W, 16.BP)
@@ -44,46 +45,55 @@ class Grayscale extends Module {
   val started = RegInit(Bool(), false.B)
   //val counter = Counter(3)
   val counter = RegInit(UInt(4.W), 0.U)
-  io.tlast := false.B
+  io.lastOut := false.B
   io.tkeep := ~0.U(4.W)
   io.tvalid := false.B
   io.tdata := out//FixedPoint.fromDouble(0, 32.W, 16.BP)
   val isReady = RegInit(Bool(), false.B)
-
-  io.treadyOut := false.B
-
+  val isValid = RegInit(Bool(), false.B)
+  io.treadyOut := isReady
+  
   when(io.tvalidIn && isReady) {
-    io.treadyOut := true.B
+    //io.treadyOut := true.B
 
     when(counter === 0.U) {
       out := io.dataIn * f0
       counter := counter + 1.U
-      //when(started) {
-        //io.tvalid := true.B
-        //isReady:= false.B
-      //}.otherwise {
-        //started := true.B
-      //}
+      //isValid := false.B
+      //isReady := false.B
+
+      //io.treadyOut := true.B
     }
 
     when(counter === 1.U) {
       out := out + io.dataIn * f1
       counter := counter + 1.U
+      //isValid := false.B
+      //isReady := false.B
+
+      //io.treadyOut := true.B
     }
 
     when(counter === 2.U) {
       out := out + io.dataIn * f2
       io.tvalid:= true.B
+      //when(io.lastIn){
+        //io.lastOut := true.B
+      //}
       isReady := false.B
+      //io.treadyOut := .B
+      //isValid := false.B
       counter := 0.U
     }
-    //when(isReady) {
-    //  io.tdata := out
-    //}
   }
 
   when(io.tready) {
     isReady := true.B
+    //io.treadyOut := true.B
   }
+  when(io.tvalidIn){
+    isValid := true.B
+  }
+
 
 }

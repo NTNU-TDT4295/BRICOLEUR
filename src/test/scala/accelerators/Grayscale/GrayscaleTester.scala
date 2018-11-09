@@ -87,9 +87,9 @@ class GrayscaleSeveral(c: Grayscale) extends PeekPokeTester(c) {
   val array = Array(1, 2, 3, 2, 3, 4, 3, 4, 5, 4, 5, 6)
   var steps = 0
   var index = 0
-  val expected = Array(463, 719, 975, 1231)
+  val expected = Array(463, 719, 975, 1231) //TODO: 32bit 16 BP fixpoint nao
   val cycles = Array(3, 6, 9, 12)
-
+  poke(c.io.tvalidIn, true.B)
   poke(c.io.tready, true.B)
   for (i <- array) {
     println("cycle:" + steps.toString + "\t output: " + peek(c.io.tdata).toString() + "\tvalid: " + peek(c.io.tvalid).toString())
