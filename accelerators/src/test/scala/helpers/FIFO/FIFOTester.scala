@@ -13,8 +13,8 @@ class FIFOUnitTester(c: FIFO) extends PeekPokeTester(c) {
 
 class FIFOTester extends ChiselFlatSpec {
   "FIFO" should "correctly delay an element" in {
-	iotesters.Driver.execute(() => new FIFO(5,32,16), new TesterOptionsManager) {
-	  c => new FIFOUnitTester(c)
-	} should be(true)
+    iotesters.Driver.execute(() => new FIFO(5, 32, 16), new TesterOptionsManager) {
+      c => new FIFOUnitTester(c)
+    } should be(true)
   }
 }
