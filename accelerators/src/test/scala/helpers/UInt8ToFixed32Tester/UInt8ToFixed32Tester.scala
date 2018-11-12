@@ -6,13 +6,18 @@ import chisel3.iotesters.{ChiselFlatSpec, PeekPokeTester, TesterOptionsManager}
 class UInt8ToFixed32UnitTester(c: UInt8ToFixed32) extends PeekPokeTester(c) {
   poke(c.io.input, 0)
 
-  expectFixedPoint(c.io.output, 0.0, "Didn't get 0 as expected")
+  expect(c.io.output, 0x0)
 
   step(1)
 
   poke(c.io.input, 10)
 
-  expect(c.io.output, 10)
+  expect(c.io.output, 0xA)
+
+  step(1)
+
+  poke(c.io.input, 255)
+  expect(c.io.output, 0xFFFFFFFF)
 }
 
 class UInt8ToFixed32Tester extends ChiselFlatSpec {
