@@ -12,10 +12,6 @@ class GaussianBlur(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) ex
   // would be nice to pass kernel constants
   // and kernel size into the Module as a parameter
 
-  // TODO:
-  // also pass in data width and binary point values
-  // as parameters
-  //  - Joakim
   val io = IO(new Bundle{
     val dataIn   = Input(FixedPoint(dataWidth.W,binaryPoint.BP))
 
@@ -27,7 +23,7 @@ class GaussianBlur(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) ex
     val tdata     = Output(FixedPoint(dataWidth.W, binaryPoint.BP))
     //val tdata      = Output(UInt(dataWidth.W))
     val tkeep     = Output(UInt(4.W))
-    
+
     val lastIn = Input(Bool())
     val lastOut = Output(Bool())
     val debugLast = Output(Bool())
@@ -64,14 +60,14 @@ class GaussianBlur(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) ex
   io.tvalid := false.B
   io.treadyOut := isReadyOut
   io.debugLast := hasAssertedLastOut
-  
+
   when(computationEnded && computationStarted && io.tvalidIn){ //Reset to process new image
     computationEnded := false.B
     computationStarted := false.B
     //hasAssertedLast := false.B
     // See if one needs to flush FIFOS
   }
-  
+
 //  when(io.lastIn){
  //   hasAssertedLast := true.B
 
