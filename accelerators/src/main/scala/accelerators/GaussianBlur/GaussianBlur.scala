@@ -44,7 +44,9 @@ class GaussianBlur(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) ex
   // chaging any code, just the kernel constants
   //  - Joakim
 
-  val counterStart = Counter(1+1+1+1+width-3+1+1+width-3+1+1-6)
+ // val counterStart = Counter(1+1+1+1+width-3+1+1+width-3+1+1-4)
+  //last attempt was +6 
+  val counterStart = Counter(2*(width-3)+5)
   val counterEdge = Counter(2)
   val endOfOutput = Counter((width-2)*(height-2))
   val counterProcess = Counter(width-2)
@@ -65,7 +67,7 @@ class GaussianBlur(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) ex
   io.treadyOut := isReadyOut
   io.debugLast := hasAssertedLastOut
   
-  when(computationEnded && computationStarted && io.tvalidIn){ //Reset to process new image
+  when(computationEnded && computationStarted &&  ~io.tvalidIn){ //Reset to process new image
     computationEnded := false.B
     computationStarted := false.B
     //hasAssertedLast := false.B
@@ -80,9 +82,11 @@ class GaussianBlur(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) ex
   when (isReady && io.tvalidIn) {
     isPushing := true.B
 
+  when(!computationStarted){
     when(counterStart.inc()){
       computationStarted := true.B
     }
+  }
 
     when(computationStarted){
 
@@ -90,7 +94,7 @@ class GaussianBlur(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) ex
         when(counterProcess.inc()){
           processWrapped := true.B
         }
-        }.otherwise{
+      }.otherwise{
           when(counterEdge.inc()){
             processWrapped := false.B
           }
