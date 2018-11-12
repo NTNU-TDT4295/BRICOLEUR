@@ -113,7 +113,7 @@ class GrayscaleSeveral(c: Grayscale) extends PeekPokeTester(c) {
 
 class GrayscaleTester extends ChiselFlatSpec {
   "Grayscale" should "correctly average a single RGB value" in {
-    iotesters.Driver.execute(() => new Grayscale(), new TesterOptionsManager) {
+    iotesters.Driver.execute(() => new Grayscale(32,16), new TesterOptionsManager) {
       c => new GrayscaleOne(c)
     } should be(true)
   }
@@ -124,7 +124,7 @@ class GrayscaleTester extends ChiselFlatSpec {
   }
   */
   "Grayscale" should "correctly average four RGB values" in {
-    iotesters.Driver.execute(() => new Grayscale(), new TesterOptionsManager) {
+    iotesters.Driver.execute(() => new Grayscale(32,16), new TesterOptionsManager) {
       c => new GrayscaleSeveral(c)
     } should be(true)
   }
