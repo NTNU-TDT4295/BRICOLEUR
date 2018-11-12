@@ -51,8 +51,8 @@ print(heuristic)
 
 # vs = cv2.VideoCapture("/home/xilinx/Code/BRICOLEUR/DetectionAlgorithm/TestData/%d-img.png")
 vs = cv2.VideoCapture(0)
-vs.set(3,320)
-vs.set(4,240)
+# vs.set(3,320)
+# vs.set(4,240)
 
 oldBoundingBox = (0, 0, 0, 0)
 
@@ -71,14 +71,15 @@ def compare_bounding_boxes(b1, b2):
 i = 0
 
 oldsize = -1
-oldpos = (-1,-1)
+oldpos = (-1,-1,-1,-1)
 x,y,w,h = 0,0,0,0
 
 # initialize the first frame in the video stream
 firstFrame = None
 
 # store the positions of the rectangles in the two last frames
-positions = d(maxlen=2)
+# positions = d(maxlen=2)
+positions = []
 
 # Dictionary containing a circular framebuffer and a circular list containing 1 if the frame at the
 # same index showed something incoming or 0 if the frame at the same index didn't show something
@@ -120,7 +121,7 @@ while True:
 
     # start_gb = time.time()
 
-    gray = cv2.GaussianBlur(gray, (21, 21), 0)
+    gray = cv2.GaussianBlur(gray, (9,9), 0)
     # end_gb = time.time()
     # total_time_f += end_gb - start_gb
 
@@ -137,14 +138,16 @@ while True:
     # otsu = cv2.threshold(frameDelta,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)[1]
 
     # dilate the thresholded image to fill in holes, then find contours on thresholded image
+    dilation_kernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (3,3))
     # start_d = time.time()
-    thresh = cv2.dilate(thresh, None, iterations=3)
+    thresh = cv2.dilate(thresh, dilation_kernel,iterations=3)
 
     # end_d = time.time()
     # total_time_f += end_d - start_d
 
     start_fc = time.time()
     cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
     end_fc = time.time()
     total_time_f += end_fc - start_fc
 
@@ -183,8 +186,8 @@ while True:
     if(heuristic == Heuristic.closestsize):
         best = (10000,(0,0,0,0))
         for tuples in epsilon:
-            print(f"size: {(tuples[1][2] * tuples[1][3])} error: {abs(tuples[0])}")
-            print(f"best: {best}")
+            # print(f"size: {(tuples[1][2] * tuples[1][3])} error: {abs(tuples[0])}")
+            # print(f"best: {best}")
             if(abs(tuples[0]) < best[0]):
                 best = (abs( tuples[0] ) ,tuples[1])
 
@@ -199,38 +202,34 @@ while True:
         cv2.rectangle(debugframe, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
     if(heuristic == Heuristic.closestpos):
-        positions.append(rectangles)
         best = (0,0,0,0)
 
-        if len(positions) == 2:
-            oldpos = positions[0]
-            newpos = positions[1]
-
+        if len(rectangles) >= 2:
             bestError = 9999
             bestRectangle = None
-            for coordinateOld in oldpos:
-                for coordinateNew in newpos:
-                    deltaX = abs(coordinateOld[0] - coordinateNew[0])
-                    deltaY = abs(coordinateOld[1] - coordinateNew[1])
-                    error = deltaX + deltaY
+            for coordinateNew in rectangles:
+                # Normalizing, so we compare the center point of the box
+                # this ignores size differences (which can cause the interpretation of position to
+                # be skewed)
+                deltaX = abs((oldpos[0]+oldpos[2]/2 ) - ( coordinateNew[0] + coordinateNew[2]/2))
+                deltaY = abs((oldpos[1]+oldpos[3]/2 ) - ( coordinateNew[1] + coordinateNew[3]/2))
+                error = deltaX + deltaY
 
-                    if error < bestError:
-                        bestError = error
-                        x, y, w, h = coordinateNew[0], coordinateNew[1], coordinateNew[2], coordinateNew[3]
-                        newBoundingBox = (coordinateNew[0], coordinateNew[1], coordinateNew[2], coordinateNew[3])
-                        best = (x,y,w,h)
-                        cv2.rectangle(debugframe, (x, y), (x + w, y + h), (0, 0, 255), 2)
+                if error < bestError:
+                    bestError = error
+                    x, y, w, h = coordinateNew[0], coordinateNew[1], coordinateNew[2], coordinateNew[3]
+                    newBoundingBox = (coordinateNew[0], coordinateNew[1], coordinateNew[2], coordinateNew[3])
+                    best = (x,y,w,h)
 
             (x,y,w,h) = best
+            oldpos = best
             cv2.rectangle(debugframe, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
 
     if compare_bounding_boxes(newBoundingBox, oldBoundingBox):
         framebuffer['incoming'].append(1)
-        # print("box bigger")
     else:
         framebuffer['incoming'].append(0)
-        # print("box smaller")
 
     if(sum( framebuffer['incoming'] ) > ( BUFFERSIZE/2 )):
        print("box definitely bigger")
@@ -240,7 +239,6 @@ while True:
     oldBoundingBox = newBoundingBox
 
     cv2.imshow('thresh',thresh)
-    # cv2.imshow('otsu',otsu)
     cv2.imshow('debugframe',debugframe)
 
     if( cv2.waitKey(1)&0xFF == 27):
