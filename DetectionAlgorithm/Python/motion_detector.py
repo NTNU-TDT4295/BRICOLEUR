@@ -29,6 +29,7 @@ class Heuristic(Enum):
     last        = 1
     closestsize = 2
     closestpos  = 3
+    composite   = 4
 
 # and here
 heuristicMap = {
@@ -36,6 +37,7 @@ heuristicMap = {
     "last"        : Heuristic.last,
     "closestsize" : Heuristic.closestsize,
     "closestpos"  : Heuristic.closestpos,
+    "composite"   : Heuristic.composite,
 }
 
 # construct the argument parser and parse the arguments
@@ -77,17 +79,15 @@ x,y,w,h = 0,0,0,0
 # initialize the first frame in the video stream
 firstFrame = None
 
-# store the positions of the rectangles in the two last frames
-# positions = d(maxlen=2)
-positions = []
-
 # Dictionary containing a circular framebuffer and a circular list containing 1 if the frame at the
 # same index showed something incoming or 0 if the frame at the same index didn't show something
 # incoming
-BUFFERSIZE = 5
+BUFFERSIZESMALL = 5
+BUFFERSIZELONG  = 30
 framebuffer = {
-        'frameBuffer': d(maxlen=BUFFERSIZE),
-        'incoming': d(maxlen=BUFFERSIZE)
+        'frameBuffer': d(maxlen=BUFFERSIZELONG,iterable=[0 for x in range(BUFFERSIZELONG)]),
+        'incomingshort': d(maxlen=BUFFERSIZESMALL, iterable=[0 for x in range(BUFFERSIZESMALL)]),
+        'incominglong': d(maxlen=BUFFERSIZELONG, iterable=[0 for x in range(BUFFERSIZELONG)])
         }
 
 # loop over the frames of the video
@@ -155,10 +155,8 @@ while True:
 
     # store error values to find the best match later
     epsilon = []
-
     # Use this to keep track of the previous bounding box
     newBoundingBox = (0, 0, 0, 0)
-
     rectangles = []
 
     # loop over the contours
@@ -170,14 +168,14 @@ while True:
         (x, y, w, h) = cv2.boundingRect(c)
         cv2.rectangle(debugframe, (x, y), (x + w, y + h), (0, 0, 255), 2)
 
-        if(heuristic == Heuristic.closestsize):
+        if(heuristic in [ Heuristic.closestsize, Heuristic.composite]):
             epsilon.append( ( (w*h - oldsize),(x,y,w,h) ) )
 
         elif(heuristic == Heuristic.biggest):
             if(w*h > newBoundingBox[2]*newBoundingBox[3]):
                 newBoundingBox = (x, y, w, h)
 
-        elif(heuristic == Heuristic.closestpos):
+        elif(heuristic in [ Heuristic.closestpos, Heuristic.composite]):
             rectangles.append((x,y, w, h))
 
         else:
@@ -193,12 +191,18 @@ while True:
 
         # prettify this. holy shit, why does python let me
         oldsize   = best[1][2] * best[1][3]
-        (x,y,w,h) = best[1][0],best[1][1],best[1][2],best[1][3],
+        (x,y,w,h) = best[1][0], best[1][1], best[1][2], best[1][3],
         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
         newBoundingBox = (x, y, w, h)
 
     if(heuristic == Heuristic.biggest):
         (x, y, w, h) = newBoundingBox
+        cv2.rectangle(debugframe, (x, y), (x + w, y + h), (0, 255, 0), 2)
+
+    if(heuristic == Heuristic.composite):
+        # TODO:
+        #implement a combination between closestpos and closestsize
+        (x, y, w, h) = newBoundingBox # Placeholder statements
         cv2.rectangle(debugframe, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
     if(heuristic == Heuristic.closestpos):
@@ -209,8 +213,8 @@ while True:
             bestRectangle = None
             for coordinateNew in rectangles:
                 # Normalizing, so we compare the center point of the box
-                # this ignores size differences (which can cause the interpretation of position to
-                # be skewed)
+                # this ignores size differences (which can cause the
+                # interpretation of position to be skewed)
                 deltaX = abs((oldpos[0]+oldpos[2]/2 ) - ( coordinateNew[0] + coordinateNew[2]/2))
                 deltaY = abs((oldpos[1]+oldpos[3]/2 ) - ( coordinateNew[1] + coordinateNew[3]/2))
                 error = deltaX + deltaY
@@ -224,17 +228,55 @@ while True:
             (x,y,w,h) = best
             oldpos = best
             cv2.rectangle(debugframe, (x, y), (x + w, y + h), (0, 255, 0), 2)
-
+        elif len(rectangles) == 1:
+            x, y, w, h = rectangles[0][0], rectangles[0][1], rectangles[0][2], rectangles[0][3]
+            cv2.rectangle(debugframe, (x, y), (x + w, y + h), (0, 255, 0), 2)
+            best = (x,y,w,h)
 
     if compare_bounding_boxes(newBoundingBox, oldBoundingBox):
-        framebuffer['incoming'].append(1)
+        framebuffer['incomingshort'].append(1)
+        framebuffer['incominglong' ].append(1)
+        framebuffer['frameBuffer'  ].append(2*newBoundingBox[2] + 2*newBoundingBox[3])
     else:
-        framebuffer['incoming'].append(0)
+        framebuffer['incomingshort'].append(0)
+        framebuffer['incominglong' ].append(0)
+        framebuffer['frameBuffer'  ].append(2*newBoundingBox[2] + 2*newBoundingBox[3])
 
-    if(sum( framebuffer['incoming'] ) > ( BUFFERSIZE/2 )):
-       print("box definitely bigger")
+
+    # if(sum( framebuffer['incomingshort'] ) > ( BUFFERSIZESMALL/2 )):
+    #    print("box definitely bigger")
+    # else:
+    #    print("box definitely smaller")
+
+    # print(sum( framebuffer['incominglong'] ))
+    # probability = [x for x in framebuffer['frameBuffer']]
+    # print(probability)
+    # print(framebuffer['incominglong'])
+
+    tot             = 0
+    prob            = 0
+    positivesamples = 0
+    for i in range(BUFFERSIZELONG):
+        # print(framebuffer['incominglong'][i],end=" ")
+        # print(framebuffer['frameBuffer'][i])
+        tot += framebuffer['frameBuffer'][i]
+        if(framebuffer['incominglong'][i] == 1):
+            prob += framebuffer['frameBuffer'][i]
+            positivesamples += 1
+
+    print(tot)
+    print(prob)
+    if(tot != 0 and positivesamples > 3):
+        prob /= tot
     else:
-       print("box definitely smaller")
+        prob= 0
+
+    print(prob)
+
+    if(sum(framebuffer['incominglong']) > ((2*BUFFERSIZELONG)/3)):
+        print("i think we're colliding")
+
+    print("=========")
 
     oldBoundingBox = newBoundingBox
 
@@ -244,7 +286,7 @@ while True:
     if( cv2.waitKey(1)&0xFF == 27):
         break
     firstFrame = gray
-    framebuffer['frameBuffer'].append(frame)
+    # framebuffer['frameBuffer'].append(frame)
     i += 1
     # print(frameBuffer)
     # cv2.imwrite(format("../Output/tracked%d.png"%i), frame)
@@ -252,8 +294,8 @@ while True:
 # cleanup the camera and close any open windows
 cv2.destroyAllWindows()
 
-print(framebuffer['incoming'])
-print(str( sum(framebuffer['incoming']) )+"/" + str(BUFFERSIZE))
+print(framebuffer['incomingshort'])
+print(str( sum(framebuffer['incomingshort']) )+"/" + str(BUFFERSIZESMALL))
 
 end = time.time()
 total_time = end - start
