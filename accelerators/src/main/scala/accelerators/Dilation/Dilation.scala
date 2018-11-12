@@ -12,10 +12,6 @@ class Dilation(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extend
   // would be nice to pass kernel constants
   // and kernel size into the Module as a parameter
 
-  // TODO:
-  // also pass in data width and binary point values
-  // as parameters
-  //  - Joakim
   val io = IO(new Bundle {
     val dataIn = Input(FixedPoint(dataWidth.W, binaryPoint.BP))
 
