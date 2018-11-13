@@ -8,5 +8,5 @@ class Fixed32ToUInt8() extends Module {
     val output = Output(UInt(8.W))
   })
 
-  io.output := io.input
+  io.output := io.input>>16.U
 }
