@@ -298,6 +298,10 @@ int main(void) {
         float ultrasonicLocalConclusion = getUltrasonicLocalConclusion(&buffer, positions, previousDistances);
         float ultrasonicGlobalConlusion = localToGlobalConclusion(ultrasonicLocalConclusion, 0, 1);
 
+        // End sensor reading line
+        USART_Tx(USART1, '\n');
+
+        /*
         // Transmit sensor data to PYNQ
         USART_send(USART0, FPGA_Tx_String);
         // Receive data from PYNQ, write to AUX_Buf
@@ -308,5 +312,6 @@ int main(void) {
 
         // Output new instruction to external device
         USART_send(USART1, AUX_Tx_String); // Forward FPGA instructions to device
+        */
     }
 }

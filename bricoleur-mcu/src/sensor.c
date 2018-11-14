@@ -73,6 +73,10 @@ unsigned int ping_ez0(GPIO_Port_TypeDef port, unsigned int pin) {
 	unsigned int digit3 = USART_Rx(SENSOR_USART) - '0';
 	unsigned int digit2 = USART_Rx(SENSOR_USART) - '0';
 	unsigned int digit1 = USART_Rx(SENSOR_USART) - '0';
+	USART_Tx(USART1, digit3 + '0');
+	USART_Tx(USART1, digit2 + '0');
+	USART_Tx(USART1, digit1 + '0');
+	USART_Tx(USART1, ';');
 	USART_Rx(SENSOR_USART);  // \r
 	unsigned int inch_distance = digit3 * 100 + digit2 * 10 + digit1;
 	delay(5);
