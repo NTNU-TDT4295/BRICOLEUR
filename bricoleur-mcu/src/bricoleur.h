@@ -31,8 +31,8 @@
 #define USART_AUX_RX 1
 #define USART_AUX_CLK 7
 #define USART_AUX_CS 8  // Unused
-#define USART_AUX_LOC USART_ROUTE_LOCATION_LOC1
-#define USART_AUX_PORTNUM 1
+#define USART_AUX_LOC USART_ROUTE_LOCATION_LOC0
+#define USART_AUX_PORTNUM 0
 
 // USART-FPGA - data transfer to and from PYNQ
 #define USART_FPGA_PORT gpioPortC

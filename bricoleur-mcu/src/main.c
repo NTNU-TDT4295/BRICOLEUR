@@ -97,17 +97,14 @@ void do_usart_setup() {
     CMU_ClockEnable(cmuClock_GPIO, true);
 
     /*
-     * Setup for USART1 / USART-AUX
+     * Setup for USART1 / USART-AUX as UART
      */
   
     CMU_ClockEnable(cmuClock_USART1, true);
-    // Synchronous
-    USART_InitSync_TypeDef initSync1 = USART_INITSYNC_DEFAULT;
-    /* Operate as SPI master */
-    initSync1.master = true;
-    /* Clock idle low, sample on falling edge. */
-    initSync1.clockMode = usartClockMode1;
-    USART_InitSync(USART1, &initSync1);
+    // Asynchronous
+    USART_InitAsync_TypeDef initAsync1 = USART_INITASYNC_DEFAULT;
+    initAsync1.baudrate = 115200;
+    USART_InitAsync(USART1, &initAsync1);
 
     /* Pin numbers:
      * Name             MCU    EXP
@@ -118,18 +115,12 @@ void do_usart_setup() {
      */
 
     /* Enable I/O and set location */
-    USART1->ROUTE = USART_ROUTE_RXPEN | USART_ROUTE_TXPEN | USART_ROUTE_LOCATION_LOC1;
-    /* Also enable CS and CLK pins if the USART is configured for synchronous mode.
-     * Set GPIO mode. */
-    USART1->ROUTE |= USART_ROUTE_CSPEN | USART_ROUTE_CLKPEN;
+    USART1->ROUTE = USART_ROUTE_RXPEN | USART_ROUTE_TXPEN | USART_AUX_LOC;
+    /* Set GPIO mode. */
     GPIO_PinModeSet((GPIO_Port_TypeDef)AF_USART1_TX_PORT(USART_AUX_PORTNUM),
-       AF_USART1_TX_PIN(USART_AUX_PORTNUM), gpioModePushPull, 0);
+       AF_USART1_TX_PIN(USART_AUX_PORTNUM), gpioModePushPull, 1);
     GPIO_PinModeSet((GPIO_Port_TypeDef)AF_USART1_RX_PORT(USART_AUX_PORTNUM), 
       AF_USART1_RX_PIN(USART_AUX_PORTNUM), gpioModeInput, 0);
-    GPIO_PinModeSet((GPIO_Port_TypeDef)AF_USART1_CS_PORT(USART_AUX_PORTNUM), 
-      AF_USART1_CS_PIN(USART_AUX_PORTNUM), gpioModePushPull, 0);
-    GPIO_PinModeSet((GPIO_Port_TypeDef)AF_USART1_CLK_PORT(USART_AUX_PORTNUM),
-      AF_USART1_CLK_PIN(USART_AUX_PORTNUM), gpioModePushPull, 0);
 
     /*
      * Setup for USART0 / USART-PYNQ
@@ -154,10 +145,10 @@ void do_usart_setup() {
      */
 
     /* Enable I/O and set location */
-    USART1->ROUTE = USART_ROUTE_RXPEN | USART_ROUTE_TXPEN | USART_FPGA_LOC;
+    USART0->ROUTE = USART_ROUTE_RXPEN | USART_ROUTE_TXPEN | USART_FPGA_LOC;
     /* Also enable CS and CLK pins if the USART is configured for synchronous mode.
      * Set GPIO mode. */
-    USART1->ROUTE |= USART_ROUTE_CSPEN | USART_ROUTE_CLKPEN;
+    USART0->ROUTE |= USART_ROUTE_CSPEN | USART_ROUTE_CLKPEN;
     GPIO_PinModeSet((GPIO_Port_TypeDef)AF_USART1_TX_PORT(USART_FPGA_PORTNUM),
       AF_USART1_TX_PIN(USART_FPGA_PORTNUM), gpioModePushPull, 0);
     GPIO_PinModeSet((GPIO_Port_TypeDef)AF_USART1_RX_PORT(USART_FPGA_PORTNUM),
