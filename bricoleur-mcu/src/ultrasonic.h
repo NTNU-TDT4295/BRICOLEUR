@@ -10,8 +10,6 @@
 
 #include <stdbool.h>
 
-#define numberOfSensors 2
-
 // 2D line on the form y = ax + b
 typedef struct Line {
     float a;

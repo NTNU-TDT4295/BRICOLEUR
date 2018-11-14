@@ -21,7 +21,7 @@
 #define ULTRA_RX0 3
 #define ULTRA_RX1 4 
 #define ULTRA_RX2 5
-#define ULTRA_NUM 3  // Number of sensors in use
+#define ULTRA_NUM 2  // Number of sensors in use
 
 // USART-AUX - feeds status to external entity
 // NOTE: There are two different ports, sorry

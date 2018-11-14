@@ -12,12 +12,13 @@
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
+#include "bricoleur.h"
 #include "sensor.h"
 
 // The x-coordinate offset from origo for each of the sensors in inches
 const float sensorOffset2D[] = {0, 5.7};
 
-unsigned int wallDistances[numberOfSensors];
+unsigned int wallDistances[ULTRA_NUM];
 
 Buffer conclusionsBuffer;
 #define conclusionsLength 5
@@ -27,7 +28,7 @@ void setWallDistances(unsigned int wallDistances[]) {
 	// Increasing this value will increase our confidence that we are seeing
 	// the wall, but also require a longer setup time
 	const unsigned int distancePairCount = 3;
-	unsigned int distancePairs[distancePairCount][numberOfSensors];
+	unsigned int distancePairs[distancePairCount][ULTRA_NUM];
 	bool moving = true;
 	unsigned int treshold = 0;
 	unsigned int attempts = 0;
@@ -37,7 +38,7 @@ void setWallDistances(unsigned int wallDistances[]) {
 		moving = false;
 
 		for (unsigned int i = 0; i < distancePairCount; i++) {
-			getInput(distancePairs[i], numberOfSensors);
+			getInput(distancePairs[i], ULTRA_NUM);
 			attempts++;
 
 			if (attempts > 10) {
@@ -54,7 +55,7 @@ void setWallDistances(unsigned int wallDistances[]) {
 		}
 	}
 
-	memcpy(wallDistances, distancePairs[0], numberOfSensors * sizeof(float));
+	memcpy(wallDistances, distancePairs[0], ULTRA_NUM * sizeof(float));
 }
 
 
@@ -74,7 +75,7 @@ void getInput(unsigned int distances[], unsigned int length) {
 
 
 bool isMoving(unsigned int distances[], unsigned int previousDistances[], unsigned int treshold) {
-	for (unsigned int i = 0; i < numberOfSensors; i++) {
+	for (unsigned int i = 0; i < ULTRA_NUM; i++) {
 		// If the difference in the distance is less than the error margin, we
 		// can't guarantee that the distance is actually different and that the
 		// object is actually moving
@@ -215,7 +216,7 @@ float chanceOfCollision(Line *line) {
 
 	// Center lies in the middle of the edges of the system.
 	// TODO: Actknowledge that the system is wider than just the sensors. There's a box on the outside.
-	float center = fabsf(sensorOffset2D[0] - sensorOffset2D[numberOfSensors - 1]) / 2;
+	float center = fabsf(sensorOffset2D[0] - sensorOffset2D[ULTRA_NUM - 1]) / 2;
 	float centerToXDistance = fabsf(center - x);
 	float centerToEdgeDistance = fabsf(center - sensorOffset2D[0]);
 	const float edgeValue = 0.8;  // Value we assign if the object will hit the edge of the system.
@@ -297,11 +298,11 @@ float getUltrasonicLocalConclusion(Buffer *buffer, Position positions[], unsigne
 	Position position;
 	Line line;
 
-	unsigned int distances[numberOfSensors];
+	unsigned int distances[ULTRA_NUM];
 
-	getInput(distances, numberOfSensors);
+	getInput(distances, ULTRA_NUM);
 
-	int status = getPosition(&position, distances, numberOfSensors);
+	int status = getPosition(&position, distances, ULTRA_NUM);
 
 	if (status != 0) {
 		flushBuffer(buffer);
@@ -340,7 +341,7 @@ float getUltrasonicLocalConclusion(Buffer *buffer, Position positions[], unsigne
 	}
 
 	// Pseudocode: previousDistances = distances
-	memcpy(previousDistances, distances, numberOfSensors * sizeof(float));
+	memcpy(previousDistances, distances, ULTRA_NUM * sizeof(float));
 
 	return getConclusion();
 }
