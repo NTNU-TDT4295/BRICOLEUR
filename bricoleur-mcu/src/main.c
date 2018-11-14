@@ -50,6 +50,10 @@
  ****************/
 #define numberOfSensors 2
 
+/* Output scale used by the imponator
+ ********************/
+#define outputMin 180
+#define outputMax 360
 
 /* USART transmission
  *******************/
@@ -239,6 +243,14 @@ void createCommand(USART_Buffer *input, char *outString) {
     *outString = strdup(input->data);
 }
 
+// Scale linearly to degrees, which the servo will use
+unsigned int localToGlobalConclusion(float input, float inputMin, float inputMax) {
+	float sloap = (outputMax - outputMin) / (inputMax - inputMin);
+	unsigned int conclusion = (unsigned int)((outputMax - outputMin) + (input * sloap));
+
+	return conclusion;
+}
+
 /**************************************************************************//**
  * @brief  Main function
  *****************************************************************************/
@@ -290,7 +302,10 @@ int main(void) {
         // Read sensor data sequentially from active sensors
 
         // Perform sensor analysis
-		bool will_collide = willCollideUltrasonic(&buffer, positions, previousDistances);
+        // Local conclusion is the conclusion in a scale defined by the ultrasonic system
+        // Global conclusion is the local conclusion mapped to a scale which will be used by the imponator
+        float ultrasonicLocalConclusion = getUltrasonicLocalConclusion(&buffer, positions, previousDistances);
+        float ultrasonicGlobalConlusion = localToGlobalConclusion(ultrasonicLocalConclusion, 0, 1);
 
         // Transmit sensor data to PYNQ
         USART_send(USART0, FPGA_Tx_String);

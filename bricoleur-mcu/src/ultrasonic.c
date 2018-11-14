@@ -200,15 +200,35 @@ void getLine(Line *line, Position positions[], unsigned int length) {
 }
 
 
-bool willCollide2D(Line *line) {
+// return a value for the chance of collision between 0 and 1
+float chanceOfCollision(Line *line) {
 	// TODO: Handle division by zero
 	// TODO: Handle objects that are not moving
-	float x = -(line->b / line->a);
+
 	// This only checks if the object will hit the front of the system.
 	// TODO: Check if the object hits the side of the object
-	bool willCollide = (x >= sensorOffset2D[0] - 10) && (x <= sensorOffset2D[numberOfSensors - 1] + 10);
+	float x = -(line->b / line->a);
 
-	return willCollide; // Check if object hits between sensor1 and sensor2
+	// Center lies in the middle of the edges of the system.
+	// TODO: Actknowledge that the system is wider than just the sensors. There's a box on the outside.
+	float center = fabsf(sensorOffset2D[0] - sensorOffset2D[numberOfSensors - 1]) / 2;
+	float centerToXDistance = fabsf(center - x);
+	float centerToEdgeDistance = fabsf(center - sensorOffset2D[0]);
+	const float edgeValue = 0.8;  // Value we assign if the object will hit the edge of the system.
+
+	float conclusion = 1 - (centerToXDistance / centerToEdgeDistance) * (1 - edgeValue);
+
+	// If the conclusion is well within the system, we set the chance to max
+	if (conclusion > 0.9) {
+		conclusion = 1;
+
+	// If an object is detected at all, we consider there to be at least a
+	// small chance of collision
+	} else if (conclusion < 0.1) {
+		conclusion = 0.1;
+	}
+
+	return conclusion;
 }
 
 
@@ -225,7 +245,7 @@ void setupUltrasonic(Buffer *buffer) {
 }
 
 
-bool willCollideUltrasonic(Buffer *buffer, Position positions[], unsigned int previousDistances[]) {
+float getUltrasonicLocalConclusion(Buffer *buffer, Position positions[], unsigned int previousDistances[]) {
 	Position position;
 	Line line;
 
@@ -236,7 +256,7 @@ bool willCollideUltrasonic(Buffer *buffer, Position positions[], unsigned int pr
 	int status = getPosition(&position, distances, numberOfSensors);
 
 	if (status != 0) {
-		return false;
+		return 0;
 	}
 
 	positions[buffer->tail] = position;
@@ -260,7 +280,7 @@ bool willCollideUltrasonic(Buffer *buffer, Position positions[], unsigned int pr
 		// get a division by zero)
 		if (buffer->length > 1) {
 			getLine(&line, positions, buffer->length);
-			return willCollide2D(&line);
+			return chanceOfCollision(&line);
 		}
 
 	} else {
@@ -273,6 +293,6 @@ bool willCollideUltrasonic(Buffer *buffer, Position positions[], unsigned int pr
 	// Pseudocode: previousDistances = distances
 	memcpy(previousDistances, distances, numberOfSensors * sizeof(float));
 
-	return false;
+	return 0;
 }
 

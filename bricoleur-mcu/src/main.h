@@ -8,4 +8,6 @@
 #ifndef SRC_MAIN_H_
 #define SRC_MAIN_H_
 
+unsigned int localToGlobalConclusion(float input, float inputMin, float inputMax);
+
 #endif /* SRC_MAIN_H_ */
