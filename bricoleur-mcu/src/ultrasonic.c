@@ -19,6 +19,10 @@ const float sensorOffset2D[] = {0, 5.7};
 
 unsigned int wallDistances[numberOfSensors];
 
+Buffer conclusionsBuffer;
+#define conclusionsLength 5
+float conclusions[conclusionsLength];
+
 void setWallDistances(unsigned int wallDistances[]) {
 	// Increasing this value will increase our confidence that we are seeing
 	// the wall, but also require a longer setup time
@@ -232,6 +236,45 @@ float chanceOfCollision(Line *line) {
 }
 
 
+void addConclusion(float conclusion) {
+	conclusions[conclusionsBuffer.tail] = conclusion;
+	conclusionsBuffer.tail = (conclusionsBuffer.tail + 1) % conclusionsBuffer.maxLength;
+
+	if (conclusionsBuffer.tail == 0) {
+		conclusionsBuffer.wrapped = true;
+	}
+
+	if (conclusionsBuffer.wrapped) {
+		conclusionsBuffer.length = conclusionsBuffer.maxLength;
+	} else {
+		conclusionsBuffer.length = conclusionsBuffer.tail;
+	}
+}
+
+
+float getConclusion(void) {
+	if (conclusionsBuffer.length == 0) {
+		return 0;
+	}
+
+	float conclusion = 0;
+
+	for (unsigned int i = 0; i < conclusionsBuffer.length; i++) {
+		conclusion += conclusions[i];
+	}
+
+	conclusion /= conclusionsBuffer.length;
+
+	return conclusion;
+}
+
+void flushBuffer(Buffer *buffer) {
+	buffer->tail = 0;
+	buffer->length = 0;
+	buffer->wrapped = false;
+}
+
+
 void setupUltrasonic(Buffer *buffer) {
 	setupSensor();
 
@@ -242,6 +285,11 @@ void setupUltrasonic(Buffer *buffer) {
 	buffer->length = 0;
 	buffer->maxLength = 2;
 	buffer->wrapped = false;
+
+	conclusionsBuffer.tail = 0;
+	conclusionsBuffer.length = 0;
+	conclusionsBuffer.maxLength = conclusionsLength;
+	conclusionsBuffer.wrapped = false;
 }
 
 
@@ -256,6 +304,8 @@ float getUltrasonicLocalConclusion(Buffer *buffer, Position positions[], unsigne
 	int status = getPosition(&position, distances, numberOfSensors);
 
 	if (status != 0) {
+		flushBuffer(buffer);
+		flushBuffer(&conclusionsBuffer);
 		return 0;
 	}
 
@@ -280,19 +330,18 @@ float getUltrasonicLocalConclusion(Buffer *buffer, Position positions[], unsigne
 		// get a division by zero)
 		if (buffer->length > 1) {
 			getLine(&line, positions, buffer->length);
-			return chanceOfCollision(&line);
+			addConclusion(chanceOfCollision(&line));
 		}
 
 	} else {
 		// Flush buffer, only keep the last element
-		buffer->tail = 0;
-		buffer->length = 0;
-		buffer->wrapped = false;
+		flushBuffer(buffer);
+		flushBuffer(&conclusionsBuffer);
 	}
 
 	// Pseudocode: previousDistances = distances
 	memcpy(previousDistances, distances, numberOfSensors * sizeof(float));
 
-	return 0;
+	return getConclusion();
 }
 

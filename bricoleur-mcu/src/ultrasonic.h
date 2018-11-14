@@ -41,5 +41,8 @@ bool isMoving(unsigned int distances[], unsigned int previousDistances[], unsign
 bool isObject(unsigned int distances[]);
 void setWallDistances(unsigned int wallDistances[]);
 float getUltrasonicLocalConclusion(Buffer *buffer, Position positions[], unsigned int previousDistances[]);
+void addConclusion(float conclusion);
+float getConclusion(void);
+void flushBuffer(Buffer *buffer);
 
 #endif /* SRC_ULTRASONIC_H_ */
