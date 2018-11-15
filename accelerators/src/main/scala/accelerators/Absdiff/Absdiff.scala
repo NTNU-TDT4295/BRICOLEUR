@@ -30,7 +30,7 @@ class Absdiff(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extends
   val startCalculating = RegInit(Bool(), false.B)
 
   // Queues
-  val queue = Module(new FIFOAltUInt((width - 2) * (height - 2), dataWidth, binaryPoint))
+  val queue = Module(new FIFOAltUInt(width * height, dataWidth, binaryPoint))
 
   // Checking this boolean value before setting it will make it wait a cycle
   when(startCalculating) {
