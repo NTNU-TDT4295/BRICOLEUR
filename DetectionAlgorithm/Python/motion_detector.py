@@ -83,49 +83,31 @@ firstFrame = None
 # same index showed something incoming or 0 if the frame at the same index didn't show something
 # incoming
 BUFFERSIZESMALL = 5
-BUFFERSIZELONG  = 30
+BUFFERSIZELONG  = 25
 framebuffer = {
-        'frameBuffer': d(maxlen=BUFFERSIZELONG,iterable=[0 for x in range(BUFFERSIZELONG)]),
-        'incomingshort': d(maxlen=BUFFERSIZESMALL, iterable=[0 for x in range(BUFFERSIZESMALL)]),
-        'incominglong': d(maxlen=BUFFERSIZELONG, iterable=[0 for x in range(BUFFERSIZELONG)])
+        # frameBuffer contains area of rectangles
+        'frameBuffer'  : d(maxlen = BUFFERSIZELONG, iterable = [0 for x in range(BUFFERSIZELONG) ]),
+        'incomingshort': d(maxlen = BUFFERSIZESMALL,iterable = [0 for x in range(BUFFERSIZESMALL)]),
+        'incominglong' : d(maxlen = BUFFERSIZELONG, iterable = [0 for x in range(BUFFERSIZELONG) ])
         }
 
 # loop over the frames of the video
 while True:
-    # Print the currently processed image in a nice way (replaces the previous print)
-    # sys.stdout.write("\rProcessing image {}".format(i))
-    # sys.stdout.flush()
-
-    # grab the current frame and initialize the occupied/unoccupied text
-    # start_r = time.time()
 
     # make a new frame to draw rectangles on for visualization purposes
     # drawing on the orignal frame altered results so we keep a spare one
     frame = vs.read()[1]
     frame = imutils.resize(frame, width=320)
     debugframe = copy.deepcopy(frame)
-    # end_r = time.time()
-
-    # total_time_f += end_r - start_r
-
-    # if the frame could not be grabbed, then we have reached the end
-    # of the vide
+    # if the frame could not be grabbed, then
+    # we have reached the end of the video
     if frame is None:
         break
 
     start_cvt = time.time()
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    # end_cvt = time.time()
-
-    # total_time_f += (end_cvt - start_cvt)
-
-    # start_gb = time.time()
-
     gray = cv2.GaussianBlur(gray, (9,9), 0)
-    # end_gb = time.time()
-    # total_time_f += end_gb - start_gb
 
-    # if the first frame is None, initialize it
     if firstFrame is None:
         firstFrame = gray
         continue
@@ -134,23 +116,15 @@ while True:
     frameDelta = cv2.absdiff(firstFrame, gray)
     thresh = cv2.threshold(frameDelta, 10, 255, cv2.THRESH_BINARY)[1]
 
-    # Otsu thresholding yields nice visual results.
+    # Otsu thresholding yields nice visual results. Maybe not useful for our application
     # otsu = cv2.threshold(frameDelta,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)[1]
 
     # dilate the thresholded image to fill in holes, then find contours on thresholded image
     dilation_kernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (3,3))
-    # start_d = time.time()
+    thresh = cv2.erode(thresh, dilation_kernel, iterations=1)
     thresh = cv2.dilate(thresh, dilation_kernel,iterations=3)
 
-    # end_d = time.time()
-    # total_time_f += end_d - start_d
-
-    start_fc = time.time()
     cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
-    end_fc = time.time()
-    total_time_f += end_fc - start_fc
-
     cnts = cnts[0] if imutils.is_cv2() else cnts[1]
 
     # store error values to find the best match later
@@ -169,7 +143,7 @@ while True:
         cv2.rectangle(debugframe, (x, y), (x + w, y + h), (0, 0, 255), 2)
 
         if(heuristic in [ Heuristic.closestsize, Heuristic.composite]):
-            epsilon.append( ( (w*h - oldsize),(x,y,w,h) ) )
+            epsilon.append(((w*h - oldsize),(x,y,w,h)))
 
         elif(heuristic == Heuristic.biggest):
             if(w*h > newBoundingBox[2]*newBoundingBox[3]):
@@ -192,7 +166,7 @@ while True:
         # prettify this. holy shit, why does python let me
         oldsize   = best[1][2] * best[1][3]
         (x,y,w,h) = best[1][0], best[1][1], best[1][2], best[1][3],
-        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+        cv2.rectangle(debugframe, (x, y), (x + w, y + h), (0, 255, 0), 2)
         newBoundingBox = (x, y, w, h)
 
     if(heuristic == Heuristic.biggest):
@@ -215,8 +189,8 @@ while True:
                 # Normalizing, so we compare the center point of the box
                 # this ignores size differences (which can cause the
                 # interpretation of position to be skewed)
-                deltaX = abs((oldpos[0]+oldpos[2]/2 ) - ( coordinateNew[0] + coordinateNew[2]/2))
-                deltaY = abs((oldpos[1]+oldpos[3]/2 ) - ( coordinateNew[1] + coordinateNew[3]/2))
+                deltaX = abs((oldpos[0]+oldpos[2]/2) - (coordinateNew[0] + coordinateNew[2]/2))
+                deltaY = abs((oldpos[1]+oldpos[3]/2) - (coordinateNew[1] + coordinateNew[3]/2))
                 error = deltaX + deltaY
 
                 if error < bestError:
@@ -229,18 +203,25 @@ while True:
             oldpos = best
             cv2.rectangle(debugframe, (x, y), (x + w, y + h), (0, 255, 0), 2)
         elif len(rectangles) == 1:
+            newBoundingBox = (rectangles[0][0], rectangles[0][1], rectangles[0][2], rectangles[0][3])
             x, y, w, h = rectangles[0][0], rectangles[0][1], rectangles[0][2], rectangles[0][3]
             cv2.rectangle(debugframe, (x, y), (x + w, y + h), (0, 255, 0), 2)
             best = (x,y,w,h)
+            oldpos = newBoundingBox
+        else:
+            oldpos = oldpos
+
 
     if compare_bounding_boxes(newBoundingBox, oldBoundingBox):
         framebuffer['incomingshort'].append(1)
         framebuffer['incominglong' ].append(1)
+        print("box bigger")
         framebuffer['frameBuffer'  ].append(2*newBoundingBox[2] + 2*newBoundingBox[3])
     else:
         framebuffer['incomingshort'].append(0)
         framebuffer['incominglong' ].append(0)
         framebuffer['frameBuffer'  ].append(2*newBoundingBox[2] + 2*newBoundingBox[3])
+        print("box smaller")
 
 
     # if(sum( framebuffer['incomingshort'] ) > ( BUFFERSIZESMALL/2 )):
@@ -253,21 +234,24 @@ while True:
     # print(probability)
     # print(framebuffer['incominglong'])
 
-    tot             = 0
+    totArea         = 0
     prob            = 0
     positivesamples = 0
     for i in range(BUFFERSIZELONG):
         # print(framebuffer['incominglong'][i],end=" ")
         # print(framebuffer['frameBuffer'][i])
-        tot += framebuffer['frameBuffer'][i]
+        totArea += framebuffer['frameBuffer'][i]
         if(framebuffer['incominglong'][i] == 1):
             prob += framebuffer['frameBuffer'][i]
             positivesamples += 1
 
-    print(tot)
-    print(prob)
-    if(tot != 0 and positivesamples > 3):
-        prob /= tot
+
+    negativesamples = BUFFERSIZELONG - positivesamples
+
+    print("total: " + str(totArea) + "\tpositive: " + str(positivesamples))
+    print("incom: " + str(prob) + "\tnegative: " + str(negativesamples))
+    if(totArea != 0 and positivesamples > 3 and negativesamples < 20):
+        prob /= totArea
     else:
         prob= 0
 
@@ -275,21 +259,24 @@ while True:
 
     if(sum(framebuffer['incominglong']) > ((2*BUFFERSIZELONG)/3)):
         print("i think we're colliding")
+    else:
+        print("")
 
+    print(str(framebuffer['incominglong']))
     print("=========")
 
     oldBoundingBox = newBoundingBox
 
-    cv2.imshow('thresh',thresh)
+    cv2.imshow('dilated',thresh)
+    # cv2.imshow('pls',pls)
+    cv2.imshow('delta', frameDelta)
     cv2.imshow('debugframe',debugframe)
 
     if( cv2.waitKey(1)&0xFF == 27):
         break
     firstFrame = gray
-    # framebuffer['frameBuffer'].append(frame)
+
     i += 1
-    # print(frameBuffer)
-    # cv2.imwrite(format("../Output/tracked%d.png"%i), frame)
 
 # cleanup the camera and close any open windows
 cv2.destroyAllWindows()
