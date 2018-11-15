@@ -35,56 +35,78 @@ class AbsdiffUnitTester(c: Absdiff, width: Int, height: Int, dataWidth: Int, bin
     0.U
   }
 
+  /*
+  This is the expected output:
+    99 97 95 93 91 89 87 85 83 81
+    79 77 75 73 71 69 67 65 63 61
+    59 57 55 53 51 49 47 45 43 41
+    39 37 35 33 31 29 27 25 23 21
+    19 17 15 13 11  9  7  5  3  1
+    1  3  5  7  9 11 13 15 17 19
+    21 23 25 27 29 31 33 35 37 39
+    41 43 45 47 49 51 53 55 57 59
+    61 63 65 67 69 71 73 75 77 79
+    81 83 85 87 89 91 93 95 97 99
+   */
+  val firstPart: Array[UInt] = Array.fill(numberOfElements / 2) {
+    1.U
+  }
+
+  for (i <- firstPart.indices) {
+    if (i > 0) {
+      firstPart(i) = (1 + 2 * i).U
+    } else {
+      firstPart(i) = 1.U
+    }
+  }
+
+  val expectedResults: Array[UInt] = firstPart.clone().reverse ++ firstPart
+
   // Send all but the last value
   for (i <- image1.indices) {
-    // If we're at the last index, assert that this is in fact the last index
+    poke(c.io.input, image1(i))
+
     if (i == image1.length - 1) {
+      // If we're at the last index, assert that this is in fact the last index
       poke(c.io.lastIn, true.B)
-      poke(c.io.input, image1(i))
     } else {
-      poke(c.io.input, image1(i))
       step(1)
     }
   }
 
-  // Wait a cycle so that the first output value can be computed
   step(1)
 
   poke(c.io.lastIn, false.B)
 
   for (i <- resultValues.indices) {
     poke(c.io.input, image2(i))
+
     step(1)
-    val actualOutput = peek(c.io.output).U
-    var expectedOutput = 0.U
 
-    if (image1(i) >= image2(i)) {
-      expectedOutput = Math.abs(image1(i) - image2(i)).asUInt()
-    } else {
-      expectedOutput = Math.abs(image2(i) - image1(i)).asUInt()
-    }
-
-    resultValues(i) = actualOutput
-    expect(c.io.output, expectedOutput)
+    resultValues(i) = peek(c.io.output).U
+    expect(c.io.output, expectedResults(i))
   }
 
-  print("\n=========== Output from absdiff ================== \n")
+  print("\n=========== Output from absdiff ================== \n\n")
+  val arrayToEnumerat: Array[UInt] = expectedResults
   var otherCounter = 0
-  for (i <- resultValues.indices) {
-    if (resultValues(i).toInt <= 10) {
+  print("\t")
+  for (i <- arrayToEnumerat.indices) {
+    if (arrayToEnumerat(i).toInt <= 10) {
       // Pad the first ten numbers for b-e-a-utiful output
-      print(s"% 2d ".format(resultValues(i).toInt))
+      print(s"% 2d ".format(arrayToEnumerat(i).toInt))
     } else {
-      print(s"${resultValues(i).toInt} ")
+      print(s"${arrayToEnumerat(i).toInt} ")
     }
 
     if (otherCounter == 9) {
-      print("\n")
+      print("\n\t")
       otherCounter = 0
     } else {
       otherCounter += 1
     }
   }
+  print("\n=========== Output from absdiff ==================\n\n")
 }
 
 class AbsdiffTester extends ChiselFlatSpec {
