@@ -47,14 +47,13 @@ ap.add_argument("-a", "--min-area", type=int, default=500, help="minimum area si
 ap.add_argument("--heuristic", type=str, default="biggest", help="which heuristic to use")
 args = vars(ap.parse_args())
 
-print(args["heuristic"])
 heuristic = heuristicMap[args["heuristic"]]
 print(heuristic)
 
 # vs = cv2.VideoCapture("/home/xilinx/Code/BRICOLEUR/DetectionAlgorithm/TestData/%d-img.png")
 vs = cv2.VideoCapture(0)
-# vs.set(3,320)
-# vs.set(4,240)
+vs.set(3,320)
+vs.set(4,240)
 
 oldBoundingBox = (0, 0, 0, 0)
 
@@ -97,7 +96,7 @@ while True:
     # make a new frame to draw rectangles on for visualization purposes
     # drawing on the orignal frame altered results so we keep a spare one
     frame = vs.read()[1]
-    frame = imutils.resize(frame, width=320)
+    # frame = imutils.resize(frame, width=320)
     debugframe = copy.deepcopy(frame)
     # if the frame could not be grabbed, then
     # we have reached the end of the video
@@ -211,24 +210,23 @@ while True:
         else:
             oldpos = oldpos
 
-
+    print("=========")
     if compare_bounding_boxes(newBoundingBox, oldBoundingBox):
         framebuffer['incomingshort'].append(1)
-        framebuffer['incominglong' ].append(1)
-        print("box bigger")
-        framebuffer['frameBuffer'  ].append(2*newBoundingBox[2] + 2*newBoundingBox[3])
+        if(sum(framebuffer['incomingshort']) >= 3):
+            framebuffer['incominglong'].append(1)
+        print("current box bigger")
+        framebuffer['frameBuffer'].append(2*newBoundingBox[2] + 2*newBoundingBox[3])
     else:
         framebuffer['incomingshort'].append(0)
         framebuffer['incominglong' ].append(0)
         framebuffer['frameBuffer'  ].append(2*newBoundingBox[2] + 2*newBoundingBox[3])
-        print("box smaller")
-
+        print("current box smaller")
 
     # if(sum( framebuffer['incomingshort'] ) > ( BUFFERSIZESMALL/2 )):
     #    print("box definitely bigger")
     # else:
     #    print("box definitely smaller")
-
     # print(sum( framebuffer['incominglong'] ))
     # probability = [x for x in framebuffer['frameBuffer']]
     # print(probability)
@@ -238,8 +236,6 @@ while True:
     prob            = 0
     positivesamples = 0
     for i in range(BUFFERSIZELONG):
-        # print(framebuffer['incominglong'][i],end=" ")
-        # print(framebuffer['frameBuffer'][i])
         totArea += framebuffer['frameBuffer'][i]
         if(framebuffer['incominglong'][i] == 1):
             prob += framebuffer['frameBuffer'][i]
@@ -248,22 +244,24 @@ while True:
 
     negativesamples = BUFFERSIZELONG - positivesamples
 
-    print("total: " + str(totArea) + "\tpositive: " + str(positivesamples))
-    print("incom: " + str(prob) + "\tnegative: " + str(negativesamples))
+    print("total: %6d\tpositive: %2d"%(totArea,positivesamples))
+    print("incom: %6d\tpnegative: %2d"%(prob,negativesamples))
     if(totArea != 0 and positivesamples > 3 and negativesamples < 20):
         prob /= totArea
     else:
         prob= 0
 
-    print(prob)
+    print("%1.6f"%prob)
 
     if(sum(framebuffer['incominglong']) > ((2*BUFFERSIZELONG)/3)):
         print("i think we're colliding")
     else:
-        print("")
+        print(23*" ")
 
+    print(str(framebuffer['incomingshort']))
     print(str(framebuffer['incominglong']))
     print("=========")
+    print(10*"\033[F")
 
     oldBoundingBox = newBoundingBox
 
