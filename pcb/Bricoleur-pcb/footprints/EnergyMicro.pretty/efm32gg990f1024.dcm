@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP EFM32GG990F1024
+D Family: Gecko, Package: BGA112, Package size: 10mm x 10mm
+K Energy Micro energymicro EFM32 32bit ARM Cortex Flash Microcontroller MCU
+F http://www.energymicro.com/downloads/datasheets
+$ENDCMP
+#
+#End Doc Library

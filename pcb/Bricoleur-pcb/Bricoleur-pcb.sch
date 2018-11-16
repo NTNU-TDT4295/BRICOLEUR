@@ -1,0 +1,1356 @@
+EESchema Schematic File Version 4
+LIBS:Bricoleur-pcb-cache
+EELAYER 26 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 5
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Bricoleur-pcb-rescue:Arducam-OV5642-Bricoleur-pcb-cache U5
+U 1 1 5B998412
+P 4200 5200
+F 0 "U5" H 4000 5500 50  0000 L CNN
+F 1 "Arducam-OV5642" H 3950 5200 50  0000 L CNN
+F 2 "Connector_IDC:IDC-Header_2x10_P2.54mm_Vertical" H 4200 5050 50  0001 C CNN
+F 3 "" H 4200 5050 50  0001 C CNN
+	1    4200 5200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Bricoleur-pcb-rescue:Arducam-OV5642-Bricoleur-pcb-cache U6
+U 1 1 5B99848C
+P 4200 7450
+F 0 "U6" H 4149 7778 50  0000 L CNN
+F 1 "Arducam-OV5642" H 3900 7550 50  0000 L CNN
+F 2 "Connector_IDC:IDC-Header_2x10_P2.54mm_Vertical" H 4200 7300 50  0001 C CNN
+F 3 "" H 4200 7300 50  0001 C CNN
+	1    4200 7450
+	-1   0    0    1   
+$EndComp
+Text Label 650  3400 1    50   ~ 0
+PYNQ_3V3
+Text Label 950  3600 2    50   ~ 0
+GND
+Text Label 3250 5700 3    50   ~ 0
+PYNQ_3V3
+Text Label 3350 5700 3    50   ~ 0
+GND
+Text Label 5150 6950 1    50   ~ 0
+PYNQ_3V3
+Text Label 5050 6950 1    50   ~ 0
+GND
+$Comp
+L Bricoleur-pcb-rescue:EFM32GG980-symbols U7
+U 1 1 5B9A6C8F
+P 6150 1200
+F 0 "U7" H 7250 1587 60  0000 C CNN
+F 1 "EFM32GG980" H 7250 1481 60  0000 C CNN
+F 2 "EFM32GG980:EFM32GG980" H 7250 1440 60  0001 C CNN
+F 3 "" H 6150 1200 60  0000 C CNN
+	1    6150 1200
+	1    0    0    -1  
+$EndComp
+Text Label 2350 4800 0    50   ~ 0
+CAM_CLK
+Text Label 3950 5700 3    50   ~ 0
+CAM_CLK
+Text Label 4450 6950 1    50   ~ 0
+CAM_CLK
+$Comp
+L Connector:USB_B_Micro J1
+U 1 1 5B9CF6E3
+P 11000 1850
+F 0 "J1" H 11050 1100 50  0000 R CNN
+F 1 "USB_B_Micro" H 11300 1250 50  0000 R CNN
+F 2 "Connector_USB:USB_Micro-B_Amphenol_10103594-0001LF_Horizontal" H 11150 1800 50  0001 C CNN
+F 3 "~" H 11150 1800 50  0001 C CNN
+	1    11000 1850
+	-1   0    0    1   
+$EndComp
+Text Label 11000 1450 1    50   ~ 0
+GND
+Text Label 950  3500 2    50   ~ 0
+PYNQ_5V0
+$Comp
+L Device:C C1
+U 1 1 5B9F37BE
+P 9750 3900
+F 0 "C1" V 9498 3900 50  0000 C CNN
+F 1 "1U" V 9589 3900 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0201_0603Metric" H 9788 3750 50  0001 C CNN
+F 3 "~" H 9750 3900 50  0001 C CNN
+	1    9750 3900
+	0    1    1    0   
+$EndComp
+Text Label 9900 3900 0    50   ~ 0
+GND
+Wire Wire Line
+	9050 4000 9050 3300
+Wire Wire Line
+	9050 3300 8350 3300
+$Comp
+L Device:C C2
+U 1 1 5B9F80AE
+P 9750 4350
+F 0 "C2" V 9498 4350 50  0000 C CNN
+F 1 "4U7" V 9589 4350 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 9788 4200 50  0001 C CNN
+F 3 "~" H 9750 4350 50  0001 C CNN
+	1    9750 4350
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	9050 4000 9050 4350
+Wire Wire Line
+	9050 4350 9600 4350
+Connection ~ 9050 4000
+Text Label 9900 4350 0    50   ~ 0
+GND
+$Comp
+L Device:L L1
+U 1 1 5B9FFD16
+P 9600 3150
+F 0 "L1" H 9653 3196 50  0000 L CNN
+F 1 "220R 2A CBF221HC" H 9653 3105 50  0000 L CNN
+F 2 "Bricoleur-custom:CBF221HC" H 9600 3150 50  0001 C CNN
+F 3 "~" H 9600 3150 50  0001 C CNN
+	1    9600 3150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9050 3300 9600 3300
+Connection ~ 9050 3300
+Wire Wire Line
+	8350 3800 9300 3800
+Wire Wire Line
+	9300 3800 9300 3650
+Wire Wire Line
+	9300 1750 10700 1750
+$Comp
+L Device:R R2
+U 1 1 5BA032BF
+P 9300 3500
+F 0 "R2" H 9231 3454 50  0000 R CNN
+F 1 "15R" H 9231 3545 50  0000 R CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" V 9230 3500 50  0001 C CNN
+F 3 "~" H 9300 3500 50  0001 C CNN
+	1    9300 3500
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	10700 1850 9400 1850
+Wire Wire Line
+	9400 3700 8350 3700
+$Comp
+L Device:R R3
+U 1 1 5BA06B86
+P 9400 3500
+F 0 "R3" H 9470 3546 50  0000 L CNN
+F 1 "15R" H 9470 3455 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" V 9330 3500 50  0001 C CNN
+F 3 "~" H 9400 3500 50  0001 C CNN
+	1    9400 3500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9400 3650 9400 3700
+$Comp
+L Bricoleur-pcb-rescue:IP4220CZ6-IP4220CZ6 U9
+U 1 1 5BA09E46
+P 10450 2750
+F 0 "U9" H 10450 2080 50  0000 C CNN
+F 1 "IP4220CZ6" H 10450 2171 50  0000 C CNN
+F 2 "Bricoleur-custom:IP4220CZ6" H 10450 2750 50  0001 L BNN
+F 3 "Unavailable" H 10450 2750 50  0001 L BNN
+F 4 "Integrated circuit: ESD protection; SOT457" H 10450 2750 50  0001 L BNN "Field4"
+F 5 "IP4220CZ6" H 10450 2750 50  0001 L BNN "Field5"
+F 6 "None" H 10450 2750 50  0001 L BNN "Field6"
+F 7 "TSOP-6 NXP Semiconductors" H 10450 2750 50  0001 L BNN "Field7"
+F 8 "NXP Semiconductors" H 10450 2750 50  0001 L BNN "Field8"
+	1    10450 2750
+	-1   0    0    1   
+$EndComp
+Text Label 11150 2550 1    50   ~ 0
+GND
+Wire Wire Line
+	11150 2750 11150 3000
+Wire Wire Line
+	9600 3000 9600 2050
+Text Label 11100 1450 1    50   ~ 0
+GND
+$Comp
+L Connector_Generic:Conn_02x03_Odd_Even U8
+U 1 1 5BA26E40
+P 8750 1150
+F 0 "U8" H 8700 1250 50  0000 L CNN
+F 1 "UART_BOOT" H 8450 1350 50  0000 L CNN
+F 2 "Connector_IDC:IDC-Header_2x03_P2.54mm_Vertical" H 8700 1250 50  0001 C CNN
+F 3 "" H 8700 1250 50  0001 C CNN
+	1    8750 1150
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	8350 3600 8850 3600
+Wire Wire Line
+	8850 3600 8850 2650
+Wire Wire Line
+	8750 1450 8750 1550
+Entry Wire Line
+	3050 5100 2950 5200
+Entry Wire Line
+	3050 4800 2950 4900
+Text Label 8350 4300 0    50   ~ 0
+US0_CLK
+Text Label 8350 4200 0    50   ~ 0
+US0_RX
+Text Label 8350 4100 0    50   ~ 0
+US0_TX
+Text Label 2350 5700 0    50   ~ 0
+US0_TX
+Text Label 2350 4900 0    50   ~ 0
+US0_RX
+Text Label 2350 5200 0    50   ~ 0
+US0_CLK
+Entry Wire Line
+	8850 4100 8950 4000
+Entry Wire Line
+	8850 4200 8950 4100
+Entry Wire Line
+	8850 4300 8950 4200
+Entry Wire Line
+	4850 6550 4950 6650
+Entry Wire Line
+	4750 6550 4850 6650
+Entry Wire Line
+	4650 6550 4750 6650
+Entry Wire Line
+	4550 6550 4650 6650
+Entry Wire Line
+	4450 6550 4550 6650
+Entry Wire Line
+	4250 6550 4350 6650
+Entry Wire Line
+	4150 6550 4250 6650
+Entry Wire Line
+	4050 6550 4150 6650
+Entry Wire Line
+	3950 6550 4050 6650
+Entry Wire Line
+	3850 6550 3950 6650
+Entry Wire Line
+	3750 6550 3850 6650
+Entry Wire Line
+	3650 6550 3750 6650
+Entry Wire Line
+	3550 6550 3650 6650
+Wire Wire Line
+	4950 6650 4950 6950
+Wire Wire Line
+	4850 6650 4850 6950
+Wire Wire Line
+	4750 6650 4750 6950
+Wire Wire Line
+	4650 6650 4650 6950
+Wire Wire Line
+	4550 6650 4550 6950
+Wire Wire Line
+	4350 6650 4350 6950
+Wire Wire Line
+	4250 6650 4250 6950
+Wire Wire Line
+	4150 6650 4150 6950
+Wire Wire Line
+	4050 6650 4050 6950
+Wire Wire Line
+	3950 6650 3950 6950
+Wire Wire Line
+	3850 6650 3850 6950
+Wire Wire Line
+	3750 6650 3750 6950
+Wire Wire Line
+	3650 6650 3650 6950
+Entry Wire Line
+	2800 6400 2900 6500
+Entry Wire Line
+	2800 6300 2900 6400
+Entry Wire Line
+	2800 6200 2900 6300
+Entry Wire Line
+	2800 6100 2900 6200
+Entry Wire Line
+	2800 6000 2900 6100
+Entry Wire Line
+	2800 5900 2900 6000
+Entry Wire Line
+	2800 5800 2900 5900
+Entry Wire Line
+	2800 5600 2900 5700
+Entry Wire Line
+	2800 5500 2900 5600
+Text Label 3650 6950 1    50   ~ 0
+CAM0_DOUT2
+Text Label 3750 6950 1    50   ~ 0
+CAM0_DOUT3
+Text Label 3850 6950 1    50   ~ 0
+CAM0_DOUT4
+Text Label 3950 6950 1    50   ~ 0
+CAM0_DOUT5
+Text Label 4050 6950 1    50   ~ 0
+CAM0_DOUT6
+Text Label 4150 6950 1    50   ~ 0
+CAM0_DOUT7
+Text Label 4350 6950 1    50   ~ 0
+CAM0_DOUT9
+Text Label 4250 6950 1    50   ~ 0
+CAM0_DOUT8
+Text Label 4550 6950 1    50   ~ 0
+CAM0_PCLK
+Text Label 4650 6950 1    50   ~ 0
+CAM0_HREF
+Text Label 4750 6950 1    50   ~ 0
+CAM0_VSYNC
+Text Label 4850 6950 1    50   ~ 0
+CAM0_SDATA
+Text Label 4950 6950 1    50   ~ 0
+CAM0_SCL
+Text Label 2350 5000 0    50   ~ 0
+CAM0_DOUT2
+Text Label 2350 5900 0    50   ~ 0
+CAM0_DOUT3
+Text Label 2350 5800 0    50   ~ 0
+CAM0_DOUT4
+Text Label 2350 5100 0    50   ~ 0
+CAM0_DOUT5
+Text Label 2350 6000 0    50   ~ 0
+CAM0_DOUT6
+Text Label 2350 5300 0    50   ~ 0
+CAM0_DOUT7
+Text Label 2350 6100 0    50   ~ 0
+CAM0_DOUT8
+Text Label 2350 5400 0    50   ~ 0
+CAM0_DOUT9
+Text Label 2350 6200 0    50   ~ 0
+CAM0_PCLK
+Text Label 2350 6300 0    50   ~ 0
+CAM0_HREF
+Entry Wire Line
+	2800 5400 2900 5500
+Entry Wire Line
+	2800 5300 2900 5400
+Text Label 2350 5500 0    50   ~ 0
+CAM0_VSYNC
+Text Label 2350 6400 0    50   ~ 0
+CAM0_SDATA
+Text Label 2350 5600 0    50   ~ 0
+CAM0_SCL
+Entry Wire Line
+	3450 6150 3550 6250
+Entry Wire Line
+	3550 6150 3650 6250
+Entry Wire Line
+	3650 6150 3750 6250
+Entry Wire Line
+	3750 6150 3850 6250
+Entry Wire Line
+	3850 6150 3950 6250
+Entry Wire Line
+	4050 6150 4150 6250
+Entry Wire Line
+	4150 6150 4250 6250
+Entry Wire Line
+	4250 6150 4350 6250
+Entry Wire Line
+	4350 6150 4450 6250
+Entry Wire Line
+	4450 6150 4550 6250
+Entry Wire Line
+	4550 6150 4650 6250
+Entry Wire Line
+	4650 6150 4750 6250
+Entry Wire Line
+	4750 6150 4850 6250
+Wire Wire Line
+	3450 6150 3450 5700
+Wire Wire Line
+	3550 6150 3550 5700
+Wire Wire Line
+	3650 6150 3650 5700
+Wire Wire Line
+	3750 6150 3750 5700
+Wire Wire Line
+	3850 6150 3850 5700
+Wire Wire Line
+	4050 6150 4050 5700
+Wire Wire Line
+	4150 5700 4150 6150
+Wire Wire Line
+	4250 6150 4250 5700
+Wire Wire Line
+	4350 5700 4350 6150
+Wire Wire Line
+	4450 6150 4450 5700
+Wire Wire Line
+	4550 5700 4550 6150
+Wire Wire Line
+	4650 6150 4650 5700
+Wire Wire Line
+	4750 5700 4750 6150
+Text Label 3450 5700 3    50   ~ 0
+CAM1_SCL
+Text Label 3550 5700 3    50   ~ 0
+CAM1_SDATA
+Text Label 3650 5700 3    50   ~ 0
+CAM1_VSYNC
+Text Label 3750 5700 3    50   ~ 0
+CAM1_HREF
+Text Label 3850 5700 3    50   ~ 0
+CAM1_PCLK
+Text Label 4050 5700 3    50   ~ 0
+CAM1_DOUT9
+Text Label 4150 5700 3    50   ~ 0
+CAM1_DOUT8
+Text Label 4250 5700 3    50   ~ 0
+CAM1_DOUT7
+Text Label 4350 5700 3    50   ~ 0
+CAM1_DOUT6
+Text Label 4450 5700 3    50   ~ 0
+CAM1_DOUT5
+Text Label 4550 5700 3    50   ~ 0
+CAM1_DOUT4
+Text Label 4650 5700 3    50   ~ 0
+CAM1_DOUT3
+Text Label 4750 5700 3    50   ~ 0
+CAM1_DOUT2
+Text Label 2350 3900 0    50   ~ 0
+CAM1_DOUT2
+Text Label 2350 4700 0    50   ~ 0
+CAM1_DOUT3
+Text Label 2350 3800 0    50   ~ 0
+CAM1_DOUT4
+Text Label 2350 4600 0    50   ~ 0
+CAM1_DOUT5
+Text Label 2350 3700 0    50   ~ 0
+CAM1_DOUT6
+Text Label 2350 4500 0    50   ~ 0
+CAM1_DOUT7
+Text Label 2350 3600 0    50   ~ 0
+CAM1_DOUT8
+Text Label 2350 4400 0    50   ~ 0
+CAM1_DOUT9
+Text Label 2350 4300 0    50   ~ 0
+CAM1_PCLK
+Text Label 2350 4200 0    50   ~ 0
+CAM1_HREF
+Text Label 2350 3500 0    50   ~ 0
+CAM1_VSYNC
+Text Label 2350 3300 0    50   ~ 0
+CAM1_SDATA
+Text Label 2350 4100 0    50   ~ 0
+CAM1_SCL
+Text Label 8350 2900 0    50   ~ 0
+GND
+Text Label 10850 5500 0    50   ~ 0
+PYNQ_3V3
+Wire Wire Line
+	8350 3900 9350 3900
+Wire Wire Line
+	9350 3900 9350 4950
+Connection ~ 9350 3900
+Wire Wire Line
+	9350 3900 9600 3900
+Text Notes 9500 5000 0    50   ~ 10
+POWER SUPPLY\n\n
+Text Label 8350 5500 0    50   ~ 0
+VDDU7
+Text Label 8350 3000 0    50   ~ 0
+VDDU7
+Text Label 6150 1900 2    50   ~ 0
+VDDU7
+Text Label 6150 2800 2    50   ~ 0
+VDDU7
+Text Label 6150 4200 2    50   ~ 0
+VDDU7
+Text Label 6150 5500 2    50   ~ 0
+VDDU7
+Connection ~ 9600 5500
+Wire Wire Line
+	9600 5500 9500 5500
+Text Label 10000 5800 2    50   ~ 0
+VDDU7
+Text Label 10150 5500 3    50   ~ 0
+VMCU
+$Comp
+L Device:C C8
+U 1 1 5BA5C7A0
+P 9400 6150
+F 0 "C8" H 9515 6196 50  0000 L CNN
+F 1 "100N" H 9515 6105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 9438 6000 50  0001 C CNN
+F 3 "~" H 9400 6150 50  0001 C CNN
+	1    9400 6150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C9
+U 1 1 5BA5C83A
+P 9700 6150
+F 0 "C9" H 9815 6196 50  0000 L CNN
+F 1 "100N" H 9815 6105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 9738 6000 50  0001 C CNN
+F 3 "~" H 9700 6150 50  0001 C CNN
+	1    9700 6150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C10
+U 1 1 5BA5C8E6
+P 9950 6150
+F 0 "C10" H 10065 6196 50  0000 L CNN
+F 1 "100N" H 10065 6105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 9988 6000 50  0001 C CNN
+F 3 "~" H 9950 6150 50  0001 C CNN
+	1    9950 6150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C11
+U 1 1 5BA5C97B
+P 10200 6150
+F 0 "C11" H 10315 6196 50  0000 L CNN
+F 1 "100N" H 10315 6105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 10238 6000 50  0001 C CNN
+F 3 "~" H 10200 6150 50  0001 C CNN
+	1    10200 6150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C12
+U 1 1 5BA5C9E1
+P 10500 6150
+F 0 "C12" H 10615 6196 50  0000 L CNN
+F 1 "100N" H 10615 6105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 10538 6000 50  0001 C CNN
+F 3 "~" H 10500 6150 50  0001 C CNN
+	1    10500 6150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C13
+U 1 1 5BA5CA48
+P 11050 6150
+F 0 "C13" H 11050 6250 50  0000 L CNN
+F 1 "10U" H 11050 6000 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 11088 6000 50  0001 C CNN
+F 3 "~" H 11050 6150 50  0001 C CNN
+	1    11050 6150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10500 6000 10800 6000
+Wire Wire Line
+	9600 5500 9600 5800
+Wire Wire Line
+	10800 6300 10500 6300
+Wire Wire Line
+	9700 6300 9550 6300
+Wire Wire Line
+	9550 6300 9550 6450
+Connection ~ 9550 6300
+Text Label 9550 6450 0    50   ~ 0
+VSSU7
+Text Label 8350 5400 0    50   ~ 0
+VSSU7
+Text Label 6150 2700 2    50   ~ 0
+VSSU7
+Text Label 6150 4300 2    50   ~ 0
+VSS07
+$Comp
+L Device:L L2
+U 1 1 5BA73BCD
+P 9350 5500
+F 0 "L2" V 9172 5500 50  0000 C CNN
+F 1 "CBF102WB" V 9263 5500 50  0000 C CNN
+F 2 "Bricoleur-custom:CBF102WB" H 9350 5500 50  0001 C CNN
+F 3 "~" H 9350 5500 50  0001 C CNN
+	1    9350 5500
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R4
+U 1 1 5BA81D5A
+P 8950 5500
+F 0 "R4" V 8743 5500 50  0000 C CNN
+F 1 "1R" V 8834 5500 50  0000 C CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" V 8880 5500 50  0001 C CNN
+F 3 "~" H 8950 5500 50  0001 C CNN
+	1    8950 5500
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	9200 5500 9100 5500
+Connection ~ 10500 6000
+Connection ~ 10500 6300
+Wire Wire Line
+	10200 6000 10500 6000
+Wire Wire Line
+	10200 6300 10500 6300
+Connection ~ 10200 6000
+Connection ~ 10200 6300
+Wire Wire Line
+	9950 6000 10200 6000
+Wire Wire Line
+	9950 6300 10200 6300
+Connection ~ 9950 6000
+Connection ~ 9950 6300
+Connection ~ 9700 6000
+Wire Wire Line
+	9700 6000 9950 6000
+Connection ~ 9700 6300
+Wire Wire Line
+	9700 6300 9950 6300
+Wire Wire Line
+	9400 6300 9550 6300
+Wire Wire Line
+	10000 5800 9600 5800
+$Comp
+L Device:C C5
+U 1 1 5BABB9CF
+P 8500 6150
+F 0 "C5" H 8615 6196 50  0000 L CNN
+F 1 "10U" H 8615 6105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 8538 6000 50  0001 C CNN
+F 3 "~" H 8500 6150 50  0001 C CNN
+	1    8500 6150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C6
+U 1 1 5BABBA61
+P 8800 6150
+F 0 "C6" H 8915 6196 50  0000 L CNN
+F 1 "10N" H 8915 6105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 8838 6000 50  0001 C CNN
+F 3 "~" H 8800 6150 50  0001 C CNN
+	1    8800 6150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C7
+U 1 1 5BABBAF8
+P 9050 6150
+F 0 "C7" H 9165 6196 50  0000 L CNN
+F 1 "10N" H 9165 6105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 9088 6000 50  0001 C CNN
+F 3 "~" H 9050 6150 50  0001 C CNN
+	1    9050 6150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8800 5500 8800 5750
+Wire Wire Line
+	9050 6000 8800 6000
+Connection ~ 8800 6000
+Wire Wire Line
+	9050 6300 8800 6300
+Connection ~ 8800 6300
+Wire Wire Line
+	8800 6300 8500 6300
+Wire Wire Line
+	8800 6300 8800 6450
+$Comp
+L Device:C C4
+U 1 1 5BAE8CAF
+P 8600 5300
+F 0 "C4" V 8348 5300 50  0000 C CNN
+F 1 "1uF" V 8439 5300 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 8638 5150 50  0001 C CNN
+F 3 "~" H 8600 5300 50  0001 C CNN
+	1    8600 5300
+	0    1    1    0   
+$EndComp
+Text Label 8750 5150 0    50   ~ 0
+GND
+Wire Wire Line
+	8800 5750 9100 5750
+Text Label 8900 5750 0    50   ~ 0
+AVDDU7
+Text Label 6150 5600 2    50   ~ 0
+AVDDU7
+Text Label 6150 5200 2    50   ~ 0
+AVDDU7
+Text Label 9550 6400 2    50   ~ 0
+GND
+Text Label 8800 6450 0    50   ~ 0
+GND
+Wire Wire Line
+	8750 5150 8750 5300
+Wire Wire Line
+	8450 5300 8350 5300
+$Comp
+L Switch:SW_Push SW2
+U 1 1 5BBC40EF
+P 5250 4700
+F 0 "SW2" H 5250 4985 50  0000 C CNN
+F 1 "SW_Push" H 5250 4894 50  0000 C CNN
+F 2 "Bricoleur-custom:SWITCH_WURTH_4301182043816" H 5250 4900 50  0001 C CNN
+F 3 "" H 5250 4900 50  0001 C CNN
+	1    5250 4700
+	1    0    0    -1  
+$EndComp
+Text Label 4650 4700 2    50   ~ 0
+GND
+$Comp
+L Device:R R1
+U 1 1 5BBCA070
+P 4850 4700
+F 0 "R1" V 4643 4700 50  0000 C CNN
+F 1 "100R" V 4734 4700 50  0000 C CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" V 4780 4700 50  0001 C CNN
+F 3 "~" H 4850 4700 50  0001 C CNN
+	1    4850 4700
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C3
+U 1 1 5BBD57A9
+P 5500 4550
+F 0 "C3" H 5615 4596 50  0000 L CNN
+F 1 "100N" H 5615 4505 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 5538 4400 50  0001 C CNN
+F 3 "~" H 5500 4550 50  0001 C CNN
+	1    5500 4550
+	1    0    0    -1  
+$EndComp
+Connection ~ 5500 4700
+Wire Wire Line
+	5500 4700 5450 4700
+Wire Wire Line
+	5050 4700 5000 4700
+Wire Wire Line
+	4700 4700 4650 4700
+$Sheet
+S 3150 3400 1300 1200
+U 5BBE2085
+F0 "debug" 50
+F1 "file5BBE2084.sch" 50
+$EndSheet
+Text GLabel 10000 5500 3    50   Input ~ 0
+VMCU
+Text GLabel 5800 2100 0    50   Input ~ 0
+DEBUG_EXT_CABLE_ATTACH
+Wire Wire Line
+	6150 2100 5800 2100
+Wire Wire Line
+	950  3400 650  3400
+Text GLabel 750  3400 1    50   Input ~ 0
+PYNQ_3V3
+Text GLabel 8350 5000 2    50   Input ~ 0
+DBG_LED_1
+Text GLabel 8350 4900 2    50   Input ~ 0
+DBG_LED_2
+Text GLabel 8350 4800 2    50   Input ~ 0
+DBG_LED_3
+Text GLabel 6150 4800 0    50   Input ~ 0
+DBG_PB_1
+Text GLabel 6150 4900 0    50   Input ~ 0
+DBG_PB_2
+Text GLabel 6150 5000 0    50   Input ~ 0
+DBG_PB_3
+Text GLabel 950  3700 0    50   Input ~ 0
+GND
+Text Label 5500 4400 0    50   ~ 0
+GND
+Text GLabel 8350 3500 2    50   Input ~ 0
+DH_TMS_SWDIO
+Text GLabel 8950 2550 1    50   Input ~ 0
+DH_TCK_SWCLK
+Text GLabel 8350 3400 2    50   Input ~ 0
+DH_TDO_SWO
+$Comp
+L Bricoleur-pcb-rescue:SW_DP3T-Bricoleur-pcb-cache U11
+U 1 1 5BAC4FA8
+P 10450 5200
+F 0 "U11" H 10525 5325 50  0000 C CNN
+F 1 "SW_DP3T" H 10525 5234 50  0000 C CNN
+F 2 "Bricoleur-custom:SW_CK_JS203011" H 10450 5200 50  0001 C CNN
+F 3 "" H 10450 5200 50  0001 C CNN
+	1    10450 5200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9350 4950 10900 4950
+Wire Wire Line
+	10900 4950 10900 5300
+Wire Wire Line
+	10900 5300 10700 5300
+Wire Wire Line
+	10700 5500 10850 5500
+Wire Wire Line
+	10850 5700 10700 5700
+Wire Wire Line
+	8650 1450 8650 1500
+Wire Wire Line
+	8950 2550 8950 2650
+Wire Wire Line
+	8950 2650 8850 2650
+Connection ~ 8850 2650
+Wire Wire Line
+	8850 2650 8850 1600
+Wire Bus Line
+	8950 2700 9100 2700
+Wire Bus Line
+	9100 2700 9100 650 
+Wire Wire Line
+	8350 4100 8850 4100
+Wire Wire Line
+	8350 4200 8850 4200
+Wire Wire Line
+	8350 4300 8850 4300
+Text Label 4850 5700 3    50   ~ 0
+GND
+Text Label 3550 6950 1    50   ~ 0
+GND
+Text GLabel 5850 4700 1    50   Input ~ 0
+DH_#RESET
+Wire Wire Line
+	5500 4700 6150 4700
+$Comp
+L Connector:TestPoint_2Pole TP1
+U 1 1 5BC50B15
+P 10650 3950
+F 0 "TP1" H 10650 4200 50  0000 L CNN
+F 1 "Test_VMCU" H 10500 4100 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x02_P2.54mm_Vertical" H 10850 3950 50  0001 C CNN
+F 3 "~" H 10850 3950 50  0001 C CNN
+	1    10650 3950
+	0    1    1    0   
+$EndComp
+NoConn ~ 10700 1650
+Text Label 2450 1700 0    50   ~ 0
+US0_TX
+Text Label 2450 1550 0    50   ~ 0
+US0_RX
+Text Label 2450 1400 0    50   ~ 0
+US0_CLK
+NoConn ~ 950  5400
+NoConn ~ 950  5300
+NoConn ~ 950  5200
+NoConn ~ 950  5100
+NoConn ~ 950  5000
+NoConn ~ 950  4900
+NoConn ~ 950  4800
+NoConn ~ 950  4700
+NoConn ~ 950  4600
+NoConn ~ 950  4500
+NoConn ~ 950  4400
+NoConn ~ 950  4300
+NoConn ~ 950  4200
+NoConn ~ 950  4100
+NoConn ~ 950  4000
+NoConn ~ 950  3900
+NoConn ~ 950  3800
+NoConn ~ 950  3300
+NoConn ~ 950  3200
+NoConn ~ 8350 1900
+NoConn ~ 8350 2000
+NoConn ~ 8350 2100
+NoConn ~ 8350 2200
+NoConn ~ 8350 2300
+NoConn ~ 8350 2400
+NoConn ~ 8350 2500
+NoConn ~ 8350 2600
+NoConn ~ 8350 2700
+NoConn ~ 8350 1200
+NoConn ~ 8350 1300
+NoConn ~ 8350 1400
+NoConn ~ 8350 1500
+NoConn ~ 8350 1600
+NoConn ~ 6150 1800
+NoConn ~ 6150 2000
+NoConn ~ 6150 2200
+NoConn ~ 6150 2300
+NoConn ~ 6150 2400
+NoConn ~ 6150 2500
+NoConn ~ 6150 2600
+NoConn ~ 6150 3100
+NoConn ~ 6150 3200
+NoConn ~ 6150 3300
+NoConn ~ 6150 3400
+NoConn ~ 6150 3600
+NoConn ~ 6150 3700
+NoConn ~ 6150 3800
+NoConn ~ 6150 3900
+NoConn ~ 6150 4000
+NoConn ~ 6150 4100
+NoConn ~ 6150 4400
+NoConn ~ 6150 4500
+NoConn ~ 6150 4600
+NoConn ~ 6150 5100
+NoConn ~ 6150 5700
+NoConn ~ 6150 5800
+NoConn ~ 6150 5900
+NoConn ~ 6150 6000
+NoConn ~ 6150 6100
+NoConn ~ 8350 6100
+NoConn ~ 8350 6000
+NoConn ~ 8350 5900
+NoConn ~ 8350 5800
+NoConn ~ 8350 5700
+NoConn ~ 8350 5600
+NoConn ~ 8350 5200
+NoConn ~ 8350 5100
+NoConn ~ 8350 4700
+NoConn ~ 8350 4600
+NoConn ~ 8350 4500
+NoConn ~ 9750 2550
+NoConn ~ 6150 1300
+NoConn ~ 6150 1400
+$Comp
+L Bricoleur-pcb-rescue:PYNQ-Shield-Bricoleur-pcb-cache-Bricoleur-pcb-cache U2
+U 1 1 5BADF788
+P 1650 2600
+F 0 "U2" H 1650 2365 50  0000 C CNN
+F 1 "PYNQ-Shield-(Arduino)" H 1650 2274 50  0000 C CNN
+F 2 "Bricoleur-custom:PYNQ_Shield" H 1600 1450 50  0001 C CNN
+F 3 "" H 1600 1450 50  0001 C CNN
+	1    1650 2600
+	1    0    0    -1  
+$EndComp
+NoConn ~ 2350 3100
+NoConn ~ 2350 3200
+NoConn ~ 2350 3400
+Wire Wire Line
+	2800 4500 2350 4500
+Wire Wire Line
+	2800 4400 2350 4400
+Wire Wire Line
+	2800 3900 2350 3900
+Wire Wire Line
+	2800 3800 2350 3800
+Wire Wire Line
+	2800 3700 2350 3700
+Wire Wire Line
+	2800 4600 2350 4600
+Wire Wire Line
+	2800 4700 2350 4700
+Wire Wire Line
+	2350 4300 2800 4300
+Wire Wire Line
+	2800 4200 2350 4200
+Wire Wire Line
+	2800 4100 2350 4100
+Wire Wire Line
+	2350 5000 2800 5000
+Wire Wire Line
+	2800 5100 2350 5100
+Wire Wire Line
+	2800 5300 2350 5300
+Wire Wire Line
+	2800 5400 2350 5400
+Wire Wire Line
+	2800 5500 2350 5500
+Wire Wire Line
+	2800 5600 2350 5600
+Wire Wire Line
+	2800 6400 2350 6400
+Wire Wire Line
+	2800 6300 2350 6300
+Wire Wire Line
+	2800 6200 2350 6200
+Wire Wire Line
+	2800 6100 2350 6100
+Wire Wire Line
+	2800 6000 2350 6000
+Wire Wire Line
+	2800 5900 2350 5900
+Wire Wire Line
+	2800 5800 2350 5800
+Wire Bus Line
+	3000 4850 3000 6250
+Entry Wire Line
+	2800 4700 2900 4800
+Entry Wire Line
+	2800 4600 2900 4700
+Entry Wire Line
+	2800 4500 2900 4600
+Entry Wire Line
+	2800 4400 2900 4500
+Entry Wire Line
+	2800 4300 2900 4400
+Entry Wire Line
+	2800 4200 2900 4300
+Entry Wire Line
+	2800 4100 2900 4200
+Entry Wire Line
+	2800 3900 2900 4000
+Entry Wire Line
+	2800 3800 2900 3900
+Entry Wire Line
+	2800 3700 2900 3800
+Entry Wire Line
+	2800 3600 2900 3700
+Entry Wire Line
+	2800 3500 2900 3600
+Wire Wire Line
+	2800 3500 2350 3500
+Wire Wire Line
+	2800 3600 2350 3600
+Wire Bus Line
+	3000 4850 2900 4850
+Wire Bus Line
+	3000 4750 3050 4750
+Entry Wire Line
+	3050 5600 2950 5700
+Wire Wire Line
+	2950 4900 2350 4900
+Wire Bus Line
+	3000 650  9100 650 
+Text GLabel 6150 1200 0    50   Input ~ 0
+PULSE
+Wire Wire Line
+	10700 2050 9600 2050
+Wire Wire Line
+	9450 900  9450 1500
+Wire Wire Line
+	9450 1500 8650 1500
+Wire Wire Line
+	9950 900  9950 1550
+Wire Wire Line
+	9950 1550 8750 1550
+Connection ~ 8850 1600
+Wire Wire Line
+	8850 1600 8850 1450
+$Sheet
+S 5300 1350 550  500 
+U 5BDAE386
+F0 "Ultra" 50
+F1 "Ultra.sch" 50
+F2 "RX0" I R 5850 1500 50 
+F3 "RX1" I R 5850 1600 50 
+F4 "RX2" I R 5850 1700 50 
+$EndSheet
+Wire Wire Line
+	6150 1500 5850 1500
+Wire Wire Line
+	5850 1600 6150 1600
+Wire Wire Line
+	6150 1700 5850 1700
+NoConn ~ 2350 4000
+NoConn ~ 8350 4400
+Entry Wire Line
+	2800 5100 2900 5200
+Entry Wire Line
+	2800 5000 2900 5100
+$Sheet
+S 1400 1250 1050 700 
+U 5BEB800B
+F0 "USART-INTERCOM" 50
+F1 "USART.sch" 50
+F2 "CLK" I R 2450 1400 50 
+F3 "RX" I R 2450 1550 50 
+F4 "TX" I R 2450 1700 50 
+$EndSheet
+Entry Wire Line
+	2900 1400 3000 1500
+Entry Wire Line
+	2900 1550 3000 1650
+Entry Wire Line
+	2900 1700 3000 1800
+Wire Wire Line
+	2450 1700 2900 1700
+Wire Wire Line
+	2900 1550 2450 1550
+Wire Wire Line
+	2450 1400 2900 1400
+Text Label 5600 2900 0    50   ~ 0
+US1_TX
+Text Label 5600 3000 0    50   ~ 0
+US1_RX
+Text Label 5600 3200 0    50   ~ 0
+US1_CLK
+$Sheet
+S 4550 2600 1050 700 
+U 5BEE7FFD
+F0 "USART-AUX" 50
+F1 "USART.sch" 50
+F2 "CLK" I R 5600 3200 50 
+F3 "RX" I R 5600 3000 50 
+F4 "TX" I R 5600 2900 50 
+$EndSheet
+Wire Wire Line
+	6150 3500 5750 3500
+Wire Wire Line
+	6150 2900 5600 2900
+Wire Wire Line
+	6150 3000 5600 3000
+Wire Wire Line
+	5750 3500 5750 3200
+Wire Wire Line
+	5750 3200 5600 3200
+Text GLabel 10650 3750 1    50   Input ~ 0
+VMCU
+Text GLabel 10650 4150 3    50   Input ~ 0
+GND
+Wire Wire Line
+	9600 5500 10350 5500
+NoConn ~ 10850 5700
+Text Label 8650 950  2    50   ~ 0
+GND
+Wire Wire Line
+	8650 950  8750 950 
+Connection ~ 8750 950 
+Wire Wire Line
+	8750 950  8850 950 
+Wire Wire Line
+	8650 1500 8650 1700
+Wire Wire Line
+	8650 1700 8350 1700
+Connection ~ 8650 1500
+Wire Wire Line
+	8750 1800 8750 1550
+Wire Wire Line
+	8350 1800 8750 1800
+Connection ~ 8750 1550
+Wire Wire Line
+	11150 3000 9600 3000
+Connection ~ 9600 3000
+Wire Wire Line
+	9300 2750 9300 3350
+Wire Wire Line
+	9300 1750 9300 2750
+Connection ~ 9300 2750
+Wire Wire Line
+	9750 2750 9300 2750
+Text Label 10050 1750 0    50   ~ 0
+USB_D-
+Text Label 10050 1850 0    50   ~ 0
+USB_D+
+$Comp
+L Device:C C17
+U 1 1 5BB181A5
+P 10800 6150
+F 0 "C17" H 10915 6196 50  0000 L CNN
+F 1 "100N" H 10915 6105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 10838 6000 50  0001 C CNN
+F 3 "~" H 10800 6150 50  0001 C CNN
+	1    10800 6150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	11050 6000 10800 6000
+Connection ~ 10800 6000
+Wire Wire Line
+	11050 6300 10800 6300
+Connection ~ 10800 6300
+$Comp
+L Device:Crystal Y1
+U 1 1 5BB326B9
+P 5550 5550
+F 0 "Y1" H 5550 5950 50  0000 C CNN
+F 1 "ABM2-48.000MHZ-D4YF-T" H 5550 5850 50  0000 C CNN
+F 2 "XTAL:XTAL" H 5550 5550 50  0001 C CNN
+F 3 "~" H 5550 5550 50  0001 C CNN
+	1    5550 5550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5750 5750 5750 5550
+Wire Wire Line
+	5750 5550 5700 5550
+Wire Wire Line
+	5350 5750 5350 5550
+Wire Wire Line
+	5350 5550 5400 5550
+Text Label 5600 6150 3    50   ~ 0
+GND
+Wire Wire Line
+	5600 6150 5600 6050
+Wire Wire Line
+	5600 6050 5350 6050
+Wire Wire Line
+	5600 6050 5750 6050
+Connection ~ 5600 6050
+Wire Wire Line
+	5750 5400 5750 5550
+Connection ~ 5750 5550
+Wire Wire Line
+	5350 5300 5350 5550
+Connection ~ 5350 5550
+$Comp
+L Device:C C18
+U 1 1 5BB1AE61
+P 5350 5900
+F 0 "C18" H 5465 5946 50  0000 L CNN
+F 1 "27p" H 5465 5855 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 5388 5750 50  0001 C CNN
+F 3 "~" H 5350 5900 50  0001 C CNN
+	1    5350 5900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C19
+U 1 1 5BB1B027
+P 5750 5900
+F 0 "C19" H 5865 5946 50  0000 L CNN
+F 1 "27p" H 5865 5855 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 5788 5750 50  0001 C CNN
+F 3 "~" H 5750 5900 50  0001 C CNN
+	1    5750 5900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6150 5400 5750 5400
+Wire Wire Line
+	5350 5300 6150 5300
+Wire Wire Line
+	9400 1850 9400 2450
+Wire Wire Line
+	9750 2450 9400 2450
+Connection ~ 9400 2450
+Wire Wire Line
+	9400 2450 9400 3350
+NoConn ~ 9750 2650
+Text Label 10000 2050 0    50   ~ 0
+USB_5v
+Text Label 8400 3700 0    50   ~ 0
+USB_R_D-
+Text Label 8400 3800 0    50   ~ 0
+USB_R_D+
+Wire Wire Line
+	8850 1600 10450 1600
+Wire Wire Line
+	10450 900  10450 1600
+Wire Wire Line
+	9400 6000 9600 6000
+Wire Wire Line
+	9600 5800 9600 6000
+Connection ~ 9600 5800
+Connection ~ 9600 6000
+Wire Wire Line
+	9600 6000 9700 6000
+Wire Wire Line
+	8500 6000 8800 6000
+Wire Wire Line
+	8800 5750 8800 6000
+Connection ~ 8800 5750
+Text Label 8350 1700 0    50   ~ 0
+MCU_BOOT_RX
+Text Label 8350 1800 0    50   ~ 0
+MCU_BOOT_TX
+$Comp
+L Diode:BAT54S D?
+U 1 1 5BFD19BE
+P 9250 900
+AR Path="/5BB71F0F/5BFD19BE" Ref="D?"  Part="1" 
+AR Path="/5BB7B6EA/5BFD19BE" Ref="D?"  Part="1" 
+AR Path="/5BCBFDFB/5BFD19BE" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAE7CD/5BFD19BE" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAE90A/5BFD19BE" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAE977/5BFD19BE" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAEF7E/5BFD19BE" Ref="D?"  Part="1" 
+AR Path="/5BEB800B/5BEC0255/5BFD19BE" Ref="D?"  Part="1" 
+AR Path="/5BEB800B/5BEC0258/5BFD19BE" Ref="D?"  Part="1" 
+AR Path="/5BEB800B/5BEC025B/5BFD19BE" Ref="D?"  Part="1" 
+AR Path="/5BEE7FFD/5BEC0255/5BFD19BE" Ref="D?"  Part="1" 
+AR Path="/5BEE7FFD/5BEC0258/5BFD19BE" Ref="D?"  Part="1" 
+AR Path="/5BEE7FFD/5BEC025B/5BFD19BE" Ref="D?"  Part="1" 
+AR Path="/5BFD19BE" Ref="D8"  Part="1" 
+F 0 "D8" H 9350 800 50  0000 L CNN
+F 1 "BAT54S" H 8950 800 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 9325 1025 50  0001 L CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds11005.pdf" H 9130 900 50  0001 C CNN
+	1    9250 900 
+	0    -1   -1   0   
+$EndComp
+Text GLabel 9250 1200 3    50   Input ~ 0
+GND
+Text GLabel 9250 600  2    50   Input ~ 0
+VMCU
+$Comp
+L Diode:BAT54S D?
+U 1 1 5C05BBEA
+P 9750 900
+AR Path="/5BB71F0F/5C05BBEA" Ref="D?"  Part="1" 
+AR Path="/5BB7B6EA/5C05BBEA" Ref="D?"  Part="1" 
+AR Path="/5BCBFDFB/5C05BBEA" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAE7CD/5C05BBEA" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAE90A/5C05BBEA" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAE977/5C05BBEA" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAEF7E/5C05BBEA" Ref="D?"  Part="1" 
+AR Path="/5BEB800B/5BEC0255/5C05BBEA" Ref="D?"  Part="1" 
+AR Path="/5BEB800B/5BEC0258/5C05BBEA" Ref="D?"  Part="1" 
+AR Path="/5BEB800B/5BEC025B/5C05BBEA" Ref="D?"  Part="1" 
+AR Path="/5BEE7FFD/5BEC0255/5C05BBEA" Ref="D?"  Part="1" 
+AR Path="/5BEE7FFD/5BEC0258/5C05BBEA" Ref="D?"  Part="1" 
+AR Path="/5BEE7FFD/5BEC025B/5C05BBEA" Ref="D?"  Part="1" 
+AR Path="/5C05BBEA" Ref="D9"  Part="1" 
+F 0 "D9" H 9850 800 50  0000 L CNN
+F 1 "BAT54S" H 9450 800 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 9825 1025 50  0001 L CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds11005.pdf" H 9630 900 50  0001 C CNN
+	1    9750 900 
+	0    -1   -1   0   
+$EndComp
+Text GLabel 9750 1200 3    50   Input ~ 0
+GND
+Text GLabel 9750 600  2    50   Input ~ 0
+VMCU
+$Comp
+L Diode:BAT54S D?
+U 1 1 5C064DF9
+P 10250 900
+AR Path="/5BB71F0F/5C064DF9" Ref="D?"  Part="1" 
+AR Path="/5BB7B6EA/5C064DF9" Ref="D?"  Part="1" 
+AR Path="/5BCBFDFB/5C064DF9" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAE7CD/5C064DF9" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAE90A/5C064DF9" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAE977/5C064DF9" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAEF7E/5C064DF9" Ref="D?"  Part="1" 
+AR Path="/5BEB800B/5BEC0255/5C064DF9" Ref="D?"  Part="1" 
+AR Path="/5BEB800B/5BEC0258/5C064DF9" Ref="D?"  Part="1" 
+AR Path="/5BEB800B/5BEC025B/5C064DF9" Ref="D?"  Part="1" 
+AR Path="/5BEE7FFD/5BEC0255/5C064DF9" Ref="D?"  Part="1" 
+AR Path="/5BEE7FFD/5BEC0258/5C064DF9" Ref="D?"  Part="1" 
+AR Path="/5BEE7FFD/5BEC025B/5C064DF9" Ref="D?"  Part="1" 
+AR Path="/5C064DF9" Ref="D10"  Part="1" 
+F 0 "D10" H 10350 800 50  0000 L CNN
+F 1 "BAT54S" H 9950 800 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 10325 1025 50  0001 L CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds11005.pdf" H 10130 900 50  0001 C CNN
+	1    10250 900 
+	0    -1   -1   0   
+$EndComp
+Text GLabel 10250 1200 3    50   Input ~ 0
+GND
+Text GLabel 10250 600  2    50   Input ~ 0
+VMCU
+Wire Wire Line
+	2350 5700 2950 5700
+Wire Wire Line
+	8350 4000 9050 4000
+Wire Wire Line
+	2350 5200 2950 5200
+Wire Bus Line
+	8950 2700 8950 4200
+Wire Bus Line
+	3050 4750 3050 5650
+Wire Bus Line
+	3000 650  3000 4750
+Wire Bus Line
+	2900 6550 4850 6550
+Wire Bus Line
+	2900 5100 2900 6550
+Wire Bus Line
+	3000 6250 4850 6250
+Wire Bus Line
+	2900 3600 2900 4850
+$EndSCHEMATC
