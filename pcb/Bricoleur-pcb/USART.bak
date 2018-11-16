@@ -4,7 +4,7 @@ EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 11 18
+Sheet 7 10
 Title ""
 Date ""
 Rev ""
@@ -14,27 +14,6 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-$Sheet
-S 2500 3300 500  400 
-U 5BEC0255
-F0 "sheet5BEC0250" 50
-F1 "ESD-BAT54S.sch" 50
-F2 "INP" I R 3000 3500 50 
-$EndSheet
-$Sheet
-S 1900 2350 500  400 
-U 5BEC0258
-F0 "sheet5BEC0251" 50
-F1 "ESD-BAT54S.sch" 50
-F2 "INP" I R 2400 2550 50 
-$EndSheet
-$Sheet
-S 1600 2900 500  400 
-U 5BEC025B
-F0 "sheet5BEC0252" 50
-F1 "ESD-BAT54S.sch" 50
-F2 "INP" I R 2100 3100 50 
-$EndSheet
 $Comp
 L Connector_Generic:Conn_02x03_Odd_Even J3
 U 1 1 5BEC0490
@@ -49,13 +28,13 @@ F 3 "~" H 3700 2350 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	3000 3500 3800 3500
+	1250 4150 3800 4150
 Wire Wire Line
-	3700 2550 3700 3100
+	3700 2550 3700 3400
 Wire Wire Line
-	2100 3100 3700 3100
+	1800 3400 3700 3400
 Wire Wire Line
-	3800 2550 3800 3500
+	3800 2550 3800 4150
 Text GLabel 3350 2050 0    50   Input ~ 0
 GND
 Wire Wire Line
@@ -74,4 +53,91 @@ Text HLabel 2900 2550 1    50   Input ~ 0
 TX
 Wire Wire Line
 	2400 2550 3600 2550
+$Comp
+L Diode:BAT54S D?
+U 1 1 5BFCC862
+P 2200 2550
+AR Path="/5BB71F0F/5BFCC862" Ref="D?"  Part="1" 
+AR Path="/5BB7B6EA/5BFCC862" Ref="D?"  Part="1" 
+AR Path="/5BCBFDFB/5BFCC862" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAE7CD/5BFCC862" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAE90A/5BFCC862" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAE977/5BFCC862" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAEF7E/5BFCC862" Ref="D?"  Part="1" 
+AR Path="/5BEB800B/5BEC0255/5BFCC862" Ref="D?"  Part="1" 
+AR Path="/5BEB800B/5BEC0258/5BFCC862" Ref="D?"  Part="1" 
+AR Path="/5BEB800B/5BEC025B/5BFCC862" Ref="D?"  Part="1" 
+AR Path="/5BEE7FFD/5BEC0255/5BFCC862" Ref="D?"  Part="1" 
+AR Path="/5BEE7FFD/5BEC0258/5BFCC862" Ref="D?"  Part="1" 
+AR Path="/5BEE7FFD/5BEC025B/5BFCC862" Ref="D?"  Part="1" 
+AR Path="/5BEB800B/5BFCC862" Ref="D16"  Part="1" 
+F 0 "D16" V 2154 2637 50  0000 L CNN
+F 1 "BAT54S" V 2245 2637 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 2275 2675 50  0001 L CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds11005.pdf" H 2080 2550 50  0001 C CNN
+	1    2200 2550
+	0    -1   -1   0   
+$EndComp
+Text GLabel 2200 2850 3    50   Input ~ 0
+GND
+Text GLabel 2200 2250 1    50   Input ~ 0
+VMCU
+$Comp
+L Diode:BAT54S D?
+U 1 1 5BFCCAAA
+P 1600 3400
+AR Path="/5BB71F0F/5BFCCAAA" Ref="D?"  Part="1" 
+AR Path="/5BB7B6EA/5BFCCAAA" Ref="D?"  Part="1" 
+AR Path="/5BCBFDFB/5BFCCAAA" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAE7CD/5BFCCAAA" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAE90A/5BFCCAAA" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAE977/5BFCCAAA" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAEF7E/5BFCCAAA" Ref="D?"  Part="1" 
+AR Path="/5BEB800B/5BEC0255/5BFCCAAA" Ref="D?"  Part="1" 
+AR Path="/5BEB800B/5BEC0258/5BFCCAAA" Ref="D?"  Part="1" 
+AR Path="/5BEB800B/5BEC025B/5BFCCAAA" Ref="D?"  Part="1" 
+AR Path="/5BEE7FFD/5BEC0255/5BFCCAAA" Ref="D?"  Part="1" 
+AR Path="/5BEE7FFD/5BEC0258/5BFCCAAA" Ref="D?"  Part="1" 
+AR Path="/5BEE7FFD/5BEC025B/5BFCCAAA" Ref="D?"  Part="1" 
+AR Path="/5BEB800B/5BFCCAAA" Ref="D17"  Part="1" 
+F 0 "D17" V 1554 3487 50  0000 L CNN
+F 1 "BAT54S" V 1645 3487 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 1675 3525 50  0001 L CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds11005.pdf" H 1480 3400 50  0001 C CNN
+	1    1600 3400
+	0    -1   -1   0   
+$EndComp
+Text GLabel 1600 3700 3    50   Input ~ 0
+GND
+Text GLabel 1600 3100 1    50   Input ~ 0
+VMCU
+$Comp
+L Diode:BAT54S D?
+U 1 1 5BFCCBA7
+P 1050 4150
+AR Path="/5BB71F0F/5BFCCBA7" Ref="D?"  Part="1" 
+AR Path="/5BB7B6EA/5BFCCBA7" Ref="D?"  Part="1" 
+AR Path="/5BCBFDFB/5BFCCBA7" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAE7CD/5BFCCBA7" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAE90A/5BFCCBA7" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAE977/5BFCCBA7" Ref="D?"  Part="1" 
+AR Path="/5BDAE386/5BDAEF7E/5BFCCBA7" Ref="D?"  Part="1" 
+AR Path="/5BEB800B/5BEC0255/5BFCCBA7" Ref="D?"  Part="1" 
+AR Path="/5BEB800B/5BEC0258/5BFCCBA7" Ref="D?"  Part="1" 
+AR Path="/5BEB800B/5BEC025B/5BFCCBA7" Ref="D?"  Part="1" 
+AR Path="/5BEE7FFD/5BEC0255/5BFCCBA7" Ref="D?"  Part="1" 
+AR Path="/5BEE7FFD/5BEC0258/5BFCCBA7" Ref="D?"  Part="1" 
+AR Path="/5BEE7FFD/5BEC025B/5BFCCBA7" Ref="D?"  Part="1" 
+AR Path="/5BEB800B/5BFCCBA7" Ref="D15"  Part="1" 
+F 0 "D15" V 1004 4237 50  0000 L CNN
+F 1 "BAT54S" V 1095 4237 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 1125 4275 50  0001 L CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds11005.pdf" H 930 4150 50  0001 C CNN
+	1    1050 4150
+	0    -1   -1   0   
+$EndComp
+Text GLabel 1050 4450 3    50   Input ~ 0
+GND
+Text GLabel 1050 3850 1    50   Input ~ 0
+VMCU
 $EndSCHEMATC
