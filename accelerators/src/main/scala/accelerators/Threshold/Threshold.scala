@@ -3,19 +3,39 @@ package accelerators.Threshold
 import chisel3._
 
 /**
-  * Threshold operation – everything over limit is 255, everything under (and including limit) is 0.
+  * Threshold operation – everything over limit clamps to 255, everything under (and including limit) clamps to 0.
   *
   * @param limit : Limit for which values should be filtered
   */
 class Threshold(limit: Int) extends Module {
   val io = IO(new Bundle {
-    val input = Input(UInt(8.W))
-    val output = Output(UInt(8.W))
+    // Gaussian blur validOut -> this tvalidIn
+    val tvalidIn = Input(Bool())
+    // Gaussian Blur tdata -> this dataIn
+    val dataIn = Input(UInt(8.W))
+    // Dilation treadyOut -> this treadyIn
+    val treadyIn = Input(Bool())
+    // this tdata -> Dilation dataIn
+    val tdata = Output(UInt(8.W))
+    // this treadyOut -> Absdiff tready
+    val treadyOut = Output(Bool())
   })
 
-  when(io.input <= limit.U) {
-    io.output := 0.U
-  }.otherwise {
-    io.output := 255.U
+  // Registers
+  val isReady = RegInit(Bool(), false.B)
+
+  io.treadyOut := true.B
+  io.tdata := 0.U
+
+  when(io.tvalidIn) {
+    when(io.dataIn <= limit.U) {
+      io.tdata := 0.U
+    }.otherwise {
+      io.tdata := 255.U
+    }
+  }
+
+  when(io.treadyIn) {
+    isReady := true.B
   }
 }

@@ -15,6 +15,7 @@ import chisel3.iotesters.{PeekPokeTester, ChiselFlatSpec, TesterOptionsManager}
   */
 class AbsdiffUnitTester(c: Absdiff, width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extends PeekPokeTester(c) {
   poke(c.io.lastIn, false.B)
+  poke(c.io.tvalidIn, false.B)
 
   val numberOfElements: Int = width * height
 
@@ -62,9 +63,11 @@ class AbsdiffUnitTester(c: Absdiff, width: Int, height: Int, dataWidth: Int, bin
 
   val expectedResults: Array[UInt] = firstPart.clone().reverse ++ firstPart
 
+  poke(c.io.tvalidIn, true.B)
+
   // Send all but the last value
   for (i <- image1.indices) {
-    poke(c.io.input, image1(i))
+    poke(c.io.dataIn, image1(i))
 
     if (i == image1.length - 1) {
       // If we're at the last index, assert that this is in fact the last index
@@ -79,12 +82,12 @@ class AbsdiffUnitTester(c: Absdiff, width: Int, height: Int, dataWidth: Int, bin
   poke(c.io.lastIn, false.B)
 
   for (i <- resultValues.indices) {
-    poke(c.io.input, image2(i))
+    poke(c.io.dataIn, image2(i))
 
     step(1)
 
-    resultValues(i) = peek(c.io.output).U
-    expect(c.io.output, expectedResults(i))
+    resultValues(i) = peek(c.io.tdata).U
+    expect(c.io.tdata, expectedResults(i))
   }
 
   print("\n=========== Output from absdiff ================== \n\n")

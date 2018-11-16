@@ -8,8 +8,8 @@ class ThresholdUnitTester(c: Threshold) extends PeekPokeTester(c) {
   val expectedValues = Array(0, 255, 255, 0, 0, 255)
 
   for (i <- testValues.indices) {
-    poke(c.io.input, testValues(i))
-    expect(c.io.output, expectedValues(i))
+    poke(c.io.dataIn, testValues(i))
+    expect(c.io.tdata, expectedValues(i))
   }
 }
 
