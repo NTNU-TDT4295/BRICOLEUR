@@ -15,7 +15,7 @@ import time
 import os
 import sys
 import copy
-
+import math
 # Working from PyCharm, so just making sure I'm actually running on the PYNQ
 full_path = os.path.realpath(__file__)
 print(full_path)
@@ -68,6 +68,25 @@ def compare_bounding_boxes(b1, b2):
     c2 = w2 + w2 + h2 + h2
 
     return c1 > c2
+
+
+def printProbabilityInBinary(prob):
+    # print("%1.6f"%(prob*100))
+    numbits = 3
+    possibleRepresentationOfAllTheBits = math.pow(2, numbits)
+    step = 100/possibleRepresentationOfAllTheBits
+
+    for i in range(0, 8):
+        if inRange(prob, i * step, (i + 1) * step):
+            print('{0:b}'.format(i))
+            break
+
+def inRange(number, a, b):
+    if number >= a and number < b:
+        return True
+    else:
+        return False
+
 
 i = 0
 
@@ -251,7 +270,8 @@ while True:
     else:
         prob= 0
 
-    print("%1.6f"%prob)
+    # print("%1.6f"%prob)
+    printProbabilityInBinary(prob * 100)
 
     if(sum(framebuffer['incominglong']) > ((2*BUFFERSIZELONG)/3)):
         print("i think we're colliding")
