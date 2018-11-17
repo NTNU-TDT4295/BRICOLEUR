@@ -78,8 +78,18 @@ def printProbabilityInBinary(prob):
 
     for i in range(0, 8):
         if inRange(prob, i * step, (i + 1) * step):
-            print('{0:b}'.format(i))
+            byteString = '{0:03b}'.format(i)
+            print(byteString)
+
+            writeToGPIO(0, byteString[0])
+            writeToGPIO(1, byteString[1])
+            writeToGPIO(2, byteString[2])
+
             break
+
+def writeToGPIO(gpio_number, value):
+    #gpio_write[gpio_number] = value
+    pass
 
 def inRange(number, a, b):
     if number >= a and number < b:
