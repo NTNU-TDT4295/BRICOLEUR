@@ -1,5 +1,4 @@
 #include "em_cmu.h"
-#include "em_emu.h"
 #include "em_gpio.h"
 #include "em_timer.h"
 #include "em_prs.h"
@@ -27,18 +26,6 @@ void TIMER1_IRQHandler(void) {
 	milliseconds++;
 }
 
-void UART0_RX_IRQHandler(void) {
-	// Need to read Rx before clearing interrupt
-	char data = USART_Rx(SENSOR_USART);
-	USART_IntClear(SENSOR_USART, USART_IF_RXDATAV);
-
-	if (data == 'R') {
-		// Avoid calling the interrupt handler for other data than 'R' after we
-		// stop waiting for 'R'
-		USART_IntDisable(SENSOR_USART, USART_IF_RXDATAV);
-	}
-}
-
 unsigned long millis(void) {
 	return milliseconds;
 }
@@ -62,12 +49,7 @@ unsigned int ping_ez0(GPIO_Port_TypeDef port, unsigned int pin) {
 	 **/
 	GPIO_PinOutSet(port, pin);
 
-	// Avoid waking up all the time while waiting for result
-	// We don't need delay()
-	TIMER_IntDisable(TIMER1, TIMER_IF_OF);
-	USART_IntEnable(SENSOR_USART, USART_IF_RXDATAV); // Setup irq
-	EMU_EnterEM1(); // Sleep
-	TIMER_IntEnable(TIMER1, TIMER_IF_OF);
+	while (USART_Rx(SENSOR_USART) != 'R') {}
 
 	GPIO_PinOutClear(port, pin);
 	unsigned int digit3 = USART_Rx(SENSOR_USART) - '0';
@@ -150,6 +132,4 @@ void setupSensor(void) {
 						PRS_CH_CTRL_SOURCESEL_GPIOL,
 						PRS_CH_CTRL_SIGSEL_GPIOPIN0,  // The X in GPIOPINX has to be the same as ULTRA_PULSE
 						prsEdgeOff);
-
-	NVIC_EnableIRQ(UART0_RX_IRQn);
 }
