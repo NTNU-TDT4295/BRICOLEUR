@@ -114,7 +114,7 @@ class AbsdiffUnitTester(c: Absdiff, width: Int, height: Int, dataWidth: Int, bin
 
 class AbsdiffTester extends ChiselFlatSpec {
   "absdiff" should "work" in {
-    val p = Array(10, 10, 32, 16)
+    val p = Array(320, 240, 32, 16)
     iotesters.Driver.execute(() => new Absdiff(p(0), p(1), p(2), p(3)), new TesterOptionsManager) {
       c => new AbsdiffUnitTester(c, p(0), p(1), p(2), p(3))
     } should be(true)
