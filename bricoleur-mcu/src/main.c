@@ -255,21 +255,6 @@ int main(void) {
         .wrapped = false, 
     };  
 
-    /* Buffer for reception of data from PYNQ */
-    USART_Buffer FPGA_Rx_Buf = {
-        .head = 0,
-        .tail = 0, 
-        .length = 0, 
-        .maxLength = recvBuffMaxLen, 
-        .wrapped = false, 
-    };  
-
-    /* Data to send to FPGA */
-    char FPGA_Tx_String[outStringMaxLen];
-
-    /* Data to send to AUX device */
-    char AUX_Tx_String[outStringMaxLen];
-
     /* Infinite loop */
     while (1) {
         /* Protocol for PYNQ and external device communication */
