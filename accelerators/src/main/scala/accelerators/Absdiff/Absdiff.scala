@@ -21,35 +21,38 @@ class Absdiff(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extends
     val dataIn = Input(UInt(8.W))
     // tvalid signal from Gaussian Blur routes to this tvalidIn signal
     val tvalidIn = Input(Bool())
+    // treadyIn
+    val treadyIn = Input(Bool())
     // tdata signal from here routes to threshold input signal
     val tdata = Output(UInt(8.W))
     // tvalidOut signal from here routes to Threshold tvalid signal
     val tvalidOut = Output(Bool())
     // treadyOut signal from here routes to Gaussian Blur tready signal
     val treadyOut = Output(Bool())
+    // lastOut
+    val lastOut = Output(Bool())
   })
 
   // Registers
   val result = RegInit(UInt(8.W), 0.U)
   val dataOut = Wire(UInt(dataWidth.W))
+  val previousAddr = Wire(UInt(dataWidth.W))
+  val oneCycleDelay = RegInit(Bool(), false.B)
+  val oneWrapDelay = RegInit(Bool(), false.B)
 
   // Booleans
   val startCalculating = RegInit(Bool(), false.B)
 
-  // Queues
-  //val queue = Module(new FIFOAltUInt(width * height, dataWidth, binaryPoint))
-
   val addr = Counter(width * height)
   val memory = Mem(width * height, UInt(dataWidth.W))
-  memory.write(addr.value, io.dataIn)
   dataOut := memory.read(addr.value)
 
   // Initialization
   io.tdata := 0.U
   io.tvalidOut := false.B
   io.treadyOut := true.B
-  //queue.io.dataIn := io.dataIn
-  //queue.io.pushing := false.B
+  io.lastOut := false.B
+  previousAddr := 0.U
 
   when(io.tvalidIn) {
     // Checking this boolean value before setting it will make it wait a cycle
@@ -80,6 +83,24 @@ class Absdiff(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extends
       }
     }
 
-    addr.inc()
+    // To avoid writing and reading on the same cycle, store the previous address for later
+    previousAddr := addr.value
+    when(addr.inc()) {
+      oneWrapDelay := true.B
+    }
+  }
+
+  when(addr.value === 0.U && oneWrapDelay) {
+    io.lastOut := true.B
+  }.otherwise {
+    io.lastOut := false.B
+  }
+
+  when(oneCycleDelay) {
+    memory.write(previousAddr, io.dataIn)
+  }
+
+  when(!oneCycleDelay) {
+    oneCycleDelay := true.B
   }
 }
