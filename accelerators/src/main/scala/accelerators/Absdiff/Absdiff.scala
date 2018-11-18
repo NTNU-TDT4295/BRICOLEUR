@@ -1,7 +1,7 @@
 package accelerators.Absdiff
 
 import chisel3._
-import helpers.FIFO.FIFOAltUInt
+import chisel3.util.Counter
 
 /**
   * Perform the absolute difference between two images
@@ -31,27 +31,33 @@ class Absdiff(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extends
 
   // Registers
   val result = RegInit(UInt(8.W), 0.U)
+  val dataOut = Wire(UInt(dataWidth.W))
 
   // Booleans
   val startCalculating = RegInit(Bool(), false.B)
 
   // Queues
-  val queue = Module(new FIFOAltUInt(width * height, dataWidth, binaryPoint))
+  //val queue = Module(new FIFOAltUInt(width * height, dataWidth, binaryPoint))
+
+  val addr = Counter(width * height)
+  val memory = Mem(width * height, UInt(dataWidth.W))
+  memory.write(addr.value, io.dataIn)
+  dataOut := memory.read(addr.value)
 
   // Initialization
   io.tdata := 0.U
   io.tvalidOut := false.B
   io.treadyOut := true.B
-  queue.io.dataIn := io.dataIn
-  queue.io.pushing := false.B
+  //queue.io.dataIn := io.dataIn
+  //queue.io.pushing := false.B
 
   when(io.tvalidIn) {
     // Checking this boolean value before setting it will make it wait a cycle
     when(startCalculating) {
-      when(queue.io.dataOut > io.dataIn) {
-        result := queue.io.dataOut - io.dataIn
+      when(dataOut > io.dataIn) {
+        result := dataOut - io.dataIn
       }.otherwise {
-        result := io.dataIn - queue.io.dataOut
+        result := io.dataIn - dataOut
       }
 
       // Saturation arithmetic, which absdiff has to do, will define a range to operate inside.
@@ -74,7 +80,6 @@ class Absdiff(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extends
       }
     }
 
-    queue.io.pushing := true.B
-    queue.io.dataIn := io.dataIn
+    addr.inc()
   }
 }
