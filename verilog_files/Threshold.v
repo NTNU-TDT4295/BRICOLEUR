@@ -1,0 +1,16 @@
+module Threshold( // @[:@3.2]
+  input        clock, // @[:@4.4]
+  input        reset, // @[:@5.4]
+  input        io_tvalidIn, // @[:@6.4]
+  input  [7:0] io_dataIn, // @[:@6.4]
+  input        io_treadyIn, // @[:@6.4]
+  output [7:0] io_tdata, // @[:@6.4]
+  output       io_treadyOut // @[:@6.4]
+);
+  wire  _T_20; // @[Threshold.scala 31:20:@12.6]
+  wire [7:0] _GEN_0; // @[Threshold.scala 31:32:@13.6]
+  assign _T_20 = io_dataIn <= 8'h28; // @[Threshold.scala 31:20:@12.6]
+  assign _GEN_0 = _T_20 ? 8'h0 : 8'hff; // @[Threshold.scala 31:32:@13.6]
+  assign io_tdata = io_tvalidIn ? _GEN_0 : 8'h0; // @[Threshold.scala 28:12:@10.4 Threshold.scala 32:16:@14.8 Threshold.scala 34:16:@17.8]
+  assign io_treadyOut = 1'h1; // @[Threshold.scala 27:16:@9.4]
+endmodule

@@ -12,10 +12,6 @@ class GaussianBlur(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) ex
   // would be nice to pass kernel constants
   // and kernel size into the Module as a parameter
 
-  // TODO:
-  // also pass in data width and binary point values
-  // as parameters
-  //  - Joakim
   val io = IO(new Bundle{
     val dataIn   = Input(FixedPoint(dataWidth.W,binaryPoint.BP))
 
@@ -24,10 +20,15 @@ class GaussianBlur(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) ex
     val tvalidIn  = Input(Bool())
     val treadyOut = Output(Bool())
     val tvalid    = Output(Bool())
-    val tlast     = Output(Bool())
     val tdata     = Output(FixedPoint(dataWidth.W, binaryPoint.BP))
     //val tdata      = Output(UInt(dataWidth.W))
     val tkeep     = Output(UInt(4.W))
+
+    val lastIn = Input(Bool())
+    val lastOut = Output(Bool())
+    val debugLast = Output(Bool())
+
+
   })
   // Screwy counter logic, idea is to wait until all queues are loaded,
   // then skip a few cycles when at the edge of image by enabling and disabling io.valid
@@ -39,7 +40,9 @@ class GaussianBlur(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) ex
   // chaging any code, just the kernel constants
   //  - Joakim
 
-  val counterStart = Counter(1+1+1+1+width-3+1+1+width-3+1+1)
+ // val counterStart = Counter(1+1+1+1+width-3+1+1+width-3+1+1-4)
+  //last attempt was +6 
+  val counterStart = Counter(2*(width-3)+5)
   val counterEdge = Counter(2)
   val endOfOutput = Counter((width-2)*(height-2))
   val counterProcess = Counter(width-2)
@@ -49,22 +52,37 @@ class GaussianBlur(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) ex
   val isReady = RegInit(Bool(), false.B)
   val isReadyOut = RegInit(Bool(), false.B)
   val isPushing = RegInit(Bool(), false.B)
+  val hasAssertedLast = RegInit(Bool(), false.B)
   val myWidth = width
   val myHeight = height
-
+  val hasAssertedLastOut = RegInit(Bool(), false.B)
   io.tdata := FixedPoint.fromDouble(0, dataWidth.W, binaryPoint.BP)
-  io.tlast := false.B
+  io.lastOut := false.B
   io.tkeep := ~(0.U(4.W))
   io.tvalid := false.B
   io.treadyOut := isReadyOut
+  io.debugLast := hasAssertedLastOut
+  
+  when(computationEnded && computationStarted &&  ~io.tvalidIn){ //Reset to process new image
+    computationEnded := false.B
+    computationStarted := false.B
+    //hasAssertedLast := false.B
+    // See if one needs to flush FIFOS
+  }
 
+//  when(io.lastIn){
+ //   hasAssertedLast := true.B
 
+ // }
+  //when(isReady && io.tvalidIn)
   when (isReady && io.tvalidIn) {
     isPushing := true.B
 
+  when(!computationStarted){
     when(counterStart.inc()){
       computationStarted := true.B
     }
+  }
 
     when(computationStarted){
 
@@ -72,7 +90,7 @@ class GaussianBlur(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) ex
         when(counterProcess.inc()){
           processWrapped := true.B
         }
-        }.otherwise{
+      }.otherwise{
           when(counterEdge.inc()){
             processWrapped := false.B
           }
@@ -81,6 +99,8 @@ class GaussianBlur(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) ex
     when(~processWrapped && computationStarted && ~computationEnded){
       when(endOfOutput.inc()){
         computationEnded := true.B
+        io.lastOut := true.B
+        hasAssertedLastOut := true.B
       }
       io.tvalid := true.B
       isReady := false.B // Force circuit to recheck if DMA is ready
@@ -193,6 +213,7 @@ class GaussianBlur(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) ex
 
   }.otherwise{
     isPushing:=false.B
+    //io.lastOut := false.B
   }
 
   when(io.tready) {

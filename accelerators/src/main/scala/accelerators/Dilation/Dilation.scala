@@ -12,10 +12,6 @@ class Dilation(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extend
   // would be nice to pass kernel constants
   // and kernel size into the Module as a parameter
 
-  // TODO:
-  // also pass in data width and binary point values
-  // as parameters
-  //  - Joakim
   val io = IO(new Bundle {
     val dataIn = Input(FixedPoint(dataWidth.W, binaryPoint.BP))
 
@@ -24,7 +20,9 @@ class Dilation(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extend
     val tvalidIn = Input(Bool())
     val treadyOut = Output(Bool())
     val tvalid = Output(Bool())
-    val tlast = Output(Bool())
+    val lastOut = Output(Bool())
+    val lastIn = Input(Bool())
+
     val tdata = Output(FixedPoint(dataWidth.W, binaryPoint.BP))
     //val tdata      = Output(UInt(dataWidth.W))
     val tkeep = Output(UInt(4.W))
@@ -47,20 +45,25 @@ class Dilation(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extend
   val processWrapped = RegInit(Bool(), false.B)
   val computationEnded = RegInit(Bool(), false.B)
   val isReady = RegInit(Bool(), false.B)
-  val isReadyOut = RegInit(Bool(), false.B)
+  //val isReadyOut = RegInit(Bool(), false.B)
   val isPushing = RegInit(Bool(), false.B)
   val myWidth = width
   val myHeight = height
 
   io.tdata := FixedPoint.fromDouble(0, dataWidth.W, binaryPoint.BP)
-  io.tlast := false.B
+  io.lastOut := false.B
   io.tkeep := ~(0.U(4.W))
   io.tvalid := false.B
-  io.treadyOut := isReadyOut
+  io.treadyOut := isReady
 
+  when(computationEnded && computationStarted && io.tvalidIn){
+    computationEnded := false.B
+    computationStarted := false.B
+  }
 
   when(isReady && io.tvalidIn) {
     isPushing := true.B
+    //io.treadyOut := true.B
 
     when(counterStart.inc()) {
       computationStarted := true.B
@@ -81,10 +84,11 @@ class Dilation(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extend
     when(~processWrapped && computationStarted && ~computationEnded) {
       when(endOfOutput.inc()) {
         computationEnded := true.B
+        io.lastOut := true.B
       }
       io.tvalid := true.B
       isReady := false.B // Force circuit to recheck if DMA is ready
-      isReadyOut := false.B
+      //isReadyOut := false.B
       //isPushing := false.B
     }.otherwise {
       io.tvalid := false.B
@@ -128,56 +132,6 @@ class Dilation(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extend
     fifo2_1.io.pushing := isPushing
     fifo1_0.io.pushing := isPushing
 
-    // Store the computed kernel snippets in theese registers
-    val kernel_0 = RegInit(FixedPoint(dataWidth.W, binaryPoint.BP), FixedPoint.fromDouble(0.0, dataWidth.W, binaryPoint.BP))
-    val kernel_1 = RegInit(FixedPoint(dataWidth.W, binaryPoint.BP), FixedPoint.fromDouble(0.0, dataWidth.W, binaryPoint.BP))
-    val kernel_2 = RegInit(FixedPoint(dataWidth.W, binaryPoint.BP), FixedPoint.fromDouble(0.0, dataWidth.W, binaryPoint.BP))
-    val kernel_3 = RegInit(FixedPoint(dataWidth.W, binaryPoint.BP), FixedPoint.fromDouble(0.0, dataWidth.W, binaryPoint.BP))
-    val kernel_4 = RegInit(FixedPoint(dataWidth.W, binaryPoint.BP), FixedPoint.fromDouble(0.0, dataWidth.W, binaryPoint.BP))
-    val kernel_5 = RegInit(FixedPoint(dataWidth.W, binaryPoint.BP), FixedPoint.fromDouble(0.0, dataWidth.W, binaryPoint.BP))
-    val kernel_6 = RegInit(FixedPoint(dataWidth.W, binaryPoint.BP), FixedPoint.fromDouble(0.0, dataWidth.W, binaryPoint.BP))
-    val kernel_7 = RegInit(FixedPoint(dataWidth.W, binaryPoint.BP), FixedPoint.fromDouble(0.0, dataWidth.W, binaryPoint.BP))
-    val kernel_8 = RegInit(FixedPoint(dataWidth.W, binaryPoint.BP), FixedPoint.fromDouble(0.0, dataWidth.W, binaryPoint.BP))
-
-    //Kernel constants, set to actual factual dilation values
-
-    val kernelC0 = FixedPoint.fromDouble(0.0, dataWidth.W, binaryPoint.BP)
-    val kernelC1 = FixedPoint.fromDouble(1.0, dataWidth.W, binaryPoint.BP)
-    val kernelC2 = FixedPoint.fromDouble(0.0, dataWidth.W, binaryPoint.BP)
-    val kernelC3 = FixedPoint.fromDouble(1.0, dataWidth.W, binaryPoint.BP)
-    val kernelC4 = FixedPoint.fromDouble(1.0, dataWidth.W, binaryPoint.BP)
-    val kernelC5 = FixedPoint.fromDouble(1.0, dataWidth.W, binaryPoint.BP)
-    val kernelC6 = FixedPoint.fromDouble(0.0, dataWidth.W, binaryPoint.BP)
-    val kernelC7 = FixedPoint.fromDouble(1.0, dataWidth.W, binaryPoint.BP)
-    val kernelC8 = FixedPoint.fromDouble(0.0, dataWidth.W, binaryPoint.BP)
-
-    /*
-    val kernelC0 = FixedPoint.fromDouble(0 ,32.W,16.BP)
-    val kernelC1 = FixedPoint.fromDouble(0 ,32.W,16.BP)
-    val kernelC2 = FixedPoint.fromDouble(0 ,32.W,16.BP)
-    val kernelC3 = FixedPoint.fromDouble(0 ,32.W,16.BP)
-    val kernelC4 = FixedPoint.fromDouble(1 ,32.W,16.BP)
-    val kernelC5 = FixedPoint.fromDouble(0 ,32.W,16.BP)
-    val kernelC6 = FixedPoint.fromDouble(0 ,32.W,16.BP)
-    val kernelC7 = FixedPoint.fromDouble(0 ,32.W,16.BP)
-    val kernelC8 = FixedPoint.fromDouble(0 ,32.W,16.BP)
-    */
-    // Dilation 3x3 kernel
-    // 0 1 0
-    // 1 1 1
-    // 0 1 0
-
-    // Computing the value of each kernel corner
-    kernel_8 := io.dataIn * kernelC8
-    kernel_7 := fifo8_7.io.dataOut * kernelC7
-    kernel_6 := fifo7_6.io.dataOut * kernelC6
-    kernel_5 := fifo6_5.io.dataOut * kernelC5
-    kernel_4 := fifo5_4.io.dataOut * kernelC4
-    kernel_3 := fifo4_3.io.dataOut * kernelC3
-    kernel_2 := fifo3_2.io.dataOut * kernelC2
-    kernel_1 := fifo2_1.io.dataOut * kernelC1
-    kernel_0 := fifo1_0.io.dataOut * kernelC0
-
     // The output function
     val kernels = Array(
       fifo2_1.io.dataOut
@@ -186,7 +140,7 @@ class Dilation(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extend
       , fifo6_5.io.dataOut
       , fifo8_7.io.dataOut
     )
-
+/*
     var minimum = 255.U.asFixedPoint(16.BP)
 
     for (i <- kernels.indices) {
@@ -194,7 +148,7 @@ class Dilation(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extend
         minimum = kernels(i)
       }
     }
-
+*/
     io.tdata := kernels(0).max(kernels(1).max(kernels(2).max(kernels(3).max(kernels(4)))))
   }.otherwise {
     isPushing := false.B
@@ -202,7 +156,7 @@ class Dilation(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extend
 
   when(io.tready) {
     isReady := true.B
-    isReadyOut := true.B
+    //isReadyOut := true.B
   }
 }
 

@@ -25,7 +25,9 @@ class GaussianBlurUnitTester(c: GaussianBlur,dataWidth: Int, binaryPoint: Int) e
   val resultArray = Array.fill((c.myWidth - 2) * (c.myHeight - 2)) {
 	0
   }
-
+  val lastArray = Array.fill((c.myWidth - 2) * (c.myHeight - 2)) {
+	0
+  }
   var resultIndex = 0
   var ii          = 0
   var isNotDone   = true
@@ -34,6 +36,7 @@ class GaussianBlurUnitTester(c: GaussianBlur,dataWidth: Int, binaryPoint: Int) e
   var dataValid   = 0
   poke(c.io.tvalidIn,true.B)
   poke(c.io.tready,true.B)
+  poke(c.io.lastIn, true.B)
   step(1);
   while (isNotDone) { // Do some testing
 
@@ -44,12 +47,15 @@ class GaussianBlurUnitTester(c: GaussianBlur,dataWidth: Int, binaryPoint: Int) e
 	else {
 	  poke(c.io.dataIn, 0.U)
 	}
+        if(peek(c.io.lastOut).toInt == 1){
+          print("LastOut is 1, cycle is "+steps+"\n" )
 
+        }
 	if (resultIndex < resultArray.length) {
 	  dataValid = peek(c.io.tvalid).toInt
-	  if (dataValid == 1) {
+          if (dataValid == 1) {
 		resultArray(resultIndex) = peek(c.io.tdata).toInt
-
+                lastArray(resultIndex) = peek(c.io.lastOut).toInt
 		resultIndex += 1
 	  }
 	}
@@ -82,7 +88,7 @@ class GaussianBlurUnitTester(c: GaussianBlur,dataWidth: Int, binaryPoint: Int) e
 	var floatpart = (resultArray(ii) & (1 << binaryPoint) - 1)
 	var test = floatpart.toFloat / (1 << binaryPoint).toFloat
 	//print(s"${intpart} ")
-        outputString += intpart + "\t"
+        outputString += intpart +" "+ lastArray(ii) +"\t"
 	// print(s"${intpart}${test.toString.substring(1)} ")
 
   }
