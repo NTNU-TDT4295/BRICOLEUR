@@ -121,21 +121,13 @@ void do_usart_setup() {
        AF_USART1_TX_PIN(USART_AUX_PORTNUM), gpioModePushPull, 1);
     GPIO_PinModeSet((GPIO_Port_TypeDef)AF_USART1_RX_PORT(USART_AUX_PORTNUM), 
       AF_USART1_RX_PIN(USART_AUX_PORTNUM), gpioModeInput, 0);
+}
 
+void do_pynq_setup() {
     /*
-     * Setup for USART0 / USART-PYNQ
+     * Setup for PYNQ communication
      */
   
-    CMU_ClockEnable(cmuClock_USART0, true);
-    // Synchronous
-    USART_InitSync_TypeDef initSync0 = USART_INITSYNC_DEFAULT;
-    /* Operate as SPI master */
-    initSync0.master = false;
-    /* Clock idle low, sample on falling edge. */
-    initSync0.clockMode = usartClockMode1;
-
-    USART_InitSync(USART0, &initSync0);
-
     /* Pin numbers:
      * Name             MCU    EXP
      * USART1_TX	PC11
@@ -145,18 +137,9 @@ void do_usart_setup() {
      */
 
     /* Enable I/O and set location */
-    USART0->ROUTE = USART_ROUTE_RXPEN | USART_ROUTE_TXPEN | USART_FPGA_LOC;
-    /* Also enable CS and CLK pins if the USART is configured for synchronous mode.
-     * Set GPIO mode. */
-    USART0->ROUTE |= USART_ROUTE_CSPEN | USART_ROUTE_CLKPEN;
-    GPIO_PinModeSet((GPIO_Port_TypeDef)AF_USART1_TX_PORT(USART_FPGA_PORTNUM),
-      AF_USART1_TX_PIN(USART_FPGA_PORTNUM), gpioModePushPull, 0);
-    GPIO_PinModeSet((GPIO_Port_TypeDef)AF_USART1_RX_PORT(USART_FPGA_PORTNUM),
-      AF_USART1_RX_PIN(USART_FPGA_PORTNUM), gpioModeInput, 0);
-    GPIO_PinModeSet((GPIO_Port_TypeDef)AF_USART1_CS_PORT(USART_FPGA_PORTNUM),
-      AF_USART1_CS_PIN(USART_FPGA_PORTNUM), gpioModeInputPull, 0);
-    GPIO_PinModeSet((GPIO_Port_TypeDef)AF_USART1_CLK_PORT(USART_FPGA_PORTNUM), 
-      AF_USART1_CLK_PIN(USART_FPGA_PORTNUM), gpioModeInput, 0);
+    GPIO_PinModeSet(USART_FPGA_PORT, USART_FPGA_TX, gpioModeInputPull, 0);
+    GPIO_PinModeSet(USART_FPGA_PORT, USART_FPGA_RX, gpioModeInputPull, 0);
+    GPIO_PinModeSet(USART_FPGA_PORT, USART_FPGA_CLK, gpioModeInputPull, 0);
 }
 
 void USART_send(USART_TypeDef *usart, char *string) {
@@ -249,6 +232,7 @@ int main(void) {
     /* Chip errata, setup and calibration */
     CHIP_Init();
     do_usart_setup();
+    do_pynq_setup();
 
 
 	Buffer buffer;
@@ -301,11 +285,16 @@ int main(void) {
         // End sensor reading line
         USART_Tx(USART1, '\n');
 
+        uint8_t bit0 = GPIO_PinInGet(USART_FPGA_PORT, USART_FPGA_TX);
+        uint8_t bit1 = GPIO_PinInGet(USART_FPGA_PORT, USART_FPGA_RX);
+        uint8_t bit2 = GPIO_PinInGet(USART_FPGA_PORT, USART_FPGA_CLK);
+
+        uint8_t pynq_data = bit2 * 4 + bit1 * 2 + bit0;
+
+        USART_Tx(USART1, pynq_data + '0');
+        USART_Tx(USART1, '\n');
+
         /*
-        // Transmit sensor data to PYNQ
-        USART_send(USART0, FPGA_Tx_String);
-        // Receive data from PYNQ, write to AUX_Buf
-        USART_recv(USART0, &FPGA_Rx_Buf, recvTimeout);
 
         // Interpret PYNQ output data, translate to external command
         createCommand(&FPGA_Rx_Buf, AUX_Tx_String);
