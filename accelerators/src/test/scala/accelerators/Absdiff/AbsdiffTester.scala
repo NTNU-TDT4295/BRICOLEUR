@@ -40,11 +40,9 @@ class AbsdiffUnitTester(c: Absdiff, width: Int, height: Int, dataWidth: Int, bin
   }
 
   // Expected values
-  val firstPart: Array[UInt] = Array.fill(numberOfElements) {
+  val expectedResults: Array[UInt] = Array.fill(numberOfElements) {
     127.U
   }
-
-  val expectedResults: Array[UInt] = firstPart
 
   poke(c.io.tvalidIn, true.B)
 
