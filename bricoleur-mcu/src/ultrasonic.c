@@ -167,6 +167,17 @@ bool isObject(unsigned int distances[]) {
 }
 
 
+bool isMovingPositions(Position positions[], unsigned int length) {
+	for (unsigned int i = 0; i < length - 1; i++) {
+		if ((positions[i].x != positions[i+1].x) || (positions[i].y != positions[i+1].y)) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
 void getLine(Line *line, Position positions[], unsigned int length) {
     // Algorithm: Ordinary linear least squares method
 
@@ -258,7 +269,7 @@ void setupUltrasonic(Buffer *buffer) {
 
 	buffer->tail = 0;
 	buffer->length = 0;
-	buffer->maxLength = 2;
+	buffer->maxLength = 3;
 	buffer->wrapped = false;
 }
 
@@ -275,6 +286,7 @@ float getUltrasonicLocalConclusion(Buffer *buffer, Position positions[], unsigne
 
 	if (status != 0) {
 		flushBuffer(buffer);
+		conclusion = 0;
 		return 0;
 	}
 
@@ -294,7 +306,7 @@ float getUltrasonicLocalConclusion(Buffer *buffer, Position positions[], unsigne
 	// It doesn't make sense to make a line from one point (and we would
 	// get a division by zero)
 
-	if (isObject(distances)) {
+	if (isObject(distances) && isMovingPositions(positions, buffer->length)) {
 		// It doesn't make sense to make a line from one point (and we would
 		// get a division by zero)
 		if (buffer->length > 1) {
