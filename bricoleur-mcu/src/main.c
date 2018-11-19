@@ -214,8 +214,11 @@ void createCommand(USART_Buffer *input, char *outString) {
 
 // Scale linearly
 uint8_t localToGlobalConclusion(float input, float inputMin, float inputMax, float outputMin, float outputMax) {
-	float sloap = (outputMax - outputMin) / (inputMax - inputMin);
-	return (uint8_t)((outputMax - outputMin) + (input * sloap));
+//	float sloap = (outputMax - outputMin) / (inputMax - inputMin);
+//	return (uint8_t)((outputMax - outputMin) + (input * sloap));
+
+	float slope = 1.0 * (outputMax - outputMin) / (inputMax - inputMin);
+	return (uint8_t)(outputMin + slope * (input - inputMin));
 }
 
 // @cameraWeight: Number between 0 and 1 indicating how much the cameraConclusion should be weighted.
