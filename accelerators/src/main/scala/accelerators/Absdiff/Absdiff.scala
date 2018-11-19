@@ -37,11 +37,12 @@ class Absdiff(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extends
   val result = RegInit(UInt(8.W), 0.U)
   val dataOut = Wire(UInt(dataWidth.W))
   val previousAddr = Wire(UInt(dataWidth.W))
-  val oneCycleDelay = RegInit(Bool(), false.B)
-  val oneWrapDelay = RegInit(Bool(), false.B)
 
   // Booleans
   val startCalculating = RegInit(Bool(), false.B)
+  val oneCycleDelay = RegInit(Bool(), false.B)
+  val oneWrapDelay = RegInit(Bool(), false.B)
+  val isReady = RegInit(Bool(), false.B)
 
   val addr = Counter(width * height)
   val memory = Mem(width * height, UInt(dataWidth.W))
@@ -54,7 +55,11 @@ class Absdiff(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extends
   io.lastOut := false.B
   previousAddr := 0.U
 
-  when(io.tvalidIn) {
+  when(io.treadyIn) {
+    isReady := true.B
+  }
+
+  when(io.tvalidIn && (io.treadyIn || isReady)) {
     // Checking this boolean value before setting it will make it wait a cycle
     when(startCalculating) {
       when(dataOut > io.dataIn) {
