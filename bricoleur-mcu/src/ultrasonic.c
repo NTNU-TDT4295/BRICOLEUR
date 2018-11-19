@@ -306,13 +306,11 @@ float getUltrasonicLocalConclusion(Buffer *buffer, Position positions[], unsigne
 	// It doesn't make sense to make a line from one point (and we would
 	// get a division by zero)
 
-	if (isObject(distances) && isMovingPositions(positions, buffer->length)) {
+	if (isObject(distances) && buffer->length > 1 && isMovingPositions(positions, buffer->length)) {
 		// It doesn't make sense to make a line from one point (and we would
 		// get a division by zero)
-		if (buffer->length > 1) {
-			getLine(&line, positions, buffer->length);
-			setConclusion(chanceOfCollision(&line));
-		}
+		getLine(&line, positions, buffer->length);
+		setConclusion(chanceOfCollision(&line));
 
 	} else {
 		// Flush buffer, only keep the last element
