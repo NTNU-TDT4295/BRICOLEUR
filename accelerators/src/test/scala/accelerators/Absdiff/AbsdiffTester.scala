@@ -45,6 +45,7 @@ class AbsdiffUnitTester(c: Absdiff, width: Int, height: Int, dataWidth: Int, bin
   }
 
   poke(c.io.tvalidIn, true.B)
+  poke(c.io.treadyIn, true.B)
 
   // Send all but the last value
   for (i <- image1.indices) {
@@ -60,6 +61,7 @@ class AbsdiffUnitTester(c: Absdiff, width: Int, height: Int, dataWidth: Int, bin
 
   step(1)
 
+  poke(c.io.treadyIn, false.B)
   poke(c.io.lastIn, false.B)
 
   for (i <- resultValues.indices) {
@@ -77,26 +79,30 @@ class AbsdiffUnitTester(c: Absdiff, width: Int, height: Int, dataWidth: Int, bin
     }
   }
 
-  print("\n=========== Output from absdiff ================== \n\n")
-  val arrayToEnumerate: Array[UInt] = resultValues
-  var otherCounter = 0
-  print("\t")
-  for (i <- arrayToEnumerate.indices) {
-    if (arrayToEnumerate(i).toInt <= 10) {
-      // Pad the first ten numbers for b-e-a-utiful output
-      print(s"% 2d ".format(arrayToEnumerate(i).toInt))
-    } else {
-      print(s"${arrayToEnumerate(i).toInt} ")
-    }
+  var shouldPrint = false
 
-    if (otherCounter == width - 1) {
-      print("\n\t")
-      otherCounter = 0
-    } else {
-      otherCounter += 1
+  if (shouldPrint) {
+    print("\n=========== Output from absdiff ================== \n\n")
+    val arrayToEnumerate: Array[UInt] = resultValues
+    var otherCounter = 0
+    print("\t")
+    for (i <- arrayToEnumerate.indices) {
+      if (arrayToEnumerate(i).toInt <= 10) {
+        // Pad the first ten numbers for b-e-a-utiful output
+        print(s"% 2d ".format(arrayToEnumerate(i).toInt))
+      } else {
+        print(s"${arrayToEnumerate(i).toInt} ")
+      }
+
+      if (otherCounter == width - 1) {
+        print("\n\t")
+        otherCounter = 0
+      } else {
+        otherCounter += 1
+      }
     }
+    print("\n=========== Output from absdiff ==================\n\n")
   }
-  print("\n=========== Output from absdiff ==================\n\n")
 }
 
 class AbsdiffTester extends ChiselFlatSpec {
