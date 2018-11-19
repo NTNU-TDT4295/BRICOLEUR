@@ -20,9 +20,9 @@ const float sensorOffset2D[] = {0, 5.7};
 
 unsigned int wallDistances[ULTRA_NUM];
 
-Buffer conclusionsBuffer;
-#define conclusionsLength 5
-float conclusions[conclusionsLength];
+float conclusion = 0;
+#define newConclusionWeight 0.5
+const float oldConclusionWeight = 1 - newConclusionWeight;
 
 void setWallDistances(unsigned int wallDistances[]) {
 	// Increasing this value will increase our confidence that we are seeing
@@ -237,37 +237,11 @@ float chanceOfCollision(Line *line) {
 }
 
 
-void addConclusion(float conclusion) {
-	conclusions[conclusionsBuffer.tail] = conclusion;
-	conclusionsBuffer.tail = (conclusionsBuffer.tail + 1) % conclusionsBuffer.maxLength;
-
-	if (conclusionsBuffer.tail == 0) {
-		conclusionsBuffer.wrapped = true;
-	}
-
-	if (conclusionsBuffer.wrapped) {
-		conclusionsBuffer.length = conclusionsBuffer.maxLength;
-	} else {
-		conclusionsBuffer.length = conclusionsBuffer.tail;
-	}
+void setConclusion(float newConclusion) {
+	// Weight older conclusions exponentially less
+	conclusion = conclusion * oldConclusionWeight + newConclusion * newConclusionWeight;
 }
 
-
-float getConclusion(void) {
-	if (conclusionsBuffer.length == 0) {
-		return 0;
-	}
-
-	float conclusion = 0;
-
-	for (unsigned int i = 0; i < conclusionsBuffer.length; i++) {
-		conclusion += conclusions[i];
-	}
-
-	conclusion /= conclusionsBuffer.length;
-
-	return conclusion;
-}
 
 void flushBuffer(Buffer *buffer) {
 	buffer->tail = 0;
@@ -286,11 +260,6 @@ void setupUltrasonic(Buffer *buffer) {
 	buffer->length = 0;
 	buffer->maxLength = 2;
 	buffer->wrapped = false;
-
-	conclusionsBuffer.tail = 0;
-	conclusionsBuffer.length = 0;
-	conclusionsBuffer.maxLength = conclusionsLength;
-	conclusionsBuffer.wrapped = false;
 }
 
 
@@ -306,7 +275,6 @@ float getUltrasonicLocalConclusion(Buffer *buffer, Position positions[], unsigne
 
 	if (status != 0) {
 		flushBuffer(buffer);
-		flushBuffer(&conclusionsBuffer);
 		return 0;
 	}
 
@@ -331,18 +299,18 @@ float getUltrasonicLocalConclusion(Buffer *buffer, Position positions[], unsigne
 		// get a division by zero)
 		if (buffer->length > 1) {
 			getLine(&line, positions, buffer->length);
-			addConclusion(chanceOfCollision(&line));
+			setConclusion(chanceOfCollision(&line));
 		}
 
 	} else {
 		// Flush buffer, only keep the last element
 		flushBuffer(buffer);
-		flushBuffer(&conclusionsBuffer);
+		conclusion = 0;
 	}
 
 	// Pseudocode: previousDistances = distances
 	memcpy(previousDistances, distances, ULTRA_NUM * sizeof(float));
 
-	return getConclusion();
+	return conclusion;
 }
 
