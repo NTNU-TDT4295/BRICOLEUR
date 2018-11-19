@@ -50,11 +50,6 @@
  ****************/
 #define numberOfSensors 2
 
-/* Output scale used by the imponator
- ********************/
-#define outputMin 180
-#define outputMax 360
-
 /* USART transmission
  *******************/
 #define outStringMaxLen 64
@@ -217,12 +212,17 @@ void createCommand(USART_Buffer *input, char *outString) {
     *outString = strdup(input->data);
 }
 
-// Scale linearly to degrees, which the servo will use
-unsigned int localToGlobalConclusion(float input, float inputMin, float inputMax) {
+// Scale linearly
+uint8_t localToGlobalConclusion(float input, float inputMin, float inputMax, float outputMin, float outputMax) {
 	float sloap = (outputMax - outputMin) / (inputMax - inputMin);
-	unsigned int conclusion = (unsigned int)((outputMax - outputMin) + (input * sloap));
+	return (uint8_t)((outputMax - outputMin) + (input * sloap));
+}
 
-	return conclusion;
+// @cameraWeight: Number between 0 and 1 indicating how much the cameraConclusion should be weighted.
+uint8_t getCombinedConclusion(uint8_t cameraConclusion, uint8_t ultrasonicConclusion, float cameraWeight) {
+	float ultrasonicWeight = 1 - cameraWeight;
+
+	return (uint8_t)(cameraConclusion * cameraWeight + ultrasonicConclusion * ultrasonicWeight);
 }
 
 /**************************************************************************//**
@@ -262,10 +262,10 @@ int main(void) {
         // Read sensor data sequentially from active sensors
 
         // Perform sensor analysis
-        // Local conclusion is the conclusion in a scale defined by the ultrasonic system
+        // Local conclusion is the conclusion in a scale defined by the ultrasonic system (0 to 1)
         // Global conclusion is the local conclusion mapped to a scale which will be used by the imponator
         float ultrasonicLocalConclusion = getUltrasonicLocalConclusion(&buffer, positions, previousDistances);
-        float ultrasonicGlobalConlusion = localToGlobalConclusion(ultrasonicLocalConclusion, 0, 1);
+        uint8_t ultrasonicGlobalConclusion = localToGlobalConclusion(ultrasonicLocalConclusion, 0, 1, 0, 255);
 
         // End sensor reading line
         USART_Tx(USART1, '\n');
@@ -274,7 +274,13 @@ int main(void) {
         uint8_t bit1 = GPIO_PinInGet(USART_FPGA_PORT, USART_FPGA_RX);
         uint8_t bit2 = GPIO_PinInGet(USART_FPGA_PORT, USART_FPGA_CLK);
 
+        // Local conclusion from camera system: Value between 0 and 7
+        // Indicates chance of collision, where 7 is largest chance of collision
+        // Based on whether an object is moving towards us or not
         uint8_t pynq_data = bit2 * 4 + bit1 * 2 + bit0;
+        uint8_t cameraGlobalConclusion = localToGlobalConclusion(pynq_data, 0, 7, 0, 255);
+
+        uint8_t combinedConclusion = getCombinedConclusion(cameraGlobalConclusion, ultrasonicGlobalConclusion, 0.5);
 
         USART_Tx(USART1, pynq_data + '0');
         USART_Tx(USART1, '\n');

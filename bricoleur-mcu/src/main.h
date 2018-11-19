@@ -8,6 +8,7 @@
 #ifndef SRC_MAIN_H_
 #define SRC_MAIN_H_
 
-unsigned int localToGlobalConclusion(float input, float inputMin, float inputMax);
+uint8_t localToGlobalConclusion(float input, float inputMin, float inputMax, float outputMin, float outputMax);
+uint8_t getCombinedConclusion(uint8_t cameraConclusion, uint8_t ultrasonicConclusion, float cameraWeight);
 
 #endif /* SRC_MAIN_H_ */
