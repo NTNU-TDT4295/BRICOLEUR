@@ -16,7 +16,7 @@
 #include "sensor.h"
 
 // The x-coordinate offset from origo for each of the sensors in inches
-const float sensorOffset2D[] = {0, 5.7};
+const float sensorOffset2D[] = {0, 12};
 
 unsigned int wallDistances[ULTRA_NUM];
 
@@ -71,6 +71,8 @@ void getInput(unsigned int distances[], unsigned int length) {
 		// distances[i] = 1;
 		distances[i] = getDistance(i);
 	}
+
+//	USART_Tx(USART1, '\n');
 }
 
 
@@ -143,6 +145,13 @@ int getPosition(Position *position, unsigned int distances[], unsigned int lengt
 	position->x /= positionsLength;
 	position->y /= positionsLength;
 
+//	char stringBuffer2[50];
+//	snprintf(stringBuffer2, 49, "getPosition: x: %.2f y: %.2f\n", positions->x, positions->y);
+//
+//	for (int i = 0; stringBuffer2[i] != '\0'; i++) {
+//		USART_Tx(USART1, stringBuffer2[i]);
+//	}
+
 	return 0;
 
 	// Approach 2
@@ -184,6 +193,12 @@ void getLine(Line *line, Position positions[], unsigned int length) {
     float x_avg = 0;
     float y_avg = 0;
 
+//	char stringBuffer2[50];
+//
+//	for (int i = 0; stringBuffer2[i] != '\0'; i++) {
+//		USART_Tx(USART1, stringBuffer2[i]);
+//	}
+
     for (unsigned int i = 0; i < length; i++) {
         x_avg += positions[i].x;
         y_avg += positions[i].y;
@@ -191,6 +206,15 @@ void getLine(Line *line, Position positions[], unsigned int length) {
 
     x_avg /= length;
     y_avg /= length;
+
+//    char stringBuffer[50];
+//    snprintf(stringBuffer, 49, "x: %.2f y: %.2f", x_avg, y_avg);
+//
+//    for (int i = 0; stringBuffer[i] != '\0'; i++) {
+//    	USART_Tx(USART1, stringBuffer[i]);
+//    }
+//
+//    USART_Tx(USART1, '\n');
 
     float x_diff[length];
     float y_diff[length];
@@ -216,19 +240,43 @@ void getLine(Line *line, Position positions[], unsigned int length) {
 }
 
 
+float getLineIntersection(Line *line, Position positions[], unsigned int length) {
+	bool changingXPosition = false;
+
+	for (unsigned int i = 0; i < length - 1; i++) {
+		if (positions[i].x != positions[i+1].x) {
+			changingXPosition = true;
+		}
+	}
+
+	if (changingXPosition) {
+		getLine(line, positions, length);
+		return -(line->b / line->a);
+	} else {
+		return positions[0].x;
+	}
+}
+
+
 // return a value for the chance of collision between 0 and 1
-float chanceOfCollision(Line *line) {
+float chanceOfCollision(float lineIntersection) {
 	// TODO: Handle division by zero
 	// TODO: Handle objects that are not moving
 
 	// This only checks if the object will hit the front of the system.
 	// TODO: Check if the object hits the side of the object
-	float x = -(line->b / line->a);
+
+//	char stringBuffer[50];
+//	snprintf(stringBuffer, 49, "intersect: %.2f\n", x);
+//
+//	for (int i = 0; stringBuffer[i] != '\0'; i++) {
+//		USART_Tx(USART1, stringBuffer[i]);
+//	}
 
 	// Center lies in the middle of the edges of the system.
 	// TODO: Actknowledge that the system is wider than just the sensors. There's a box on the outside.
 	float center = fabsf(sensorOffset2D[0] - sensorOffset2D[ULTRA_NUM - 1]) / 2;
-	float centerToXDistance = fabsf(center - x);
+	float centerToXDistance = fabsf(center - lineIntersection);
 	float centerToEdgeDistance = fabsf(center - sensorOffset2D[0]);
 	const float edgeValue = 0.8;  // Value we assign if the object will hit the edge of the system.
 
@@ -249,8 +297,9 @@ float chanceOfCollision(Line *line) {
 
 
 void setConclusion(float newConclusion) {
-	// Weight older conclusions exponentially less
-	conclusion = conclusion * oldConclusionWeight + newConclusion * newConclusionWeight;
+	if (newConclusion > conclusion) {
+		conclusion = newConclusion;
+	}
 }
 
 
@@ -286,8 +335,7 @@ float getUltrasonicLocalConclusion(Buffer *buffer, Position positions[], unsigne
 
 	if (status != 0) {
 		flushBuffer(buffer);
-		conclusion = 0;
-		return 0;
+		return conclusion;
 	}
 
 	positions[buffer->tail] = position;
@@ -310,10 +358,9 @@ float getUltrasonicLocalConclusion(Buffer *buffer, Position positions[], unsigne
 		// It doesn't make sense to make a line from one point (and we would
 		// get a division by zero)
 		if (buffer->length > 1 && isMovingPositions(positions, buffer->length)) {
-			getLine(&line, positions, buffer->length);
-			setConclusion(chanceOfCollision(&line));
+			setConclusion(chanceOfCollision(getLineIntersection(&line, positions, buffer->length)));
 		} else {
-			conclusion = 0.1;
+			setConclusion(0.1);
 		}
 
 	} else {

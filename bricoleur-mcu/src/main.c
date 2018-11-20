@@ -219,10 +219,12 @@ uint8_t localToGlobalConclusion(float input, float inputMin, float inputMax, flo
 }
 
 // @cameraWeight: Number between 0 and 1 indicating how much the cameraConclusion should be weighted.
-uint8_t getCombinedConclusion(uint8_t cameraConclusion, uint8_t ultrasonicConclusion, float cameraWeight) {
-	float ultrasonicWeight = 1 - cameraWeight;
-
-	return (uint8_t)(cameraConclusion * cameraWeight + ultrasonicConclusion * ultrasonicWeight);
+uint8_t getCombinedConclusion(uint8_t cameraConclusion, uint8_t ultrasonicConclusion) {
+	if (cameraConclusion > ultrasonicConclusion) {
+		return cameraConclusion;
+	} else {
+		return ultrasonicConclusion;
+	}
 }
 
 /**************************************************************************//**
@@ -253,7 +255,9 @@ int main(void) {
         .length = 0, 
         .maxLength = recvBuffMaxLen, 
         .wrapped = false, 
-    };  
+    };
+
+    set_dbg_LED(2, true);
 
     /* Infinite loop */
     while (1) {
@@ -267,8 +271,15 @@ int main(void) {
         float ultrasonicLocalConclusion = getUltrasonicLocalConclusion(&buffer, positions, previousDistances);
         uint8_t ultrasonicGlobalConclusion = localToGlobalConclusion(ultrasonicLocalConclusion, 0, 1, 0, 255);
 
+//        char stringBuffer[50];
+//		snprintf(stringBuffer, 49, "conclusion: %u\n", ultrasonicGlobalConclusion);
+//
+//		for (int i = 0; stringBuffer[i] != '\0'; i++) {
+//			USART_Tx(USART1, stringBuffer[i]);
+//		}
+
         // End sensor reading line
-        USART_Tx(USART1, '\n');
+//        USART_Tx(USART1, '\n');
 
         uint8_t bit0 = GPIO_PinInGet(USART_FPGA_PORT, USART_FPGA_TX);
         uint8_t bit1 = GPIO_PinInGet(USART_FPGA_PORT, USART_FPGA_RX);
@@ -280,10 +291,10 @@ int main(void) {
         uint8_t pynq_data = bit2 * 4 + bit1 * 2 + bit0;
         uint8_t cameraGlobalConclusion = localToGlobalConclusion(pynq_data, 0, 7, 0, 255);
 
-        uint8_t combinedConclusion = getCombinedConclusion(cameraGlobalConclusion, ultrasonicGlobalConclusion, 0.5);
+        uint8_t combinedConclusion = getCombinedConclusion(cameraGlobalConclusion, ultrasonicGlobalConclusion);
 
-        USART_Tx(USART1, pynq_data + '0');
-        USART_Tx(USART1, '\n');
+        USART_Tx(USART1, combinedConclusion);
+//        USART_Tx(USART1, '\n');
 
         /*
 
