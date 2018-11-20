@@ -37,7 +37,9 @@ class Dilation(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extend
   // chaging any code, just the kernel constants
   //  - Joakim
 
-  val counterStart = Counter(1 + 1 + 1 + 1 + width - 3 + 1 + 1 + width - 3 + 1 + 1)
+  //val counterStart = Counter(1 + 1 + 1 + 1 + width - 3 + 1 + 1 + width - 3 + 1 + 1)
+  
+  val counterStart = Counter(2*(width-3)+5)
   val counterEdge = Counter(2)
   val endOfOutput = Counter((width - 2) * (height - 2))
   val counterProcess = Counter(width - 2)
@@ -56,7 +58,7 @@ class Dilation(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extend
   io.tvalid := false.B
   io.treadyOut := isReady
 
-  when(computationEnded && computationStarted && io.tvalidIn){
+  when(computationEnded && computationStarted && ~io.tvalidIn){
     computationEnded := false.B
     computationStarted := false.B
   }
@@ -64,11 +66,11 @@ class Dilation(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) extend
   when(isReady && io.tvalidIn) {
     isPushing := true.B
     //io.treadyOut := true.B
-
-    when(counterStart.inc()) {
-      computationStarted := true.B
+    when(!computationStarted){
+      when(counterStart.inc()) {
+        computationStarted := true.B
+      }
     }
-
     when(computationStarted) {
 
       when(~processWrapped) {
