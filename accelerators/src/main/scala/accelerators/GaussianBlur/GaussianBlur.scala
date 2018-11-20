@@ -70,11 +70,6 @@ class GaussianBlur(width: Int, height: Int, dataWidth: Int, binaryPoint: Int) ex
     // See if one needs to flush FIFOS
   }
 
-//  when(io.lastIn){
- //   hasAssertedLast := true.B
-
- // }
-  //when(isReady && io.tvalidIn)
   when (isReady && io.tvalidIn) {
     isPushing := true.B
 

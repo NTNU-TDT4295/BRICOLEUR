@@ -13,16 +13,11 @@ class Threshold(limit: Int) extends Module {
     val tvalidIn = Input(Bool())
     // Gaussian Blur tdata -> this dataIn
     val dataIn = Input(UInt(8.W))
-    // Dilation treadyOut -> this treadyIn
-    val treadyIn = Input(Bool())
     // this tdata -> Dilation dataIn
     val tdata = Output(UInt(8.W))
     // this treadyOut -> Absdiff tready
     val treadyOut = Output(Bool())
   })
-
-  // Registers
-  val isReady = RegInit(Bool(), false.B)
 
   io.treadyOut := true.B
   io.tdata := 0.U
@@ -33,9 +28,5 @@ class Threshold(limit: Int) extends Module {
     }.otherwise {
       io.tdata := 255.U
     }
-  }
-
-  when(io.treadyIn) {
-    isReady := true.B
   }
 }
