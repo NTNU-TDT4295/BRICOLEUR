@@ -1,0 +1,86 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[final]{pdfpages}
+\usepackage{wrapfig}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{microtype}
+\usepackage{xfrac}
+\usepackage[normalem]{ulem}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Bash,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\begin{document}
+
+\input{Text/TitlePage.tex}
+
+\tableofcontents
+
+\newpage
+
+\input{Text/Acknowledgements.tex}
+
+\newpage
+
+\input{Text/Introduction.tex}
+
+\newpage
+
+\input{Text/Setup-complete.tex}
+
+\newpage
+
+\input{Text/Usage.tex}
+
+\newpage
+
+\input{Text/System-description.tex}
+
+\newpage
+
+\input{Appendices/AppendixA-Schematics.tex}
+
+\newpage
+
+\input{Appendices/AppendixB-ListOfComponents.tex}
+
+\newpage
+
+\input{Appendices/AppendixC-SoftwareAndToolChain.tex}
+
+\newpage
+
+\input{Appendices/AppendixE-PipelineFigures.tex}
+
+\newpage
+
+%For some stupid reason Overleaf does not support mid-line commenting, and colorlinks does nothing, except give a warning
+\hypersetup{%colorlinks=true, 
+linkcolor = myblue}
+
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\end{document}

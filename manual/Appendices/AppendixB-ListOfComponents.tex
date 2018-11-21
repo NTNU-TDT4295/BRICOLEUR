@@ -1,0 +1,57 @@
+
+
+\section{Appendix B - Components}
+The following is a list of all components used in the assembly of one copy of the BRICOLEUR system. 
+\subsection{Pre-made components}
+\begin{tabular}{c | r}
+    Component & Quantity            \\ \hline
+    CMOS OV5642 Camera Module  & 1  \\
+    LV-MaxSonar-EZ0 MB1000 & 2      \\
+    PYNQ-Z1 & 1                     \\
+    Cardboard container & 1          \\
+\end{tabular}
+
+\subsection{PCB BOM}
+
+\small
+\begin{tabular}{@{} l|c|c|c|c|r @{}}
+    Designation & Footprint & Stat & Distributor & Distributor ID & Qty \\ \hline
+    U7 & QFP100 & EFM32GG980 & Mouser & 634-32GG980F1024-E & 1\\
+    C18,C19 & 0402 & 27pF & Digikey & 478-11777-1-ND & 2 \\
+    \parbox[t]{3cm}{C17,C3,C8,C9,\\C10,C11,C12} & 0402 & 100nF & Digikey & 1276-1004-1-ND & 7\\
+    C1 & 0201 & 1$\mu$F & Digikey & 490-7229-1-ND & 1\\
+    C4 & 0603 & 1$\mu$F & Digikey & 1276-6524-1-ND & 1\\
+    C5, C13 & 0805 & 10$\mu$F & Digikey & 1276-6456-1-ND & 2\\
+    C6, C7 & 0402 & 10nF & Digikey & 490-4762-1-ND & 2\\
+    C14,C15,C16 & 0402 & 1nF & Digikey & 490-6348-1-ND & 3\\
+    C2 & 0805 & 4.7$\mu$F & Digikey & 399-3134-1-ND & 1\\ \hline
+    R14,R15,R17 & 0402 & 100k$\Omega$ & Digikey & MCS0402-100K-CFCT-ND & 3\\
+    R1,R11,R12,R13 & 0402 & 100$\Omega$ & Digikey & RR05P100DCT-ND & 4\\
+    R10,R9, R8 & 0402 & 3k$\Omega$ & Digikey & RR05P3.0KDCT-ND & 3\\
+    R2, R3 & 0402 & 15$\Omega$ & Digikey & P15DDCT-ND & 2\\
+    R4 & 0402 & 1$\Omega$ & Digikey & 311-1.00LRCT-ND & 1\\
+    R5,R6,R7 & 0402 & 1M$\Omega$ & Digikey & 311-1.00MLRCT-ND & 3\\
+    R16 & 0402 & 10k$\Omega$ & Digikey & RR05P10.0KDCT-ND & 1\\ \hline
+    L1 & 0805 & 2200nH& Digikey & 732-1614-1-ND & 1 \\
+    L2 & 0603 & 10$\mu$H & Digikey & 732-4484-1-ND & 1\\ \hline
+    SW2,SW3,SW4,SW5 & 6x6mm & switch & Farnell & 2065105 & 4\\
+    U9 & 3.1x3.0mm & 1pF 1MHz & Digikey & 1727-3578-1-ND & 1\\
+    J1 & 8.4x6.4mm & USB\_Micro-B & Digikey & 609-4050-1-ND & 1\\
+    U1,U3,U4,J3,J4 & 9.4x15.8mm & IDC 2x3 & Digikey & 609-2845-ND & 5\\  
+    U5, U6, & 33.5x9.4mm & IDC 2x10 & Digikey & ED10524-ND & 2\\
+    D1, D2, D3 & 0603 & LED & Digikey & 732-4981-1-ND & 3\\
+    \parbox[t]{3cm}{D9,D18,D15,D16,\\D17,D6,D4,D19,\\D20,D11,D12,D13,\\D14,D7,D8,D10,\\D5} & SOT-23 & ESD & Farnell & 1081194RL & 17\\
+    Header pins & -- & 2.54mm & $\Omega$Verksted & -- & 60\\
+\end{tabular}
+\normalsize
+
+\subsection{Connectors}
+\begin{tabular}{c|c|c|c|c|r}
+    Designation & Stat & Distributor & Distributor ID & Qty \\ \hline
+    IDC-Female small & 2x3pin & Digikey & 649-71600-306LF & 6\\
+    IDC-Female med. & 2x10pin & Digikey & ED10503-ND & 3\\
+    Flat cable & 6 lines & Digikey & 732-11799-ND & 1m\\
+    Flat cable & 20 lines & Digikey & 732-11806-ND & 1m \\
+    Diode & 100MHz & $\Omega$Verksted & -- & 2\\
+\end{tabular}
+

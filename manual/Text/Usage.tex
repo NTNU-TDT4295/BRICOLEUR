@@ -1,0 +1,43 @@
+
+\section{Usage}
+%Throw some shit at the PYNQ in front of its cameras and ultrasonic sensors.
+Once the system is assembled, place it on a flat surface and connect the power supply for the PYNQ. Optionally connect a visualization unit. Turn on the power supply for the PCB. The MCU will then calibrate the ultrasonic sensors, and begin normal operation.
+
+\subsection{Video force feeding}
+In the event that the project's camera should fail, it is possible to send externally recorded video to the PYNQ. For instance, a pre-recorded video, or even the feed from a laptop webcam, may be used for this purpose. The Python script performing the tracking algorithm reads raw frames from stdin, so the data can be piped in from f.ex. a file or netcat. The following shell commands were used to successfully pipe a laptop's webcam through the algorithm on the PYNQ.
+
+\lstset{basicstyle=\footnotesize}
+\begin{lstlisting}[language=bash]
+# On the PYNQ
+sudo sh -c 'nc -l -p 420 | ./video-mp.py'
+# On the laptop
+ffmpeg -i /dev/video0 -f rawvideo -s 320x240 -pix_fmt gray8 - \
+    | nc xilinx@192.168.2.99 420
+\end{lstlisting}
+
+\subsection{Observations}
+% Hva så vi under tests?
+
+
+The ultrasonic sensors read distances correctly, however the employed algorithm proved to be somewhat unstable. The camera worked better, but still struggled with larger distances to the target object. Sadly, the delay between the ultrasonic and camera readings made it difficult to combine their results without sacrificing latency. 
+
+\subsection{Output}
+% Description of what final output is
+Bricoleur output can be read from the AUX-port. By default it will be transmitted through UART with a baudrate of 115200. The output is a byte value, ranging from 0 to 255. Here 0 indicates no sensed danger of collision, and 255 indicates certain collision. This output is weighted combination of the PYNQ's output and the conclusion of the ultrasonic analysis. 
+
+The PYNQ will also output video frames---annotated with bounding boxes of tracked objects---to a file. The file can either be analyzed afterwards, or used for real-time monitoring of the system. During testing, we have played back the annotated video real-time on a connected laptop by using the following shell commands before starting the Python script.
+
+\lstset{basicstyle=\footnotesize}
+\begin{lstlisting}[language=bash]
+# On the laptop
+nc -l -p 4200 | ffplay -f rawvideo -pixel_format gray8 \
+    -framerate 144 -video_size 318x238 -
+# On the PYNQ
+mkfifo debugframes.raw
+nc 192.168.2.1 4200 < debugframes.raw
+\end{lstlisting}
+
+\subsubsection{Visualisation suggestion}
+% Description of servo/output unit
+For the demonstration an external system was used to turn the output byte value into something more tangible. This device consisted of an Arduino Uno, which read the transmitted serial data, and a servo, which pointed a needle to indicate level of panic. 
+% Include image
