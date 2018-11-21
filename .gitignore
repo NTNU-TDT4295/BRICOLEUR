@@ -1,3 +1,4 @@
+
 /**/.idea
 /**/outputImage.jpg
 generated
@@ -487,3 +488,16 @@ $RECYCLE.BIN/
 
 
 # End of https://www.gitignore.io/api/c,vim,cvs,c++,kicad,emacs,linux,macos,opencv,python,windows,pycharm,visualstudiocode
+
+*.o
+*.d
+*.axf
+*.bin
+*.hex
+*.map
+*.mk
+*.s37
+
+.vscode
+bricoleur-mcu/GNU*
+bricoleur-mcu/.settings
