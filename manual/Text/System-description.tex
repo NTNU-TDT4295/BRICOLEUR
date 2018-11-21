@@ -27,7 +27,7 @@ The custom accelerator is designed to process images from the camera and give th
     \label{fig:fpga2}
 \end{figure}
 
-The Gaussian Blur accelerator is modelled after \cite{cong2014optimal} and looks like figure [\ref{fig:pipeline-overview}].
+The Gaussian Blur accelerator is modelled after \cite{cong2014optimal} and looks like figure [\ref{fig:fpga1}].
 
 \subsection{Accelerator pipeline}
 The accelerator's pipeline follows a sequential pattern [\ref{fig:Real_Pipe}], meaning the pixels are inputted from left to right, top to bottom. The reason for this is avoiding unnecessary complexity, since the intended camera model outputs the pixel-values in this fashion. Another reason is that this method is able to get the throughput needed, it has the least amount of latency, and uses the least amount of resources.
@@ -114,10 +114,10 @@ The EFM32GG980F1024-QFP100 was selected to be the PCB's MCU because of its flexi
 \end{itemize}
 
 \subsubsection{Device Communication}
-See \autoref{fig:PCB_COMM}.
-\begin{figure}
+%See \autoref{fig:PCB_COMM}.
+\begin{figure}[h!]
     \centering
-    \includegraphics[scale=0.2]{Images/PCB(7).png}
+    \includegraphics[scale=0.12]{Images/PCB(7).png}
     \caption{Communication on the BRICOLEUR PCB}
     \label{fig:PCB_COMM}
 \end{figure}
@@ -134,20 +134,20 @@ Each of the ultrasonic sensors will detect a different distance to an object. Th
     \item By looking at where the object will intersect the x-axis (the system is at $y = 0$), one can conclude whether the object will collide heads-on, hit the edge of our system, or misses it completely. This means that even if an object is moving toward the sensors, it is possible to detect that it will actually miss the system.
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.5]{Images/ultrasonic_trilateration.png}
     \caption{Ultrasonic: The difference in distance is used to find the position of the object}
     \label{fig:ultrasonic_trilateration}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.5]{Images/ultrasonic_motion.png}
     \caption{Ultrasonic: The different positions over time are used to estimate the future position of the object}
     \label{fig:ultrasonic_motion}
 \end{figure}
-
+\clearpage
 % How do we determine what to output 
 \subsubsection{Combining the conclusions from the camera and ultrasonic sensors}
 
@@ -205,9 +205,11 @@ Shortly after placing the PCB order it was discovered that the way in which the 
 
 Additionally, it turns out that the footprint intended for the power switch was poorly dimensioned. This has been amended by replacing the switch with a set of header pins and an externally wired power switch. A jumper between the correct pins can perform the switch's duty as well. 
 
-\begin{figure}
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.25]{Images/Cable.png}
     \caption{The cables connecting the ultrasonic sensors to the PCB}
     \label{fig:cable}
 \end{figure}
+
+\clearpage
